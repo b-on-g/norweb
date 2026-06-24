@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    @keyframes dashpulse { 0%,100% { opacity:.5 } 50% { opacity:.85 } }
+  </style>
+</helmet>
+
+<div style="display:flex; height:100vh; width:100%; font-family:system-ui,-apple-system,sans-serif; background:#e9e8e6; color:#44403c; overflow:hidden;">
+
+  <!-- ===== LEFT SIDEBAR ===== -->
+  <aside style="width:228px; flex:none; background:#f5f4f2; border-right:1px solid #d6d3d1; display:flex; flex-direction:column; padding:18px 14px;">
+    <div style="display:flex; align-items:center; gap:9px; padding:4px 6px 18px;">
+      <div style="width:26px; height:26px; border:2px solid #5b5bd6; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#5b5bd6;">R</div>
+      <div style="font-weight:700; font-size:16px; letter-spacing:.3px;">RAGU</div>
+      <div style="margin-left:auto; font:600 9px ui-monospace,monospace; color:#a8a29e; border:1px solid #d6d3d1; border-radius:4px; padding:2px 5px;">demo</div>
+    </div>
+
+    <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.8px; padding:0 6px 8px;">Разделы</div>
+    <nav style="display:flex; flex-direction:column; gap:4px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+        <div onClick="{{ item.onClick }}" style="{{ item.style }}">
+          <span style="width:18px; text-align:center;">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </div>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto; display:flex; flex-direction:column; gap:10px;">
+      <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.8px; padding:0 6px;">Активный корпус</div>
+      <div style="background:#fff; border:1px solid #d6d3d1; border-radius:6px; padding:9px 11px; display:flex; flex-direction:column; gap:3px;">
+        <div style="font-weight:600; font-size:13px;">{{ dataset }}</div>
+        <div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">{{ datasetMeta }}</div>
+      </div>
+      <div style="display:flex; gap:6px; align-items:center; padding:2px 4px;">
+        <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; margin-right:auto;">ЯЗЫК</div>
+        <sc-for list="{{ langItems }}" as="lng" hint-placeholder-count="2">
+          <div onClick="{{ lng.onClick }}" style="{{ lng.style }}">{{ lng.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN COLUMN ===== -->
+  <main style="flex:1; display:flex; flex-direction:column; min-width:0;">
+
+    <!-- TOP BAR -->
+    <header style="height:58px; flex:none; background:#fff; border-bottom:1px solid #d6d3d1; display:flex; align-items:center; gap:14px; padding:0 20px;">
+      <div style="display:flex; flex-direction:column;">
+        <div style="font-weight:700; font-size:15px;">{{ screenTitle }}</div>
+        <div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">{{ dataset }}</div>
+      </div>
+
+      <div style="margin-left:auto; display:flex; align-items:center; gap:7px;">
+        <span style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase;">Пресет</span>
+        <div style="display:flex; gap:4px; background:#f5f4f2; border:1px solid #d6d3d1; border-radius:7px; padding:3px;">
+          <sc-for list="{{ presetItems }}" as="p" hint-placeholder-count="3">
+            <div onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</div>
+          </sc-for>
+        </div>
+        <div onClick="{{ openSettings }}" style="display:flex; align-items:center; gap:6px; background:#fff; border:1px solid #d6d3d1; border-radius:7px; padding:7px 12px; font-size:12px; font-weight:600; cursor:pointer;" style-hover="background:#f5f4f2;">⚙ Настройки</div>
+        <div style="display:flex; align-items:center; gap:6px; background:#5b5bd6; color:#fff; border-radius:7px; padding:7px 12px; font-size:12px; font-weight:600; cursor:pointer;" style-hover="background:#4a4ac4;">↓ Экспорт</div>
+      </div>
+    </header>
+
+    <!-- SCREEN AREA -->
+    <section style="flex:1; position:relative; overflow:auto; min-height:0;">
+
+      <!-- ===== GALLERY ===== -->
+      <sc-if value="{{ isGallery }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:24px 28px;">
+          <div style="display:flex; align-items:flex-end; gap:14px; margin-bottom:20px;">
+            <div>
+              <div style="font-weight:700; font-size:20px;">Галерея корпусов</div>
+              <div style="font-size:13px; color:#78716c; margin-top:3px;">Выберите готовый граф знаний или загрузите свой документ / индекс</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:9px;">
+              <div style="border:1px dashed #b8b4b0; border-radius:8px; padding:10px 16px; font-size:12px; font-weight:600; color:#57534e; background:#fff; cursor:pointer;">＋ Загрузить документ</div>
+              <div style="border:1px dashed #b8b4b0; border-radius:8px; padding:10px 16px; font-size:12px; font-weight:600; color:#57534e; background:#fff; cursor:pointer;">⇪ Загрузить готовый индекс</div>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+            <sc-for list="{{ datasets }}" as="d" hint-placeholder-count="6">
+              <div onClick="{{ d.onClick }}" style="{{ d.style }}">
+                <div style="height:118px; border-radius:7px; background-image:repeating-linear-gradient(135deg,#efedea 0 9px,#e7e4e0 9px 18px); display:flex; align-items:center; justify-content:center; font:600 10px ui-monospace,monospace; color:#a8a29e; position:relative;">
+                  <span>превью графа</span>
+                  <span style="position:absolute; top:8px; left:8px; background:#fff; border:1px solid #d6d3d1; border-radius:5px; padding:2px 7px; font-size:10px; color:#57534e;">{{ d.domain }}</span>
+                </div>
+                <div style="font-weight:700; font-size:14px; margin-top:11px;">{{ d.title }}</div>
+                <div style="font-size:11px; color:#78716c; margin-top:4px; line-height:1.4;">{{ d.desc }}</div>
+                <div style="display:flex; gap:6px; margin-top:10px; flex-wrap:wrap;">
+                  <span style="font:600 10px ui-monospace,monospace; color:#57534e; background:#f5f4f2; border-radius:5px; padding:3px 7px;">{{ d.nodes }} узлов</span>
+                  <span style="font:600 10px ui-monospace,monospace; color:#57534e; background:#f5f4f2; border-radius:5px; padding:3px 7px;">{{ d.edges }} связей</span>
+                  <span style="font:600 10px ui-monospace,monospace; color:#57534e; background:#f5f4f2; border-radius:5px; padding:3px 7px;">{{ d.comms }} сообществ</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== EXPLORER ===== -->
+      <sc-if value="{{ isExplorer }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; height:100%;">
+          <!-- graph canvas -->
+          <div style="flex:1; position:relative; background:#1c1b1a; min-width:0;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background-image:radial-gradient(circle at 35% 40%, rgba(91,91,214,.18), transparent 45%), radial-gradient(circle at 70% 65%, rgba(214,91,140,.14), transparent 45%);">
+              <div style="font:600 12px ui-monospace,monospace; color:#6b6864; letter-spacing:1px; text-align:center; animation:dashpulse 3s ease-in-out infinite;">⬡ ⬡ ⬡<br/><br/>ИНТЕРАКТИВНЫЙ ГРАФ ЗНАНИЙ<br/>Sigma.js / WebGL · force layout<br/>цвет = тип NEREL · толщина = strength</div>
+            </div>
+            <!-- top-left filters -->
+            <div style="position:absolute; top:14px; left:14px; display:flex; gap:8px; flex-wrap:wrap; max-width:62%;">
+              <div style="background:rgba(255,255,255,.95); border-radius:7px; padding:8px 11px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:7px;">🔍 Поиск узла…</div>
+              <div style="background:rgba(255,255,255,.95); border-radius:7px; padding:8px 11px; font-size:11px; font-weight:600;">Тип сущности ▾</div>
+              <div style="background:rgba(255,255,255,.95); border-radius:7px; padding:8px 11px; font-size:11px; font-weight:600;">Порог strength ▾</div>
+              <div style="background:#5b5bd6; color:#fff; border-radius:7px; padding:8px 11px; font-size:11px; font-weight:600;">◉ Сообщества: вкл</div>
+            </div>
+            <!-- legend -->
+            <div style="position:absolute; top:14px; right:14px; background:rgba(28,27,26,.9); border:1px solid #3a3937; border-radius:8px; padding:11px 13px; width:150px;">
+              <div style="font:700 10px ui-monospace,monospace; color:#d6d3d1; text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;">Entity Types</div>
+              <sc-for list="{{ legend }}" as="lg" hint-placeholder-count="6">
+                <div style="display:flex; align-items:center; gap:8px; padding:2px 0;">
+                  <span style="width:9px; height:9px; border-radius:50%; background:{{ lg.color }}; flex:none;"></span>
+                  <span style="font:500 10px ui-monospace,monospace; color:#a8a29e;">{{ lg.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <!-- entity card -->
+          <aside style="width:300px; flex:none; background:#fff; border-left:1px solid #d6d3d1; padding:18px; overflow:auto;">
+            <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.7px;">Карточка сущности</div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:11px;">
+              <span style="width:12px; height:12px; border-radius:50%; background:#7c6ce0;"></span>
+              <span style="font-weight:700; font-size:16px;">Бьёрнстьерне Бьёрнсон</span>
+            </div>
+            <div style="font:600 10px ui-monospace,monospace; color:#5b5bd6; margin-top:6px;">PERSON</div>
+            <div style="font-size:12px; color:#57534e; line-height:1.5; margin-top:10px;">Автор текста гимна Норвегии (1859). Норвежский писатель, лауреат Нобелевской премии по литературе.</div>
+
+            <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; margin:18px 0 8px;">Связи (12)</div>
+            <sc-for list="{{ relations }}" as="r" hint-placeholder-count="3">
+              <div style="border:1px solid #e7e4e0; border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:11px;">
+                <span style="font:600 10px ui-monospace,monospace; color:#5b5bd6;">{{ r.type }}</span>
+                <div style="color:#57534e; margin-top:2px;">{{ r.target }}</div>
+              </div>
+            </sc-for>
+
+            <div style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; margin:16px 0 8px;">Источники (provenance)</div>
+            <div style="border:1px dashed #d6d3d1; border-radius:6px; padding:10px; font:500 10px ui-monospace,monospace; color:#a8a29e; background:#faf9f8;">chunk #418 · chunk #902 …</div>
+
+            <div style="margin-top:16px; background:#5b5bd6; color:#fff; border-radius:7px; padding:10px; text-align:center; font-size:12px; font-weight:600; cursor:pointer;">💬 Спросить про эту сущность</div>
+          </aside>
+        </div>
+      </sc-if>
+
+      <!-- ===== CHAT ===== -->
+      <sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; height:100%;">
+          <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+            <div style="padding:14px 22px; border-bottom:1px solid #e7e4e0; display:flex; align-items:center; gap:9px;">
+              <span style="font:600 10px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase;">Движок поиска</span>
+              <div style="display:flex; gap:5px;">
+                <span style="background:#5b5bd6; color:#fff; border-radius:6px; padding:5px 10px; font-size:11px; font-weight:600;">LocalSearch</span>
+                <span style="background:#f5f4f2; border:1px solid #d6d3d1; border-radius:6px; padding:5px 10px; font-size:11px; font-weight:600; color:#78716c;">Global</span>
+                <span style="background:#f5f4f2; border:1px solid #d6d3d1; border-radius:6px; padding:5px 10px; font-size:11px; font-weight:600; color:#78716c;">Mix</span>
+                <span style="background:#f5f4f2; border:1px solid #d6d3d1; border-radius:6px; padding:5px 10px; font-size:11px; font-weight:600; color:#78716c;">QueryPlan</span>
+              </div>
+            </div>
+            <div style="flex:1; overflow:auto; padding:22px; display:flex; flex-direction:column; gap:16px;">
+              <div style="align-self:flex-end; max-width:70%; background:#5b5bd6; color:#fff; border-radius:12px 12px 3px 12px; padding:11px 15px; font-size:13px;">Кто написал гимн Норвегии и когда?</div>
+              <div style="align-self:flex-start; max-width:78%;">
+                <div style="background:#fff; border:1px solid #e7e4e0; border-radius:12px 12px 12px 3px; padding:13px 16px; font-size:13px; line-height:1.55; color:#44403c;">Текст гимна Норвегии написал <b>Бьёрнстьерне Бьёрнсон</b> в 1859 году…</div>
+                <!-- trace -->
+                <div style="margin-top:8px; border:1px solid #d6d3d1; border-radius:9px; background:#faf9f8; overflow:hidden;">
+                  <div style="padding:9px 13px; font:600 11px ui-monospace,monospace; color:#5b5bd6; display:flex; align-items:center; gap:7px; border-bottom:1px solid #e7e4e0;">▾ Трейс ответа <span style="margin-left:auto; color:#a8a29e; font-weight:500;">LocalSearch · top-k 8 · rerank ✓</span></div>
+                  <div style="padding:11px 13px; display:flex; flex-direction:column; gap:8px;">
+                    <div style="font:600 10px ui-monospace,monospace; color:#a8a29e;">СУЩНОСТИ В КОНТЕКСТЕ</div>
+                    <div style="display:flex; gap:5px; flex-wrap:wrap;">
+                      <span style="background:#ece9fb; color:#5b5bd6; border-radius:5px; padding:3px 8px; font:600 10px ui-monospace,monospace;">Бьёрнсон</span>
+                      <span style="background:#ece9fb; color:#5b5bd6; border-radius:5px; padding:3px 8px; font:600 10px ui-monospace,monospace;">гимн Норвегии</span>
+                      <span style="background:#ece9fb; color:#5b5bd6; border-radius:5px; padding:3px 8px; font:600 10px ui-monospace,monospace;">1859</span>
+                    </div>
+                    <div style="display:flex; gap:14px; font:500 10px ui-monospace,monospace; color:#78716c; margin-top:2px;">
+                      <span>chunks: 3</span><span>communities: 1</span><span>retrieval 140мс</span><span>gen 1.2с</span><span>≈0.4 Вт·ч</span>
+                    </div>
+                    <div style="font:500 10px ui-monospace,monospace; color:#5b5bd6;">↳ подсветить на графе</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:14px 22px; border-top:1px solid #e7e4e0;">
+              <div style="display:flex; gap:7px; margin-bottom:10px; flex-wrap:wrap;">
+                <span style="border:1px dashed #c7c3bf; border-radius:14px; padding:5px 11px; font-size:11px; color:#78716c;">Кто получал Нобелевскую премию?</span>
+                <span style="border:1px dashed #c7c3bf; border-radius:14px; padding:5px 11px; font-size:11px; color:#78716c;">Связь Ибсена и Бьёрнсона?</span>
+              </div>
+              <div style="border:1px solid #d6d3d1; border-radius:10px; padding:12px 15px; color:#a8a29e; font-size:13px; display:flex; align-items:center;">Спросите что-нибудь про корпус…<span style="margin-left:auto; background:#5b5bd6; color:#fff; border-radius:7px; padding:6px 14px; font-size:12px; font-weight:600;">↑</span></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== DASHBOARD ===== -->
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:24px 28px;">
+          <div style="font-weight:700; font-size:20px; margin-bottom:4px;">Дашборд корпуса</div>
+          <div style="font-size:13px; color:#78716c; margin-bottom:20px;">Статистика графа · качество · энергия и стоимость · тайминги и логи</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+            <div style="background:#fff; border:1px solid #d6d3d1; border-radius:10px; padding:18px;">
+              <div style="font:600 11px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.6px;">① Статистика графа</div>
+              <div style="display:flex; gap:22px; margin-top:14px;">
+                <div><div style="font-weight:800; font-size:26px;">2 410</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">узлов</div></div>
+                <div><div style="font-weight:800; font-size:26px;">7 088</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">связей</div></div>
+                <div><div style="font-weight:800; font-size:26px;">38</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">сообществ</div></div>
+              </div>
+              <div style="margin-top:14px; height:64px; border-radius:6px; background-image:repeating-linear-gradient(90deg,#efedea 0 7px,#e7e4e0 7px 14px); display:flex; align-items:center; justify-content:center; font:600 10px ui-monospace,monospace; color:#a8a29e;">распределение типов сущностей</div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #d6d3d1; border-radius:10px; padding:18px;">
+              <div style="font:600 11px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.6px;">② Качество (бенчмарки)</div>
+              <sc-for list="{{ metrics }}" as="m" hint-placeholder-count="3">
+                <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+                  <span style="width:120px; font-size:12px; font-weight:600;">{{ m.name }}</span>
+                  <span style="flex:1; height:8px; border-radius:4px; background:#ece9fb; position:relative; overflow:hidden;"><span style="position:absolute; left:0; top:0; bottom:0; width:{{ m.pct }}; background:#5b5bd6;"></span></span>
+                  <span style="font:600 11px ui-monospace,monospace; color:#5b5bd6; width:36px; text-align:right;">{{ m.val }}</span>
+                </div>
+              </sc-for>
+              <div style="font:500 10px ui-monospace,monospace; color:#a8a29e; margin-top:12px;">RAGU vs LightRAG / HippoRAG2 / Naive</div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #d6d3d1; border-radius:10px; padding:18px;">
+              <div style="font:600 11px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.6px;">③ Энергия и стоимость</div>
+              <div style="display:flex; gap:22px; margin-top:14px; align-items:flex-end;">
+                <div><div style="font-weight:800; font-size:26px;">0.18</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">кВт·ч / корпус</div></div>
+                <div><div style="font-weight:800; font-size:26px; color:#1f8a5b;">−94%</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e;">$ vs GPT-4 API</div></div>
+              </div>
+              <div style="margin-top:12px; font:500 10px ui-monospace,monospace; color:#78716c; line-height:1.5; background:#faf9f8; border:1px dashed #d6d3d1; border-radius:6px; padding:9px;">кВт·ч = TDP × время × PUE<br/>meno-lite 7B локально vs ~40k токенов/док по тарифам gpt-4o</div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #d6d3d1; border-radius:10px; padding:18px;">
+              <div style="font:600 11px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.6px;">④ Тайминги пайплайна</div>
+              <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+                <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                  <span style="width:130px; font:600 11px ui-monospace,monospace; color:#57534e;">{{ s.name }}</span>
+                  <span style="flex:1; height:8px; border-radius:4px; background:#f5f4f2; overflow:hidden;"><span style="display:block; height:100%; width:{{ s.pct }}; background:#a89bf0;"></span></span>
+                  <span style="font:500 10px ui-monospace,monospace; color:#78716c; width:42px; text-align:right;">{{ s.t }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="grid-column:1 / -1; background:#fff; border:1px solid #d6d3d1; border-radius:10px; padding:18px;">
+              <div style="font:600 11px ui-monospace,monospace; color:#a8a29e; text-transform:uppercase; letter-spacing:.6px;">Логи запросов (разворачиваются в трейс)</div>
+              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; gap:14px; font:500 11px ui-monospace,monospace; color:#57534e; padding:8px 10px; background:#faf9f8; border-radius:6px;"><span style="color:#a8a29e;">12:04:18</span><span style="flex:1;">«Кто написал гимн…»</span><span>LocalSearch</span><span style="color:#1f8a5b;">1.3с</span><span>▾</span></div>
+                <div style="display:flex; gap:14px; font:500 11px ui-monospace,monospace; color:#57534e; padding:8px 10px; background:#faf9f8; border-radius:6px;"><span style="color:#a8a29e;">12:03:51</span><span style="flex:1;">«Связь Ибсена и…»</span><span>MixSearch</span><span style="color:#1f8a5b;">2.1с</span><span>▾</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+    </section>
+  </main>
+
+  <!-- ===== SETTINGS SLIDE-OVER ===== -->
+  <sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSettings }}" style="position:fixed; inset:0; background:rgba(28,27,26,.35); z-index:40;"></div>
+    <aside style="position:fixed; top:0; right:0; bottom:0; width:380px; background:#fff; border-left:1px solid #d6d3d1; z-index:50; display:flex; flex-direction:column; box-shadow:-12px 0 40px rgba(0,0,0,.12);">
+      <div style="padding:18px 20px; border-bottom:1px solid #e7e4e0; display:flex; align-items:center;">
+        <div><div style="font-weight:700; font-size:16px;">Настройки движка RAGU</div><div style="font:500 10px ui-monospace,monospace; color:#a8a29e; margin-top:2px;">пресет + ручной режим</div></div>
+        <div onClick="{{ closeSettings }}" style="margin-left:auto; width:30px; height:30px; border:1px solid #d6d3d1; border-radius:7px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px;">✕</div>
+      </div>
+      <div style="padding:18px 20px; overflow:auto; display:flex; flex-direction:column; gap:18px;">
+        <sc-for list="{{ settingGroups }}" as="g" hint-placeholder-count="6">
+          <div>
+            <div style="font:700 10px ui-monospace,monospace; color:#5b5bd6; text-transform:uppercase; letter-spacing:.6px; display:flex; align-items:center; gap:8px;">{{ g.step }}
+              <sc-if value="{{ g.reindex }}" hint-placeholder-val="{{ false }}"><span style="background:#fdf0e6; color:#c2691a; border-radius:4px; padding:2px 6px; font-size:9px; font-weight:600; letter-spacing:0;">требует переиндексации</span></sc-if>
+            </div>
+            <div style="font-weight:600; font-size:13px; margin-top:5px;">{{ g.title }}</div>
+            <div style="font-size:11px; color:#78716c; line-height:1.5; margin-top:4px;">{{ g.opts }}</div>
+            <div style="height:30px; margin-top:8px; border:1px solid #e7e4e0; border-radius:6px; background:#faf9f8; display:flex; align-items:center; padding:0 10px; font:500 10px ui-monospace,monospace; color:#a8a29e;">{{ g.control }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'gallery', preset: 'demo', lang: 'RU', settingsOpen: false };
+
+  renderVals() {
+    const s = this.state;
+    const set = (k, v) => () => this.setState({ [k]: v });
+
+    const navBase = { display:'flex', alignItems:'center', gap:'10px', padding:'9px 11px', borderRadius:'7px', fontSize:'13px', fontWeight:600, cursor:'pointer', color:'#57534e' };
+    const navActive = { ...navBase, background:'#ece9fb', color:'#5b5bd6' };
+    const mkNav = (key, icon, label) => ({ icon, label, onClick: set('screen', key), style: s.screen===key ? navActive : navBase });
+    const navItems = [
+      mkNav('gallery','▤','Датасеты'),
+      mkNav('explorer','◉','Граф'),
+      mkNav('chat','💬','Чат'),
+      mkNav('dashboard','▦','Дашборд'),
+    ];
+
+    const langBase = { fontFamily:'ui-monospace,monospace', fontSize:'11px', fontWeight:700, padding:'4px 8px', borderRadius:'5px', cursor:'pointer', color:'#a8a29e' };
+    const langActive = { ...langBase, background:'#5b5bd6', color:'#fff' };
+    const mkLang = (l) => ({ label:l, onClick:set('lang',l), style: s.lang===l?langActive:langBase });
+    const langItems = [mkLang('EN'), mkLang('RU')];
+
+    const presBase = { fontSize:'11px', fontWeight:600, padding:'5px 10px', borderRadius:'5px', cursor:'pointer', color:'#78716c' };
+    const presActive = { ...presBase, background:'#fff', color:'#44403c', boxShadow:'0 1px 2px rgba(0,0,0,.08)' };
+    const mkPres = (key,label) => ({ label, onClick:set('preset',key), style: s.preset===key?presActive:presBase });
+    const presetItems = [mkPres('fast','⚡ Быстро'), mkPres('accurate','🎯 Точно'), mkPres('demo','🎬 Демо')];
+
+    const cardBase = { background:'#fff', border:'1px solid #d6d3d1', borderRadius:'10px', padding:'13px', cursor:'pointer' };
+    const cardActive = { ...cardBase, border:'2px solid #5b5bd6', padding:'12px' };
+    const mkDs = (id,title,domain,desc,nodes,edges,comms) => ({ title, domain, desc, nodes, edges, comms, onClick: () => this.setState({ activeDs:id, screen:'explorer' }), style: cardBase });
+    const datasets = [
+      mkDs('law','Кодексы и законы РФ','Право','Сеть норм, отсылок, органов и понятий российского права.','18.4k','52k','210'),
+      mkDs('un','Устав ООН + резолюции','Международное право','Органы, государства, статьи и ключевые резолюции ООН.','9.1k','27k','96'),
+      mkDs('papers','Наша статья + цитируемые','Наука','Авторы, методы, бенчмарки и цитирования — граф про сам GraphRAG.','1.2k','3.4k','24'),
+      mkDs('medical','GraphRAG-Bench Medical','Медицина','Биомедицинский корпус из бенчмарков — рядом метрики качества.','6.7k','19k','71'),
+      mkDs('wiki','Википедия: писатели','Биографии','Связный тематический срез: персоны, события, награды.','2.4k','7.1k','38'),
+      mkDs('own','＋ Загрузить свой','—','Документ или готовый индекс — построим граф на лету.','—','—','—'),
+    ];
+
+    const legend = [
+      { color:'#e0524f', label:'PERSON' }, { color:'#4f8ee0', label:'ORGANIZATION' },
+      { color:'#3fb56b', label:'LOCATION' }, { color:'#d97ad9', label:'EVENT' },
+      { color:'#e0a73f', label:'DATE' }, { color:'#7c6ce0', label:'WORK_OF_ART' },
+      { color:'#3fb8b8', label:'LAW' },
+    ];
+    const relations = [
+      { type:'WORKS_AS', target:'писатель' },
+      { type:'AWARDED_WITH', target:'Нобелевская премия' },
+      { type:'PLACE_OF_BIRTH', target:'Квикне, Норвегия' },
+    ];
+    const metrics = [
+      { name:'Answer Correctness', val:'59.0', pct:'59%' },
+      { name:'Evidence Recall', val:'84.2', pct:'84%' },
+      { name:'Context Relevancy', val:'90.8', pct:'91%' },
+    ];
+    const stages = [
+      { name:'Chunking', t:'1.2с', pct:'15%' },
+      { name:'Extraction', t:'8.4с', pct:'70%' },
+      { name:'Summarization', t:'3.1с', pct:'38%' },
+      { name:'Communities', t:'2.0с', pct:'26%' },
+      { name:'Refinement', t:'0.6с', pct:'9%' },
+    ];
+
+    const settingGroups = [
+      { step:'Шаг 1', title:'Chunking', opts:'Simple / SemanticText / SmartSemantic · размер · overlap', control:'SmartSemanticChunker ▾', reindex:true },
+      { step:'Шаг 2', title:'Extraction', opts:'single ↔ two-stage · валидация NEREL · ICL (semantic/BM25/hybrid/random) · модель', control:'two-stage · meno-lite 7B · ICL hybrid ▾', reindex:true },
+      { step:'Шаг 3', title:'Summarization', opts:'DBSCAN (eps, min_samples) · LLM-суммаризация сущностей/связей', control:'DBSCAN вкл · суммаризация вкл', reindex:true },
+      { step:'Шаг 4', title:'Communities', opts:'Hierarchical Leiden (resolution, levels) · суммаризация сообществ', control:'Leiden · resolution 1.0', reindex:true },
+      { step:'Шаг 5', title:'Refinement', opts:'RemoveIsolatedNodes и пост-обработчики', control:'RemoveIsolatedNodes вкл', reindex:true },
+      { step:'Шаг 6', title:'Search', opts:'Local/Global/Naive/Mix/QueryPlan · rerank · hybrid (BM25/BM42/SPLADE) · top-k', control:'LocalSearch · rerank ✓ · top-k 8', reindex:false },
+    ];
+
+    const titles = { gallery:'Датасеты', explorer:'Граф знаний', chat:'Чат с агентом', dashboard:'Дашборд' };
+    const dsNames = { law:'Кодексы и законы РФ', un:'Устав ООН + резолюции', papers:'Наша статья + цитируемые', medical:'GraphRAG-Bench Medical', wiki:'Википедия: писатели', own:'Свой корпус' };
+    const dsId = s.activeDs || 'wiki';
+
+    return {
+      navItems, langItems, presetItems, datasets, legend, relations, metrics, stages, settingGroups,
+      screenTitle: titles[s.screen],
+      dataset: dsNames[dsId],
+      datasetMeta: '2 410 узлов · 38 сообществ',
+      isGallery: s.screen==='gallery',
+      isExplorer: s.screen==='explorer',
+      isChat: s.screen==='chat',
+      isDashboard: s.screen==='dashboard',
+      settingsOpen: s.settingsOpen,
+      openSettings: () => this.setState({ settingsOpen:true }),
+      closeSettings: () => this.setState({ settingsOpen:false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
