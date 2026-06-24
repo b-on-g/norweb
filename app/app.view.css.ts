@@ -14,13 +14,16 @@ namespace $ {
 		Main: {
 			flex: {
 				grow: 1,
+				shrink: 1,
 				direction: 'column',
 			},
 			minWidth: 0,
 		},
 		Body: {
-			flex: { grow: 1 },
+			display: 'flex',
+			flex: { grow: 1, shrink: 1, direction: 'column' },
 			minHeight: 0,
+			minWidth: 0,
 		},
 	} )
 }

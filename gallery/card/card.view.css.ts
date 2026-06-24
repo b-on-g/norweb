@@ -31,7 +31,6 @@ namespace $ {
 		Preview: {
 			height: '118px',
 			border: { radius: '7px' },
-			background: { color: '#e7e4e0' },
 			align: { items: 'center' },
 			justify: { content: 'center' },
 			position: 'relative',

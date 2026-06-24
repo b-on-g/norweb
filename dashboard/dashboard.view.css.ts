@@ -68,7 +68,8 @@ namespace $ {
 	} as const
 
 	$mol_style_define( $bog_ragufront_dashboard, {
-		flex: { direction: 'column' },
+		flex: { direction: 'column', shrink: 1 },
+		minWidth: 0,
 		padding: {
 			top: '1.5rem',
 			bottom: '1.5rem',
@@ -88,8 +89,9 @@ namespace $ {
 
 		Grid: {
 			display: 'grid',
-			gridTemplateColumns: '1fr 1fr',
+			gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
 			gap: '16px',
+			minWidth: 0,
 		},
 
 		Card_stats: card,
@@ -122,7 +124,6 @@ namespace $ {
 			margin: { top: '14px' },
 			height: '64px',
 			border: { radius: '6px' },
-			background: { color: '#e7e4e0' },
 			align: { items: 'center' },
 			justify: { content: 'center' },
 			font: {

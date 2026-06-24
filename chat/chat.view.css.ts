@@ -52,7 +52,8 @@ namespace $ {
 	} as const
 
 	$mol_style_define( $bog_ragufront_chat, {
-		flex: { direction: 'column' },
+		flex: { direction: 'column', shrink: 1 },
+		minWidth: 0,
 		height: '100%',
 
 		Modes_bar: {

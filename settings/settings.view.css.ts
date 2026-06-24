@@ -94,6 +94,7 @@ namespace $ {
 				left: '20px',
 				right: '20px',
 			},
+			display: 'flex',
 			flex: { direction: 'column' },
 			gap: '18px',
 		},

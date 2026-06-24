@@ -1,5 +1,7 @@
 namespace $ {
 
+	const { radial_gradient } = $mol_style_func
+
 	const dot_base = {
 		minWidth: '9px',
 		maxWidth: '9px',
@@ -54,11 +56,12 @@ namespace $ {
 	} as const
 
 	$mol_style_define( $bog_ragufront_explorer, {
-		flex: { direction: 'row' },
+		flex: { direction: 'row', shrink: 1 },
+		minWidth: 0,
 		height: '100%',
 
 		Canvas: {
-			flex: { grow: 1, direction: 'column' },
+			flex: { grow: 1, shrink: 1, direction: 'column' },
 			position: 'relative',
 			background: { color: '#1c1b1a' },
 			minWidth: 0,
@@ -71,6 +74,12 @@ namespace $ {
 			left: 0,
 			align: { items: 'center' },
 			justify: { content: 'center' },
+			background: {
+				image: [
+					[ radial_gradient( 'circle at 35% 40%, #5b5bd62e, transparent 45%' ) ],
+					[ radial_gradient( 'circle at 70% 65%, #d65b8c24, transparent 45%' ) ],
+				],
+			},
 		},
 		Canvas_label: {
 			font: {
