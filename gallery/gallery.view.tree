@@ -1,0 +1,22 @@
+$bog_ragufront_gallery $bog_builderui_div
+	dataset_id \wiki
+	select_dataset? null
+	datasets /
+	sub /
+		<= Header $bog_builderui_div sub /
+			<= Header_text $bog_builderui_div sub /
+				<= Header_title $bog_builderui_div sub / \Галерея корпусов
+				<= Header_subtitle $bog_builderui_div sub / \Выберите готовый граф знаний или загрузите свой документ / индекс
+			<= Spacer $bog_builderui_div
+			<= Upload_doc $bog_builderui_div sub / \＋ Загрузить документ
+			<= Upload_idx $bog_builderui_div sub / \⇪ Загрузить готовый индекс
+		<= Grid $bog_builderui_div sub <= rows /
+			<= Card* $bog_ragufront_gallery_card
+				id <= card_id* \
+				title <= card_title* \
+				domain <= card_domain* \
+				desc <= card_desc* \
+				nodes <= card_nodes* \
+				edges <= card_edges* \
+				comms <= card_comms* \
+				click? <=> click*? null

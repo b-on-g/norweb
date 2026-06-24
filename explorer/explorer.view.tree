@@ -1,0 +1,58 @@
+$bog_ragufront_explorer $bog_builderui_div
+	sub /
+		<= Canvas $bog_builderui_div sub /
+			<= Canvas_bg $bog_builderui_div sub /
+				<= Canvas_label $bog_builderui_div sub /
+					\⬡ ⬡ ⬡
+					\
+					\ИНТЕРАКТИВНЫЙ ГРАФ ЗНАНИЙ
+					\Sigma.js / WebGL · force layout
+					\цвет = тип NEREL · толщина = strength
+			<= Filters $bog_builderui_div sub /
+				<= Filter_search $bog_builderui_div sub / \🔍 Поиск узла…
+				<= Filter_type $bog_builderui_div sub / \Тип сущности ▾
+				<= Filter_thresh $bog_builderui_div sub / \Порог strength ▾
+				<= Filter_comm $bog_builderui_div sub / \◉ Сообщества: вкл
+			<= Legend $bog_builderui_div sub /
+				<= Legend_title $bog_builderui_div sub / \Entity Types
+				<= Legend_person $bog_builderui_div sub /
+					<= Legend_person_dot $bog_builderui_div
+					<= Legend_person_label $bog_builderui_div sub / \PERSON
+				<= Legend_org $bog_builderui_div sub /
+					<= Legend_org_dot $bog_builderui_div
+					<= Legend_org_label $bog_builderui_div sub / \ORGANIZATION
+				<= Legend_loc $bog_builderui_div sub /
+					<= Legend_loc_dot $bog_builderui_div
+					<= Legend_loc_label $bog_builderui_div sub / \LOCATION
+				<= Legend_event $bog_builderui_div sub /
+					<= Legend_event_dot $bog_builderui_div
+					<= Legend_event_label $bog_builderui_div sub / \EVENT
+				<= Legend_date $bog_builderui_div sub /
+					<= Legend_date_dot $bog_builderui_div
+					<= Legend_date_label $bog_builderui_div sub / \DATE
+				<= Legend_work $bog_builderui_div sub /
+					<= Legend_work_dot $bog_builderui_div
+					<= Legend_work_label $bog_builderui_div sub / \WORK_OF_ART
+				<= Legend_law $bog_builderui_div sub /
+					<= Legend_law_dot $bog_builderui_div
+					<= Legend_law_label $bog_builderui_div sub / \LAW
+		<= Aside $bog_builderui_div sub /
+			<= Aside_title $bog_builderui_div sub / \Карточка сущности
+			<= Entity_head $bog_builderui_div sub /
+				<= Entity_dot $bog_builderui_div
+				<= Entity_name $bog_builderui_div sub / \Бьёрнстьерне Бьёрнсон
+			<= Entity_type $bog_builderui_div sub / \PERSON
+			<= Entity_desc $bog_builderui_div sub / \Автор текста гимна Норвегии (1859). Норвежский писатель, лауреат Нобелевской премии по литературе.
+			<= Relations_title $bog_builderui_div sub / \Связи (12)
+			<= Rel_one $bog_builderui_div sub /
+				<= Rel_one_type $bog_builderui_div sub / \WORKS_AS
+				<= Rel_one_target $bog_builderui_div sub / \писатель
+			<= Rel_two $bog_builderui_div sub /
+				<= Rel_two_type $bog_builderui_div sub / \AWARDED_WITH
+				<= Rel_two_target $bog_builderui_div sub / \Нобелевская премия
+			<= Rel_three $bog_builderui_div sub /
+				<= Rel_three_type $bog_builderui_div sub / \PLACE_OF_BIRTH
+				<= Rel_three_target $bog_builderui_div sub / \Квикне, Норвегия
+			<= Sources_title $bog_builderui_div sub / \Источники (provenance)
+			<= Sources $bog_builderui_div sub / \chunk #418 · chunk #902 …
+			<= Ask_btn $bog_builderui_div sub / \💬 Спросить про эту сущность

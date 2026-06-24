@@ -1,0 +1,62 @@
+$bog_ragufront_dashboard $bog_builderui_div
+	metrics /
+	stages /
+	sub /
+		<= Title $bog_builderui_div sub / \Дашборд корпуса
+		<= Subtitle $bog_builderui_div sub / \Статистика графа · качество · энергия и стоимость · тайминги и логи
+		<= Grid $bog_builderui_div sub /
+			<= Card_stats $bog_builderui_div sub /
+				<= Card_stats_label $bog_builderui_div sub / \① Статистика графа
+				<= Stats_row $bog_builderui_div sub /
+					<= Stat_nodes $bog_builderui_div sub /
+						<= Stat_nodes_val $bog_builderui_div sub / \2 410
+						<= Stat_nodes_lbl $bog_builderui_div sub / \узлов
+					<= Stat_edges $bog_builderui_div sub /
+						<= Stat_edges_val $bog_builderui_div sub / \7 088
+						<= Stat_edges_lbl $bog_builderui_div sub / \связей
+					<= Stat_comms $bog_builderui_div sub /
+						<= Stat_comms_val $bog_builderui_div sub / \38
+						<= Stat_comms_lbl $bog_builderui_div sub / \сообществ
+				<= Stats_dist $bog_builderui_div sub / \распределение типов сущностей
+			<= Card_quality $bog_builderui_div sub /
+				<= Card_quality_label $bog_builderui_div sub / \② Качество (бенчмарки)
+				<= Metric_rows $bog_builderui_div sub <= metric_rows /
+					<= Metric* $bog_ragufront_dashboard_metric
+						name <= metric_name* \
+						value <= metric_value* \
+						pct <= metric_pct* \0%
+				<= Quality_footer $bog_builderui_div sub / \RAGU vs LightRAG / HippoRAG2 / Naive
+			<= Card_energy $bog_builderui_div sub /
+				<= Card_energy_label $bog_builderui_div sub / \③ Энергия и стоимость
+				<= Energy_row $bog_builderui_div sub /
+					<= Energy_kwh $bog_builderui_div sub /
+						<= Energy_kwh_val $bog_builderui_div sub / \0.18
+						<= Energy_kwh_lbl $bog_builderui_div sub / \кВт·ч / корпус
+					<= Energy_cost $bog_builderui_div sub /
+						<= Energy_cost_val $bog_builderui_div sub / \−94%
+						<= Energy_cost_lbl $bog_builderui_div sub / \$ vs GPT-4 API
+				<= Energy_note $bog_builderui_div sub /
+					\кВт·ч = TDP × время × PUE
+					\meno-lite 7B локально vs ~40k токенов/док по тарифам gpt-4o
+			<= Card_timings $bog_builderui_div sub /
+				<= Card_timings_label $bog_builderui_div sub / \④ Тайминги пайплайна
+				<= Stage_rows $bog_builderui_div sub <= stage_rows /
+					<= Stage* $bog_ragufront_dashboard_stage
+						name <= stage_name* \
+						time <= stage_time* \
+						pct <= stage_pct* \0%
+			<= Card_logs $bog_builderui_div sub /
+				<= Card_logs_label $bog_builderui_div sub / \Логи запросов (разворачиваются в трейс)
+				<= Log_list $bog_builderui_div sub /
+					<= Log_one $bog_builderui_div sub /
+						<= Log_one_time $bog_builderui_div sub / \12:04:18
+						<= Log_one_text $bog_builderui_div sub / \«Кто написал гимн…»
+						<= Log_one_mode $bog_builderui_div sub / \LocalSearch
+						<= Log_one_dur $bog_builderui_div sub / \1.3с
+						<= Log_one_arrow $bog_builderui_div sub / \▾
+					<= Log_two $bog_builderui_div sub /
+						<= Log_two_time $bog_builderui_div sub / \12:03:51
+						<= Log_two_text $bog_builderui_div sub / \«Связь Ибсена и…»
+						<= Log_two_mode $bog_builderui_div sub / \MixSearch
+						<= Log_two_dur $bog_builderui_div sub / \2.1с
+						<= Log_two_arrow $bog_builderui_div sub / \▾

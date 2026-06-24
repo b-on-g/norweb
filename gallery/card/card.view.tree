@@ -1,0 +1,22 @@
+$bog_ragufront_gallery_card $bog_builderui_div
+	id \
+	title \
+	domain \
+	desc \
+	nodes \
+	edges \
+	comms \
+	click? null
+	event *
+		^
+		click? <=> click? null
+	sub /
+		<= Preview $bog_builderui_div sub /
+			<= Preview_label $bog_builderui_div sub / \превью графа
+			<= Domain_badge $bog_builderui_div sub / <= domain
+		<= Title $bog_builderui_div sub / <= title
+		<= Desc $bog_builderui_div sub / <= desc
+		<= Tags $bog_builderui_div sub /
+			<= Tag_nodes $bog_builderui_div sub / <= tag_nodes \
+			<= Tag_edges $bog_builderui_div sub / <= tag_edges \
+			<= Tag_comms $bog_builderui_div sub / <= tag_comms \

@@ -1,0 +1,101 @@
+namespace $ {
+	$mol_style_define( $bog_ragufront_settings, {
+		position: 'fixed',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		display: 'none',
+		zIndex: 40,
+		'@': {
+			bog_ragufront_settings_showed: {
+				true: { display: 'flex' },
+			},
+		},
+
+		Backdrop: {
+			position: 'absolute',
+			top: 0,
+			right: 0,
+			bottom: 0,
+			left: 0,
+			background: { color: '#1c1b1a59' },
+		},
+
+		Panel: {
+			position: 'absolute',
+			top: 0,
+			right: 0,
+			bottom: 0,
+			width: '380px',
+			background: { color: '#ffffff' },
+			border: {
+				left: { width: '1px', style: 'solid', color: '#d6d3d1' },
+			},
+			zIndex: 1,
+			flex: { direction: 'column' },
+			box: {
+				shadow: [ {
+					x: '-12px',
+					y: 0,
+					blur: '40px',
+					spread: 0,
+					color: '#0000001f',
+				} ],
+			},
+		},
+
+		Header: {
+			padding: {
+				top: '18px',
+				bottom: '18px',
+				left: '20px',
+				right: '20px',
+			},
+			border: {
+				bottom: { width: '1px', style: 'solid', color: '#e7e4e0' },
+			},
+			flex: { direction: 'row' },
+			align: { items: 'center' },
+		},
+		Header_text: {
+			flex: { direction: 'column' },
+		},
+		Header_title: {
+			font: { weight: 700, size: '16px' },
+		},
+		Header_sub: {
+			font: {
+				family: 'ui-monospace, monospace',
+				weight: 500,
+				size: '10px',
+			},
+			color: '#a8a29e',
+			margin: { top: '2px' },
+		},
+		Spacer: {
+			flex: { grow: 1 },
+		},
+		Close_btn: {
+			minWidth: '30px',
+			maxWidth: '30px',
+			height: '30px',
+			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '7px' },
+			align: { items: 'center' },
+			justify: { content: 'center' },
+			cursor: 'pointer',
+			font: { size: '15px' },
+		},
+
+		Body: {
+			padding: {
+				top: '18px',
+				bottom: '18px',
+				left: '20px',
+				right: '20px',
+			},
+			flex: { direction: 'column' },
+			gap: '18px',
+		},
+	} )
+}

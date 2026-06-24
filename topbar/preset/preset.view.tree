@@ -1,0 +1,11 @@
+$bog_ragufront_topbar_preset $bog_builderui_div
+	label \
+	active false
+	click? null
+	attr *
+		^
+		bog_ragufront_topbar_preset_active <= active
+	event *
+		^
+		click? <=> click? null
+	sub / <= label

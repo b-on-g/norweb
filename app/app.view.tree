@@ -1,0 +1,27 @@
+$bog_ragufront_app $bog_builderui_div
+	screen? \gallery
+	preset? \demo
+	lang? \RU
+	dataset_id? \wiki
+	settings_open? false
+	body /
+	sub /
+		<= Sidebar $bog_ragufront_sidebar
+			screen? <=> screen?
+			lang? <=> lang?
+			dataset_id <= dataset_id
+		<= Main $bog_builderui_div sub /
+			<= Topbar $bog_ragufront_topbar
+				screen <= screen
+				dataset_id <= dataset_id
+				preset? <=> preset?
+				open_settings? <=> open_settings? null
+			<= Body $mol_scroll sub <= body
+		<= Settings $bog_ragufront_settings
+			showed? <=> settings_open?
+	Gallery $bog_ragufront_gallery
+		dataset_id <= dataset_id
+		select_dataset? <=> select_dataset? null
+	Explorer $bog_ragufront_explorer
+	Chat $bog_ragufront_chat
+	Dashboard $bog_ragufront_dashboard

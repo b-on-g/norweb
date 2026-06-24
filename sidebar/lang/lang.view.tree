@@ -1,0 +1,11 @@
+$bog_ragufront_sidebar_lang $bog_builderui_div
+	label \
+	active false
+	click? null
+	attr *
+		^
+		bog_ragufront_sidebar_lang_active <= active
+	event *
+		^
+		click? <=> click? null
+	sub / <= label

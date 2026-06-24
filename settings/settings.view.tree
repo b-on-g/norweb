@@ -1,0 +1,55 @@
+$bog_ragufront_settings $bog_builderui_div
+	showed? false
+	close? null
+	attr *
+		^
+		bog_ragufront_settings_showed <= showed?
+	sub /
+		<= Backdrop $bog_builderui_div
+			event * click? <=> close? null
+		<= Panel $bog_builderui_div sub /
+			<= Header $bog_builderui_div sub /
+				<= Header_text $bog_builderui_div sub /
+					<= Header_title $bog_builderui_div sub / \Настройки движка RAGU
+					<= Header_sub $bog_builderui_div sub / \пресет + ручной режим
+				<= Spacer $bog_builderui_div
+				<= Close_btn $bog_builderui_div
+					event * click? <=> close? null
+					sub / \✕
+			<= Body $mol_scroll sub /
+				<= Group_chunking $bog_ragufront_settings_group
+					step \Шаг 1
+					title \Chunking
+					opts \Simple / SemanticText / SmartSemantic · размер · overlap
+					control \SmartSemanticChunker ▾
+					reindex true
+				<= Group_extraction $bog_ragufront_settings_group
+					step \Шаг 2
+					title \Extraction
+					opts \single ↔ two-stage · валидация NEREL · ICL (semantic/BM25/hybrid/random) · модель
+					control \two-stage · meno-lite 7B · ICL hybrid ▾
+					reindex true
+				<= Group_summarization $bog_ragufront_settings_group
+					step \Шаг 3
+					title \Summarization
+					opts \DBSCAN (eps, min_samples) · LLM-суммаризация сущностей/связей
+					control \DBSCAN вкл · суммаризация вкл
+					reindex true
+				<= Group_communities $bog_ragufront_settings_group
+					step \Шаг 4
+					title \Communities
+					opts \Hierarchical Leiden (resolution, levels) · суммаризация сообществ
+					control \Leiden · resolution 1.0
+					reindex true
+				<= Group_refinement $bog_ragufront_settings_group
+					step \Шаг 5
+					title \Refinement
+					opts \RemoveIsolatedNodes и пост-обработчики
+					control \RemoveIsolatedNodes вкл
+					reindex true
+				<= Group_search $bog_ragufront_settings_group
+					step \Шаг 6
+					title \Search
+					opts \Local/Global/Naive/Mix/QueryPlan · rerank · hybrid (BM25/BM42/SPLADE) · top-k
+					control \LocalSearch · rerank ✓ · top-k 8
+					reindex false

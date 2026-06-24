@@ -1,0 +1,26 @@
+name: $bog_ragufront_app
+
+permissions: write-all
+
+on:
+    workflow_dispatch:
+    push:
+        branches: [main, master]
+
+concurrency:
+    group: deploy-ragufront
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: hyoo-ru/mam_build@master2
+              with:
+                  package: "bog/ragufront"
+                  modules: 'app'
+
+            - uses: hyoo-ru/gh-deploy@v4.4.1
+              with:
+                  folder: "bog/ragufront/app/-"
