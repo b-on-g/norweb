@@ -25,6 +25,25 @@ namespace $.$$ {
 			return null
 		}
 
+		arg_value( key: string, next: string | undefined, fallback: string ) {
+			const arg = this.$.$mol_state_arg
+			if ( next === undefined ) return arg.value( key ) ?? fallback
+			arg.value( key, next === fallback ? null : next )
+			return next
+		}
+
+		@$mol_mem
+		screen( next?: string ) { return this.arg_value( 'screen', next, 'gallery' ) }
+
+		@$mol_mem
+		preset( next?: string ) { return this.arg_value( 'preset', next, 'demo' ) }
+
+		@$mol_mem
+		lang( next?: string ) { return this.arg_value( 'lang', next, 'RU' ) }
+
+		@$mol_mem
+		dataset_id( next?: string ) { return this.arg_value( 'ds', next, 'wiki' ) }
+
 	}
 
 }
