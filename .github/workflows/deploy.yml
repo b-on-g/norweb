@@ -5,14 +5,16 @@ permissions: write-all
 on:
     workflow_dispatch:
     push:
-        branches: [main, master]
+    pull_request:
+    delete:
 
 concurrency:
-    group: deploy-ragufront
+    group: deploy-${{ github.ref }}
     cancel-in-progress: true
 
 jobs:
     build:
+        if: github.event_name != 'delete'
         runs-on: ubuntu-latest
 
         steps:
@@ -21,6 +23,36 @@ jobs:
                   package: "bog/ragufront"
                   modules: 'app'
 
-            - uses: hyoo-ru/gh-deploy@v4.4.1
+            - name: Deploy main
+              if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+              uses: hyoo-ru/gh-deploy@v4.4.1
               with:
                   folder: "bog/ragufront/app/-"
+
+            - name: Deploy feature branch
+              if: startsWith(github.ref, 'refs/heads/feature/')
+              uses: hyoo-ru/gh-deploy@v4.4.1
+              with:
+                  folder: "bog/ragufront/app/-"
+                  target-folder: ${{ github.ref_name }}
+
+    cleanup:
+        if: github.event_name == 'delete' && startsWith(github.event.ref, 'feature/')
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  ref: gh-pages
+
+            - name: Remove feature folder
+              run: |
+                  BRANCH_NAME="${{ github.event.ref }}"
+                  FOLDER="feature/${BRANCH_NAME#feature/}"
+                  if [ -d "$FOLDER" ]; then
+                    git config user.name "github-actions[bot]"
+                    git config user.email "github-actions[bot]@users.noreply.github.com"
+                    git rm -rf "$FOLDER"
+                    git commit -m "Clean up preview for deleted branch: $BRANCH_NAME"
+                    git push
+                  fi
