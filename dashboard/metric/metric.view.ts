@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $bog_ragufront_dashboard_metric extends $.$bog_ragufront_dashboard_metric {
+	export class $raggu_web_dashboard_metric extends $.$raggu_web_dashboard_metric {
 
 		Bar_fill() {
 			const fill = super.Bar_fill()

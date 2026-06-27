@@ -1,4 +1,4 @@
-$bog_ragufront_chat $bog_builderui_div
+$raggu_web_chat $bog_builderui_div
 	sub /
 		<= Modes_bar $bog_builderui_div sub /
 			<= Modes_label $bog_builderui_div sub / \Движок поиска

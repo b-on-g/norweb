@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_dashboard_metric, {
+	$mol_style_define( $raggu_web_dashboard_metric, {
 		flex: { direction: 'row' },
 		align: { items: 'center' },
 		gap: '10px',

@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_settings_group, {
+	$mol_style_define( $raggu_web_settings_group, {
 		flex: { direction: 'column' },
 
 		Head: {
@@ -30,7 +30,7 @@ namespace $ {
 			font: { size: '9px', weight: 600 },
 			display: 'none',
 			'@': {
-				bog_ragufront_settings_group_reindex: {
+				raggu_web_settings_group_reindex: {
 					true: { display: 'flex' },
 				},
 			},

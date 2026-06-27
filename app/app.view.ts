@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $bog_ragufront_app extends $.$bog_ragufront_app {
+	export class $raggu_web_app extends $.$raggu_web_app {
 
 		body() {
 			switch( this.screen() ) {

@@ -55,7 +55,7 @@ namespace $ {
 		margin: { top: '2px' },
 	} as const
 
-	$mol_style_define( $bog_ragufront_explorer, {
+	$mol_style_define( $raggu_web_explorer, {
 		flex: { direction: 'row', shrink: 1 },
 		minWidth: 0,
 		height: '100%',

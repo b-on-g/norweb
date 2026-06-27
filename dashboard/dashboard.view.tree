@@ -1,4 +1,4 @@
-$bog_ragufront_dashboard $bog_builderui_div
+$raggu_web_dashboard $bog_builderui_div
 	metrics /
 	stages /
 	sub /
@@ -17,11 +17,11 @@ $bog_ragufront_dashboard $bog_builderui_div
 					<= Stat_comms $bog_builderui_div sub /
 						<= Stat_comms_val $bog_builderui_div sub / \38
 						<= Stat_comms_lbl $bog_builderui_div sub / \сообществ
-				<= Stats_dist $bog_ragufront_dashboard_dist sub / \распределение типов сущностей
+				<= Stats_dist $raggu_web_dashboard_dist sub / \распределение типов сущностей
 			<= Card_quality $bog_builderui_div sub /
 				<= Card_quality_label $bog_builderui_div sub / \② Качество (бенчмарки)
 				<= Metric_rows $bog_builderui_div sub <= metric_rows /
-					<= Metric* $bog_ragufront_dashboard_metric
+					<= Metric* $raggu_web_dashboard_metric
 						name <= metric_name* \
 						value <= metric_value* \
 						pct <= metric_pct* \0%
@@ -41,7 +41,7 @@ $bog_ragufront_dashboard $bog_builderui_div
 			<= Card_timings $bog_builderui_div sub /
 				<= Card_timings_label $bog_builderui_div sub / \④ Тайминги пайплайна
 				<= Stage_rows $bog_builderui_div sub <= stage_rows /
-					<= Stage* $bog_ragufront_dashboard_stage
+					<= Stage* $raggu_web_dashboard_stage
 						name <= stage_name* \
 						time <= stage_time* \
 						pct <= stage_pct* \0%

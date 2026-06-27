@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $bog_ragufront_settings extends $.$bog_ragufront_settings {
+	export class $raggu_web_settings extends $.$raggu_web_settings {
 
 		@$mol_action
 		close() {

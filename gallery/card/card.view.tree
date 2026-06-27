@@ -1,4 +1,4 @@
-$bog_ragufront_gallery_card $bog_builderui_div
+$raggu_web_gallery_card $bog_builderui_div
 	id \
 	title \
 	domain \
@@ -11,7 +11,7 @@ $bog_ragufront_gallery_card $bog_builderui_div
 		^
 		click? <=> click? null
 	sub /
-		<= Preview $bog_ragufront_gallery_card_preview sub /
+		<= Preview $raggu_web_gallery_card_preview sub /
 			<= Preview_label $bog_builderui_div sub / \превью графа
 			<= Domain_badge $bog_builderui_div sub / <= domain
 		<= Title $bog_builderui_div sub / <= title

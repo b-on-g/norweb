@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_gallery, {
+	$mol_style_define( $raggu_web_gallery, {
 		flex: { direction: 'column', shrink: 1 },
 		minWidth: 0,
 		padding: {

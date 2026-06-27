@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_sidebar_nav, {
+	$mol_style_define( $raggu_web_sidebar_nav, {
 		flex: { direction: 'row' },
 		align: { items: 'center' },
 		gap: '0.625rem',
@@ -18,7 +18,7 @@ namespace $ {
 			textAlign: 'center',
 		},
 		'@': {
-			bog_ragufront_sidebar_nav_active: {
+			raggu_web_sidebar_nav_active: {
 				true: {
 					background: { color: '#ece9fb' },
 					color: '#5b5bd6',

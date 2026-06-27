@@ -1,4 +1,4 @@
-$bog_ragufront_app $bog_builderui_div
+$raggu_web_app $bog_builderui_div
 	screen? \gallery
 	preset? \demo
 	lang? \RU
@@ -6,22 +6,22 @@ $bog_ragufront_app $bog_builderui_div
 	settings_open? false
 	body /
 	sub /
-		<= Sidebar $bog_ragufront_sidebar
+		<= Sidebar $raggu_web_sidebar
 			screen? <=> screen?
 			lang? <=> lang?
 			dataset_id <= dataset_id
 		<= Main $bog_builderui_div sub /
-			<= Topbar $bog_ragufront_topbar
+			<= Topbar $raggu_web_topbar
 				screen <= screen
 				dataset_id <= dataset_id
 				preset? <=> preset?
 				open_settings? <=> open_settings? null
 			<= Body $mol_scroll sub <= body
-		<= Settings $bog_ragufront_settings
+		<= Settings $raggu_web_settings
 			showed? <=> settings_open?
-	Gallery $bog_ragufront_gallery
+	Gallery $raggu_web_gallery
 		dataset_id <= dataset_id
 		select_dataset? <=> select_dataset? null
-	Explorer $bog_ragufront_explorer
-	Chat $bog_ragufront_chat
-	Dashboard $bog_ragufront_dashboard
+	Explorer $raggu_web_explorer
+	Chat $raggu_web_chat
+	Dashboard $raggu_web_dashboard

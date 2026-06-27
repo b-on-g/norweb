@@ -1,4 +1,4 @@
-$bog_ragufront_explorer $bog_builderui_div
+$raggu_web_explorer $bog_builderui_div
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /

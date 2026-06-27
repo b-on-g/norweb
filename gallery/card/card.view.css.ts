@@ -16,7 +16,7 @@ namespace $ {
 		},
 	} as const
 
-	$mol_style_define( $bog_ragufront_gallery_card, {
+	$mol_style_define( $raggu_web_gallery_card, {
 		background: { color: '#ffffff' },
 		border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '10px' },
 		padding: {

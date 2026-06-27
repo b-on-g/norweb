@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_topbar, {
+	$mol_style_define( $raggu_web_topbar, {
 		height: '58px',
 		minHeight: '58px',
 		background: { color: '#ffffff' },

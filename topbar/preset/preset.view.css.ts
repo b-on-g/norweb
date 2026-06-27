@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_topbar_preset, {
+	$mol_style_define( $raggu_web_topbar_preset, {
 		font: { size: '11px', weight: 600 },
 		padding: {
 			top: '5px',
@@ -11,7 +11,7 @@ namespace $ {
 		cursor: 'pointer',
 		color: '#78716c',
 		'@': {
-			bog_ragufront_topbar_preset_active: {
+			raggu_web_topbar_preset_active: {
 				true: {
 					background: { color: '#ffffff' },
 					color: '#44403c',

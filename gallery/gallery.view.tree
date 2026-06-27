@@ -1,4 +1,4 @@
-$bog_ragufront_gallery $bog_builderui_div
+$raggu_web_gallery $bog_builderui_div
 	dataset_id \wiki
 	select_dataset? null
 	datasets /
@@ -11,7 +11,7 @@ $bog_ragufront_gallery $bog_builderui_div
 			<= Upload_doc $bog_builderui_div sub / \＋ Загрузить документ
 			<= Upload_idx $bog_builderui_div sub / \⇪ Загрузить готовый индекс
 		<= Grid $bog_builderui_div sub <= rows /
-			<= Card* $bog_ragufront_gallery_card
+			<= Card* $raggu_web_gallery_card
 				id <= card_id* \
 				title <= card_title* \
 				domain <= card_domain* \

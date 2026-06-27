@@ -17,7 +17,7 @@ namespace $.$$ {
 		{ id: 'refinement', name: 'Refinement', time: '0.6с', pct: '9%' },
 	]
 
-	export class $bog_ragufront_dashboard extends $.$bog_ragufront_dashboard {
+	export class $raggu_web_dashboard extends $.$raggu_web_dashboard {
 
 		metrics() { return METRICS as readonly Metric[] as Metric[] }
 		stages() { return STAGES as readonly Stage[] as Stage[] }

@@ -1,4 +1,4 @@
-name: $bog_ragufront_app
+name: $raggu_web_app
 
 permissions: write-all
 
@@ -20,20 +20,20 @@ jobs:
         steps:
             - uses: hyoo-ru/mam_build@master2
               with:
-                  package: "bog/ragufront"
+                  package: "raggu/web"
                   modules: 'app'
 
             - name: Deploy main
               if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
               uses: hyoo-ru/gh-deploy@v4.4.1
               with:
-                  folder: "bog/ragufront/app/-"
+                  folder: "raggu/web/app/-"
 
             - name: Deploy feature branch
               if: startsWith(github.ref, 'refs/heads/feature/')
               uses: hyoo-ru/gh-deploy@v4.4.1
               with:
-                  folder: "bog/ragufront/app/-"
+                  folder: "raggu/web/app/-"
                   target-folder: ${{ github.ref_name }}
 
     cleanup:

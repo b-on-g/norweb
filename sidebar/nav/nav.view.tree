@@ -1,11 +1,11 @@
-$bog_ragufront_sidebar_nav $bog_builderui_div
+$raggu_web_sidebar_nav $bog_builderui_div
 	icon \
 	label \
 	active false
 	click? null
 	attr *
 		^
-		bog_ragufront_sidebar_nav_active <= active
+		raggu_web_sidebar_nav_active <= active
 	event *
 		^
 		click? <=> click? null

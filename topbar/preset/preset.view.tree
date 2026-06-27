@@ -1,10 +1,10 @@
-$bog_ragufront_topbar_preset $bog_builderui_div
+$raggu_web_topbar_preset $bog_builderui_div
 	label \
 	active false
 	click? null
 	attr *
 		^
-		bog_ragufront_topbar_preset_active <= active
+		raggu_web_topbar_preset_active <= active
 	event *
 		^
 		click? <=> click? null

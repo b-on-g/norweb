@@ -19,7 +19,7 @@ namespace $.$$ {
 		{ id: 'own', title: '＋ Загрузить свой', domain: '—', desc: 'Документ или готовый индекс — построим граф на лету.', nodes: '—', edges: '—', comms: '—' },
 	]
 
-	export class $bog_ragufront_gallery extends $.$bog_ragufront_gallery {
+	export class $raggu_web_gallery extends $.$raggu_web_gallery {
 
 		datasets() { return DATASETS as readonly Dataset[] as Dataset[] }
 

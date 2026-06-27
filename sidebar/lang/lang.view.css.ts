@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_sidebar_lang, {
+	$mol_style_define( $raggu_web_sidebar_lang, {
 		font: {
 			family: 'ui-monospace, monospace',
 			weight: 700,
@@ -15,7 +15,7 @@ namespace $ {
 		cursor: 'pointer',
 		color: '#a8a29e',
 		'@': {
-			bog_ragufront_sidebar_lang_active: {
+			raggu_web_sidebar_lang_active: {
 				true: {
 					background: { color: '#5b5bd6' },
 					color: '#ffffff',

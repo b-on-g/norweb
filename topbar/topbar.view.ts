@@ -16,7 +16,7 @@ namespace $.$$ {
 		own: 'Свой корпус',
 	}
 
-	export class $bog_ragufront_topbar extends $.$bog_ragufront_topbar {
+	export class $raggu_web_topbar extends $.$raggu_web_topbar {
 
 		screen_title() { return SCREEN_TITLES[ this.screen() ] ?? '' }
 		dataset_name() { return DATASET_NAMES[ this.dataset_id() ] ?? '' }

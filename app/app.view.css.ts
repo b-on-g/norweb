@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_app, {
+	$mol_style_define( $raggu_web_app, {
 		height: '100vh',
 		width: '100%',
 		background: { color: '#e9e8e6' },

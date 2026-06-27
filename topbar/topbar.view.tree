@@ -1,4 +1,4 @@
-$bog_ragufront_topbar $bog_builderui_div
+$raggu_web_topbar $bog_builderui_div
 	screen \gallery
 	dataset_id \wiki
 	preset? \demo
@@ -10,15 +10,15 @@ $bog_ragufront_topbar $bog_builderui_div
 		<= Spacer $bog_builderui_div
 		<= Preset_label $bog_builderui_div sub / \Пресет
 		<= Preset_group $bog_builderui_div sub /
-			<= Preset_fast $bog_ragufront_topbar_preset
+			<= Preset_fast $raggu_web_topbar_preset
 				label \⚡ Быстро
 				active <= is_fast false
 				click? <=> click_fast? null
-			<= Preset_accurate $bog_ragufront_topbar_preset
+			<= Preset_accurate $raggu_web_topbar_preset
 				label \🎯 Точно
 				active <= is_accurate false
 				click? <=> click_accurate? null
-			<= Preset_demo $bog_ragufront_topbar_preset
+			<= Preset_demo $raggu_web_topbar_preset
 				label \🎬 Демо
 				active <= is_demo false
 				click? <=> click_demo? null

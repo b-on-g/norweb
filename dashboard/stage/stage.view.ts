@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $bog_ragufront_dashboard_stage extends $.$bog_ragufront_dashboard_stage {
+	export class $raggu_web_dashboard_stage extends $.$raggu_web_dashboard_stage {
 
 		Bar_fill() {
 			const fill = super.Bar_fill()

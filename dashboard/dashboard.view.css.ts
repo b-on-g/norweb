@@ -67,7 +67,7 @@ namespace $ {
 		color: '#1f8a5b',
 	} as const
 
-	$mol_style_define( $bog_ragufront_dashboard, {
+	$mol_style_define( $raggu_web_dashboard, {
 		flex: { direction: 'column', shrink: 1 },
 		minWidth: 0,
 		padding: {

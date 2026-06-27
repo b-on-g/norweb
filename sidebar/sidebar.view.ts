@@ -9,7 +9,7 @@ namespace $.$$ {
 		own: 'Свой корпус',
 	}
 
-	export class $bog_ragufront_sidebar extends $.$bog_ragufront_sidebar {
+	export class $raggu_web_sidebar extends $.$raggu_web_sidebar {
 
 		dataset_name() {
 			return DATASET_NAMES[ this.dataset_id() ] ?? ''

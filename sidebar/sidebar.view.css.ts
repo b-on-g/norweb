@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_sidebar, {
+	$mol_style_define( $raggu_web_sidebar, {
 		minWidth: '228px',
 		maxWidth: '228px',
 		background: { color: '#f5f4f2' },

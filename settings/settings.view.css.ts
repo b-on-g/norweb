@@ -1,5 +1,5 @@
 namespace $ {
-	$mol_style_define( $bog_ragufront_settings, {
+	$mol_style_define( $raggu_web_settings, {
 		position: 'fixed',
 		top: 0,
 		left: 0,
@@ -8,7 +8,7 @@ namespace $ {
 		display: 'none',
 		zIndex: 40,
 		'@': {
-			bog_ragufront_settings_showed: {
+			raggu_web_settings_showed: {
 				true: { display: 'flex' },
 			},
 		},

@@ -51,7 +51,7 @@ namespace $ {
 		color: '#78716c',
 	} as const
 
-	$mol_style_define( $bog_ragufront_chat, {
+	$mol_style_define( $raggu_web_chat, {
 		flex: { direction: 'column', shrink: 1 },
 		minWidth: 0,
 		height: '100%',
