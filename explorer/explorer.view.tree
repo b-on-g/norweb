@@ -1,18 +1,35 @@
 $raggu_web_explorer $bog_builderui_div
+	canvas_title_text @ \INTERACTIVE KNOWLEDGE GRAPH
+	canvas_engine_text @ \Sigma.js / WebGL · force layout
+	canvas_meaning_text @ \color = NEREL type · thickness = strength
+	filter_search_text @ \🔍 Find node…
+	filter_type_text @ \Entity type ▾
+	filter_thresh_text @ \Strength threshold ▾
+	filter_comm_text @ \◉ Communities: on
+	aside_title_text @ \Entity card
+	entity_name_text @ \Bjørnstjerne Bjørnson
+	entity_desc_text @ \Author of the Norwegian anthem (1859). Norwegian writer, Nobel Prize laureate in Literature.
+	relations_title_text @ \Relations (12)
+	rel_one_target_text @ \writer
+	rel_two_target_text @ \Nobel Prize
+	rel_three_target_text @ \Kvikne, Norway
+	sources_title_text @ \Sources (provenance)
+	sources_text @ \chunk #418 · chunk #902 …
+	ask_btn_text @ \💬 Ask about this entity
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
 				<= Canvas_label $bog_builderui_div sub /
 					\⬡ ⬡ ⬡
 					\
-					\ИНТЕРАКТИВНЫЙ ГРАФ ЗНАНИЙ
-					\Sigma.js / WebGL · force layout
-					\цвет = тип NEREL · толщина = strength
+					<= canvas_title_text
+					<= canvas_engine_text
+					<= canvas_meaning_text
 			<= Filters $bog_builderui_div sub /
-				<= Filter_search $bog_builderui_div sub / \🔍 Поиск узла…
-				<= Filter_type $bog_builderui_div sub / \Тип сущности ▾
-				<= Filter_thresh $bog_builderui_div sub / \Порог strength ▾
-				<= Filter_comm $bog_builderui_div sub / \◉ Сообщества: вкл
+				<= Filter_search $bog_builderui_div sub / <= filter_search_text
+				<= Filter_type $bog_builderui_div sub / <= filter_type_text
+				<= Filter_thresh $bog_builderui_div sub / <= filter_thresh_text
+				<= Filter_comm $bog_builderui_div sub / <= filter_comm_text
 			<= Legend $bog_builderui_div sub /
 				<= Legend_title $bog_builderui_div sub / \Entity Types
 				<= Legend_person $bog_builderui_div sub /
@@ -37,22 +54,22 @@ $raggu_web_explorer $bog_builderui_div
 					<= Legend_law_dot $bog_builderui_div
 					<= Legend_law_label $bog_builderui_div sub / \LAW
 		<= Aside $bog_builderui_div sub /
-			<= Aside_title $bog_builderui_div sub / \Карточка сущности
+			<= Aside_title $bog_builderui_div sub / <= aside_title_text
 			<= Entity_head $bog_builderui_div sub /
 				<= Entity_dot $bog_builderui_div
-				<= Entity_name $bog_builderui_div sub / \Бьёрнстьерне Бьёрнсон
+				<= Entity_name $bog_builderui_div sub / <= entity_name_text
 			<= Entity_type $bog_builderui_div sub / \PERSON
-			<= Entity_desc $bog_builderui_div sub / \Автор текста гимна Норвегии (1859). Норвежский писатель, лауреат Нобелевской премии по литературе.
-			<= Relations_title $bog_builderui_div sub / \Связи (12)
+			<= Entity_desc $bog_builderui_div sub / <= entity_desc_text
+			<= Relations_title $bog_builderui_div sub / <= relations_title_text
 			<= Rel_one $bog_builderui_div sub /
 				<= Rel_one_type $bog_builderui_div sub / \WORKS_AS
-				<= Rel_one_target $bog_builderui_div sub / \писатель
+				<= Rel_one_target $bog_builderui_div sub / <= rel_one_target_text
 			<= Rel_two $bog_builderui_div sub /
 				<= Rel_two_type $bog_builderui_div sub / \AWARDED_WITH
-				<= Rel_two_target $bog_builderui_div sub / \Нобелевская премия
+				<= Rel_two_target $bog_builderui_div sub / <= rel_two_target_text
 			<= Rel_three $bog_builderui_div sub /
 				<= Rel_three_type $bog_builderui_div sub / \PLACE_OF_BIRTH
-				<= Rel_three_target $bog_builderui_div sub / \Квикне, Норвегия
-			<= Sources_title $bog_builderui_div sub / \Источники (provenance)
-			<= Sources $bog_builderui_div sub / \chunk #418 · chunk #902 …
-			<= Ask_btn $bog_builderui_div sub / \💬 Спросить про эту сущность
+				<= Rel_three_target $bog_builderui_div sub / <= rel_three_target_text
+			<= Sources_title $bog_builderui_div sub / <= sources_title_text
+			<= Sources $bog_builderui_div sub / <= sources_text
+			<= Ask_btn $bog_builderui_div sub / <= ask_btn_text

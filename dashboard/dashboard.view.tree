@@ -1,62 +1,77 @@
 $raggu_web_dashboard $bog_builderui_div
 	metrics /
 	stages /
+	title_text @ \Corpus dashboard
+	subtitle_text @ \Graph stats · quality · energy and cost · timings and logs
+	card_stats_label_text @ \① Graph stats
+	stat_nodes_lbl_text @ \nodes
+	stat_edges_lbl_text @ \edges
+	stat_comms_lbl_text @ \communities
+	stats_dist_text @ \entity type distribution
+	card_quality_label_text @ \② Quality (benchmarks)
+	quality_footer_text @ \RAGU vs LightRAG / HippoRAG2 / Naive
+	card_energy_label_text @ \③ Energy and cost
+	energy_kwh_lbl_text @ \kWh / corpus
+	energy_cost_lbl_text @ \$ vs GPT-4 API
+	energy_note_text @ \kWh = TDP × time × PUE · meno-lite 7B locally vs ~40k tokens/doc on gpt-4o pricing
+	card_timings_label_text @ \④ Pipeline timings
+	card_logs_label_text @ \Query logs (expand into trace)
+	log_one_text_text @ \«Who wrote the anthem…»
+	log_two_text_text @ \«Connection between Ibsen and…»
 	sub /
-		<= Title $bog_builderui_div sub / \Дашборд корпуса
-		<= Subtitle $bog_builderui_div sub / \Статистика графа · качество · энергия и стоимость · тайминги и логи
+		<= Title $bog_builderui_div sub / <= title_text
+		<= Subtitle $bog_builderui_div sub / <= subtitle_text
 		<= Grid $bog_builderui_div sub /
 			<= Card_stats $bog_builderui_div sub /
-				<= Card_stats_label $bog_builderui_div sub / \① Статистика графа
+				<= Card_stats_label $bog_builderui_div sub / <= card_stats_label_text
 				<= Stats_row $bog_builderui_div sub /
 					<= Stat_nodes $bog_builderui_div sub /
 						<= Stat_nodes_val $bog_builderui_div sub / \2 410
-						<= Stat_nodes_lbl $bog_builderui_div sub / \узлов
+						<= Stat_nodes_lbl $bog_builderui_div sub / <= stat_nodes_lbl_text
 					<= Stat_edges $bog_builderui_div sub /
 						<= Stat_edges_val $bog_builderui_div sub / \7 088
-						<= Stat_edges_lbl $bog_builderui_div sub / \связей
+						<= Stat_edges_lbl $bog_builderui_div sub / <= stat_edges_lbl_text
 					<= Stat_comms $bog_builderui_div sub /
 						<= Stat_comms_val $bog_builderui_div sub / \38
-						<= Stat_comms_lbl $bog_builderui_div sub / \сообществ
-				<= Stats_dist $raggu_web_dashboard_dist sub / \распределение типов сущностей
+						<= Stat_comms_lbl $bog_builderui_div sub / <= stat_comms_lbl_text
+				<= Stats_dist $raggu_web_dashboard_dist sub / <= stats_dist_text
 			<= Card_quality $bog_builderui_div sub /
-				<= Card_quality_label $bog_builderui_div sub / \② Качество (бенчмарки)
+				<= Card_quality_label $bog_builderui_div sub / <= card_quality_label_text
 				<= Metric_rows $bog_builderui_div sub <= metric_rows /
 					<= Metric* $raggu_web_dashboard_metric
 						name <= metric_name* \
 						value <= metric_value* \
 						pct <= metric_pct* \0%
-				<= Quality_footer $bog_builderui_div sub / \RAGU vs LightRAG / HippoRAG2 / Naive
+				<= Quality_footer $bog_builderui_div sub / <= quality_footer_text
 			<= Card_energy $bog_builderui_div sub /
-				<= Card_energy_label $bog_builderui_div sub / \③ Энергия и стоимость
+				<= Card_energy_label $bog_builderui_div sub / <= card_energy_label_text
 				<= Energy_row $bog_builderui_div sub /
 					<= Energy_kwh $bog_builderui_div sub /
 						<= Energy_kwh_val $bog_builderui_div sub / \0.18
-						<= Energy_kwh_lbl $bog_builderui_div sub / \кВт·ч / корпус
+						<= Energy_kwh_lbl $bog_builderui_div sub / <= energy_kwh_lbl_text
 					<= Energy_cost $bog_builderui_div sub /
 						<= Energy_cost_val $bog_builderui_div sub / \−94%
-						<= Energy_cost_lbl $bog_builderui_div sub / \$ vs GPT-4 API
-				<= Energy_note $bog_builderui_div sub /
-					\кВт·ч = TDP × время × PUE
-					\meno-lite 7B локально vs ~40k токенов/док по тарифам gpt-4o
+						<= Energy_cost_lbl $bog_builderui_div sub / <= energy_cost_lbl_text
+				<= Energy_note $bog_builderui_div sub / <= energy_note_text
 			<= Card_timings $bog_builderui_div sub /
-				<= Card_timings_label $bog_builderui_div sub / \④ Тайминги пайплайна
+				<= Card_timings_label $bog_builderui_div sub / <= card_timings_label_text
 				<= Stage_rows $bog_builderui_div sub <= stage_rows /
 					<= Stage* $raggu_web_dashboard_stage
 						name <= stage_name* \
 						time <= stage_time* \
 						pct <= stage_pct* \0%
 			<= Card_logs $bog_builderui_div sub /
-				<= Card_logs_label $bog_builderui_div sub / \Логи запросов (разворачиваются в трейс)
+				<= Card_logs_label $bog_builderui_div sub / <= card_logs_label_text
 				<= Log_list $bog_builderui_div sub /
 					<= Log_one $bog_builderui_div sub /
 						<= Log_one_time $bog_builderui_div sub / \12:04:18
-						<= Log_one_text $bog_builderui_div sub / \«Кто написал гимн…»
+						<= Log_one_text $bog_builderui_div sub / <= log_one_text_text
 						<= Log_one_mode $bog_builderui_div sub / \LocalSearch
-						<= Log_one_dur $bog_builderui_div sub / \1.3с
+						<= Log_one_dur $bog_builderui_div sub / \1.3s
 						<= Log_one_arrow $bog_builderui_div sub / \▾
 					<= Log_two $bog_builderui_div sub /
 						<= Log_two_time $bog_builderui_div sub / \12:03:51
-						<= Log_two_text $bog_builderui_div sub / \«Связь Ибсена и…»
+						<= Log_two_text $bog_builderui_div sub / <= log_two_text_text
 						<= Log_two_mode $bog_builderui_div sub / \MixSearch
-						<= Log_two_dur $bog_builderui_div sub / \2.1с
+						<= Log_two_dur $bog_builderui_div sub / \2.1s
 						<= Log_two_arrow $bog_builderui_div sub / \▾

@@ -7,12 +7,13 @@ $raggu_web_gallery_card $bog_builderui_div
 	edges \
 	comms \
 	click? null
+	preview_label_text @ \graph preview
 	event *
 		^
 		click? <=> click? null
 	sub /
 		<= Preview $raggu_web_gallery_card_preview sub /
-			<= Preview_label $bog_builderui_div sub / \превью графа
+			<= Preview_label $bog_builderui_div sub / <= preview_label_text
 			<= Domain_badge $bog_builderui_div sub / <= domain
 		<= Title $bog_builderui_div sub / <= title
 		<= Desc $bog_builderui_div sub / <= desc

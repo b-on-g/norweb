@@ -1,38 +1,56 @@
 $raggu_web_chat $bog_builderui_div
+	modes_label_text @ \Search engine
+	msg_user_text @ \Who wrote the Norwegian anthem and when?
+	msg_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
+	trace_head_title_text @ \▾ Answer trace
+	trace_head_meta_text @ \LocalSearch · top-k 8 · rerank ✓
+	trace_label_text @ \ENTITIES IN CONTEXT
+	trace_chip_one_text @ \Bjørnson
+	trace_chip_two_text @ \Norwegian anthem
+	trace_chip_three_text @ \1859
+	trace_stat_chunks_text @ \chunks: 3
+	trace_stat_comms_text @ \communities: 1
+	trace_stat_retr_text @ \retrieval 140ms
+	trace_stat_gen_text @ \gen 1.2s
+	trace_stat_power_text @ \≈0.4 Wh
+	trace_link_text @ \↳ highlight on graph
+	sug_one_text @ \Who received the Nobel Prize?
+	sug_two_text @ \Connection between Ibsen and Bjørnson?
+	input_hint_text @ \Ask anything about the corpus…
 	sub /
 		<= Modes_bar $bog_builderui_div sub /
-			<= Modes_label $bog_builderui_div sub / \Движок поиска
+			<= Modes_label $bog_builderui_div sub / <= modes_label_text
 			<= Modes $bog_builderui_div sub /
 				<= Mode_local $bog_builderui_div sub / \LocalSearch
 				<= Mode_global $bog_builderui_div sub / \Global
 				<= Mode_mix $bog_builderui_div sub / \Mix
 				<= Mode_plan $bog_builderui_div sub / \QueryPlan
 		<= Body $bog_builderui_div sub /
-			<= Msg_user $bog_builderui_div sub / \Кто написал гимн Норвегии и когда?
+			<= Msg_user $bog_builderui_div sub / <= msg_user_text
 			<= Msg_assistant_wrap $bog_builderui_div sub /
-				<= Msg_assistant $bog_builderui_div sub / \Текст гимна Норвегии написал Бьёрнстьерне Бьёрнсон в 1859 году…
+				<= Msg_assistant $bog_builderui_div sub / <= msg_assistant_text
 				<= Trace $bog_builderui_div sub /
 					<= Trace_head $bog_builderui_div sub /
-						<= Trace_head_title $bog_builderui_div sub / \▾ Трейс ответа
-						<= Trace_head_meta $bog_builderui_div sub / \LocalSearch · top-k 8 · rerank ✓
+						<= Trace_head_title $bog_builderui_div sub / <= trace_head_title_text
+						<= Trace_head_meta $bog_builderui_div sub / <= trace_head_meta_text
 					<= Trace_body $bog_builderui_div sub /
-						<= Trace_label $bog_builderui_div sub / \СУЩНОСТИ В КОНТЕКСТЕ
+						<= Trace_label $bog_builderui_div sub / <= trace_label_text
 						<= Trace_chips $bog_builderui_div sub /
-							<= Trace_chip_one $bog_builderui_div sub / \Бьёрнсон
-							<= Trace_chip_two $bog_builderui_div sub / \гимн Норвегии
-							<= Trace_chip_three $bog_builderui_div sub / \1859
+							<= Trace_chip_one $bog_builderui_div sub / <= trace_chip_one_text
+							<= Trace_chip_two $bog_builderui_div sub / <= trace_chip_two_text
+							<= Trace_chip_three $bog_builderui_div sub / <= trace_chip_three_text
 						<= Trace_stats $bog_builderui_div sub /
-							<= Trace_stat_chunks $bog_builderui_div sub / \chunks: 3
-							<= Trace_stat_comms $bog_builderui_div sub / \communities: 1
-							<= Trace_stat_retr $bog_builderui_div sub / \retrieval 140мс
-							<= Trace_stat_gen $bog_builderui_div sub / \gen 1.2с
-							<= Trace_stat_power $bog_builderui_div sub / \≈0.4 Вт·ч
-						<= Trace_link $bog_builderui_div sub / \↳ подсветить на графе
+							<= Trace_stat_chunks $bog_builderui_div sub / <= trace_stat_chunks_text
+							<= Trace_stat_comms $bog_builderui_div sub / <= trace_stat_comms_text
+							<= Trace_stat_retr $bog_builderui_div sub / <= trace_stat_retr_text
+							<= Trace_stat_gen $bog_builderui_div sub / <= trace_stat_gen_text
+							<= Trace_stat_power $bog_builderui_div sub / <= trace_stat_power_text
+						<= Trace_link $bog_builderui_div sub / <= trace_link_text
 		<= Footer $bog_builderui_div sub /
 			<= Suggestions $bog_builderui_div sub /
-				<= Sug_one $bog_builderui_div sub / \Кто получал Нобелевскую премию?
-				<= Sug_two $bog_builderui_div sub / \Связь Ибсена и Бьёрнсона?
+				<= Sug_one $bog_builderui_div sub / <= sug_one_text
+				<= Sug_two $bog_builderui_div sub / <= sug_two_text
 			<= Input_row $bog_builderui_div sub /
-				<= Input_hint $bog_builderui_div sub / \Спросите что-нибудь про корпус…
+				<= Input_hint $bog_builderui_div sub / <= input_hint_text
 				<= Input_spacer $bog_builderui_div
 				<= Input_send $bog_builderui_div sub / \↑

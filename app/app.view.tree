@@ -1,14 +1,15 @@
 $raggu_web_app $bog_builderui_div
 	screen? \gallery
 	preset? \demo
-	lang? \RU
 	dataset_id? \wiki
 	settings_open? false
 	body /
+	plugins /
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_graph
 	sub /
 		<= Sidebar $raggu_web_sidebar
 			screen? <=> screen?
-			lang? <=> lang?
 			dataset_id <= dataset_id
 		<= Main $bog_builderui_div sub /
 			<= Topbar $raggu_web_topbar

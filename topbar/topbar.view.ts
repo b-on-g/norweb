@@ -1,25 +1,14 @@
 namespace $.$$ {
 
-	const SCREEN_TITLES: Record< string, string > = {
-		gallery: 'Датасеты',
-		explorer: 'Граф знаний',
-		chat: 'Чат с агентом',
-		dashboard: 'Дашборд',
-	}
-
-	const DATASET_NAMES: Record< string, string > = {
-		law: 'Кодексы и законы РФ',
-		un: 'Устав ООН + резолюции',
-		papers: 'Наша статья + цитируемые',
-		medical: 'GraphRAG-Bench Medical',
-		wiki: 'Википедия: писатели',
-		own: 'Свой корпус',
-	}
-
 	export class $raggu_web_topbar extends $.$raggu_web_topbar {
 
-		screen_title() { return SCREEN_TITLES[ this.screen() ] ?? '' }
-		dataset_name() { return DATASET_NAMES[ this.dataset_id() ] ?? '' }
+		screen_title() {
+			return this.$.$mol_locale.text( `$raggu_web_app_screen_${ this.screen() }_title` ) || ''
+		}
+
+		dataset_name() {
+			return this.$.$mol_locale.text( `$raggu_web_app_dataset_${ this.dataset_id() }_title` ) || ''
+		}
 
 		is_fast() { return this.preset() === 'fast' }
 		is_accurate() { return this.preset() === 'accurate' }

@@ -1,42 +1,45 @@
 $raggu_web_sidebar $bog_builderui_div
 	screen? \gallery
-	lang? \RU
 	dataset_id \wiki
+	sections_label_text @ \Sections
+	corpus_label_text @ \Active corpus
+	corpus_meta_text @ \2,410 nodes · 38 communities
+	lang_label_text @ \LANGUAGE
 	sub /
 		<= Brand $bog_builderui_div sub /
 			<= Brand_logo $bog_builderui_div sub / \R
 			<= Brand_title $bog_builderui_div sub / \RAGU
 			<= Brand_badge $bog_builderui_div sub / \demo
-		<= Sections_label $bog_builderui_div sub / \Разделы
+		<= Sections_label $bog_builderui_div sub / <= sections_label_text
 		<= Nav $bog_builderui_div sub /
 			<= Nav_gallery $raggu_web_sidebar_nav
 				icon \▤
-				label \Датасеты
+				label @ \Datasets
 				active <= is_gallery false
 				click? <=> click_gallery? null
 			<= Nav_explorer $raggu_web_sidebar_nav
 				icon \◉
-				label \Граф
+				label @ \Graph
 				active <= is_explorer false
 				click? <=> click_explorer? null
 			<= Nav_chat $raggu_web_sidebar_nav
 				icon \💬
-				label \Чат
+				label @ \Chat
 				active <= is_chat false
 				click? <=> click_chat? null
 			<= Nav_dashboard $raggu_web_sidebar_nav
 				icon \▦
-				label \Дашборд
+				label @ \Dashboard
 				active <= is_dashboard false
 				click? <=> click_dashboard? null
 		<= Spacer $bog_builderui_div
 		<= Footer $bog_builderui_div sub /
-			<= Corpus_label $bog_builderui_div sub / \Активный корпус
+			<= Corpus_label $bog_builderui_div sub / <= corpus_label_text
 			<= Corpus_card $bog_builderui_div sub /
 				<= Corpus_name $bog_builderui_div sub / <= dataset_name \
-				<= Corpus_meta $bog_builderui_div sub / \2 410 узлов · 38 сообществ
+				<= Corpus_meta $bog_builderui_div sub / <= corpus_meta_text
 			<= Lang_row $bog_builderui_div sub /
-				<= Lang_label $bog_builderui_div sub / \ЯЗЫК
+				<= Lang_label $bog_builderui_div sub / <= lang_label_text
 				<= Lang_en $raggu_web_sidebar_lang
 					label \EN
 					active <= is_en false

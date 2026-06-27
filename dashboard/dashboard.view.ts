@@ -10,11 +10,11 @@ namespace $.$$ {
 	]
 
 	const STAGES: readonly Stage[] = [
-		{ id: 'chunking', name: 'Chunking', time: '1.2с', pct: '15%' },
-		{ id: 'extraction', name: 'Extraction', time: '8.4с', pct: '70%' },
-		{ id: 'summarization', name: 'Summarization', time: '3.1с', pct: '38%' },
-		{ id: 'communities', name: 'Communities', time: '2.0с', pct: '26%' },
-		{ id: 'refinement', name: 'Refinement', time: '0.6с', pct: '9%' },
+		{ id: 'chunking', name: 'Chunking', time: '1.2s', pct: '15%' },
+		{ id: 'extraction', name: 'Extraction', time: '8.4s', pct: '70%' },
+		{ id: 'summarization', name: 'Summarization', time: '3.1s', pct: '38%' },
+		{ id: 'communities', name: 'Communities', time: '2.0s', pct: '26%' },
+		{ id: 'refinement', name: 'Refinement', time: '0.6s', pct: '9%' },
 	]
 
 	export class $raggu_web_dashboard extends $.$raggu_web_dashboard {

@@ -39,9 +39,6 @@ namespace $.$$ {
 		preset( next?: string ) { return this.arg_value( 'preset', next, 'demo' ) }
 
 		@$mol_mem
-		lang( next?: string ) { return this.arg_value( 'lang', next, 'RU' ) }
-
-		@$mol_mem
 		dataset_id( next?: string ) { return this.arg_value( 'ds', next, 'wiki' ) }
 
 	}

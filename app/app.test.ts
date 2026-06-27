@@ -59,7 +59,7 @@ namespace $.$$ {
 			$mol_assert_equal( v.Grid().sub().length, 6 )
 		},
 
-		'url state: screen / preset / lang / dataset_id round-trip through $mol_state_arg'( $ ) {
+		'url state: screen / preset / dataset_id round-trip through $mol_state_arg'( $ ) {
 			const app = $raggu_web_app.make({ $ })
 			const arg = $.$mol_state_arg
 
@@ -74,15 +74,21 @@ namespace $.$$ {
 			app.preset( 'fast' )
 			$mol_assert_equal( arg.value( 'preset' ), 'fast' )
 
-			app.lang( 'EN' )
-			$mol_assert_equal( arg.value( 'lang' ), 'EN' )
-
 			app.dataset_id( 'law' )
 			$mol_assert_equal( arg.value( 'ds' ), 'law' )
 
 			// resetting to default removes from URL
 			app.screen( 'gallery' )
 			$mol_assert_equal( arg.value( 'screen' ), null )
+		},
+
+		'lang state: $mol_locale.lang() persists via $mol_state_local, NOT URL'( $ ) {
+			$.$mol_locale.lang( 'en' )
+			$mol_assert_equal( $.$mol_locale.lang(), 'en' )
+			$mol_assert_equal( $.$mol_state_arg.value( 'lang' ), null )
+
+			$.$mol_locale.lang( 'ru' )
+			$mol_assert_equal( $.$mol_locale.lang(), 'ru' )
 		},
 
 		'e2e: full user flow through all screens'( $ ) {
@@ -123,12 +129,10 @@ namespace $.$$ {
 			app.Gallery().click( 'law' )
 			$mol_assert_equal( app.screen(), 'explorer' )
 			$mol_assert_equal( app.dataset_id(), 'law' )
-			$mol_assert_equal( app.Sidebar().dataset_name(), 'Кодексы и законы РФ' )
 
-			// user switches language EN
-			$mol_assert_equal( app.lang(), 'RU' )
+			// user switches language EN — re-renders all @-strings via $mol_locale
 			app.Sidebar().click_en()
-			$mol_assert_equal( app.lang(), 'EN' )
+			$mol_assert_equal( $.$mol_locale.lang(), 'en' )
 
 			// user picks preset
 			$mol_assert_equal( app.preset(), 'demo' )
@@ -149,7 +153,6 @@ namespace $.$$ {
 			const initial = {
 				screen: app.screen(),
 				preset: app.preset(),
-				lang: app.lang(),
 				dataset_id: app.dataset_id(),
 				settings_open: app.settings_open(),
 			}
@@ -175,7 +178,6 @@ namespace $.$$ {
 			// restore initial state so the user can interact afterwards
 			app.screen( initial.screen )
 			app.preset( initial.preset )
-			app.lang( initial.lang )
 			app.dataset_id( initial.dataset_id )
 			app.settings_open( initial.settings_open )
 

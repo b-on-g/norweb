@@ -2,14 +2,18 @@ $raggu_web_gallery $bog_builderui_div
 	dataset_id \wiki
 	select_dataset? null
 	datasets /
+	header_title_text @ \Corpus gallery
+	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
+	upload_doc_text @ \＋ Upload document
+	upload_idx_text @ \⇪ Upload prebuilt index
 	sub /
 		<= Header $bog_builderui_div sub /
 			<= Header_text $bog_builderui_div sub /
-				<= Header_title $bog_builderui_div sub / \Галерея корпусов
-				<= Header_subtitle $bog_builderui_div sub / \Выберите готовый граф знаний или загрузите свой документ / индекс
+				<= Header_title $bog_builderui_div sub / <= header_title_text
+				<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
 			<= Spacer $bog_builderui_div
-			<= Upload_doc $bog_builderui_div sub / \＋ Загрузить документ
-			<= Upload_idx $bog_builderui_div sub / \⇪ Загрузить готовый индекс
+			<= Upload_doc $bog_builderui_div sub / <= upload_doc_text
+			<= Upload_idx $bog_builderui_div sub / <= upload_idx_text
 		<= Grid $bog_builderui_div sub <= rows /
 			<= Card* $raggu_web_gallery_card
 				id <= card_id* \
