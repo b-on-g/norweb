@@ -50,6 +50,7 @@ namespace $ {
 		},
 		font: { size: '11px' },
 		color: $bog_builderui_tokens.shade,
+		cursor: 'pointer',
 	} as const
 
 	$mol_style_define( $raggu_web_chat, {
@@ -111,47 +112,68 @@ namespace $ {
 			},
 			gap: '16px',
 		},
-		Msg_user: {
-			align: { self: 'flex-end' },
-			maxWidth: '70%',
-			background: { color: '#5b5bd6' },
-			color: '#ffffff',
-			borderRadius: '12px 12px 3px 12px',
-			padding: {
-				top: '11px',
-				bottom: '11px',
-				left: '15px',
-				right: '15px',
-			},
-			font: { size: '13px' },
-		},
-		Msg_assistant_wrap: {
-			align: { self: 'flex-start' },
-			maxWidth: '78%',
+
+		Message: {
 			flex: { direction: 'column' },
-		},
-		Msg_assistant: {
-			background: { color: $bog_builderui_tokens.card },
-			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
-			borderRadius: '12px 12px 12px 3px',
-			padding: {
-				top: '13px',
-				bottom: '13px',
-				left: '16px',
-				right: '16px',
+			maxWidth: '78%',
+			'@': {
+				raggu_role: {
+					user: {
+						align: { self: 'flex-end' },
+						maxWidth: '70%',
+					},
+					assistant: {
+						align: { self: 'flex-start' },
+					},
+				},
 			},
+		},
+		Message_text: {
 			font: { size: '13px' },
 			lineHeight: '1.55',
-			color: $bog_builderui_tokens.text,
+			'@': {
+				raggu_role: {
+					user: {
+						background: { color: '#5b5bd6' },
+						color: '#ffffff',
+						borderRadius: '12px 12px 3px 12px',
+						padding: {
+							top: '11px',
+							bottom: '11px',
+							left: '15px',
+							right: '15px',
+						},
+					},
+					assistant: {
+						background: { color: $bog_builderui_tokens.card },
+						border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+						borderRadius: '12px 12px 12px 3px',
+						padding: {
+							top: '13px',
+							bottom: '13px',
+							left: '16px',
+							right: '16px',
+						},
+						color: $bog_builderui_tokens.text,
+					},
+				},
+			},
 		},
-		Trace: {
+		Message_trace: {
 			margin: { top: '8px' },
 			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '9px' },
 			background: { color: $bog_builderui_tokens.back },
 			overflow: 'hidden',
 			flex: { direction: 'column' },
+			'@': {
+				raggu_visible: {
+					false: {
+						display: 'none',
+					},
+				},
+			},
 		},
-		Trace_head: {
+		Message_trace_head: {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
 			gap: '7px',
@@ -171,12 +193,12 @@ namespace $ {
 				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 		},
-		Trace_head_meta: {
+		Message_trace_head_meta: {
 			marginLeft: 'auto',
 			color: $bog_builderui_tokens.shade,
 			font: { weight: 500 },
 		},
-		Trace_body: {
+		Message_trace_body: {
 			padding: {
 				top: '11px',
 				bottom: '11px',
@@ -186,7 +208,7 @@ namespace $ {
 			flex: { direction: 'column' },
 			gap: '8px',
 		},
-		Trace_label: {
+		Message_trace_label: {
 			font: {
 				family: 'ui-monospace, monospace',
 				weight: 600,
@@ -194,25 +216,25 @@ namespace $ {
 			},
 			color: $bog_builderui_tokens.shade,
 		},
-		Trace_chips: {
+		Message_trace_chips: {
 			flex: { direction: 'row' },
 			flexWrap: 'wrap',
 			gap: '5px',
 		},
-		Trace_chip_one: chip,
-		Trace_chip_two: chip,
-		Trace_chip_three: chip,
-		Trace_stats: {
+		Message_trace_chip_one: chip,
+		Message_trace_chip_two: chip,
+		Message_trace_chip_three: chip,
+		Message_trace_stats: {
 			flex: { direction: 'row' },
 			gap: '14px',
 			margin: { top: '2px' },
 		},
-		Trace_stat_chunks: trace_stat,
-		Trace_stat_comms: trace_stat,
-		Trace_stat_retr: trace_stat,
-		Trace_stat_gen: trace_stat,
-		Trace_stat_power: trace_stat,
-		Trace_link: {
+		Message_trace_stat_chunks: trace_stat,
+		Message_trace_stat_comms: trace_stat,
+		Message_trace_stat_retr: trace_stat,
+		Message_trace_stat_gen: trace_stat,
+		Message_trace_stat_power: trace_stat,
+		Message_trace_link: {
 			font: {
 				family: 'ui-monospace, monospace',
 				weight: 500,
@@ -244,18 +266,22 @@ namespace $ {
 		Input_row: {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
+			gap: '8px',
 			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
 			padding: {
-				top: '12px',
-				bottom: '12px',
-				left: '15px',
-				right: '15px',
+				top: '8px',
+				bottom: '8px',
+				left: '12px',
+				right: '8px',
 			},
 			color: $bog_builderui_tokens.shade,
 			font: { size: '13px' },
 		},
-		Input_spacer: {
+		Prompt: {
 			flex: { grow: 1 },
+			border: { width: 0 },
+			background: { color: 'transparent' },
+			minHeight: '24px',
 		},
 		Input_send: {
 			background: { color: '#5b5bd6' },

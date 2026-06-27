@@ -73,21 +73,5 @@ namespace $ {
 			cursor: 'pointer',
 		},
 
-		Export_btn: {
-			flex: { direction: 'row' },
-			align: { items: 'center' },
-			gap: '6px',
-			background: { color: '#5b5bd6' },
-			color: $bog_builderui_tokens.card,
-			border: { radius: '7px' },
-			padding: {
-				top: '7px',
-				bottom: '7px',
-				left: '12px',
-				right: '12px',
-			},
-			font: { size: '12px', weight: 600 },
-			cursor: 'pointer',
-		},
 	} )
 }

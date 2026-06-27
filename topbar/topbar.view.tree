@@ -5,7 +5,6 @@ $raggu_web_topbar $bog_builderui_div
 	open_settings? null
 	preset_label_text @ \Preset
 	settings_btn_text @ \⚙ Settings
-	export_btn_text @ \↓ Export
 	preset_fast_label @ \⚡ Fast
 	preset_accurate_label @ \🎯 Accurate
 	preset_demo_label @ \🎬 Demo
@@ -31,4 +30,5 @@ $raggu_web_topbar $bog_builderui_div
 		<= Settings_btn $bog_builderui_div
 			event * click? <=> open_settings? null
 			sub / <= settings_btn_text
-		<= Export_btn $bog_builderui_div sub / <= export_btn_text
+		<= Export $raggu_web_export
+			screen <= screen

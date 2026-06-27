@@ -2,5 +2,9 @@
 	"$raggu_web_gallery_header_title_text": "Галерея корпусов",
 	"$raggu_web_gallery_header_subtitle_text": "Выберите готовый граф знаний или загрузите свой документ / индекс",
 	"$raggu_web_gallery_upload_doc_text": "＋ Загрузить документ",
-	"$raggu_web_gallery_upload_idx_text": "⇪ Загрузить готовый индекс"
+	"$raggu_web_gallery_upload_idx_text": "⇪ Загрузить готовый индекс",
+	"$raggu_web_gallery_uploaded_document_title": "Загруженный документ",
+	"$raggu_web_gallery_uploaded_index_title": "Загруженный индекс",
+	"$raggu_web_gallery_uploaded_domain": "Пользовательская загрузка",
+	"$raggu_web_gallery_uploaded_desc": "Мок-датасет, построенный демо-пайплайном индексации."
 }

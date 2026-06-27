@@ -2,6 +2,9 @@ $raggu_web_gallery $bog_builderui_div
 	dataset_id \wiki
 	select_dataset? null
 	datasets /
+	upload_kind? \
+	upload_complete? null
+	upload_close? null
 	header_title_text @ \Corpus gallery
 	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
 	upload_doc_text @ \＋ Upload document
@@ -12,8 +15,12 @@ $raggu_web_gallery $bog_builderui_div
 				<= Header_title $bog_builderui_div sub / <= header_title_text
 				<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
 			<= Spacer $bog_builderui_div
-			<= Upload_doc $bog_builderui_div sub / <= upload_doc_text
-			<= Upload_idx $bog_builderui_div sub / <= upload_idx_text
+			<= Upload_doc $bog_builderui_div
+				sub / <= upload_doc_text
+				event * click? <=> upload_doc_click? null
+			<= Upload_idx $bog_builderui_div
+				sub / <= upload_idx_text
+				event * click? <=> upload_idx_click? null
 		<= Grid $bog_builderui_div sub <= rows /
 			<= Card* $raggu_web_gallery_card
 				id <= card_id* \
@@ -24,3 +31,8 @@ $raggu_web_gallery $bog_builderui_div
 				edges <= card_edges* \
 				comms <= card_comms* \
 				click? <=> click*? null
+		<= Upload $raggu_web_gallery_upload
+			showed? <=> upload_showed? false
+			kind <= upload_kind?
+			complete? <=> upload_complete? null
+			close? <=> upload_close? null

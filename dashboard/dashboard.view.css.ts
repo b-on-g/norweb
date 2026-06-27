@@ -37,37 +37,6 @@ namespace $ {
 		color: $bog_builderui_tokens.shade,
 	} as const
 
-	const log_row = {
-		flex: { direction: 'row' },
-		gap: '14px',
-		font: {
-			family: 'ui-monospace, monospace',
-			weight: 500,
-			size: '11px',
-		},
-		color: $bog_builderui_tokens.shade,
-		padding: {
-			top: '8px',
-			bottom: '8px',
-			left: '10px',
-			right: '10px',
-		},
-		background: { color: $bog_builderui_tokens.back },
-		border: { radius: '6px' },
-	} as const
-
-	const log_time = {
-		color: $bog_builderui_tokens.shade,
-	} as const
-
-	const log_text = {
-		flex: { grow: 1 },
-	} as const
-
-	const log_dur = {
-		color: '#1f8a5b',
-	} as const
-
 	$mol_style_define( $raggu_web_dashboard, {
 		flex: { direction: 'column', shrink: 1 },
 		minWidth: 0,
@@ -160,8 +129,18 @@ namespace $ {
 		Energy_kwh_lbl: stat_lbl,
 		Energy_cost_lbl: stat_lbl,
 
+		Energy_formula: {
+			margin: { top: '10px' },
+			font: {
+				family: 'ui-monospace, monospace',
+				weight: 600,
+				size: '10px',
+			},
+			color: $bog_builderui_tokens.shade,
+		},
+
 		Energy_note: {
-			margin: { top: '12px' },
+			margin: { top: '8px' },
 			font: {
 				family: 'ui-monospace, monospace',
 				weight: 500,
@@ -187,13 +166,5 @@ namespace $ {
 			gap: '6px',
 			margin: { top: '12px' },
 		},
-		Log_one: log_row,
-		Log_two: log_row,
-		Log_one_time: log_time,
-		Log_two_time: log_time,
-		Log_one_text: log_text,
-		Log_two_text: log_text,
-		Log_one_dur: log_dur,
-		Log_two_dur: log_dur,
 	} )
 }

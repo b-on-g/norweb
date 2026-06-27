@@ -1,7 +1,5 @@
 {
 	"$raggu_web_chat_modes_label_text": "Движок поиска",
-	"$raggu_web_chat_msg_user_text": "Кто написал гимн Норвегии и когда?",
-	"$raggu_web_chat_msg_assistant_text": "Текст гимна Норвегии написал Бьёрнстьерне Бьёрнсон в 1859 году…",
 	"$raggu_web_chat_trace_head_title_text": "▾ Трейс ответа",
 	"$raggu_web_chat_trace_head_meta_text": "LocalSearch · top-k 8 · rerank ✓",
 	"$raggu_web_chat_trace_label_text": "СУЩНОСТИ В КОНТЕКСТЕ",
@@ -16,5 +14,10 @@
 	"$raggu_web_chat_trace_link_text": "↳ подсветить на графе",
 	"$raggu_web_chat_sug_one_text": "Кто получал Нобелевскую премию?",
 	"$raggu_web_chat_sug_two_text": "Связь Ибсена и Бьёрнсона?",
-	"$raggu_web_chat_input_hint_text": "Спросите что-нибудь про корпус…"
+	"$raggu_web_chat_input_hint_text": "Спросите что-нибудь про корпус…",
+	"$raggu_web_chat_send_label_text": "Отправить",
+	"$raggu_web_chat_seed_user_text": "Кто написал гимн Норвегии и когда?",
+	"$raggu_web_chat_seed_assistant_text": "Текст гимна Норвегии написал Бьёрнстьерне Бьёрнсон в 1859 году…",
+	"$raggu_web_chat_mock_prefix_text": "Спасибо за вопрос:",
+	"$raggu_web_chat_mock_suffix_text": "(Mock-ответ. Реальный поиск будет на бэке.)"
 }

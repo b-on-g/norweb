@@ -22,10 +22,11 @@ namespace $.$$ {
 			$mol_assert_equal( /flex-direction: column/.test( rule ), true )
 		},
 
-		'settings: 6 distinct groups under Body'( $ ) {
+		'settings: 6 distinct groups + presets row under Body'( $ ) {
 			const v = $raggu_web_settings.make({ $ })
 			v.showed( true )
-			$mol_assert_equal( v.Body().sub().length, 6 )
+			// 1 presets row + 6 step groups
+			$mol_assert_equal( v.Body().sub().length, 7 )
 		},
 
 		'app: every screen exists as sub-view'( $ ) {
@@ -116,7 +117,7 @@ namespace $.$$ {
 			app.open_settings()
 			$mol_assert_equal( app.settings_open(), true )
 			$mol_assert_equal( app.Settings().showed(), true )
-			$mol_assert_equal( app.Settings().Body().sub().length, 6 )
+			$mol_assert_equal( app.Settings().Body().sub().length, 7 )
 
 			// user clicks backdrop → slide-over closes
 			app.Settings().close()

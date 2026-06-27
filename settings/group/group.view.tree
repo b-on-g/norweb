@@ -2,7 +2,7 @@ $raggu_web_settings_group $bog_builderui_div
 	step \
 	title \
 	opts \
-	control \
+	controls /
 	reindex true
 	reindex_text @ \requires reindexing
 	sub /
@@ -13,4 +13,4 @@ $raggu_web_settings_group $bog_builderui_div
 				sub / <= reindex_text
 		<= Title $bog_builderui_div sub / <= title
 		<= Opts $bog_builderui_div sub / <= opts
-		<= Control $bog_builderui_div sub / <= control
+		<= Controls $bog_builderui_div sub <= controls

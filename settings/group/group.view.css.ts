@@ -46,22 +46,10 @@ namespace $ {
 			lineHeight: '1.5',
 			margin: { top: '4px' },
 		},
-		Control: {
-			height: '30px',
+		Controls: {
 			margin: { top: '8px' },
-			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
-			background: { color: $bog_builderui_tokens.back },
-			align: { items: 'center' },
-			padding: {
-				left: '10px',
-				right: '10px',
-			},
-			font: {
-				family: 'ui-monospace, monospace',
-				weight: 500,
-				size: '10px',
-			},
-			color: $bog_builderui_tokens.shade,
+			flex: { direction: 'column' },
+			gap: '8px',
 		},
 	} )
 }
