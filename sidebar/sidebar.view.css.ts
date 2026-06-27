@@ -128,7 +128,7 @@ namespace $ {
 		Lang_row: {
 			flex: { direction: 'row' },
 			flexWrap: 'wrap',
-			gap: '0.375rem',
+			gap: '0.125rem',
 			align: { items: 'center' },
 			padding: {
 				top: '2px',
