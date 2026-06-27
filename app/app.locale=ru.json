@@ -20,5 +20,8 @@
 	"$raggu_web_app_screen_gallery_title": "Датасеты",
 	"$raggu_web_app_screen_explorer_title": "Граф знаний",
 	"$raggu_web_app_screen_chat_title": "Чат с агентом",
-	"$raggu_web_app_screen_dashboard_title": "Дашборд"
+	"$raggu_web_app_screen_dashboard_title": "Дашборд",
+	"$bog_theme_switch_light_hint": "Светлая",
+	"$bog_theme_switch_system_hint": "Как в системе",
+	"$bog_theme_switch_dark_hint": "Тёмная"
 }

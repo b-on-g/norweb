@@ -12,5 +12,6 @@
 	"$raggu_web_gallery_upload_progress_label_text": "Шаг",
 	"$raggu_web_gallery_upload_error_title_text": "Загрузка отклонена",
 	"$raggu_web_gallery_upload_error_too_large": "Файл слишком большой: %s МБ. Лимит — 10 МБ.",
-	"$raggu_web_gallery_upload_retry_text": "Закрыть"
+	"$raggu_web_gallery_upload_retry_text": "Закрыть",
+	"$raggu_web_gallery_upload_close_text": "✕"
 }

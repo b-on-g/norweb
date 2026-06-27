@@ -20,5 +20,8 @@
 	"$raggu_web_app_screen_gallery_title": "Datasets",
 	"$raggu_web_app_screen_explorer_title": "Knowledge graph",
 	"$raggu_web_app_screen_chat_title": "Chat with agent",
-	"$raggu_web_app_screen_dashboard_title": "Dashboard"
+	"$raggu_web_app_screen_dashboard_title": "Dashboard",
+	"$bog_theme_switch_light_hint": "Light",
+	"$bog_theme_switch_system_hint": "Match system",
+	"$bog_theme_switch_dark_hint": "Dark"
 }
