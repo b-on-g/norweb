@@ -1,10 +1,11 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_topbar, {
 		height: '58px',
 		minHeight: '58px',
-		background: { color: '#ffffff' },
+		background: { color: $bog_builderui_tokens.card },
 		border: {
-			bottom: { width: '1px', style: 'solid', color: '#d6d3d1' },
+			bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 		},
 		flex: { direction: 'row' },
 		align: { items: 'center' },
@@ -26,7 +27,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 
 		Spacer: {
@@ -39,15 +40,15 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 		},
 
 		Preset_group: {
 			flex: { direction: 'row' },
 			gap: '0.25rem',
-			background: { color: '#f5f4f2' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '7px' },
+			background: { color: $bog_builderui_tokens.field },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '7px' },
 			padding: {
 				top: '3px',
 				bottom: '3px',
@@ -60,8 +61,8 @@ namespace $ {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
 			gap: '6px',
-			background: { color: '#ffffff' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '7px' },
+			background: { color: $bog_builderui_tokens.card },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '7px' },
 			padding: {
 				top: '7px',
 				bottom: '7px',
@@ -77,7 +78,7 @@ namespace $ {
 			align: { items: 'center' },
 			gap: '6px',
 			background: { color: '#5b5bd6' },
-			color: '#ffffff',
+			color: $bog_builderui_tokens.card,
 			border: { radius: '7px' },
 			padding: {
 				top: '7px',

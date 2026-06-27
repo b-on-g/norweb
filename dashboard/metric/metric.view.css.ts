@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_dashboard_metric, {
 		flex: { direction: 'row' },

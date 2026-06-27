@@ -12,6 +12,11 @@ namespace $.$$ {
 			return []
 		}
 
+		@$mol_mem
+		lights_mode() {
+			return this.Theme_auto().is_light_now() ? 'light' : 'dark'
+		}
+
 		@$mol_action
 		open_settings() {
 			this.settings_open( true )

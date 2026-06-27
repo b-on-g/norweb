@@ -1,8 +1,9 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 
 	const mode_pill_inactive = {
-		background: { color: '#f5f4f2' },
-		border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '6px' },
+		background: { color: $bog_builderui_tokens.field },
+		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
 		padding: {
 			top: '5px',
 			bottom: '5px',
@@ -10,7 +11,7 @@ namespace $ {
 			right: '10px',
 		},
 		font: { size: '11px', weight: 600 },
-		color: '#78716c',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	const chip = {
@@ -36,11 +37,11 @@ namespace $ {
 			weight: 500,
 			size: '10px',
 		},
-		color: '#78716c',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	const suggestion = {
-		border: { width: '1px', style: 'dashed', color: '#c7c3bf', radius: '14px' },
+		border: { width: '1px', style: 'dashed', color: $bog_builderui_tokens.line, radius: '14px' },
 		padding: {
 			top: '5px',
 			bottom: '5px',
@@ -48,7 +49,7 @@ namespace $ {
 			right: '11px',
 		},
 		font: { size: '11px' },
-		color: '#78716c',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	$mol_style_define( $raggu_web_chat, {
@@ -67,7 +68,7 @@ namespace $ {
 				right: '22px',
 			},
 			border: {
-				bottom: { width: '1px', style: 'solid', color: '#e7e4e0' },
+				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 		},
 		Modes_label: {
@@ -76,7 +77,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 		},
 		Modes: {
@@ -130,8 +131,8 @@ namespace $ {
 			flex: { direction: 'column' },
 		},
 		Msg_assistant: {
-			background: { color: '#ffffff' },
-			border: { width: '1px', style: 'solid', color: '#e7e4e0' },
+			background: { color: $bog_builderui_tokens.card },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			borderRadius: '12px 12px 12px 3px',
 			padding: {
 				top: '13px',
@@ -141,12 +142,12 @@ namespace $ {
 			},
 			font: { size: '13px' },
 			lineHeight: '1.55',
-			color: '#44403c',
+			color: $bog_builderui_tokens.text,
 		},
 		Trace: {
 			margin: { top: '8px' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '9px' },
-			background: { color: '#faf9f8' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '9px' },
+			background: { color: $bog_builderui_tokens.back },
 			overflow: 'hidden',
 			flex: { direction: 'column' },
 		},
@@ -167,12 +168,12 @@ namespace $ {
 			},
 			color: '#5b5bd6',
 			border: {
-				bottom: { width: '1px', style: 'solid', color: '#e7e4e0' },
+				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 		},
 		Trace_head_meta: {
 			marginLeft: 'auto',
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			font: { weight: 500 },
 		},
 		Trace_body: {
@@ -191,7 +192,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 		Trace_chips: {
 			flex: { direction: 'row' },
@@ -228,7 +229,7 @@ namespace $ {
 				right: '22px',
 			},
 			border: {
-				top: { width: '1px', style: 'solid', color: '#e7e4e0' },
+				top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 			flex: { direction: 'column' },
 		},
@@ -243,14 +244,14 @@ namespace $ {
 		Input_row: {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '10px' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
 			padding: {
 				top: '12px',
 				bottom: '12px',
 				left: '15px',
 				right: '15px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			font: { size: '13px' },
 		},
 		Input_spacer: {

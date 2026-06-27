@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_settings_group, {
 		flex: { direction: 'column' },
@@ -41,15 +42,15 @@ namespace $ {
 		},
 		Opts: {
 			font: { size: '11px' },
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			lineHeight: '1.5',
 			margin: { top: '4px' },
 		},
 		Control: {
 			height: '30px',
 			margin: { top: '8px' },
-			border: { width: '1px', style: 'solid', color: '#e7e4e0', radius: '6px' },
-			background: { color: '#faf9f8' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
+			background: { color: $bog_builderui_tokens.back },
 			align: { items: 'center' },
 			padding: {
 				left: '10px',
@@ -60,7 +61,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 	} )
 }

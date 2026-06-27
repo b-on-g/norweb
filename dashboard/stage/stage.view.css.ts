@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_dashboard_stage, {
 		flex: { direction: 'row' },
@@ -13,13 +14,13 @@ namespace $ {
 				weight: 600,
 				size: '11px',
 			},
-			color: '#57534e',
+			color: $bog_builderui_tokens.shade,
 		},
 		Bar: {
 			flex: { grow: 1 },
 			height: '8px',
 			border: { radius: '4px' },
-			background: { color: '#f5f4f2' },
+			background: { color: $bog_builderui_tokens.field },
 			overflow: 'hidden',
 		},
 		Bar_fill: {
@@ -32,7 +33,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			minWidth: '42px',
 			maxWidth: '42px',
 			textAlign: 'right',

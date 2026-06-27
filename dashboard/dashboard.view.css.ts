@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 
 	const card_label = {
@@ -6,14 +7,14 @@ namespace $ {
 			weight: 600,
 			size: '11px',
 		},
-		color: '#a8a29e',
+		color: $bog_builderui_tokens.shade,
 		textTransform: 'uppercase',
 		letterSpacing: '0.6px',
 	} as const
 
 	const card = {
-		background: { color: '#ffffff' },
-		border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '10px' },
+		background: { color: $bog_builderui_tokens.card },
+		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
 		padding: {
 			top: '18px',
 			bottom: '18px',
@@ -33,7 +34,7 @@ namespace $ {
 			weight: 500,
 			size: '10px',
 		},
-		color: '#a8a29e',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	const log_row = {
@@ -44,19 +45,19 @@ namespace $ {
 			weight: 500,
 			size: '11px',
 		},
-		color: '#57534e',
+		color: $bog_builderui_tokens.shade,
 		padding: {
 			top: '8px',
 			bottom: '8px',
 			left: '10px',
 			right: '10px',
 		},
-		background: { color: '#faf9f8' },
+		background: { color: $bog_builderui_tokens.back },
 		border: { radius: '6px' },
 	} as const
 
 	const log_time = {
-		color: '#a8a29e',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	const log_text = {
@@ -83,7 +84,7 @@ namespace $ {
 		},
 		Subtitle: {
 			font: { size: '13px' },
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			margin: { bottom: '20px' },
 		},
 
@@ -131,7 +132,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 
 		Metric_rows: { flex: { direction: 'column' } },
@@ -142,7 +143,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			margin: { top: '12px' },
 		},
 
@@ -166,10 +167,10 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			lineHeight: '1.5',
-			background: { color: '#faf9f8' },
-			border: { width: '1px', style: 'dashed', color: '#d6d3d1', radius: '6px' },
+			background: { color: $bog_builderui_tokens.back },
+			border: { width: '1px', style: 'dashed', color: $bog_builderui_tokens.line, radius: '6px' },
 			padding: {
 				top: '9px',
 				bottom: '9px',

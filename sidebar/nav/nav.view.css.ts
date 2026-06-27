@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_sidebar_nav, {
 		flex: { direction: 'row' },
@@ -12,7 +13,7 @@ namespace $ {
 		border: { radius: '7px' },
 		font: { size: '13px', weight: 600 },
 		cursor: 'pointer',
-		color: '#57534e',
+		color: $bog_builderui_tokens.shade,
 		Icon: {
 			minWidth: '18px',
 			textAlign: 'center',

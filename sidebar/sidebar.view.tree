@@ -1,6 +1,7 @@
 $raggu_web_sidebar $bog_builderui_div
 	screen? \gallery
 	dataset_id \wiki
+	Theme_auto $bog_theme_auto
 	sections_label_text @ \Sections
 	corpus_label_text @ \Active corpus
 	corpus_meta_text @ \2,410 nodes · 38 communities
@@ -39,6 +40,8 @@ $raggu_web_sidebar $bog_builderui_div
 				<= Corpus_name $bog_builderui_div sub / <= dataset_name \
 				<= Corpus_meta $bog_builderui_div sub / <= corpus_meta_text
 			<= Lang_row $bog_builderui_div sub /
+				<= Theme_switch $bog_theme_switch
+					theme_auto <= Theme_auto
 				<= Lang_label $bog_builderui_div sub / <= lang_label_text
 				<= Lang_en $raggu_web_sidebar_lang
 					label \EN

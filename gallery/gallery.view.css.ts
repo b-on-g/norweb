@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_gallery, {
 		flex: { direction: 'column', shrink: 1 },
@@ -25,7 +26,7 @@ namespace $ {
 		},
 		Header_subtitle: {
 			font: { size: '13px' },
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			margin: { top: '3px' },
 		},
 		Spacer: {
@@ -40,8 +41,8 @@ namespace $ {
 				right: '16px',
 			},
 			font: { size: '12px', weight: 600 },
-			color: '#57534e',
-			background: { color: '#ffffff' },
+			color: $bog_builderui_tokens.shade,
+			background: { color: $bog_builderui_tokens.card },
 			cursor: 'pointer',
 		},
 		Upload_idx: {
@@ -53,8 +54,8 @@ namespace $ {
 				right: '16px',
 			},
 			font: { size: '12px', weight: 600 },
-			color: '#57534e',
-			background: { color: '#ffffff' },
+			color: $bog_builderui_tokens.shade,
+			background: { color: $bog_builderui_tokens.card },
 			cursor: 'pointer',
 		},
 

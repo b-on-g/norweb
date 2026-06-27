@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 
 	const { radial_gradient } = $mol_style_func
@@ -25,11 +26,11 @@ namespace $ {
 			weight: 500,
 			size: '10px',
 		},
-		color: '#a8a29e',
+		color: $bog_builderui_tokens.shade,
 	} as const
 
 	const relation_card = {
-		border: { width: '1px', style: 'solid', color: '#e7e4e0', radius: '6px' },
+		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
 		padding: {
 			top: '8px',
 			bottom: '8px',
@@ -51,7 +52,7 @@ namespace $ {
 	} as const
 
 	const relation_target = {
-		color: '#57534e',
+		color: $bog_builderui_tokens.shade,
 		margin: { top: '2px' },
 	} as const
 
@@ -172,7 +173,7 @@ namespace $ {
 				weight: 700,
 				size: '10px',
 			},
-			color: '#d6d3d1',
+			color: $bog_builderui_tokens.line,
 			textTransform: 'uppercase',
 			letterSpacing: '0.6px',
 			margin: { bottom: '8px' },
@@ -202,9 +203,9 @@ namespace $ {
 		Aside: {
 			minWidth: '300px',
 			maxWidth: '300px',
-			background: { color: '#ffffff' },
+			background: { color: $bog_builderui_tokens.card },
 			border: {
-				left: { width: '1px', style: 'solid', color: '#d6d3d1' },
+				left: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 			padding: {
 				top: '18px',
@@ -221,7 +222,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 			letterSpacing: '0.7px',
 		},
@@ -252,7 +253,7 @@ namespace $ {
 		},
 		Entity_desc: {
 			font: { size: '12px' },
-			color: '#57534e',
+			color: $bog_builderui_tokens.shade,
 			lineHeight: '1.5',
 			margin: { top: '10px' },
 		},
@@ -263,7 +264,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 			margin: { top: '18px', bottom: '8px' },
 		},
@@ -283,12 +284,12 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 			margin: { top: '16px', bottom: '8px' },
 		},
 		Sources: {
-			border: { width: '1px', style: 'dashed', color: '#d6d3d1', radius: '6px' },
+			border: { width: '1px', style: 'dashed', color: $bog_builderui_tokens.line, radius: '6px' },
 			padding: {
 				top: '10px',
 				bottom: '10px',
@@ -300,8 +301,8 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
-			background: { color: '#faf9f8' },
+			color: $bog_builderui_tokens.shade,
+			background: { color: $bog_builderui_tokens.back },
 		},
 		Ask_btn: {
 			margin: { top: '16px' },

@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_settings, {
 		position: 'fixed',
@@ -28,9 +29,9 @@ namespace $ {
 			right: 0,
 			bottom: 0,
 			width: '380px',
-			background: { color: '#ffffff' },
+			background: { color: $bog_builderui_tokens.card },
 			border: {
-				left: { width: '1px', style: 'solid', color: '#d6d3d1' },
+				left: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 			zIndex: 1,
 			flex: { direction: 'column' },
@@ -53,7 +54,7 @@ namespace $ {
 				right: '20px',
 			},
 			border: {
-				bottom: { width: '1px', style: 'solid', color: '#e7e4e0' },
+				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
 			flex: { direction: 'row' },
 			align: { items: 'center' },
@@ -70,7 +71,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			margin: { top: '2px' },
 		},
 		Spacer: {
@@ -80,7 +81,7 @@ namespace $ {
 			minWidth: '30px',
 			maxWidth: '30px',
 			height: '30px',
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '7px' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '7px' },
 			align: { items: 'center' },
 			justify: { content: 'center' },
 			cursor: 'pointer',

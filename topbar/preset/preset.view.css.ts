@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_topbar_preset, {
 		font: { size: '11px', weight: 600 },
@@ -9,12 +10,12 @@ namespace $ {
 		},
 		border: { radius: '5px' },
 		cursor: 'pointer',
-		color: '#78716c',
+		color: $bog_builderui_tokens.shade,
 		'@': {
 			raggu_web_topbar_preset_active: {
 				true: {
-					background: { color: '#ffffff' },
-					color: '#44403c',
+					background: { color: $bog_builderui_tokens.card },
+					color: $bog_builderui_tokens.text,
 					box: {
 						shadow: [ {
 							x: 0,

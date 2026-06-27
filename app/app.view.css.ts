@@ -1,9 +1,10 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_app, {
 		height: '100vh',
 		width: '100%',
-		background: { color: '#e9e8e6' },
-		color: '#44403c',
+		background: { color: $bog_builderui_tokens.back },
+		color: $bog_builderui_tokens.text,
 		overflow: 'hidden',
 		font: {
 			family: 'system-ui, -apple-system, sans-serif',

@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	const tag_style = {
 		font: {
@@ -5,8 +6,8 @@ namespace $ {
 			weight: 600,
 			size: '10px',
 		},
-		color: '#57534e',
-		background: { color: '#f5f4f2' },
+		color: $bog_builderui_tokens.shade,
+		background: { color: $bog_builderui_tokens.field },
 		border: { radius: '5px' },
 		padding: {
 			top: '3px',
@@ -17,8 +18,8 @@ namespace $ {
 	} as const
 
 	$mol_style_define( $raggu_web_gallery_card, {
-		background: { color: '#ffffff' },
-		border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '10px' },
+		background: { color: $bog_builderui_tokens.card },
+		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
 		padding: {
 			top: '13px',
 			bottom: '13px',
@@ -41,14 +42,14 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 		Domain_badge: {
 			position: 'absolute',
 			top: '8px',
 			left: '8px',
-			background: { color: '#ffffff' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '5px' },
+			background: { color: $bog_builderui_tokens.card },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '5px' },
 			padding: {
 				top: '2px',
 				bottom: '2px',
@@ -56,7 +57,7 @@ namespace $ {
 				right: '7px',
 			},
 			font: { size: '10px' },
-			color: '#57534e',
+			color: $bog_builderui_tokens.shade,
 		},
 
 		Title: {
@@ -65,7 +66,7 @@ namespace $ {
 		},
 		Desc: {
 			font: { size: '11px' },
-			color: '#78716c',
+			color: $bog_builderui_tokens.shade,
 			margin: { top: '4px' },
 			lineHeight: '1.4',
 		},

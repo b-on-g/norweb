@@ -1,3 +1,4 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_sidebar_lang, {
 		font: {
@@ -13,12 +14,12 @@ namespace $ {
 		},
 		border: { radius: '5px' },
 		cursor: 'pointer',
-		color: '#a8a29e',
+		color: $bog_builderui_tokens.shade,
 		'@': {
 			raggu_web_sidebar_lang_active: {
 				true: {
 					background: { color: '#5b5bd6' },
-					color: '#ffffff',
+					color: $bog_builderui_tokens.card,
 				},
 			},
 		},

@@ -1,10 +1,11 @@
+/** @see $bog_builderui_tokens */
 namespace $ {
 	$mol_style_define( $raggu_web_sidebar, {
 		minWidth: '228px',
 		maxWidth: '228px',
-		background: { color: '#f5f4f2' },
+		background: { color: $bog_builderui_tokens.field },
 		border: {
-			right: { width: '1px', style: 'solid', color: '#d6d3d1' },
+			right: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 		},
 		flex: { direction: 'column' },
 		padding: {
@@ -46,8 +47,8 @@ namespace $ {
 				weight: 600,
 				size: '9px',
 			},
-			color: '#a8a29e',
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '4px' },
+			color: $bog_builderui_tokens.shade,
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '4px' },
 			padding: {
 				top: '2px',
 				bottom: '2px',
@@ -62,7 +63,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 			letterSpacing: '0.8px',
 			padding: {
@@ -92,7 +93,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			textTransform: 'uppercase',
 			letterSpacing: '0.8px',
 			padding: {
@@ -101,8 +102,8 @@ namespace $ {
 			},
 		},
 		Corpus_card: {
-			background: { color: '#ffffff' },
-			border: { width: '1px', style: 'solid', color: '#d6d3d1', radius: '6px' },
+			background: { color: $bog_builderui_tokens.card },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
 			padding: {
 				top: '0.5625rem',
 				bottom: '0.5625rem',
@@ -121,11 +122,12 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 		},
 
 		Lang_row: {
 			flex: { direction: 'row' },
+			flexWrap: 'wrap',
 			gap: '0.375rem',
 			align: { items: 'center' },
 			padding: {
@@ -141,8 +143,18 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#a8a29e',
+			color: $bog_builderui_tokens.shade,
 			marginRight: 'auto',
+		},
+		Theme_switch: {
+			padding: { top: '2px', bottom: '2px', left: '2px', right: '2px' },
+			background: { color: $bog_builderui_tokens.card },
+			border: { color: $bog_builderui_tokens.line },
+			$mol_button_minor: {
+				minWidth: '1.5rem',
+				minHeight: '1.5rem',
+				padding: { top: 0, bottom: 0, left: '0.375rem', right: '0.375rem' },
+			},
 		},
 	} )
 }
