@@ -1,0 +1,82 @@
+$raggu_web_front_chat $bog_builderui_div
+	modes_label_text @ \Search engine
+	trace_head_title_text @ \▾ Answer trace
+	trace_head_meta_text @ \LocalSearch · top-k 8 · rerank ✓
+	trace_label_text @ \ENTITIES IN CONTEXT
+	trace_chip_one_text @ \Bjørnson
+	trace_chip_two_text @ \Norwegian anthem
+	trace_chip_three_text @ \1859
+	trace_stat_chunks_text @ \chunks: 3
+	trace_stat_comms_text @ \communities: 1
+	trace_stat_retr_text @ \retrieval 140ms
+	trace_stat_gen_text @ \gen 1.2s
+	trace_stat_power_text @ \≈0.4 Wh
+	trace_link_text @ \↳ highlight on graph
+	sug_one_text @ \Who received the Nobel Prize?
+	sug_two_text @ \Connection between Ibsen and Bjørnson?
+	input_hint_text @ \Ask anything about the corpus…
+	send_label_text @ \Send
+	seed_user_text @ \Who wrote the Norwegian anthem and when?
+	seed_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
+	mock_prefix_text @ \Thanks for the question:
+	mock_suffix_text @ \(Mock response. Real retrieval will be wired to the backend.)
+	prompt_text? \
+	prompt_submit? null
+	use_sug_one? null
+	use_sug_two? null
+	rows /
+	message_text* \
+	message_role* \
+	message_with_trace* false
+	sub /
+		<= Modes_bar $bog_builderui_div sub /
+			<= Modes_label $bog_builderui_div sub / <= modes_label_text
+			<= Modes $bog_builderui_div sub /
+				<= Mode_local $bog_builderui_div sub / \LocalSearch
+				<= Mode_global $bog_builderui_div sub / \Global
+				<= Mode_mix $bog_builderui_div sub / \Mix
+				<= Mode_plan $bog_builderui_div sub / \QueryPlan
+		<= Body $mol_list rows <= rows
+		<= Footer $bog_builderui_div sub /
+			<= Suggestions $bog_builderui_div sub /
+				<= Sug_one $bog_builderui_div
+					sub / <= sug_one_text
+					event * click? <=> use_sug_one? null
+				<= Sug_two $bog_builderui_div
+					sub / <= sug_two_text
+					event * click? <=> use_sug_two? null
+			<= Input_row $bog_builderui_div sub /
+				<= Prompt $mol_textarea
+					hint <= input_hint_text
+					value? <=> prompt_text? \
+					submit? <=> prompt_submit? null
+				<= Input_send $mol_button_minor
+					hint <= send_label_text
+					click? <=> prompt_submit? null
+					sub / \↑
+	Message* $bog_builderui_div
+		attr *
+			^
+			raggu_role <= message_role*
+		sub /
+			<= Message_text* $bog_builderui_div sub / <= message_text*
+			<= Message_trace* $bog_builderui_div
+				attr *
+					raggu_visible <= message_with_trace*
+				sub /
+					<= Message_trace_head* $bog_builderui_div sub /
+						<= Message_trace_head_title* $bog_builderui_div sub / <= trace_head_title_text
+						<= Message_trace_head_meta* $bog_builderui_div sub / <= trace_head_meta_text
+					<= Message_trace_body* $bog_builderui_div sub /
+						<= Message_trace_label* $bog_builderui_div sub / <= trace_label_text
+						<= Message_trace_chips* $bog_builderui_div sub /
+							<= Message_trace_chip_one* $bog_builderui_div sub / <= trace_chip_one_text
+							<= Message_trace_chip_two* $bog_builderui_div sub / <= trace_chip_two_text
+							<= Message_trace_chip_three* $bog_builderui_div sub / <= trace_chip_three_text
+						<= Message_trace_stats* $bog_builderui_div sub /
+							<= Message_trace_stat_chunks* $bog_builderui_div sub / <= trace_stat_chunks_text
+							<= Message_trace_stat_comms* $bog_builderui_div sub / <= trace_stat_comms_text
+							<= Message_trace_stat_retr* $bog_builderui_div sub / <= trace_stat_retr_text
+							<= Message_trace_stat_gen* $bog_builderui_div sub / <= trace_stat_gen_text
+							<= Message_trace_stat_power* $bog_builderui_div sub / <= trace_stat_power_text
+						<= Message_trace_link* $bog_builderui_div sub / <= trace_link_text

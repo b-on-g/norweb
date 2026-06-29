@@ -1,0 +1,53 @@
+$raggu_web_front_sidebar $bog_builderui_div
+	screen? \gallery
+	dataset_id \wiki
+	Theme_auto $bog_theme_auto
+	sections_label_text @ \Sections
+	corpus_label_text @ \Active corpus
+	corpus_meta_text @ \2,410 nodes · 38 communities
+	lang_label_text @ \LANG
+	sub /
+		<= Brand $bog_builderui_div sub /
+			<= Brand_logo $bog_builderui_div sub / \R
+			<= Brand_title $bog_builderui_div sub / \RAGU
+			<= Brand_badge $bog_builderui_div sub / \demo
+		<= Sections_label $bog_builderui_div sub / <= sections_label_text
+		<= Nav $bog_builderui_div sub /
+			<= Nav_gallery $raggu_web_front_sidebar_nav
+				icon \▤
+				label @ \Datasets
+				active <= is_gallery false
+				click? <=> click_gallery? null
+			<= Nav_explorer $raggu_web_front_sidebar_nav
+				icon \◉
+				label @ \Graph
+				active <= is_explorer false
+				click? <=> click_explorer? null
+			<= Nav_chat $raggu_web_front_sidebar_nav
+				icon \💬
+				label @ \Chat
+				active <= is_chat false
+				click? <=> click_chat? null
+			<= Nav_dashboard $raggu_web_front_sidebar_nav
+				icon \▦
+				label @ \Dashboard
+				active <= is_dashboard false
+				click? <=> click_dashboard? null
+		<= Spacer $bog_builderui_div
+		<= Footer $bog_builderui_div sub /
+			<= Corpus_label $bog_builderui_div sub / <= corpus_label_text
+			<= Corpus_card $bog_builderui_div sub /
+				<= Corpus_name $bog_builderui_div sub / <= dataset_name \
+				<= Corpus_meta $bog_builderui_div sub / <= corpus_meta_text
+			<= Lang_row $bog_builderui_div sub /
+				<= Theme_switch $bog_theme_switch
+					theme_auto <= Theme_auto
+				<= Lang_label $bog_builderui_div sub / <= lang_label_text
+				<= Lang_en $raggu_web_front_sidebar_lang
+					label \EN
+					active <= is_en false
+					click? <=> click_en? null
+				<= Lang_ru $raggu_web_front_sidebar_lang
+					label \RU
+					active <= is_ru false
+					click? <=> click_ru? null
