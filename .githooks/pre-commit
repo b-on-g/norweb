@@ -1,0 +1,70 @@
+#!/bin/sh
+# Fast pre-commit checks for raggu/web frontend.
+# Activate once: ./.githooks/install.sh
+set -e
+
+REPO="$(git rev-parse --show-toplevel)"
+RED='\033[0;31m'; YEL='\033[0;33m'; GRN='\033[0;32m'; NC='\033[0m'
+
+fail() { printf "${RED}✗ %s${NC}\n" "$1" >&2; exit 1; }
+ok()   { printf "${GRN}✓ %s${NC}\n" "$1"; }
+
+# 1. `as any` запрещён (см. memory MOL_QUICK_START)
+STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(view\.)?ts$' | grep -v '\.d\.ts$' || true)
+if [ -n "$STAGED_TS" ]; then
+	HITS=$(echo "$STAGED_TS" | while IFS= read -r f; do grep -Hn 'as any' "$REPO/$f" 2>/dev/null || true; done)
+	if [ -n "$HITS" ]; then
+		printf "${RED}✗ 'as any' в стейджед .ts:${NC}\n%s\n" "$HITS" >&2
+		exit 1
+	fi
+fi
+ok "no 'as any' in staged .ts"
+
+# 2. Locale parity: каждый ключ из web.locale=en.json должен быть в web.locale=ru.json
+EN="$REPO/front/app/-/web.locale=en.json"
+RU="$REPO/front/app/-/web.locale=ru.json"
+if [ -f "$EN" ] && [ -f "$RU" ]; then
+	MISSING=$(python3 -c "
+import json
+en = json.load(open('$EN'))
+ru = json.load(open('$RU'))
+for k in sorted(set(en) - set(ru)): print(k)
+" 2>/dev/null)
+	if [ -n "$MISSING" ]; then
+		printf "${RED}✗ ключи без RU-перевода:${NC}\n%s\n" "$MISSING" >&2
+		exit 1
+	fi
+	ok "locale en ⊂ ru parity"
+else
+	printf "${YEL}⚠ skipping locale check: build artifacts missing — run \`npx mam raggu/web/front/app\`${NC}\n"
+fi
+
+# 3. Audit: web.audit.js должен говорить "Audit passed"
+AUDIT="$REPO/front/app/-/web.audit.js"
+if [ -f "$AUDIT" ]; then
+	if ! grep -q 'Audit passed' "$AUDIT"; then
+		printf "${RED}✗ audit fail:${NC}\n" >&2
+		cat "$AUDIT" >&2
+		exit 1
+	fi
+	ok "audit passed (cached)"
+else
+	printf "${YEL}⚠ audit cache missing — dev-server не запущен?${NC}\n"
+fi
+
+# 4. Запрет hex-цветов для нейтралов в стейджед .view.css.ts (мигрированы на $bog_builderui_tokens)
+# Разрешённые hex: акценты + статусы + canvas dark
+ALLOWED='#5b5bd6|#ece9fb|#4a4ac4|#a89bf0|#1f8a5b|#fdf0e6|#c2691a|#1c1b1a|#3a3937|#6b6864|#1c1b1a8c|#e0524f|#4f8ee0|#3fb56b|#d97ad9|#e0a73f|#7c6ce0|#3fb8b8|#ffffffe6|#1c1b1ae6|#1c1b1a59|#00000014|#0000001a|#0000001f|#0000000a|#00000022|#0000001a|#0000000d|#efedea|#b8b4b0|#d6d3d180'
+STAGED_CSS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.view\.css\.ts$' || true)
+if [ -n "$STAGED_CSS" ]; then
+	for f in $STAGED_CSS; do
+		BAD=$(grep -oE "'#[0-9a-fA-F]{3,8}'" "$REPO/$f" 2>/dev/null | grep -vE "^'($ALLOWED)'" || true)
+		if [ -n "$BAD" ]; then
+			printf "${RED}✗ запрещённый hex в %s — мигрируй на \$bog_builderui_tokens:${NC}\n%s\n" "$f" "$BAD" >&2
+			exit 1
+		fi
+	done
+	ok "no foreign hex in staged .view.css.ts"
+fi
+
+printf "${GRN}pre-commit OK${NC}\n"

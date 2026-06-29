@@ -62,6 +62,19 @@ node raggu/web/front/app/-/node.test.js
 
 Должно вывести `All tests passed`. Текущий счёт — **283** (структурные snapshot'ы, e2e-flow через view-API, URL state, CSS rule intent, новые фичи).
 
+## Git hooks (локально)
+
+Активировать один раз после клона:
+
+```bash
+./.githooks/install.sh
+```
+
+- **`pre-commit`** (быстро, секунды): `as any` запрет в staged `.ts`, locale-парити (en ⊂ ru), audit cache не fail, нет «чужих» hex в `.view.css.ts` (только разрешённый allowlist акцентов/статусов)
+- **`pre-push`** (тяжело, ~10-30с): полный `npx mam raggu/web/front/app` + проверка audit + прогон `node.test.js` (должно быть `All tests passed`)
+
+Отключить: `git config --unset core.hooksPath`.
+
 ## CI / Deploy
 
 [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml):
