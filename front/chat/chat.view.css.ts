@@ -15,8 +15,8 @@ namespace $ {
 	} as const
 
 	const chip = {
-		background: { color: '#ece9fb' },
-		color: '#5b5bd6',
+		background: { color: $bog_builderui_tokens.field },
+		color: $bog_builderui_tokens.current,
 		border: { radius: '5px' },
 		padding: {
 			top: '3px',
@@ -86,7 +86,7 @@ namespace $ {
 			gap: '5px',
 		},
 		Mode_local: {
-			background: { color: '#5b5bd6' },
+			background: { color: $bog_builderui_tokens.current },
 			color: '#ffffff',
 			border: { radius: '6px' },
 			padding: {
@@ -134,7 +134,7 @@ namespace $ {
 			'@': {
 				raggu_role: {
 					user: {
-						background: { color: '#5b5bd6' },
+						background: { color: $bog_builderui_tokens.current },
 						color: '#ffffff',
 						borderRadius: '12px 12px 3px 12px',
 						padding: {
@@ -188,7 +188,7 @@ namespace $ {
 				weight: 600,
 				size: '11px',
 			},
-			color: '#5b5bd6',
+			color: $bog_builderui_tokens.current,
 			border: {
 				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
 			},
@@ -240,7 +240,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#5b5bd6',
+			color: $bog_builderui_tokens.current,
 		},
 
 		Footer: {
@@ -284,7 +284,7 @@ namespace $ {
 			minHeight: '24px',
 		},
 		Input_send: {
-			background: { color: '#5b5bd6' },
+			background: { color: $bog_builderui_tokens.current },
 			color: '#ffffff',
 			border: { radius: '7px' },
 			padding: {

@@ -48,7 +48,7 @@ namespace $ {
 			weight: 600,
 			size: '10px',
 		},
-		color: '#5b5bd6',
+		color: $bog_builderui_tokens.current,
 	} as const
 
 	const relation_target = {
@@ -104,7 +104,8 @@ namespace $ {
 			maxWidth: '62%',
 		},
 		Filter_search: {
-			background: { color: '#ffffffe6' },
+			background: { color: $bog_builderui_tokens.field },
+			color: $bog_builderui_tokens.text,
 			border: { radius: '7px' },
 			padding: {
 				top: '8px',
@@ -118,7 +119,8 @@ namespace $ {
 			gap: '7px',
 		},
 		Filter_type: {
-			background: { color: '#ffffffe6' },
+			background: { color: $bog_builderui_tokens.field },
+			color: $bog_builderui_tokens.text,
 			border: { radius: '7px' },
 			padding: {
 				top: '8px',
@@ -129,7 +131,8 @@ namespace $ {
 			font: { size: '11px', weight: 600 },
 		},
 		Filter_thresh: {
-			background: { color: '#ffffffe6' },
+			background: { color: $bog_builderui_tokens.field },
+			color: $bog_builderui_tokens.text,
 			border: { radius: '7px' },
 			padding: {
 				top: '8px',
@@ -140,7 +143,7 @@ namespace $ {
 			font: { size: '11px', weight: 600 },
 		},
 		Filter_comm: {
-			background: { color: '#5b5bd6' },
+			background: { color: $bog_builderui_tokens.current },
 			color: '#ffffff',
 			border: { radius: '7px' },
 			padding: {
@@ -248,7 +251,7 @@ namespace $ {
 				weight: 600,
 				size: '10px',
 			},
-			color: '#5b5bd6',
+			color: $bog_builderui_tokens.current,
 			margin: { top: '6px' },
 		},
 		Entity_desc: {
@@ -306,7 +309,7 @@ namespace $ {
 		},
 		Ask_btn: {
 			margin: { top: '16px' },
-			background: { color: '#5b5bd6' },
+			background: { color: $bog_builderui_tokens.current },
 			color: '#ffffff',
 			border: { radius: '7px' },
 			padding: {

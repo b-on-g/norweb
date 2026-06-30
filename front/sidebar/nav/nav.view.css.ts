@@ -21,8 +21,8 @@ namespace $ {
 		'@': {
 			raggu_web_front_sidebar_nav_active: {
 				true: {
-					background: { color: '#ece9fb' },
-					color: '#5b5bd6',
+					background: { color: $bog_builderui_tokens.current },
+					color: '#ffffff',
 				},
 			},
 		},

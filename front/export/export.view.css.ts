@@ -6,8 +6,8 @@ namespace $ {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
 			gap: '6px',
-			background: { color: '#5b5bd6' },
-			color: $bog_builderui_tokens.card,
+			background: { color: $bog_builderui_tokens.current },
+			color: '#ffffff',
 			border: { radius: '7px' },
 			padding: {
 				top: '7px',

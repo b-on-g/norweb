@@ -18,8 +18,8 @@ namespace $ {
 		'@': {
 			raggu_web_front_sidebar_lang_active: {
 				true: {
-					background: { color: '#5b5bd6' },
-					color: $bog_builderui_tokens.card,
+					background: { color: $bog_builderui_tokens.current },
+					color: '#ffffff',
 				},
 			},
 		},

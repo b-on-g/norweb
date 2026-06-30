@@ -15,7 +15,7 @@ namespace $ {
 			flex: { grow: 1 },
 			height: '8px',
 			border: { radius: '4px' },
-			background: { color: '#ece9fb' },
+			background: { color: $bog_builderui_tokens.field },
 			position: 'relative',
 			overflow: 'hidden',
 		},
@@ -24,7 +24,7 @@ namespace $ {
 			left: 0,
 			top: 0,
 			bottom: 0,
-			background: { color: '#5b5bd6' },
+			background: { color: $bog_builderui_tokens.current },
 		},
 		Value: {
 			font: {
@@ -32,7 +32,7 @@ namespace $ {
 				weight: 600,
 				size: '11px',
 			},
-			color: '#5b5bd6',
+			color: $bog_builderui_tokens.current,
 			minWidth: '36px',
 			maxWidth: '36px',
 			textAlign: 'right',

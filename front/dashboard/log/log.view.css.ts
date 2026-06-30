@@ -92,7 +92,7 @@ namespace $ {
 				weight: 500,
 				size: '10px',
 			},
-			color: '#5b5bd6',
+			color: $bog_builderui_tokens.current,
 		},
 
 		'@': {
