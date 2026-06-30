@@ -171,8 +171,8 @@ namespace $.$$ {
 			if ( !event ) return
 			const target = event.target as Element
 			const node_id = target.getAttribute( 'data-node-id' )
-			const svg = event.currentTarget as Element
-			svg.setPointerCapture( event.pointerId )
+			const svg = this.dom_node() as unknown as Element
+			try { svg.setPointerCapture( event.pointerId ) } catch {}
 			if ( node_id ) {
 				this.drag_id( node_id )
 				return
@@ -199,7 +199,7 @@ namespace $.$$ {
 			const dy = event.clientY - this.last_y
 			this.last_x = event.clientX
 			this.last_y = event.clientY
-			const svg = event.currentTarget as SVGSVGElement
+			const svg = this.dom_node() as unknown as SVGSVGElement
 			const scale = ( 600 / this.zoom() ) / svg.clientWidth
 			this.pan_x( this.pan_x() - dx * scale )
 			this.pan_y( this.pan_y() - dy * scale )
@@ -215,8 +215,10 @@ namespace $.$$ {
 		}
 
 		// Convert pointer client coords → svg coords accounting for current view_box.
+		// Use dom_node() rather than event.currentTarget — the latter is reset to null
+		// once event dispatch returns from inside @$mol_action's fiber.
 		client_to_svg( event: PointerEvent ): { x: number, y: number } {
-			const svg = event.currentTarget as SVGSVGElement
+			const svg = this.dom_node() as unknown as SVGSVGElement
 			const rect = svg.getBoundingClientRect()
 			const z = Math.max( 0.2, Math.min( 5, this.zoom() ) )
 			const size = 600 / z
