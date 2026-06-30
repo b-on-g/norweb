@@ -82,18 +82,6 @@ namespace $ {
 				],
 			},
 		},
-		Canvas_label: {
-			font: {
-				family: 'ui-monospace, monospace',
-				weight: 600,
-				size: '12px',
-			},
-			color: '#6b6864',
-			letterSpacing: '1px',
-			textAlign: 'center',
-			whiteSpace: 'pre-line',
-		},
-
 		Filters: {
 			position: 'absolute',
 			top: '14px',
@@ -271,15 +259,12 @@ namespace $ {
 			textTransform: 'uppercase',
 			margin: { top: '18px', bottom: '8px' },
 		},
-		Rel_one: relation_card,
-		Rel_two: relation_card,
-		Rel_three: relation_card,
-		Rel_one_type: relation_type,
-		Rel_two_type: relation_type,
-		Rel_three_type: relation_type,
-		Rel_one_target: relation_target,
-		Rel_two_target: relation_target,
-		Rel_three_target: relation_target,
+		Relations_list: {
+			flex: { direction: 'column' },
+		},
+		Rel: relation_card,
+		Rel_type: relation_type,
+		Rel_target: relation_target,
 
 		Sources_title: {
 			font: {

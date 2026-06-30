@@ -1,0 +1,78 @@
+$raggu_web_front_explorer_forcegraph $mol_svg_root
+	view_box <= computed_view_box \-300 -300 600 600
+	aspect \xMidYMid meet
+	select?val null
+	selected_id? \
+	hovered_id? \
+	drag_id? \
+	pan_x? +0
+	pan_y? +0
+	zoom? +1
+	positions? *
+	event *
+		^
+		wheel?event <=> wheel?event null
+		pointerdown?event <=> pan_start?event null
+		pointermove?event <=> pan_move?event null
+		pointerup?event <=> pan_end?event null
+		pointerleave?event <=> pan_end?event null
+		click?event <=> bg_click?event null
+	sub /
+		<= G_edges $mol_svg_group
+			sub <= edge_views /
+				<= Edge* $mol_svg_line
+					from_x <= edge_x1* \
+					from_y <= edge_y1* \
+					to_x <= edge_x2* \
+					to_y <= edge_y2* \
+					attr *
+						^
+						stroke <= edge_color* \#7a7672
+						stroke-width <= edge_width* \1
+						stroke-opacity <= edge_opacity* \0.55
+		<= G_nodes $mol_svg_group
+			sub <= node_views /
+				<= Node* $mol_svg_circle
+					pos_x <= node_x* \
+					pos_y <= node_y* \
+					radius <= node_radius* \6
+					attr *
+						^
+						fill <= node_color* \#7c6ce0
+						stroke <= node_stroke* \transparent
+						stroke-width <= node_stroke_width* \0
+						cursor \pointer
+					event *
+						^
+						click? <=> click*? null
+						pointerenter? <=> hover_enter*? null
+						pointerleave? <=> hover_leave*? null
+						pointerdown?event <=> node_pointerdown*?event null
+		<= Tooltip $mol_svg_group
+			attr *
+				^
+				pointer-events \none
+			sub <= tooltip_sub /
+				<= Tooltip_bg $mol_svg_rect
+					pos_x <= tooltip_bg_x \0
+					pos_y <= tooltip_bg_y \0
+					width <= tooltip_bg_w \0
+					height <= tooltip_bg_h \0
+					attr *
+						^
+						rx \3
+						ry \3
+						fill \#1c1b1ad9
+						stroke \#5b5bd6
+						stroke-width \1
+				<= Tooltip_text $mol_svg_text
+					pos_x <= tooltip_x \0
+					pos_y <= tooltip_y \0
+					align \middle
+					align_vert \middle
+					text <= tooltip_text \
+					attr *
+						^
+						fill \#ffffff
+						font-size <= tooltip_font_size \11
+						font-weight \600

@@ -1,30 +1,20 @@
 $raggu_web_front_explorer $bog_builderui_div
-	canvas_title_text @ \INTERACTIVE KNOWLEDGE GRAPH
-	canvas_engine_text @ \Sigma.js / WebGL · force layout
-	canvas_meaning_text @ \color = NEREL type · thickness = strength
+	selected_id? \
 	filter_search_text @ \🔍 Find node…
 	filter_type_text @ \Entity type ▾
 	filter_thresh_text @ \Strength threshold ▾
 	filter_comm_text @ \◉ Communities: on
 	aside_title_text @ \Entity card
-	entity_name_text @ \Bjørnstjerne Bjørnson
-	entity_desc_text @ \Author of the Norwegian anthem (1859). Norwegian writer, Nobel Prize laureate in Literature.
-	relations_title_text @ \Relations (12)
-	rel_one_target_text @ \writer
-	rel_two_target_text @ \Nobel Prize
-	rel_three_target_text @ \Kvikne, Norway
+	aside_empty_text @ \Click a node on the graph
+	relations_title_template @ \Relations (%s)
 	sources_title_text @ \Sources (provenance)
 	sources_text @ \chunk #418 · chunk #902 …
 	ask_btn_text @ \💬 Ask about this entity
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
-				<= Canvas_label $bog_builderui_div sub /
-					\⬡ ⬡ ⬡
-					\
-					<= canvas_title_text
-					<= canvas_engine_text
-					<= canvas_meaning_text
+				<= Graph $raggu_web_front_explorer_forcegraph
+					selected_id? <=> selected_id?
 			<= Filters $bog_builderui_div sub /
 				<= Filter_search $bog_builderui_div sub / <= filter_search_text
 				<= Filter_type $bog_builderui_div sub / <= filter_type_text
@@ -57,19 +47,14 @@ $raggu_web_front_explorer $bog_builderui_div
 			<= Aside_title $bog_builderui_div sub / <= aside_title_text
 			<= Entity_head $bog_builderui_div sub /
 				<= Entity_dot $bog_builderui_div
-				<= Entity_name $bog_builderui_div sub / <= entity_name_text
-			<= Entity_type $bog_builderui_div sub / \PERSON
-			<= Entity_desc $bog_builderui_div sub / <= entity_desc_text
-			<= Relations_title $bog_builderui_div sub / <= relations_title_text
-			<= Rel_one $bog_builderui_div sub /
-				<= Rel_one_type $bog_builderui_div sub / \WORKS_AS
-				<= Rel_one_target $bog_builderui_div sub / <= rel_one_target_text
-			<= Rel_two $bog_builderui_div sub /
-				<= Rel_two_type $bog_builderui_div sub / \AWARDED_WITH
-				<= Rel_two_target $bog_builderui_div sub / <= rel_two_target_text
-			<= Rel_three $bog_builderui_div sub /
-				<= Rel_three_type $bog_builderui_div sub / \PLACE_OF_BIRTH
-				<= Rel_three_target $bog_builderui_div sub / <= rel_three_target_text
+				<= Entity_name $bog_builderui_div sub / <= entity_name \
+			<= Entity_type $bog_builderui_div sub / <= entity_type \
+			<= Entity_desc $bog_builderui_div sub / <= entity_desc \
+			<= Relations_title $bog_builderui_div sub / <= relations_title \
+			<= Relations_list $bog_builderui_div sub <= rel_rows /
+				<= Rel* $bog_builderui_div sub /
+					<= Rel_type* $bog_builderui_div sub / <= rel_type* \
+					<= Rel_target* $bog_builderui_div sub / <= rel_target* \
 			<= Sources_title $bog_builderui_div sub / <= sources_title_text
 			<= Sources $bog_builderui_div sub / <= sources_text
 			<= Ask_btn $bog_builderui_div sub / <= ask_btn_text
