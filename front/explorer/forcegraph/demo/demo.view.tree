@@ -14,7 +14,8 @@ $raggu_web_front_explorer_forcegraph_demo $mol_example_small
 		<= Canvas $mol_view
 			sub /
 				<= Graph $raggu_web_front_explorer_forcegraph
-					graph_n <= graph_n
+					nodes <= graph_nodes /
+					edges <= graph_edges /
 					gravity <= gravity
 					force_scale <= force_scale
 					damping <= damping

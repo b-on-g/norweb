@@ -5,11 +5,12 @@ $raggu_web_front_explorer_forcegraph $mol_svg_root
 	selected_id? \
 	hovered_id? \
 	drag_id? \
+	nodes /
+	edges /
 	pan_x? +0
 	pan_y? +0
 	zoom? +1
 	positions? *
-	graph_n? +80
 	gravity +0.04
 	force_scale +0.06
 	damping +0.82

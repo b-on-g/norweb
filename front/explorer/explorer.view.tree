@@ -1,4 +1,5 @@
 $raggu_web_front_explorer $bog_builderui_div
+	dataset_id \
 	selected_id? \
 	filter_search_text @ \🔍 Find node…
 	filter_type_text @ \Entity type ▾
@@ -14,6 +15,8 @@ $raggu_web_front_explorer $bog_builderui_div
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
 				<= Graph $raggu_web_front_explorer_forcegraph
+					nodes <= graph_nodes /
+					edges <= graph_edges /
 					selected_id? <=> selected_id?
 			<= Filters $bog_builderui_div sub /
 				<= Filter_search $bog_builderui_div sub / <= filter_search_text

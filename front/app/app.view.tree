@@ -36,5 +36,6 @@ $raggu_web_front_app $bog_builderui_div
 		dataset_id <= dataset_id
 		select_dataset? <=> select_dataset? null
 	Explorer $raggu_web_front_explorer
+		dataset_id <= dataset_id
 	Chat $raggu_web_front_chat
 	Dashboard $raggu_web_front_dashboard

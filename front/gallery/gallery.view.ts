@@ -45,8 +45,32 @@ namespace $.$$ {
 			return next ?? []
 		}
 
+		// URL flag `?mock=1` (or missing $mol_state_arg in jsdom tests) → BUILTIN.
+		mock_flag(): boolean {
+			return this.$.$mol_state_arg.value( 'mock' ) === '1'
+		}
+
+		// Reactive fetch of preindexed datasets. Any transport error propagates
+		// via $mol_wire so the view frame shows an error plate instead of moks.
+		@$mol_mem
+		remote_datasets(): DatasetStats[] | null {
+			if ( this.mock_flag() ) return null
+			const cards = this.$.$raggu_web_front_api(
+				$raggu_web_front_api_ragu_list_datasets,
+				{ query: { locale: 'ru' } },
+			)
+			return cards.map( ( c: any ) => ( {
+				id: c.id,
+				nodes: format_count( c.stats.nodes ),
+				edges: format_count( c.stats.edges ),
+				comms: String( c.stats.communities ),
+				dynamic: { title: c.title, domain: c.domain, desc: c.description },
+			} ) )
+		}
+
 		datasets() {
-			return [ ...BUILTIN, ...this.extra_datasets() ]
+			const base = this.remote_datasets() ?? BUILTIN
+			return [ ...base, ...this.extra_datasets() ]
 		}
 
 		rows() {

@@ -40,3 +40,15 @@ those UI actions.
 cd web/back
 pytest
 ```
+
+## OpenAPI spec
+
+`openapi.json` next to this README is the source-of-truth spec — dumped from
+FastAPI and committed for the frontend codegen. Regenerate after schema changes:
+
+```bash
+python -c 'from ragu_web_api.main import create_app; import json; print(json.dumps(create_app().openapi(), indent=2))' > openapi.json
+```
+
+The frontend's typed client `web/front/api/ragu.openapi.ts` is generated from
+this file. Regen the client with `openapi-typescript` after the spec updates.

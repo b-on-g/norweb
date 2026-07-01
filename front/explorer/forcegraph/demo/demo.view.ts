@@ -16,6 +16,22 @@ namespace $.$$ {
 
 	export class $raggu_web_front_explorer_forcegraph_demo extends $.$raggu_web_front_explorer_forcegraph_demo {
 
+		// Playground data source — deterministic PRNG mock, rebuilt when the
+		// `graph_n` slider changes. Feeds forcegraph via nodes/edges bindings.
+		@$mol_mem
+		mock() {
+			const n = this.graph_n()
+			return $raggu_web_front_explorer_forcegraph_build_mock( 42, n, Math.round( n * 1.6 ) )
+		}
+
+		graph_nodes(): readonly $raggu_web_front_explorer_forcegraph_node[] {
+			return this.mock().nodes
+		}
+
+		graph_edges(): readonly $raggu_web_front_explorer_forcegraph_edge[] {
+			return this.mock().edges
+		}
+
 		@$mol_action
 		reset() {
 			this.graph_n( DEFAULTS.graph_n )

@@ -1,280 +1,21 @@
 namespace $.$$ {
 
-	type NodeType = 'PERSON' | 'ORG' | 'LOC' | 'EVENT' | 'DATE' | 'WORK' | 'LAW'
-
-	type GraphNode = {
-		id: string
-		label: string
-		type: NodeType
-		degree: number
-		x: number
-		y: number
-	}
-
-	type GraphEdge = {
-		id: string
-		source: string
-		target: string
-		strength: number
-		relation: string
-	}
-
-	const RELATIONS = [
-		'MENTIONS', 'CITES', 'WORKS_AT', 'LOCATED_IN', 'INVOLVES',
-		'DATED', 'AUTHORED', 'PART_OF', 'REFERS_TO', 'CONTAINS',
-	]
-
-	const TYPE_COLOR: Record< NodeType, string > = {
-		PERSON: '#e0524f',
-		ORG: '#4f8ee0',
-		LOC: '#3fb56b',
-		EVENT: '#d97ad9',
-		DATE: '#e0a73f',
-		WORK: '#7c6ce0',
-		LAW: '#3fb8b8',
-	}
-
-	const TYPES: NodeType[] = [ 'PERSON', 'ORG', 'LOC', 'EVENT', 'DATE', 'WORK', 'LAW' ]
-
-	// Deterministic PRNG for stable mock graph between renders.
-	function rand( seed: number ) {
-		let s = seed
-		return () => {
-			s = ( s * 9301 + 49297 ) % 233280
-			return s / 233280
-		}
-	}
-
-	export function build_mock( seed = 42, n_nodes = 80, n_edges = 130 ): { nodes: GraphNode[], edges: GraphEdge[] } {
-		const r = rand( seed )
-		const nodes: GraphNode[] = []
-		for ( let i = 0; i < n_nodes; i++ ) {
-			const type = TYPES[ Math.floor( r() * TYPES.length ) ]
-			nodes.push( {
-				id: `n${ i }`,
-				label: `${ type } ${ i }`,
-				type,
-				degree: 0,
-				x: ( r() - 0.5 ) * 400,
-				y: ( r() - 0.5 ) * 400,
-			} )
-		}
-		const edges: GraphEdge[] = []
-		const seen = new Set< string >()
-		for ( let i = 0; i < n_edges; i++ ) {
-			let a: number, b: number, key: string
-			do {
-				a = Math.floor( r() * n_nodes )
-				b = Math.floor( r() * n_nodes )
-				key = a < b ? `${ a }-${ b }` : `${ b }-${ a }`
-			} while ( a === b || seen.has( key ) )
-			seen.add( key )
-			edges.push( {
-				id: `e${ i }`,
-				source: `n${ a }`,
-				target: `n${ b }`,
-				strength: 0.3 + r() * 0.7,
-				relation: RELATIONS[ Math.floor( r() * RELATIONS.length ) ],
-			} )
-			nodes[ a ].degree++
-			nodes[ b ].degree++
-		}
-		return { nodes, edges }
-	}
-
-	const FORCE_K = 60
-	const THETA = 0.3   // Barnes-Hut opening angle. Smaller = more accurate, slower
-	const THETA2 = THETA * THETA
-
-	// Tunable physics params — passed into tick_layout every tick.
-	// Defaults come from view.tree; demo playground overrides via bindings.
-	export type LayoutParams = {
-		gravity: number       // radial pull toward origin (ForceAtlas2 `gravity`)
-		force_scale: number   // force → per-tick acceleration factor
-		damping: number       // velocity persistence per tick (0..1, higher = springier)
-		min_move: number      // smooth freeze gate midpoint (px/tick)
-		max_speed: number     // tanh-saturated speed ceiling
-	}
-
-	// --- Barnes-Hut quadtree ------------------------------------------------
-	// Instead of every-pair repulsion ( O(N²) ), aggregate distant groups of
-	// nodes into a single "average" point ( center of mass ) and apply one
-	// repulsion. Node A treats subtree S as one point iff size(S) / dist < θ.
-	// Overall: O(N log N).
-	type QuadCell = {
-		x0: number, y0: number, size: number,
-		com_x: number, com_y: number, count: number,
-		node?: { id: string, x: number, y: number },   // leaf holder
-		kids?: QuadCell[],                              // 4 quadrants when split
-	}
-
-	function make_cell( x0: number, y0: number, size: number ): QuadCell {
-		return { x0, y0, size, com_x: 0, com_y: 0, count: 0 }
-	}
-
-	function insert( cell: QuadCell, node: { id: string, x: number, y: number }, depth: number ): void {
-		cell.com_x += node.x
-		cell.com_y += node.y
-		cell.count++
-		if ( depth > 20 ) return   // guard against coincident points
-		if ( !cell.kids && !cell.node ) { cell.node = node; return }
-		if ( cell.node ) {
-			// Was a leaf — split, push old node down, then insert new
-			const old = cell.node
-			cell.node = undefined
-			const h = cell.size / 2
-			cell.kids = [
-				make_cell( cell.x0,     cell.y0,     h ),
-				make_cell( cell.x0 + h, cell.y0,     h ),
-				make_cell( cell.x0,     cell.y0 + h, h ),
-				make_cell( cell.x0 + h, cell.y0 + h, h ),
-			]
-			insert_child( cell, old, depth + 1 )
-		}
-		insert_child( cell, node, depth + 1 )
-	}
-
-	function insert_child( cell: QuadCell, node: { id: string, x: number, y: number }, depth: number ) {
-		const mx = cell.x0 + cell.size / 2
-		const my = cell.y0 + cell.size / 2
-		const idx = ( node.x >= mx ? 1 : 0 ) + ( node.y >= my ? 2 : 0 )
-		insert( cell.kids![ idx ], node, depth )
-	}
-
-	function accumulate_repulsion( cell: QuadCell, id: string, x: number, y: number, k2: number, out: { dx: number, dy: number } ): void {
-		if ( cell.count === 0 ) return
-		if ( cell.node && cell.node.id === id ) return
-		const cx = cell.com_x / cell.count
-		const cy = cell.com_y / cell.count
-		const dx = x - cx
-		const dy = y - cy
-		const d2 = dx * dx + dy * dy || 0.01
-		// Barnes-Hut criterion: if cell size² is small enough vs distance², treat as one aggregate mass
-		if ( !cell.kids || cell.size * cell.size < THETA2 * d2 ) {
-			const force = ( k2 * cell.count ) / d2
-			out.dx += dx * force
-			out.dy += dy * force
-			return
-		}
-		for ( const kid of cell.kids ) accumulate_repulsion( kid, id, x, y, k2, out )
-	}
-
-	// Velocity-Verlet sim tick — d3-force / ForceAtlas2 style.
-	//   v[i] = ( v[i] + acceleration[i] ) * damping     ← momentum with friction
-	//   p[i] += v[i] * smoothstep_gate                  ← smooth freeze at low speed
-	// Gives Obsidian-style feel on drag: perturbation ripples through edges
-	// and dies via damping. Distant nodes have sub-threshold velocity →
-	// gate closes, no whole-graph shake.
-	// Repulsion via Barnes-Hut quadtree ( O(N log N) instead of naive O(N²) ).
-
-	// Hermite smoothstep — C¹ continuous ramp from 0 at `a` to 1 at `b`.
-	function smoothstep( a: number, b: number, x: number ): number {
-		if ( x <= a ) return 0
-		if ( x >= b ) return 1
-		const t = ( x - a ) / ( b - a )
-		return t * t * ( 3 - 2 * t )
-	}
-
-	export function tick_layout(
-		nodes: GraphNode[],
-		edges: GraphEdge[],
-		positions: Record< string, { x: number, y: number } >,
-		velocities: Record< string, { vx: number, vy: number } >,
-		pinned_id: string,
-		params: LayoutParams,
-	): { positions: Record< string, { x: number, y: number } >, velocities: Record< string, { vx: number, vy: number } > } {
-		const { gravity, force_scale, damping, min_move, max_speed } = params
-		const k = FORCE_K
-		const k2 = k * k
-		const dispX: Record< string, number > = {}
-		const dispY: Record< string, number > = {}
-
-		// Bounds for quadtree — encompass all current node positions
-		let min_x = Infinity, min_y = Infinity, max_x = -Infinity, max_y = -Infinity
-		for ( const n of nodes ) {
-			const p = positions[ n.id ]
-			if ( p.x < min_x ) min_x = p.x
-			if ( p.y < min_y ) min_y = p.y
-			if ( p.x > max_x ) max_x = p.x
-			if ( p.y > max_y ) max_y = p.y
-		}
-		const size = Math.max( max_x - min_x, max_y - min_y ) + 1
-		const cx = ( min_x + max_x ) / 2
-		const cy = ( min_y + max_y ) / 2
-		const root = make_cell( cx - size / 2, cy - size / 2, size )
-		for ( const n of nodes ) {
-			const p = positions[ n.id ]
-			insert( root, { id: n.id, x: p.x, y: p.y }, 0 )
-		}
-
-		// Repulsion — Barnes-Hut walk per node
-		for ( const n of nodes ) {
-			const p = positions[ n.id ]
-			const out = { dx: 0, dy: 0 }
-			accumulate_repulsion( root, n.id, p.x, p.y, k2, out )
-			dispX[ n.id ] = out.dx
-			dispY[ n.id ] = out.dy
-		}
-		// Attraction — exact, O(E)
-		for ( const e of edges ) {
-			const dx = positions[ e.source ].x - positions[ e.target ].x
-			const dy = positions[ e.source ].y - positions[ e.target ].y
-			const dist = Math.sqrt( dx * dx + dy * dy ) || 0.01
-			const force = ( dist * dist ) / k * e.strength
-			const fx = ( dx / dist ) * force
-			const fy = ( dy / dist ) * force
-			dispX[ e.source ] -= fx; dispY[ e.source ] -= fy
-			dispX[ e.target ] += fx; dispY[ e.target ] += fy
-		}
-		// Gravity — soft radial pull toward origin
-		for ( const n of nodes ) {
-			const p = positions[ n.id ]
-			dispX[ n.id ] -= p.x * gravity * k
-			dispY[ n.id ] -= p.y * gravity * k
-		}
-
-		// Integrate: velocities accumulate + damp; position moves via smooth freeze gate.
-		// No hard cutoffs — both the speed ceiling and freeze use C¹-continuous ramps
-		// so nodes decelerate/stop imperceptibly instead of snapping.
-		const next_pos: Record< string, { x: number, y: number } > = {}
-		const next_vel: Record< string, { vx: number, vy: number } > = {}
-		for ( const n of nodes ) {
-			if ( n.id === pinned_id ) {
-				next_pos[ n.id ] = positions[ n.id ]
-				next_vel[ n.id ] = { vx: 0, vy: 0 }
-				continue
-			}
-			const prev = velocities[ n.id ] || { vx: 0, vy: 0 }
-			let vx = ( prev.vx + dispX[ n.id ] * force_scale ) * damping
-			let vy = ( prev.vy + dispY[ n.id ] * force_scale ) * damping
-			const speed = Math.sqrt( vx * vx + vy * vy )
-			// Soft speed cap: tanh saturation. Below cap almost no effect,
-			// above cap velocity asymptotically bounded to max_speed.
-			if ( speed > 0 ) {
-				const cap_scale = max_speed * Math.tanh( speed / max_speed ) / speed
-				vx *= cap_scale
-				vy *= cap_scale
-			}
-			// Soft freeze gate: position change fades smoothly to zero as velocity
-			// drops below min_move. No visual snap-to-stop. Velocity itself
-			// keeps damping toward zero so eventually gate*v goes to zero too.
-			const gate = smoothstep( min_move * 0.3, min_move * 1.5, speed )
-			next_pos[ n.id ] = { x: positions[ n.id ].x + vx * gate, y: positions[ n.id ].y + vy * gate }
-			next_vel[ n.id ] = { vx, vy }
-		}
-		return { positions: next_pos, velocities: next_vel }
-	}
-
-	// Initial random positions from mock — no synchronous FR pre-compute.
-	// The view auto-starts a live sim that visibly settles the graph
-	// ( Obsidian-style spring-in ).
-	export function build_initial_positions( nodes: GraphNode[], _edges: GraphEdge[] ): Record< string, { x: number, y: number } > {
-		const positions: Record< string, { x: number, y: number } > = {}
-		for ( const n of nodes ) positions[ n.id ] = { x: n.x, y: n.y }
-		return positions
-	}
+	// Local type aliases — view code reads better with short names,
+	// while shared identifiers live in `types.ts` under `$raggu_web_front_explorer_forcegraph_*`.
+	type GraphNode = $raggu_web_front_explorer_forcegraph_node
+	type GraphEdge = $raggu_web_front_explorer_forcegraph_edge
+	type LayoutParams = $raggu_web_front_explorer_forcegraph_layout_params
 
 	export class $raggu_web_front_explorer_forcegraph extends $.$raggu_web_front_explorer_forcegraph {
+
+		// Typed accessors over view.tree's `nodes /` and `edges /` — parents
+		// (explorer / demo) feed them via `nodes <= ...` bindings.
+		override nodes(): readonly GraphNode[] {
+			return super.nodes() as readonly GraphNode[]
+		}
+		override edges(): readonly GraphEdge[] {
+			return super.edges() as readonly GraphEdge[]
+		}
 
 		// Plain non-reactive field overriding the auto-gen @$mol_mem drag_id.
 		// The mem-cell version got invalidated between event-handler fibers
@@ -420,40 +161,16 @@ namespace $.$$ {
 			return { x: local.x, y: local.y }
 		}
 
-		// Node count via URL arg `graph_n` — e.g. `#!screen=explorer/graph_n=500`.
-		// Round-trips like other app args (null when default → removed from URL).
-		@$mol_mem
-		graph_n( next?: number ) {
-			const arg = this.$.$mol_state_arg
-			const fallback = 80
-			if ( next === undefined ) {
-				const raw = arg.value( 'graph_n' )
-				const parsed = raw ? Number( raw ) : 0
-				return parsed > 0 ? parsed : fallback
-			}
-			arg.value( 'graph_n', next === fallback ? null : String( next ) )
-			return next
-		}
-
-		@$mol_mem
-		mock(): { nodes: GraphNode[], edges: GraphEdge[] } {
-			const n = this.graph_n()
-			return build_mock( 42, n, Math.round( n * 1.6 ) )
-		}
-
-		nodes() { return this.mock().nodes }
-		edges() { return this.mock().edges }
-
 		// Lazily-computed initial FR layout — memoized so first render already shows
 		// nodes settled into the circular bound, not the raw square mock coords.
 		@$mol_mem
 		initial_positions(): Record< string, { x: number, y: number } > {
-			return build_initial_positions( this.nodes(), this.edges() )
+			return $raggu_web_front_explorer_forcegraph_initial_positions( this.nodes() as GraphNode[] )
 		}
 
 		// Seed positions on first read, or re-seed when the node set changes
-		// ( e.g. graph_n slider moved ) — old cell may still hold coords for a
-		// different number of nodes.
+		// (e.g. dataset switched, new fetch result arrived) — old cell may still
+		// hold coords for a different set of nodes.
 		ensure_positions(): Record< string, { x: number, y: number } > {
 			let p = this.positions()
 			const nodes = this.nodes()
@@ -484,7 +201,14 @@ namespace $.$$ {
 		@$mol_action
 		tick() {
 			const positions = this.ensure_positions()
-			const next = tick_layout( this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), this.layout_params() )
+			const next = $raggu_web_front_explorer_forcegraph_tick_layout(
+				this.nodes() as GraphNode[],
+				this.edges() as GraphEdge[],
+				positions,
+				this.velocities,
+				this.drag_id(),
+				this.layout_params(),
+			)
 			this.velocities = next.velocities
 			this.positions( next.positions )
 		}
@@ -521,7 +245,7 @@ namespace $.$$ {
 
 		// Reactive kick — reading every tunable param here means the mem cell
 		// invalidates whenever any of them changes. dom_tree reads it below,
-		// so slider tweaks (and graph_n rebuilds) restart the sim automatically.
+		// so slider tweaks (and dataset switches) restart the sim automatically.
 		@$mol_mem
 		params_kick(): null {
 			// Register deps on all sim inputs
@@ -530,7 +254,7 @@ namespace $.$$ {
 			this.damping()
 			this.min_move()
 			this.max_speed()
-			this.graph_n()
+			this.nodes()   // rebuild sim on new graph
 			// Idempotent: re-arms frame budget; starts loop if it was stopped
 			this.start_sim( this.SIM_DRAG_FRAMES )
 			return null
@@ -588,7 +312,9 @@ namespace $.$$ {
 		node_radius( id: string ) {
 			return String( this.node_radius_num( id ) )
 		}
-		node_color( id: string ) { return TYPE_COLOR[ this.node_by_id()[ id ].type ] }
+		node_color( id: string ) {
+			return $raggu_web_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
+		}
 		node_stroke( id: string ) {
 			if ( this.selected_id() === id ) return '#ffffff'
 			if ( this.hovered_id() === id ) return '#ffffff'
@@ -681,7 +407,7 @@ namespace $.$$ {
 
 		tooltip_text() {
 			const id = this.active_id()
-			return id ? this.node_by_id()[ id ].label : ''
+			return id ? this.node_by_id()[ id ]?.label ?? '' : ''
 		}
 
 		tooltip_font_size() {
@@ -730,7 +456,9 @@ namespace $.$$ {
 
 		selected_color() {
 			const n = this.selected_node()
-			return n ? TYPE_COLOR[ n.type ] : TYPE_COLOR.WORK
+			return n
+				? $raggu_web_front_explorer_forcegraph_type_color[ n.type ]
+				: $raggu_web_front_explorer_forcegraph_type_color.WORK
 		}
 
 		// Edges incident to selected node, with the OTHER node's label
@@ -742,7 +470,7 @@ namespace $.$$ {
 				.filter( e => e.source === id || e.target === id )
 				.map( e => {
 					const other_id = e.source === id ? e.target : e.source
-					return { relation: e.relation, target_label: idx[ other_id ].label }
+					return { relation: e.relation, target_label: idx[ other_id ]?.label ?? other_id }
 				} )
 		}
 
