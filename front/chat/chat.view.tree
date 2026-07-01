@@ -94,6 +94,7 @@ $raggu_web_front_chat $bog_builderui_div
 		<= Body $mol_scroll
 			sub /
 				<= Messages $mol_list rows <= rows
+				<= Status $mol_status status <= communication null
 		<= Footer $bog_builderui_div sub /
 			<= Suggestions $bog_builderui_div sub /
 				<= Sug_one $bog_builderui_div

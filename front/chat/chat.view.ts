@@ -106,13 +106,9 @@ namespace $.$$ {
 		override prompt_submit() {
 			const text = this.prompt_text().trim()
 			if( !text ) return null
-			const next: Raggu_chat_item[] = [ ... this.history(), { role: 'user', text } ]
-			this.history( next )
+			this.history( [ ... this.history(), { role: 'user', text } ] )
 			this.prompt_text( '' )
-			if( this.mode() === 'llm' ) {
-				// Real LLM через $mol_github_model — асинхронно, оборачиваем в fiber
-				$mol_wire_async( this ).llm_reply( text )
-			} else {
+			if( this.mode() !== 'llm' ) {
 				// Мок для search-режимов
 				const mock = `${ this.mock_prefix_text() } "${ text }". ${ this.mock_suffix_text() }`
 				setTimeout( () => {
@@ -123,17 +119,37 @@ namespace $.$$ {
 			return null
 		}
 
-		@ $mol_action
-		llm_reply( text: string ) {
+		// Реактивный LLM-роутер по паттерну $giper_bot.communication.
+		// Срабатывает когда история заканчивается на user-сообщение и режим llm.
+		// $mol_promise_like → перебрасываем suspension обратно в wire для retry.
+		// $mol_fail_log → реальную ошибку логируем И кладём в чат как assistant-сообщение,
+		// чтобы юзер увидел причину (429 rate-limit, 400 bad request, network).
+		@ $mol_mem
+		communication() {
+			const history = this.history()
+			if( history.length === 0 ) return
+			const last = history[ history.length - 1 ]
+			if( last.role !== 'user' ) return
+			if( this.mode() !== 'llm' ) return
+
 			const model = this.llm().fork()
-			model.ask( [ text ] )
-			const resp = model.response() as { reply?: string } | string | null
-			const reply =
-				typeof resp === 'string' ? resp
-				: resp?.reply ?? JSON.stringify( resp, null, 2 )
-			this.history( [ ... this.history(), { role: 'assistant', text: reply } ] )
-			return null
+			for( const item of history ) {
+				if( item.role === 'user' ) model.ask( [ item.text ] )
+				else model.tell( [ item.text ] )
+			}
+
+			try {
+				const resp = model.response() as { reply?: string } | string
+				const reply = typeof resp === 'string' ? resp : resp?.reply ?? JSON.stringify( resp, null, 2 )
+				this.history( [ ... history, { role: 'assistant', text: reply } ] )
+			} catch( error: any ) {
+				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
+				if( $mol_fail_log( error ) ) {
+					this.history( [ ... history, { role: 'assistant', text: '📛 ' + ( error.message || String( error ) ) } ] )
+				}
+			}
 		}
+
 
 		@ $mol_action
 		override use_sug_one() {
