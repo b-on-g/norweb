@@ -1,7 +1,7 @@
 /** @see $bog_builderui_tokens */
 namespace $ {
 
-	const mode_pill_inactive = {
+	const mode_pill = {
 		background: { color: $bog_builderui_tokens.field },
 		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
 		padding: {
@@ -12,6 +12,16 @@ namespace $ {
 		},
 		font: { size: '11px', weight: 600 },
 		color: $bog_builderui_tokens.shade,
+		cursor: 'pointer',
+		'@': {
+			raggu_chat_mode_active: {
+				true: {
+					background: { color: $bog_builderui_tokens.current },
+					color: '#ffffff',
+					border: { color: $bog_builderui_tokens.current },
+				},
+			},
+		},
 	} as const
 
 	const chip = {
@@ -86,21 +96,11 @@ namespace $ {
 			flex: { direction: 'row' },
 			gap: '5px',
 		},
-		Mode_local: {
-			background: { color: $bog_builderui_tokens.current },
-			color: '#ffffff',
-			border: { radius: '6px' },
-			padding: {
-				top: '5px',
-				bottom: '5px',
-				left: '10px',
-				right: '10px',
-			},
-			font: { size: '11px', weight: 600 },
-		},
-		Mode_global: mode_pill_inactive,
-		Mode_mix: mode_pill_inactive,
-		Mode_plan: mode_pill_inactive,
+		Mode_llm: mode_pill,
+		Mode_local: mode_pill,
+		Mode_global: mode_pill,
+		Mode_mix: mode_pill,
+		Mode_plan: mode_pill,
 
 		Clear: {
 			marginLeft: 'auto',

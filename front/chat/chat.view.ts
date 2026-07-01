@@ -24,6 +24,28 @@ namespace $.$$ {
 			return this.$.$mol_state_session.value( '$raggu_web_front_chat.prompt_text', next ) ?? ''
 		}
 
+		@ $mol_mem
+		override mode( next?: string ): string {
+			return this.$.$mol_state_session.value( '$raggu_web_front_chat.mode', next ) ?? 'llm'
+		}
+
+		is_llm() { return this.mode() === 'llm' }
+		is_local() { return this.mode() === 'local' }
+		is_global() { return this.mode() === 'global' }
+		is_mix() { return this.mode() === 'mix' }
+		is_plan() { return this.mode() === 'plan' }
+
+		@ $mol_action override select_llm() { this.mode( 'llm' ); return null }
+		@ $mol_action override select_local() { this.mode( 'local' ); return null }
+		@ $mol_action override select_global() { this.mode( 'global' ); return null }
+		@ $mol_action override select_mix() { this.mode( 'mix' ); return null }
+		@ $mol_action override select_plan() { this.mode( 'plan' ); return null }
+
+		@ $mol_mem
+		llm() {
+			return $mol_github_model.make({ $: this.$ })
+		}
+
 		override rows() {
 			return this.history().map( ( _, i ) => this.Message( i ) )
 		}
@@ -69,11 +91,27 @@ namespace $.$$ {
 			const next: Raggu_chat_item[] = [ ... this.history(), { role: 'user', text } ]
 			this.history( next )
 			this.prompt_text( '' )
-			const mock = `${ this.mock_prefix_text() } "${ text }". ${ this.mock_suffix_text() }`
-			setTimeout( () => {
-				const cur = this.history()
-				this.history( [ ... cur, { role: 'assistant', text: mock, trace: true } ] )
-			}, 500 )
+			if( this.mode() === 'llm' ) {
+				// Real LLM через $mol_github_model — асинхронно, оборачиваем в fiber
+				$mol_wire_async( this ).llm_reply( text )
+			} else {
+				// Мок для search-режимов
+				const mock = `${ this.mock_prefix_text() } "${ text }". ${ this.mock_suffix_text() }`
+				setTimeout( () => {
+					const cur = this.history()
+					this.history( [ ... cur, { role: 'assistant', text: mock, trace: true } ] )
+				}, 500 )
+			}
+			return null
+		}
+
+		@ $mol_action
+		llm_reply( text: string ) {
+			const model = this.llm().fork()
+			model.ask( [ text ] )
+			const resp = model.response()
+			const reply = typeof resp === 'string' ? resp : JSON.stringify( resp, null, 2 )
+			this.history( [ ... this.history(), { role: 'assistant', text: reply } ] )
 			return null
 		}
 
