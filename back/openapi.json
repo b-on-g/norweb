@@ -13,7 +13,7 @@
           "System"
         ],
         "summary": "Service health check",
-        "operationId": "health_api_v1_health_get",
+        "operationId": "health",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -34,7 +34,7 @@
           "System"
         ],
         "summary": "Runtime feature flags",
-        "operationId": "capabilities_api_v1_capabilities_get",
+        "operationId": "capabilities",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -55,7 +55,7 @@
           "Datasets"
         ],
         "summary": "List preindexed datasets",
-        "operationId": "list_datasets_api_v1_datasets_get",
+        "operationId": "list_datasets",
         "parameters": [
           {
             "name": "locale",
@@ -84,7 +84,7 @@
                   "items": {
                     "$ref": "#/components/schemas/DatasetCard"
                   },
-                  "title": "Response List Datasets Api V1 Datasets Get"
+                  "title": "Response List Datasets"
                 }
               }
             }
@@ -118,7 +118,7 @@
           "Datasets"
         ],
         "summary": "Get dataset details",
-        "operationId": "get_dataset_api_v1_datasets__dataset_id__get",
+        "operationId": "get_dataset",
         "parameters": [
           {
             "name": "dataset_id",
@@ -186,7 +186,7 @@
           "Graph Explorer"
         ],
         "summary": "Get graph node-link data",
-        "operationId": "get_graph_api_v1_datasets__dataset_id__graph_get",
+        "operationId": "get_graph",
         "parameters": [
           {
             "name": "dataset_id",
@@ -358,7 +358,7 @@
           "Graph Explorer"
         ],
         "summary": "Get entity card data",
-        "operationId": "get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get",
+        "operationId": "get_node",
         "parameters": [
           {
             "name": "dataset_id",
@@ -419,7 +419,7 @@
           "Graph Explorer"
         ],
         "summary": "Get a node neighborhood subgraph",
-        "operationId": "get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get",
+        "operationId": "get_node_neighbors",
         "parameters": [
           {
             "name": "dataset_id",
@@ -516,7 +516,7 @@
           "Graph Explorer"
         ],
         "summary": "List graph communities",
-        "operationId": "get_communities_api_v1_datasets__dataset_id__graph_communities_get",
+        "operationId": "get_communities",
         "parameters": [
           {
             "name": "dataset_id",
@@ -568,7 +568,7 @@
           "Agent"
         ],
         "summary": "Ask a question over a dataset graph",
-        "operationId": "create_agent_message_api_v1_datasets__dataset_id__agent_messages_post",
+        "operationId": "create_agent_message",
         "parameters": [
           {
             "name": "dataset_id",
@@ -630,7 +630,7 @@
           "Agent"
         ],
         "summary": "Get dataset-specific starter questions",
-        "operationId": "get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get",
+        "operationId": "get_agent_suggestions",
         "parameters": [
           {
             "name": "dataset_id",

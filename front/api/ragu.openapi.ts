@@ -13,7 +13,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Service health check */
-	        get: operations["health_api_v1_health_get"];
+	        get: operations["health"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -30,7 +30,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Runtime feature flags */
-	        get: operations["capabilities_api_v1_capabilities_get"];
+	        get: operations["capabilities"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -47,7 +47,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** List preindexed datasets */
-	        get: operations["list_datasets_api_v1_datasets_get"];
+	        get: operations["list_datasets"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -64,7 +64,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Get dataset details */
-	        get: operations["get_dataset_api_v1_datasets__dataset_id__get"];
+	        get: operations["get_dataset"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -81,7 +81,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Get graph node-link data */
-	        get: operations["get_graph_api_v1_datasets__dataset_id__graph_get"];
+	        get: operations["get_graph"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -98,7 +98,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Get entity card data */
-	        get: operations["get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get"];
+	        get: operations["get_node"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -115,7 +115,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Get a node neighborhood subgraph */
-	        get: operations["get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get"];
+	        get: operations["get_node_neighbors"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -132,7 +132,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** List graph communities */
-	        get: operations["get_communities_api_v1_datasets__dataset_id__graph_communities_get"];
+	        get: operations["get_communities"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -151,7 +151,7 @@ namespace $.$raggu_web_front_api_ragu {
 	        get?: never;
 	        put?: never;
 	        /** Ask a question over a dataset graph */
-	        post: operations["create_agent_message_api_v1_datasets__dataset_id__agent_messages_post"];
+	        post: operations["create_agent_message"];
 	        delete?: never;
 	        options?: never;
 	        head?: never;
@@ -166,7 +166,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            cookie?: never;
 	        };
 	        /** Get dataset-specific starter questions */
-	        get: operations["get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get"];
+	        get: operations["get_agent_suggestions"];
 	        put?: never;
 	        post?: never;
 	        delete?: never;
@@ -812,9 +812,9 @@ namespace $.$raggu_web_front_api_ragu {
 	    headers: never;
 	    pathItems: never;
 	}
-	export type $defs = Record<string, never>;
+	export type defs = Record<string, never>;
 	export interface operations {
-	    health_api_v1_health_get: {
+	    health: {
 	        parameters: {
 	            query?: never;
 	            header?: never;
@@ -834,7 +834,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    capabilities_api_v1_capabilities_get: {
+	    capabilities: {
 	        parameters: {
 	            query?: never;
 	            header?: never;
@@ -854,7 +854,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    list_datasets_api_v1_datasets_get: {
+	    list_datasets: {
 	        parameters: {
 	            query?: {
 	                /** @description Response locale. */
@@ -895,7 +895,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_dataset_api_v1_datasets__dataset_id__get: {
+	    get_dataset: {
 	        parameters: {
 	            query?: {
 	                /** @description Response locale. */
@@ -938,7 +938,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_graph_api_v1_datasets__dataset_id__graph_get: {
+	    get_graph: {
 	        parameters: {
 	            query?: {
 	                limit?: number;
@@ -985,7 +985,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get: {
+	    get_node: {
 	        parameters: {
 	            query?: never;
 	            header?: never;
@@ -1026,7 +1026,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get: {
+	    get_node_neighbors: {
 	        parameters: {
 	            query?: {
 	                depth?: number;
@@ -1071,7 +1071,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_communities_api_v1_datasets__dataset_id__graph_communities_get: {
+	    get_communities: {
 	        parameters: {
 	            query?: never;
 	            header?: never;
@@ -1111,7 +1111,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    create_agent_message_api_v1_datasets__dataset_id__agent_messages_post: {
+	    create_agent_message: {
 	        parameters: {
 	            query?: never;
 	            header?: never;
@@ -1155,7 +1155,7 @@ namespace $.$raggu_web_front_api_ragu {
 	            };
 	        };
 	    };
-	    get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get: {
+	    get_agent_suggestions: {
 	        parameters: {
 	            query?: {
 	                /** @description Response locale. */
@@ -1202,84 +1202,84 @@ namespace $.$raggu_web_front_api_ragu {
 }
 
 namespace $ {
-	export const $raggu_web_front_api_ragu_health_api_v1_health_get = {
+	export const $raggu_web_front_api_ragu_health = {
 		method: "GET",
 		route: "/api/v1/health",
 		params: undefined as undefined,
 		query: undefined as undefined,
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "health_api_v1_health_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "health" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_capabilities_api_v1_capabilities_get = {
+	export const $raggu_web_front_api_ragu_capabilities = {
 		method: "GET",
 		route: "/api/v1/capabilities",
 		params: undefined as undefined,
 		query: undefined as undefined,
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "capabilities_api_v1_capabilities_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "capabilities" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_list_datasets_api_v1_datasets_get = {
+	export const $raggu_web_front_api_ragu_list_datasets = {
 		method: "GET",
 		route: "/api/v1/datasets",
 		params: undefined as undefined,
-		query: {} as $raggu_web_front_api_ragu.operations[ "list_datasets_api_v1_datasets_get" ][ 'parameters' ][ 'query' ],
+		query: {} as $raggu_web_front_api_ragu.operations[ "list_datasets" ][ 'parameters' ][ 'query' ],
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "list_datasets_api_v1_datasets_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "list_datasets" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_dataset_api_v1_datasets__dataset_id__get = {
+	export const $raggu_web_front_api_ragu_get_dataset = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_dataset_api_v1_datasets__dataset_id__get" ][ 'parameters' ][ 'path' ],
-		query: {} as $raggu_web_front_api_ragu.operations[ "get_dataset_api_v1_datasets__dataset_id__get" ][ 'parameters' ][ 'query' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_dataset" ][ 'parameters' ][ 'path' ],
+		query: {} as $raggu_web_front_api_ragu.operations[ "get_dataset" ][ 'parameters' ][ 'query' ],
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_dataset_api_v1_datasets__dataset_id__get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_dataset" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_graph_api_v1_datasets__dataset_id__graph_get = {
+	export const $raggu_web_front_api_ragu_get_graph = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}/graph",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_graph_api_v1_datasets__dataset_id__graph_get" ][ 'parameters' ][ 'path' ],
-		query: {} as $raggu_web_front_api_ragu.operations[ "get_graph_api_v1_datasets__dataset_id__graph_get" ][ 'parameters' ][ 'query' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_graph" ][ 'parameters' ][ 'path' ],
+		query: {} as $raggu_web_front_api_ragu.operations[ "get_graph" ][ 'parameters' ][ 'query' ],
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_graph_api_v1_datasets__dataset_id__graph_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_graph" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get = {
+	export const $raggu_web_front_api_ragu_get_node = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}/graph/nodes/{node_id}",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get" ][ 'parameters' ][ 'path' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_node" ][ 'parameters' ][ 'path' ],
 		query: undefined as undefined,
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_node_api_v1_datasets__dataset_id__graph_nodes__node_id__get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_node" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get = {
+	export const $raggu_web_front_api_ragu_get_node_neighbors = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}/graph/nodes/{node_id}/neighbors",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get" ][ 'parameters' ][ 'path' ],
-		query: {} as $raggu_web_front_api_ragu.operations[ "get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get" ][ 'parameters' ][ 'query' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_node_neighbors" ][ 'parameters' ][ 'path' ],
+		query: {} as $raggu_web_front_api_ragu.operations[ "get_node_neighbors" ][ 'parameters' ][ 'query' ],
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_node_neighbors_api_v1_datasets__dataset_id__graph_nodes__node_id__neighbors_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_node_neighbors" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_communities_api_v1_datasets__dataset_id__graph_communities_get = {
+	export const $raggu_web_front_api_ragu_get_communities = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}/graph/communities",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_communities_api_v1_datasets__dataset_id__graph_communities_get" ][ 'parameters' ][ 'path' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_communities" ][ 'parameters' ][ 'path' ],
 		query: undefined as undefined,
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_communities_api_v1_datasets__dataset_id__graph_communities_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_communities" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_create_agent_message_api_v1_datasets__dataset_id__agent_messages_post = {
+	export const $raggu_web_front_api_ragu_create_agent_message = {
 		method: "POST",
 		route: "/api/v1/datasets/{dataset_id}/agent/messages",
-		params: {} as $raggu_web_front_api_ragu.operations[ "create_agent_message_api_v1_datasets__dataset_id__agent_messages_post" ][ 'parameters' ][ 'path' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "create_agent_message" ][ 'parameters' ][ 'path' ],
 		query: undefined as undefined,
-		body: {} as ( $raggu_web_front_api_ragu.operations[ "create_agent_message_api_v1_datasets__dataset_id__agent_messages_post" ][ 'requestBody' ] extends { content: { 'application/json': infer B } } ? B : unknown ),
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "create_agent_message_api_v1_datasets__dataset_id__agent_messages_post" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		body: {} as ( $raggu_web_front_api_ragu.operations[ "create_agent_message" ][ 'requestBody' ] extends { content: { 'application/json': infer B } } ? B : unknown ),
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "create_agent_message" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
-	export const $raggu_web_front_api_ragu_get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get = {
+	export const $raggu_web_front_api_ragu_get_agent_suggestions = {
 		method: "GET",
 		route: "/api/v1/datasets/{dataset_id}/agent/suggestions",
-		params: {} as $raggu_web_front_api_ragu.operations[ "get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get" ][ 'parameters' ][ 'path' ],
-		query: {} as $raggu_web_front_api_ragu.operations[ "get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get" ][ 'parameters' ][ 'query' ],
+		params: {} as $raggu_web_front_api_ragu.operations[ "get_agent_suggestions" ][ 'parameters' ][ 'path' ],
+		query: {} as $raggu_web_front_api_ragu.operations[ "get_agent_suggestions" ][ 'parameters' ][ 'query' ],
 		body: undefined as undefined,
-		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_agent_suggestions_api_v1_datasets__dataset_id__agent_suggestions_get" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
+		out: {} as NonNullable< $raggu_web_front_api_ragu.operations[ "get_agent_suggestions" ][ 'responses' ][ 200 ] extends { content: { 'application/json': infer R } } ? R : unknown >,
 	}
 }

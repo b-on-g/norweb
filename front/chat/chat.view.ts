@@ -28,6 +28,28 @@ namespace $.$$ {
 			return this.history().map( ( _, i ) => this.Message( i ) )
 		}
 
+		// One-time setup: sticky-to-bottom via MutationObserver.
+		// Fires AFTER browser laid out the new content, so scrollHeight is fresh.
+		// scroll-listener drops the stick flag when user scrolls away from bottom.
+		@ $mol_mem
+		body_autoscroll() {
+			const el = this.Body().dom_node() as HTMLElement
+			let stick = true
+			el.addEventListener( 'scroll', () => {
+				stick = el.scrollHeight - el.scrollTop - el.clientHeight < 32
+			}, { passive: true } )
+			new MutationObserver( () => {
+				if( stick ) el.scrollTop = el.scrollHeight
+			} ).observe( el, { childList: true, subtree: true, characterData: true } )
+			return el
+		}
+
+		@ $mol_mem
+		override sub() {
+			this.body_autoscroll()
+			return super.sub()
+		}
+
 		message_text( index: number ) {
 			return this.history()[ index ]?.text ?? ''
 		}

@@ -427,7 +427,7 @@ namespace $.$$ {
 				settings_open: app.settings_open(),
 			}
 
-			console.log( '▸ ragufront e2e visual demo: start' )
+			// console.log( '▸ ragufront e2e visual demo: start' )
 
 			// await sleep( 1000 )
 			click( app.Sidebar().Nav_explorer(), () => app.Sidebar().click_explorer() )
@@ -451,7 +451,7 @@ namespace $.$$ {
 			app.dataset_id( initial.dataset_id )
 			app.settings_open( initial.settings_open )
 
-			console.log( '✓ ragufront e2e visual demo: done' )
+			// console.log( '✓ ragufront e2e visual demo: done' )
 		}, 2000 )
 	}
 

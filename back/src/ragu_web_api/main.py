@@ -1,8 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.routing import APIRoute
 
 from ragu_web_api import __version__
 from ragu_web_api.routers import api_router
+
+
+# Use the endpoint function name as the OpenAPI operationId so codegen produces
+# short, stable identifiers ( `get_graph` instead of the auto-generated
+# `get_graph_api_v1_datasets__dataset_id__graph_get` ).
+def _short_operation_id(route: APIRoute) -> str:
+    return route.name
 
 
 OPENAPI_TAGS = [
@@ -36,6 +44,7 @@ def create_app() -> FastAPI:
             "flows are intentionally not exposed."
         ),
         openapi_tags=OPENAPI_TAGS,
+        generate_unique_id_function=_short_operation_id,
     )
 
     app.add_middleware(

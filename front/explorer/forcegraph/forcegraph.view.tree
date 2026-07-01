@@ -71,9 +71,8 @@ $raggu_web_front_explorer_forcegraph $mol_svg_root
 						^
 						rx \3
 						ry \3
-						fill \#1c1b1ad9
-						stroke \#5b5bd6
 						stroke-width \1
+						data-forcegraph-tooltip-bg \
 				<= Tooltip_text $mol_svg_text
 					pos_x <= tooltip_x \0
 					pos_y <= tooltip_y \0
@@ -82,6 +81,6 @@ $raggu_web_front_explorer_forcegraph $mol_svg_root
 					text <= tooltip_text \
 					attr *
 						^
-						fill \#ffffff
 						font-size <= tooltip_font_size \11
 						font-weight \600
+						data-forcegraph-tooltip-text \

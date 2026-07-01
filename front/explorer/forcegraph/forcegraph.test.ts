@@ -193,9 +193,9 @@ namespace $.$$ {
 				const tick_ms = ( ( Date.now() - t0 ) / 10 ).toFixed( 2 )
 				results.push( { n, edges: g.edges.length, tick_ms: `${ tick_ms }ms` } )
 			}
-			console.log( '\n[forcegraph STRESS — Barnes-Hut]\n' + results.map( r =>
-				`  n=${ r.n.toString().padStart( 4 ) } edges=${ r.edges.toString().padStart( 5 ) }  tick=${ r.tick_ms.padStart( 8 ) }`
-			).join( '\n' ) + '\n  (60fps budget = 16.67ms/tick)\n' )
+			// console.log( '\n[forcegraph STRESS — Barnes-Hut]\n' + results.map( r =>
+			// 	`  n=${ r.n.toString().padStart( 4 ) } edges=${ r.edges.toString().padStart( 5 ) }  tick=${ r.tick_ms.padStart( 8 ) }`
+			// ).join( '\n' ) + '\n  (60fps budget = 16.67ms/tick)\n' )
 			$mol_assert_equal( results.length, sizes.length )
 		},
 

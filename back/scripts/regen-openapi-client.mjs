@@ -22,10 +22,16 @@ const NS = '$raggu_web_front_api_ragu'
 const spec = JSON.parse( readFileSync( SPEC, 'utf8' ) )
 
 // 1) Types block via openapi-typescript CLI.
-const raw_types = execSync( `npx --yes openapi-typescript "${ SPEC }"`, {
+const raw_types_untidy = execSync( `npx --yes openapi-typescript "${ SPEC }"`, {
 	encoding: 'utf8',
 	cwd: REPO_ROOT,
 } )
+
+// MAM scans identifiers/strings for `$foo` refs and pulls in `foo/foo` as a
+// module. openapi-typescript emits `$defs` (JSON Schema keyword) as a TS
+// type name — strip the `$` so MAM doesn't hunt for a nonexistent `defs`
+// package. Same for any other `$-prefixed` names JSON Schema might inject.
+const raw_types = raw_types_untidy.replace( /\$defs\b/g, 'defs' )
 
 // Indent every non-empty line with a tab and wrap in outer namespace.
 const indented_types = raw_types.split( '\n' ).map( l => l.length ? '\t' + l : l ).join( '\n' )
