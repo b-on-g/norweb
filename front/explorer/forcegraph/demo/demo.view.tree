@@ -1,0 +1,88 @@
+$raggu_web_front_explorer_forcegraph_demo $mol_view
+	graph_n?val +80
+	gravity?val +0.09
+	force_scale?val +0.06
+	damping?val +0.82
+	min_move?val +0.15
+	max_speed?val +12
+	sub /
+		<= Canvas $mol_view
+			sub /
+				<= Graph $raggu_web_front_explorer_forcegraph
+					graph_n <= graph_n
+					gravity <= gravity
+					force_scale <= force_scale
+					damping <= damping
+					min_move <= min_move
+					max_speed <= max_speed
+		<= Panel $mol_view
+			sub /
+				<= Panel_title $mol_view
+					sub / \Physics playground
+				<= Row_n $raggu_web_front_explorer_forcegraph_demo_row
+					label \nodes
+					info \graph size (rebuild on change)
+					step +10
+					value_min +10
+					value_max +2000
+					value?val <=> graph_n?val
+				<= Row_gravity $raggu_web_front_explorer_forcegraph_demo_row
+					label \gravity
+					info \radial pull toward center
+					step +0.005
+					value_min +0
+					value_max +0.3
+					value?val <=> gravity?val
+				<= Row_force $raggu_web_front_explorer_forcegraph_demo_row
+					label \force_scale
+					info \how sharply force becomes velocity
+					step +0.005
+					value_min +0
+					value_max +0.3
+					value?val <=> force_scale?val
+				<= Row_damping $raggu_web_front_explorer_forcegraph_demo_row
+					label \damping
+					info \momentum bleed (higher = springier)
+					step +0.01
+					value_min +0.4
+					value_max +0.98
+					value?val <=> damping?val
+				<= Row_min_move $raggu_web_front_explorer_forcegraph_demo_row
+					label \min_move
+					info \soft freeze gate midpoint
+					step +0.01
+					value_min +0
+					value_max +1
+					value?val <=> min_move?val
+				<= Row_max_speed $raggu_web_front_explorer_forcegraph_demo_row
+					label \max_speed
+					info \tanh-saturated velocity ceiling
+					step +1
+					value_min +1
+					value_max +60
+					value?val <=> max_speed?val
+				<= Reset $mol_button_minor
+					sub /
+						\reset defaults
+					click?event <=> reset?event null
+
+$raggu_web_front_explorer_forcegraph_demo_row $mol_view
+	label \
+	info \
+	step +1
+	value_min +0
+	value_max +100
+	value?val +0
+	sub /
+		<= Row_top $mol_view
+			sub /
+				<= Label $mol_view
+					sub / <= label
+				<= Slider $mol_number
+					value?val <=> value?val
+					hint <= label
+					precision <= step
+					value_min <= value_min
+					value_max <= value_max
+		<= Info $mol_view
+			sub / <= info

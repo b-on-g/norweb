@@ -85,10 +85,16 @@ namespace $.$$ {
 	const FORCE_K = 60
 	const THETA = 0.3   // Barnes-Hut opening angle. Smaller = more accurate, slower
 	const THETA2 = THETA * THETA
-	// Soft radial pull toward origin — replaces the old hard-clamp bounding circle.
-	// Same idea as `gravity` in ForceAtlas2 / d3-force's forceCenter.
-	// Larger → tighter cluster; smaller → looser, may drift far.
-	const GRAVITY = 0.09
+
+	// Tunable physics params — passed into tick_layout every tick.
+	// Defaults come from view.tree; demo playground overrides via bindings.
+	export type LayoutParams = {
+		gravity: number       // radial pull toward origin (ForceAtlas2 `gravity`)
+		force_scale: number   // force → per-tick acceleration factor
+		damping: number       // velocity persistence per tick (0..1, higher = springier)
+		min_move: number      // smooth freeze gate midpoint (px/tick)
+		max_speed: number     // tanh-saturated speed ceiling
+	}
 
 	// --- Barnes-Hut quadtree ------------------------------------------------
 	// Instead of every-pair repulsion ( O(N²) ), aggregate distant groups of
@@ -155,14 +161,11 @@ namespace $.$$ {
 
 	// Velocity-Verlet sim tick — d3-force / ForceAtlas2 style.
 	//   v[i] = ( v[i] + acceleration[i] ) * damping     ← momentum with friction
-	//   p[i] += v[i]  (only if |v| >= MIN_MOVE)         ← threshold cuts jitter
+	//   p[i] += v[i] * smoothstep_gate                  ← smooth freeze at low speed
 	// Gives Obsidian-style feel on drag: perturbation ripples through edges
 	// and dies via damping. Distant nodes have sub-threshold velocity →
-	// freeze completely, no whole-graph shake.
+	// gate closes, no whole-graph shake.
 	// Repulsion via Barnes-Hut quadtree ( O(N log N) instead of naive O(N²) ).
-	const MIN_MOVE = 0.15          // where the soft freeze gate reaches ~half
-	const FORCE_SCALE = 0.06       // force → acceleration scale
-	const MAX_SPEED = 12           // soft velocity ceiling (tanh saturation)
 
 	// Hermite smoothstep — C¹ continuous ramp from 0 at `a` to 1 at `b`.
 	function smoothstep( a: number, b: number, x: number ): number {
@@ -178,8 +181,9 @@ namespace $.$$ {
 		positions: Record< string, { x: number, y: number } >,
 		velocities: Record< string, { vx: number, vy: number } >,
 		pinned_id: string,
-		damping: number,
+		params: LayoutParams,
 	): { positions: Record< string, { x: number, y: number } >, velocities: Record< string, { vx: number, vy: number } > } {
+		const { gravity, force_scale, damping, min_move, max_speed } = params
 		const k = FORCE_K
 		const k2 = k * k
 		const dispX: Record< string, number > = {}
@@ -225,8 +229,8 @@ namespace $.$$ {
 		// Gravity — soft radial pull toward origin
 		for ( const n of nodes ) {
 			const p = positions[ n.id ]
-			dispX[ n.id ] -= p.x * GRAVITY * k
-			dispY[ n.id ] -= p.y * GRAVITY * k
+			dispX[ n.id ] -= p.x * gravity * k
+			dispY[ n.id ] -= p.y * gravity * k
 		}
 
 		// Integrate: velocities accumulate + damp; position moves via smooth freeze gate.
@@ -241,20 +245,20 @@ namespace $.$$ {
 				continue
 			}
 			const prev = velocities[ n.id ] || { vx: 0, vy: 0 }
-			let vx = ( prev.vx + dispX[ n.id ] * FORCE_SCALE ) * damping
-			let vy = ( prev.vy + dispY[ n.id ] * FORCE_SCALE ) * damping
+			let vx = ( prev.vx + dispX[ n.id ] * force_scale ) * damping
+			let vy = ( prev.vy + dispY[ n.id ] * force_scale ) * damping
 			const speed = Math.sqrt( vx * vx + vy * vy )
 			// Soft speed cap: tanh saturation. Below cap almost no effect,
-			// above cap velocity asymptotically bounded to MAX_SPEED.
+			// above cap velocity asymptotically bounded to max_speed.
 			if ( speed > 0 ) {
-				const cap_scale = MAX_SPEED * Math.tanh( speed / MAX_SPEED ) / speed
+				const cap_scale = max_speed * Math.tanh( speed / max_speed ) / speed
 				vx *= cap_scale
 				vy *= cap_scale
 			}
 			// Soft freeze gate: position change fades smoothly to zero as velocity
-			// drops below MIN_MOVE. No visual snap-to-stop. Velocity itself
+			// drops below min_move. No visual snap-to-stop. Velocity itself
 			// keeps damping toward zero so eventually gate*v goes to zero too.
-			const gate = smoothstep( MIN_MOVE * 0.3, MIN_MOVE * 1.5, speed )
+			const gate = smoothstep( min_move * 0.3, min_move * 1.5, speed )
 			next_pos[ n.id ] = { x: positions[ n.id ].x + vx * gate, y: positions[ n.id ].y + vy * gate }
 			next_vel[ n.id ] = { vx, vy }
 		}
@@ -462,13 +466,22 @@ namespace $.$$ {
 		// then die via damping instead of shaking the whole graph each frame.
 		velocities: Record< string, { vx: number, vy: number } > = {}
 
-		// One sim tick. Damping controls how fast momentum bleeds off:
-		//   0.6 → aggressive (settles fast, less overshoot)
-		//   0.85 → springy (Obsidian-ish feel)
+		// Bundle the tunable params ( declared as view.tree props with defaults ).
+		layout_params(): LayoutParams {
+			return {
+				gravity: this.gravity(),
+				force_scale: this.force_scale(),
+				damping: this.damping(),
+				min_move: this.min_move(),
+				max_speed: this.max_speed(),
+			}
+		}
+
+		// One sim tick.
 		@$mol_action
 		tick() {
 			const positions = this.ensure_positions()
-			const next = tick_layout( this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), 0.82 )
+			const next = tick_layout( this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), this.layout_params() )
 			this.velocities = next.velocities
 			this.positions( next.positions )
 		}
