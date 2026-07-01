@@ -5,6 +5,10 @@ $raggu_web_front_app $bog_builderui_div
 	settings_open? false
 	body /
 	lights_mode \light
+	screen_gallery_title @ \Datasets
+	screen_explorer_title @ \Knowledge graph
+	screen_chat_title @ \Chat with agent
+	screen_dashboard_title @ \Dashboard
 	attr *
 		^
 		bog_builderui_lights <= lights_mode
@@ -22,11 +26,14 @@ $raggu_web_front_app $bog_builderui_div
 		<= Sidebar $raggu_web_front_sidebar
 			screen? <=> screen?
 			dataset_id <= dataset_id
+			dataset_title <= dataset_title \
 			Theme_auto <= Theme_auto
 		<= Main $bog_builderui_div sub /
 			<= Topbar $raggu_web_front_topbar
 				screen <= screen
 				dataset_id <= dataset_id
+				dataset_title <= dataset_title \
+				screen_title <= screen_title \
 				preset? <=> preset?
 				open_settings? <=> open_settings? null
 			<= Body $mol_scroll sub <= body

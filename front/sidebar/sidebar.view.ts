@@ -2,10 +2,6 @@ namespace $.$$ {
 
 	export class $raggu_web_front_sidebar extends $.$raggu_web_front_sidebar {
 
-		dataset_name() {
-			return this.$.$mol_locale.text( `$raggu_web_front_app_dataset_${ this.dataset_id() }_title` ) || ''
-		}
-
 		is_gallery() { return this.screen() === 'gallery' }
 		is_explorer() { return this.screen() === 'explorer' }
 		is_chat() { return this.screen() === 'chat' }

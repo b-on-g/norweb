@@ -6,5 +6,8 @@
 	"$raggu_web_front_gallery_uploaded_document_title": "Загруженный документ",
 	"$raggu_web_front_gallery_uploaded_index_title": "Загруженный индекс",
 	"$raggu_web_front_gallery_uploaded_domain": "Пользовательская загрузка",
-	"$raggu_web_front_gallery_uploaded_desc": "Мок-датасет, построенный демо-пайплайном индексации."
+	"$raggu_web_front_gallery_uploaded_desc": "Мок-датасет, построенный демо-пайплайном индексации.",
+	"$raggu_web_front_gallery_dataset_law_title": "Кодексы и законы РФ",
+	"$raggu_web_front_gallery_dataset_law_domain": "Право",
+	"$raggu_web_front_gallery_dataset_law_desc": "Сеть норм, отсылок, органов и понятий российского права."
 }

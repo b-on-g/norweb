@@ -9,13 +9,10 @@ namespace $.$$ {
 		dynamic?: { title: string; domain: string; desc: string }
 	}
 
+	// Только один статичный мок — на нём показываем схему локализации через view.tree @.
+	// Реальные датасеты приходят с бэка через remote_datasets и несут dynamic-строки.
 	const BUILTIN: readonly DatasetStats[] = [
 		{ id: 'law', nodes: '18.4k', edges: '52k', comms: '210' },
-		{ id: 'un', nodes: '9.1k', edges: '27k', comms: '96' },
-		{ id: 'papers', nodes: '1.2k', edges: '3.4k', comms: '24' },
-		{ id: 'medical', nodes: '6.7k', edges: '19k', comms: '71' },
-		{ id: 'wiki', nodes: '2.4k', edges: '7.1k', comms: '38' },
-		{ id: 'own', nodes: '—', edges: '—', comms: '—' },
 	]
 
 	function format_count( n: number ): string {
@@ -81,27 +78,31 @@ namespace $.$$ {
 			return this.datasets().find( d => d.id === id ) ?? BUILTIN[ 0 ]
 		}
 
-		dataset_text( id: string, suffix: string ) {
-			return this.$.$mol_locale.text( `$raggu_web_front_app_dataset_${ id }_${ suffix }` ) || ''
-		}
-
 		card_id( id: string ) { return id }
 
 		card_active( id: string ) { return id === this.dataset_id() }
 
+		// Бэк-датасеты кладут title/domain/desc в dynamic — рендерим напрямую.
+		// Единственный мок 'law' резолвится через @-объявленные строки view.tree.
 		card_title( id: string ) {
 			const ds = this.dataset( id )
-			return ds.dynamic?.title ?? this.dataset_text( id, 'title' )
+			if( ds.dynamic ) return ds.dynamic.title
+			if( id === 'law' ) return this.dataset_law_title()
+			return ''
 		}
 
 		card_domain( id: string ) {
 			const ds = this.dataset( id )
-			return ds.dynamic?.domain ?? this.dataset_text( id, 'domain' )
+			if( ds.dynamic ) return ds.dynamic.domain
+			if( id === 'law' ) return this.dataset_law_domain()
+			return ''
 		}
 
 		card_desc( id: string ) {
 			const ds = this.dataset( id )
-			return ds.dynamic?.desc ?? this.dataset_text( id, 'desc' )
+			if( ds.dynamic ) return ds.dynamic.desc
+			if( id === 'law' ) return this.dataset_law_desc()
+			return ''
 		}
 
 		card_nodes( id: string ) { return this.dataset( id ).nodes }

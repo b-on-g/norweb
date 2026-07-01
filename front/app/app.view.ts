@@ -37,6 +37,22 @@ namespace $.$$ {
 			return null
 		}
 
+		screen_title() {
+			switch( this.screen() ) {
+				case 'gallery': return this.screen_gallery_title()
+				case 'explorer': return this.screen_explorer_title()
+				case 'chat': return this.screen_chat_title()
+				case 'dashboard': return this.screen_dashboard_title()
+			}
+			return ''
+		}
+
+		dataset_title() {
+			const id = this.dataset_id()
+			if( !id ) return ''
+			return this.Gallery().card_title( id )
+		}
+
 		arg_value( key: string, next: string | undefined, fallback: string ) {
 			const arg = this.$.$mol_state_arg
 			if ( next === undefined ) return arg.value( key ) ?? fallback

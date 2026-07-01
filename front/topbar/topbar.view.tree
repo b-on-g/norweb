@@ -1,6 +1,8 @@
 $raggu_web_front_topbar $bog_builderui_div
 	screen \gallery
 	dataset_id \wiki
+	dataset_title \
+	screen_title \
 	preset? \demo
 	open_settings? null
 	preset_label_text @ \Preset
@@ -10,8 +12,8 @@ $raggu_web_front_topbar $bog_builderui_div
 	preset_demo_label @ \🎬 Demo
 	sub /
 		<= Title_block $bog_builderui_div sub /
-			<= Title $bog_builderui_div sub / <= screen_title \
-			<= Subtitle $bog_builderui_div sub / <= dataset_name \
+			<= Title $bog_builderui_div sub / <= screen_title
+			<= Subtitle $bog_builderui_div sub / <= dataset_title
 		<= Spacer $bog_builderui_div
 		<= Preset_label $bog_builderui_div sub / <= preset_label_text
 		<= Preset_group $bog_builderui_div sub /
