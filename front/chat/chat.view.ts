@@ -76,7 +76,15 @@ namespace $.$$ {
 		}
 
 		message_with_trace( index: number ) {
-			return Boolean( this.history()[ index ]?.trace )
+			return index % 2 !== 0
+		}
+
+		// Условный рендер trace-блока: чётные индексы (user) без trace, нечётные (assistant) с trace.
+		// Возвращаем null → mol_view.render() пропускает пустой child в sub-массиве.
+		@ $mol_mem_key
+		override Message_trace( index: number ): any {
+			if( !this.message_with_trace( index ) ) return null
+			return super.Message_trace( index )
 		}
 
 		@ $mol_mem_key

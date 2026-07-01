@@ -233,13 +233,6 @@ namespace $ {
 			background: { color: $bog_builderui_tokens.back },
 			overflow: 'hidden',
 			flex: { direction: 'column' },
-			'@': {
-				raggu_visible: {
-					false: {
-						display: 'none',
-					},
-				},
-			},
 		},
 		Message_trace_head: {
 			flex: { direction: 'row' },
