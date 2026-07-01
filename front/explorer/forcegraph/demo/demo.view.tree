@@ -8,6 +8,8 @@ $raggu_web_front_explorer_forcegraph_demo $mol_example_small
 	damping?val +0.82
 	min_move?val +0.15
 	max_speed?val +12
+	node_size_base?val +4
+	node_size_growth?val +0.7
 	sub /
 		<= Canvas $mol_view
 			sub /
@@ -18,6 +20,8 @@ $raggu_web_front_explorer_forcegraph_demo $mol_example_small
 					damping <= damping
 					min_move <= min_move
 					max_speed <= max_speed
+					node_size_base <= node_size_base
+					node_size_growth <= node_size_growth
 		<= Panel $mol_view
 			sub /
 				<= Panel_title $mol_view
@@ -64,6 +68,20 @@ $raggu_web_front_explorer_forcegraph_demo $mol_example_small
 					value_min +1
 					value_max +60
 					value?val <=> max_speed?val
+				<= Row_size_base $raggu_web_front_explorer_forcegraph_demo_row
+					label \node_size_base
+					info \base radius (px), 0 degree
+					step +0.5
+					value_min +1
+					value_max +20
+					value?val <=> node_size_base?val
+				<= Row_size_growth $raggu_web_front_explorer_forcegraph_demo_row
+					label \node_size_growth
+					info \radius added per connection
+					step +0.1
+					value_min +0
+					value_max +5
+					value?val <=> node_size_growth?val
 				<= Reset $mol_button_minor
 					sub /
 						\reset defaults
