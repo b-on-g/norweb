@@ -1,12 +1,4 @@
 {
 	"$raggu_web_front_export_export_btn_text": "↓ Экспорт",
-	"$raggu_web_front_export_empty_text": "Нечего экспортировать",
-	"$raggu_web_front_export_fmt_graphml": "GraphML (.xml)",
-	"$raggu_web_front_export_fmt_gexf": "GEXF (.gexf)",
-	"$raggu_web_front_export_fmt_json_graph": "JSON (.json)",
-	"$raggu_web_front_export_fmt_png_graph": "PNG (.png)",
-	"$raggu_web_front_export_fmt_md_chat": "Markdown (.md)",
-	"$raggu_web_front_export_fmt_json_chat": "JSON (.json)",
-	"$raggu_web_front_export_fmt_csv_dash": "CSV (.csv)",
-	"$raggu_web_front_export_fmt_json_dash": "JSON (.json)"
+	"$raggu_web_front_export_empty_text": "Нечего экспортировать"
 }
