@@ -45,10 +45,9 @@ namespace $.$$ {
 			return next ?? []
 		}
 
-		// URL flag `?mock=1` (or node/jsdom test/prerender env — no live backend) → BUILTIN.
+		// URL flag `?mock=1` → BUILTIN.
 		mock_flag(): boolean {
-			if ( this.$.$mol_state_arg.value( 'mock' ) === '1' ) return true
-			return typeof process !== 'undefined' && !!( process as any ).versions?.node
+			return this.$.$mol_state_arg.value( 'mock' ) === '1'
 		}
 
 		// Reactive fetch of preindexed datasets. Any transport error propagates
