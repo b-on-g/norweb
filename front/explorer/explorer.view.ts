@@ -8,10 +8,11 @@ namespace $.$$ {
 
 	export class $raggu_web_front_explorer extends $.$raggu_web_front_explorer {
 
-		// URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo
-		// and jsdom tests where no live backend is available.
+		// URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo.
+		// Also auto-mock in node/jsdom test/prerender env where no live backend is available.
 		mock_flag(): boolean {
-			return this.$.$mol_state_arg.value( 'mock' ) === '1'
+			if ( this.$.$mol_state_arg.value( 'mock' ) === '1' ) return true
+			return typeof process !== 'undefined' && !!( process as any ).versions?.node
 		}
 
 		// Reactive live fetch. Any transport error propagates via $mol_wire so
