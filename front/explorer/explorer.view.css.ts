@@ -64,7 +64,7 @@ namespace $ {
 		Canvas: {
 			flex: { grow: 1, shrink: 1, direction: 'column' },
 			position: 'relative',
-			background: { color: '#1c1b1a' },
+			background: { color: $bog_builderui_tokens.back },
 			minWidth: 0,
 		},
 		Canvas_bg: {
