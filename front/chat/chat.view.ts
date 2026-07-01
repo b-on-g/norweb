@@ -31,26 +31,7 @@ namespace $.$$ {
 		override dom_tree( next?: Element ): Element {
 			const node = super.dom_tree( next )
 			const body = this.Body().dom_node() as HTMLElement
-
-			// walk up to find who ACTUALLY has scrollbar
-			const chain: string[] = []
-			let cur: HTMLElement | null = body
-			while( cur ) {
-				const overflows = cur.scrollHeight > cur.clientHeight + 1
-				const cs = getComputedStyle( cur )
-				chain.push(
-					`${ cur.tagName }#${ cur.id || '-' }.${ cur.getAttribute( 'mol_view_class' )?.split( ' ' )[ 0 ] || '?' } `
-					+ `sH=${ cur.scrollHeight } cH=${ cur.clientHeight } sT=${ cur.scrollTop } `
-					+ `overflow=${ cs.overflowY } scrolls=${ overflows }`
-				)
-				cur = cur.parentElement
-				if( chain.length > 6 ) break
-			}
-			console.log( '[chat scroll] history len=', this.history().length, '\n' + chain.join( '\n' ) )
-
 			this.Body().scroll_top( body.scrollHeight )
-			console.log( '[chat scroll] after scroll_top: sT=', body.scrollTop, 'max=', body.scrollHeight - body.clientHeight )
-
 			return node
 		}
 
@@ -68,9 +49,6 @@ namespace $.$$ {
 
 		@ $mol_action
 		override prompt_submit() {
-			const body = this.Body().dom_node() as HTMLElement
-			console.log(body.scrollHeight)
-
 			const text = this.prompt_text().trim()
 			if( !text ) return null
 			const next: Raggu_chat_item[] = [ ... this.history(), { role: 'user', text } ]
@@ -82,7 +60,6 @@ namespace $.$$ {
 				this.history( [ ... cur, { role: 'assistant', text: mock, trace: true } ] )
 			}, 500 )
 			return null
-			
 		}
 
 		@ $mol_action
