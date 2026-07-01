@@ -314,12 +314,19 @@ namespace $.$$ {
 		nodes() { return this.mock().nodes }
 		edges() { return this.mock().edges }
 
-		// Initial positions seeded by full FR layout. Stored back into positions cell
-		// on first access — subsequent ticks mutate positions live.
+		// Lazily-computed initial FR layout — memoized so first render already shows
+		// nodes settled into the circular bound, not the raw square mock coords.
+		@$mol_mem
+		initial_positions(): Record< string, { x: number, y: number } > {
+			return build_initial_positions( this.nodes(), this.edges() )
+		}
+
+		// Called by pan_start / tick_layout to make sure positions cell is populated
+		// before we start mutating it live.
 		ensure_positions(): Record< string, { x: number, y: number } > {
 			let p = this.positions()
 			if ( Object.keys( p ).length === 0 ) {
-				p = build_initial_positions( this.nodes(), this.edges() )
+				p = { ... this.initial_positions() }
 				this.positions( p )
 			}
 			return p
@@ -373,9 +380,12 @@ namespace $.$$ {
 			return this.edges().map( e => this.Edge( e.id ) )
 		}
 
-		// Effective node position: user-dragged override OR layout output
+		// Effective node position: live positions cell (drag/sim output) first,
+		// then the memoized initial FR layout, then raw mock as last resort.
 		pos( id: string ) {
-			return this.positions()[ id ] ?? this.node_by_id()[ id ]
+			const live = this.positions()[ id ]
+			if ( live ) return live
+			return this.initial_positions()[ id ] ?? this.node_by_id()[ id ]
 		}
 
 		// Used in view.tree as `data-node-id` attr so pan_start can identify node-target.
