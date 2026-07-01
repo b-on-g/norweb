@@ -20,10 +20,12 @@ $raggu_web_front_chat $bog_builderui_div
 	seed_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
 	mock_prefix_text @ \Thanks for the question:
 	mock_suffix_text @ \(Mock response. Real retrieval will be wired to the backend.)
+	clear_text @ \Clear
 	prompt_text? \
 	prompt_submit? null
 	use_sug_one? null
 	use_sug_two? null
+	clear_click? null
 	rows /
 	message_text* \
 	message_role* \
@@ -36,7 +38,13 @@ $raggu_web_front_chat $bog_builderui_div
 				<= Mode_global $bog_builderui_div sub / \Global
 				<= Mode_mix $bog_builderui_div sub / \Mix
 				<= Mode_plan $bog_builderui_div sub / \QueryPlan
-		<= Body $mol_list rows <= rows
+			<= Clear $mol_button_minor
+				hint <= clear_text
+				click? <=> clear_click? null
+				sub / \✕
+		<= Body $mol_scroll
+			sub /
+				<= Messages $mol_list rows <= rows
 		<= Footer $bog_builderui_div sub /
 			<= Suggestions $bog_builderui_div sub /
 				<= Sug_one $bog_builderui_div

@@ -56,6 +56,7 @@ namespace $ {
 	$mol_style_define( $raggu_web_front_chat, {
 		flex: { direction: 'column', shrink: 1 },
 		minWidth: 0,
+		minHeight: 0,
 		height: '100%',
 
 		Modes_bar: {
@@ -101,15 +102,38 @@ namespace $ {
 		Mode_mix: mode_pill_inactive,
 		Mode_plan: mode_pill_inactive,
 
+		Clear: {
+			marginLeft: 'auto',
+			minWidth: '40px',
+			height: '26px',
+			padding: {
+				top: 0,
+				bottom: 0,
+				left: 0,
+				right: 0,
+			},
+			align: { items: 'center' },
+			justify: { content: 'center' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
+			color: $bog_builderui_tokens.shade,
+			font: { size: '14px', weight: 500 },
+			lineHeight: '1',
+		},
+
 		Body: {
 			flex: { grow: 1, direction: 'column' },
 			overflow: 'auto',
+			// min-height: 0 обязателен для flex-child с overflow:auto,
+			// иначе элемент раздувается до scrollHeight и внешний контейнер скроллится вместо него.
+			minHeight: 0,
 			padding: {
 				top: '22px',
 				bottom: '22px',
 				left: '22px',
 				right: '22px',
 			},
+		},
+		Messages: {
 			gap: '16px',
 		},
 

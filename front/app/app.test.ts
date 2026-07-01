@@ -124,11 +124,11 @@ namespace $.$$ {
 			$mol_assert_equal( app.settings_open(), false )
 			$mol_assert_equal( app.Settings().showed(), false )
 
-			// user navigates back to Датасеты and clicks a card → explorer + dataset selected
+			// user navigates back to Датасеты and clicks a card → dataset selected, screen stays
 			app.Sidebar().click_gallery()
 			$mol_assert_equal( app.screen(), 'gallery' )
 			app.Gallery().click( 'law' )
-			$mol_assert_equal( app.screen(), 'explorer' )
+			$mol_assert_equal( app.screen(), 'gallery' )
 			$mol_assert_equal( app.dataset_id(), 'law' )
 
 			// user switches language EN — re-renders all @-strings via $mol_locale

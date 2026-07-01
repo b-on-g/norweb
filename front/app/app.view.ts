@@ -26,7 +26,6 @@ namespace $.$$ {
 		@$mol_action
 		select_dataset( id: string ) {
 			this.dataset_id( id )
-			this.screen( 'explorer' )
 			return null
 		}
 

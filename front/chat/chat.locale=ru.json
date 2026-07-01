@@ -19,5 +19,6 @@
 	"$raggu_web_front_chat_seed_user_text": "Кто написал гимн Норвегии и когда?",
 	"$raggu_web_front_chat_seed_assistant_text": "Текст гимна Норвегии написал Бьёрнстьерне Бьёрнсон в 1859 году…",
 	"$raggu_web_front_chat_mock_prefix_text": "Спасибо за вопрос:",
-	"$raggu_web_front_chat_mock_suffix_text": "(Mock-ответ. Реальный поиск будет на бэке.)"
+	"$raggu_web_front_chat_mock_suffix_text": "(Mock-ответ. Реальный поиск будет на бэке.)",
+	"$raggu_web_front_chat_clear_text": "Очистить"
 }
