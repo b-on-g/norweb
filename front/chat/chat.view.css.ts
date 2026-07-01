@@ -306,6 +306,7 @@ namespace $ {
 			border: { width: 0 },
 			background: { color: 'transparent' },
 			minHeight: '24px',
+			color: $bog_builderui_tokens.text
 		},
 		Input_send: {
 			background: { color: $bog_builderui_tokens.current },

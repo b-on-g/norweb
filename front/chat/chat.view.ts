@@ -27,11 +27,26 @@ namespace $.$$ {
 		override rows() {
 			return this.history().map( ( _, i ) => this.Message( i ) )
 		}
+		
+		@ $mol_mem
+		scroll_height(): number {
+			// Явная подписка на history — при новом сообщении канал инвалидируется,
+			// тянет за собой dom_tree, и scroll_top получает свежее значение.
+			void this.history()
+			return this.Body().dom_node().scrollHeight
+		}
 
+		@ $mol_mem
+		scroll_top( next?: number ): number {
+			const el = this.Body().dom_node() as HTMLElement
+			if( next !== undefined ) el.scrollTop = next
+			return el.scrollTop
+		}
+
+		@ $mol_mem
 		override dom_tree( next?: Element ): Element {
 			const node = super.dom_tree( next )
-			const body = this.Body().dom_node() as HTMLElement
-			this.Body().scroll_top( body.scrollHeight )
+			this.scroll_top( this.scroll_height() )
 			return node
 		}
 
