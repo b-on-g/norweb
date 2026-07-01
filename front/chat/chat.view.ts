@@ -119,6 +119,23 @@ namespace $.$$ {
 			return null
 		}
 
+		// true когда последнее сообщение — user и режим llm.
+		// Реактивно на history+mode. Пока true — под Messages показывается skeleton-card.
+		// После ответа last=assistant → false → скелет исчезает.
+		//
+		// Внутри дёргаем communication() — это активирует его wire-фибр.
+		// Если communication бросит suspension → Status.dom_tree поймает
+		// (он $mol_view с встроенным try/catch на suspension), остальной чат
+		// продолжает рендер, wire автоматом ретраит когда Promise резолвится.
+		is_communicating(): boolean {
+			if( this.mode() !== 'llm' ) return false
+			const h = this.history()
+			if( h.length === 0 ) return false
+			if( h[ h.length - 1 ].role !== 'user' ) return false
+			this.communication()
+			return true
+		}
+
 		// Реактивный LLM-роутер по паттерну $giper_bot.communication.
 		// Срабатывает когда история заканчивается на user-сообщение и режим llm.
 		// $mol_promise_like → перебрасываем suspension обратно в wire для retry.

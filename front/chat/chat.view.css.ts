@@ -133,6 +133,50 @@ namespace $ {
 				right: '22px',
 			},
 		},
+		Body_flow: {
+			flex: { direction: 'column' },
+			gap: '16px',
+		},
+		Status: {
+			background: { color: $bog_builderui_tokens.card },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+			borderRadius: '12px 12px 12px 3px',
+			padding: {
+				top: '13px',
+				bottom: '13px',
+				left: '16px',
+				right: '16px',
+			},
+			maxWidth: '78%',
+			align: { self: 'flex-start' },
+			flex: { direction: 'column' },
+			gap: '10px',
+			// По дефолту скрыт. attr raggu_loading=true → показываем скелет.
+			// Boolean false → mol удаляет атрибут → [attr="true"] селектор ниже включает display.
+			display: 'none',
+			'@': {
+				raggu_loading: {
+					true: {
+						display: 'flex',
+					},
+				},
+			},
+		},
+		Skel_line_one: {
+			height: '12px',
+			borderRadius: '4px',
+			minWidth: '260px',
+		},
+		Skel_line_two: {
+			height: '12px',
+			borderRadius: '4px',
+			minWidth: '320px',
+		},
+		Skel_line_three: {
+			height: '12px',
+			borderRadius: '4px',
+			minWidth: '200px',
+		},
 		Messages: {
 			gap: '16px',
 		},

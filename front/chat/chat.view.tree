@@ -93,8 +93,16 @@ $raggu_web_front_chat $bog_builderui_div
 				sub / \✕
 		<= Body $mol_scroll
 			sub /
-				<= Messages $mol_list rows <= rows
-				<= Status $mol_status status <= communication null
+				<= Body_flow $bog_builderui_div sub /
+					<= Messages $mol_list rows <= rows
+					<= Status $bog_builderui_card
+						attr *
+							^
+							raggu_loading <= is_communicating false
+						sub /
+							<= Skel_line_one $bog_builderui_skeleton
+							<= Skel_line_two $bog_builderui_skeleton
+							<= Skel_line_three $bog_builderui_skeleton
 		<= Footer $bog_builderui_div sub /
 			<= Suggestions $bog_builderui_div sub /
 				<= Sug_one $bog_builderui_div
