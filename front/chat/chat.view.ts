@@ -91,6 +91,17 @@ namespace $.$$ {
 			return Boolean( this.history()[ index ]?.trace )
 		}
 
+		@ $mol_mem_key
+		override trace_expanded( index: number, next?: boolean ): boolean {
+			return next ?? false
+		}
+
+		@ $mol_action
+		override trace_toggle( index: number ) {
+			this.trace_expanded( index, !this.trace_expanded( index ) )
+			return null
+		}
+
 		@ $mol_action
 		override prompt_submit() {
 			const text = this.prompt_text().trim()

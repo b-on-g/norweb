@@ -201,6 +201,8 @@ namespace $ {
 			flex: { direction: 'row' },
 			align: { items: 'center' },
 			gap: '7px',
+			cursor: 'pointer',
+			userSelect: 'none',
 			padding: {
 				top: '9px',
 				bottom: '9px',
@@ -213,9 +215,6 @@ namespace $ {
 				size: '11px',
 			},
 			color: $bog_builderui_tokens.current,
-			border: {
-				bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
-			},
 		},
 		Message_trace_head_meta: {
 			marginLeft: 'auto',
@@ -229,8 +228,21 @@ namespace $ {
 				left: '13px',
 				right: '13px',
 			},
-			flex: { direction: 'column' },
 			gap: '8px',
+			border: {
+				top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+			},
+			// По дефолту скрыт. Показываем только когда trace_expanded=true.
+			// Boolean false → mol удаляет атрибут → CSS [attr="false"] не сработает.
+			display: 'none',
+			'@': {
+				raggu_expanded: {
+					true: {
+						display: 'flex',
+						flexDirection: 'column',
+					},
+				},
+			},
 		},
 		Message_trace_label: {
 			font: {
