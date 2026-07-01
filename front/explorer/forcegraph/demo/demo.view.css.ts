@@ -41,11 +41,6 @@ namespace $ {
 			margin: { bottom: '4px' },
 		},
 
-		Reset: {
-			margin: { top: '8px' },
-			alignSelf: 'flex-start',
-		},
-
 	} )
 
 	$mol_style_define( $raggu_web_front_explorer_forcegraph_demo_row, {
@@ -79,6 +74,32 @@ namespace $ {
 			font: { size: '10px' },
 			color: '#8f8b83',
 			lineHeight: '1.4',
+		},
+
+		// $mol_number renders as a container with Dec/String/Inc children.
+		// Give the whole widget a dark backdrop so the input field doesn't sit
+		// on the browser's default light color.
+		Slider: {
+			background: { color: '#0f0e0d' },
+			border: {
+				width: '1px', style: 'solid', color: '#2a2927', radius: '4px',
+			},
+			overflow: 'hidden',
+		},
+
+		// Descendant attribute selector — reaches into $mol_number's inner
+		// $mol_string input and styles the actual field.
+		'@': {
+			mol_number_string: {
+				'': {
+					background: { color: 'transparent' },
+					color: '#ede7d8',
+					font: {
+						family: 'ui-monospace, monospace',
+						size: '11px',
+					},
+				},
+			},
 		},
 
 	} )

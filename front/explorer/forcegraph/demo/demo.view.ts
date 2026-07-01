@@ -1,5 +1,8 @@
 namespace $.$$ {
 
+	// Kept in sync with defaults in demo.view.tree — needed for the reset button.
+	// There's no runtime hook in $mol to re-read a tree-declared default after
+	// state has been touched, so the values live in both places.
 	const DEFAULTS = {
 		graph_n: 80,
 		gravity: 0.09,

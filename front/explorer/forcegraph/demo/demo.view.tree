@@ -1,4 +1,7 @@
-$raggu_web_front_explorer_forcegraph_demo $mol_view
+$raggu_web_front_explorer_forcegraph_demo $mol_example_small
+	title \Forcegraph physics playground
+	plugins /
+		<= Theme $mol_theme_auto
 	graph_n?val +80
 	gravity?val +0.09
 	force_scale?val +0.06
@@ -65,6 +68,12 @@ $raggu_web_front_explorer_forcegraph_demo $mol_view
 					sub /
 						\reset defaults
 					click?event <=> reset?event null
+	tags /
+		\graph
+		\force-layout
+		\physics
+	aspects /
+		\Widget/Graph
 
 $raggu_web_front_explorer_forcegraph_demo_row $mol_view
 	label \
