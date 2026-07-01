@@ -11,6 +11,7 @@ $raggu_web_front_explorer $bog_builderui_div
 	sources_title_text @ \Sources (provenance)
 	sources_text @ \chunk #418 · chunk #902 …
 	ask_btn_text @ \💬 Ask about this entity
+	legend_title_text @ \Entity Types
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
@@ -24,7 +25,7 @@ $raggu_web_front_explorer $bog_builderui_div
 				<= Filter_thresh $bog_builderui_div sub / <= filter_thresh_text
 				<= Filter_comm $bog_builderui_div sub / <= filter_comm_text
 			<= Legend $bog_builderui_div sub /
-				<= Legend_title $bog_builderui_div sub / \Entity Types
+				<= Legend_title $bog_builderui_div sub / <= legend_title_text
 				<= Legend_person $bog_builderui_div sub /
 					<= Legend_person_dot $bog_builderui_div
 					<= Legend_person_label $bog_builderui_div sub / \PERSON

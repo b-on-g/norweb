@@ -1,7 +1,6 @@
 $raggu_web_front_export $mol_pop
 	screen \gallery
 	showed? false
-	align \bottom_right
 	export_btn_text @ \↓ Export
 	empty_text @ \Nothing to export
 	Anchor $bog_builderui_div

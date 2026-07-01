@@ -9,6 +9,10 @@ $raggu_web_front_gallery $bog_builderui_div
 	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
 	upload_doc_text @ \＋ Upload document
 	upload_idx_text @ \⇪ Upload prebuilt index
+	uploaded_document_title @ \Uploaded document
+	uploaded_index_title @ \Uploaded index
+	uploaded_domain @ \User upload
+	uploaded_desc @ \Mock dataset built by the demo indexing pipeline.
 	sub /
 		<= Header $bog_builderui_div sub /
 			<= Header_text $bog_builderui_div sub /

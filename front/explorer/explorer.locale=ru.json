@@ -8,5 +8,6 @@
 	"$raggu_web_front_explorer_relations_title_template": "Связи (%s)",
 	"$raggu_web_front_explorer_sources_title_text": "Источники (provenance)",
 	"$raggu_web_front_explorer_sources_text": "chunk #418 · chunk #902 …",
-	"$raggu_web_front_explorer_ask_btn_text": "💬 Спросить про эту сущность"
+	"$raggu_web_front_explorer_ask_btn_text": "💬 Спросить про эту сущность",
+	"$raggu_web_front_explorer_legend_title_text": "Типы сущностей"
 }

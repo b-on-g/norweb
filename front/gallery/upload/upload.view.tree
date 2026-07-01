@@ -8,6 +8,9 @@ $raggu_web_front_gallery_upload $bog_builderui_div
 	complete? null
 	title_text @ \Indexing document
 	subtitle_text @ \Mock pipeline run · 6 stages · about 4 seconds
+	panel_title_document_text @ \Indexing document
+	panel_title_index_text @ \Uploading prebuilt index
+	error_too_large_template @ \File too large: %s MB. Limit is 10 MB.
 	step_chunking_text @ \Chunking
 	step_extraction_text @ \Extraction
 	step_summarization_text @ \Summarization

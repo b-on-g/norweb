@@ -146,15 +146,9 @@ namespace $.$$ {
 			const id = `up-${ Date.now() }-${ idx }`
 			const seed = Date.now() + idx
 			const stats = random_stats( seed )
-			const title_prefix = this.$.$mol_locale.text(
-				kind === 'index'
-					? '$raggu_web_front_gallery_uploaded_index_title'
-					: '$raggu_web_front_gallery_uploaded_document_title'
-			) || ( kind === 'index' ? 'Uploaded index' : 'Uploaded document' )
-			const domain = this.$.$mol_locale.text( '$raggu_web_front_gallery_uploaded_domain' )
-				|| 'User upload'
-			const desc = this.$.$mol_locale.text( '$raggu_web_front_gallery_uploaded_desc' )
-				|| 'Mock dataset built by the demo indexing pipeline.'
+			const title_prefix = kind === 'index' ? this.uploaded_index_title() : this.uploaded_document_title()
+			const domain = this.uploaded_domain()
+			const desc = this.uploaded_desc()
 			this.extra_datasets( [
 				...list,
 				{

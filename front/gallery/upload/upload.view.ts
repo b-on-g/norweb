@@ -29,8 +29,7 @@ namespace $.$$ {
 		}
 
 		panel_title() {
-			const key = this.kind() === 'index' ? 'panel_title_index' : 'panel_title_document'
-			return this.$.$mol_locale.text( `$raggu_web_front_gallery_upload_${ key }` ) || this.title_text()
+			return this.kind() === 'index' ? this.panel_title_index_text() : this.panel_title_document_text()
 		}
 
 		body() {
@@ -85,9 +84,7 @@ namespace $.$$ {
 			this.error( '' )
 			this.step( 0 )
 			if ( mock_file_size_mb > 10 ) {
-				const tpl = this.$.$mol_locale.text( '$raggu_web_front_gallery_upload_error_too_large' )
-					|| 'File too large: %s MB. Limit is 10 MB.'
-				this.error( tpl.replace( '%s', mock_file_size_mb.toFixed( 1 ) ) )
+				this.error( this.error_too_large_template().replace( '%s', mock_file_size_mb.toFixed( 1 ) ) )
 				return
 			}
 			this.tick( 1 )
