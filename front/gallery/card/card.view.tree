@@ -6,8 +6,12 @@ $raggu_web_front_gallery_card $bog_builderui_div
 	nodes \
 	edges \
 	comms \
+	active false
 	click? null
 	preview_label_text @ \graph preview
+	attr *
+		^
+		raggu_web_front_gallery_card_active <= active
 	event *
 		^
 		click? <=> click? null

@@ -87,6 +87,8 @@ namespace $.$$ {
 
 		card_id( id: string ) { return id }
 
+		card_active( id: string ) { return id === this.dataset_id() }
+
 		card_title( id: string ) {
 			const ds = this.dataset( id )
 			return ds.dynamic?.title ?? this.dataset_text( id, 'title' )

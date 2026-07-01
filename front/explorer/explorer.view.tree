@@ -1,6 +1,7 @@
 $raggu_web_front_explorer $bog_builderui_div
 	dataset_id \
 	selected_id? \
+	ask_click? null
 	filter_search_text @ \🔍 Find node…
 	filter_type_text @ \Entity type ▾
 	filter_thresh_text @ \Strength threshold ▾
@@ -61,4 +62,6 @@ $raggu_web_front_explorer $bog_builderui_div
 					<= Rel_target* $bog_builderui_div sub / <= rel_target* \
 			<= Sources_title $bog_builderui_div sub / <= sources_title_text
 			<= Sources $bog_builderui_div sub / <= sources_text
-			<= Ask_btn $bog_builderui_div sub / <= ask_btn_text
+			<= Ask_btn $bog_builderui_div
+				sub / <= ask_btn_text
+				event * click? <=> ask_click? null

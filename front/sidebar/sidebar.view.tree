@@ -22,16 +22,19 @@ $raggu_web_front_sidebar $bog_builderui_div
 				icon \◉
 				label @ \Graph
 				active <= is_explorer false
+				disabled <= no_dataset false
 				click? <=> click_explorer? null
 			<= Nav_chat $raggu_web_front_sidebar_nav
 				icon \💬
 				label @ \Chat
 				active <= is_chat false
+				disabled <= no_dataset false
 				click? <=> click_chat? null
 			<= Nav_dashboard $raggu_web_front_sidebar_nav
 				icon \▦
 				label @ \Dashboard
 				active <= is_dashboard false
+				disabled <= no_dataset false
 				click? <=> click_dashboard? null
 		<= Spacer $bog_builderui_div
 		<= Footer $bog_builderui_div sub /

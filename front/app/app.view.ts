@@ -3,7 +3,9 @@ namespace $.$$ {
 	export class $raggu_web_front_app extends $.$raggu_web_front_app {
 
 		body() {
-			switch( this.screen() ) {
+			// Без выбранного датасета всегда показываем Gallery — остальные экраны бессмысленны.
+			const s = this.dataset_id() ? this.screen() : 'gallery'
+			switch( s ) {
 				case 'gallery': return [ this.Gallery() ]
 				case 'explorer': return [ this.Explorer() ]
 				case 'chat': return [ this.Chat() ]
@@ -29,6 +31,12 @@ namespace $.$$ {
 			return null
 		}
 
+		@$mol_action
+		ask_chat() {
+			this.screen( 'chat' )
+			return null
+		}
+
 		arg_value( key: string, next: string | undefined, fallback: string ) {
 			const arg = this.$.$mol_state_arg
 			if ( next === undefined ) return arg.value( key ) ?? fallback
@@ -43,7 +51,7 @@ namespace $.$$ {
 		preset( next?: string ) { return this.arg_value( 'preset', next, 'demo' ) }
 
 		@$mol_mem
-		dataset_id( next?: string ) { return this.arg_value( 'ds', next, 'wiki' ) }
+		dataset_id( next?: string ) { return this.arg_value( 'ds', next, '' ) }
 
 	}
 

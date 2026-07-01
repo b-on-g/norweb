@@ -1,7 +1,7 @@
 $raggu_web_front_app $bog_builderui_div
 	screen? \gallery
 	preset? \demo
-	dataset_id? \wiki
+	dataset_id? \
 	settings_open? false
 	body /
 	lights_mode \light
@@ -37,5 +37,6 @@ $raggu_web_front_app $bog_builderui_div
 		select_dataset? <=> select_dataset? null
 	Explorer $raggu_web_front_explorer
 		dataset_id <= dataset_id
+		ask_click? <=> ask_chat? null
 	Chat $raggu_web_front_chat
 	Dashboard $raggu_web_front_dashboard

@@ -25,6 +25,13 @@ namespace $ {
 					color: '#ffffff',
 				},
 			},
+			raggu_web_front_sidebar_nav_disabled: {
+				true: {
+					opacity: 0.4,
+					cursor: 'not-allowed',
+					pointerEvents: 'none',
+				},
+			},
 		},
 	} )
 }

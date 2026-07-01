@@ -11,6 +11,8 @@ namespace $.$$ {
 		is_chat() { return this.screen() === 'chat' }
 		is_dashboard() { return this.screen() === 'dashboard' }
 
+		no_dataset() { return !this.dataset_id() }
+
 		is_en() { return this.$.$mol_locale.lang() === 'en' }
 		is_ru() { return this.$.$mol_locale.lang() === 'ru' }
 

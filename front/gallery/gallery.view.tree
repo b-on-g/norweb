@@ -34,6 +34,7 @@ $raggu_web_front_gallery $bog_builderui_div
 				nodes <= card_nodes* \
 				edges <= card_edges* \
 				comms <= card_comms* \
+				active <= card_active* false
 				click? <=> click*? null
 		<= Upload $raggu_web_front_gallery_upload
 			showed? <=> upload_showed? false

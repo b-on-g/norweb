@@ -19,15 +19,23 @@ namespace $ {
 
 	$mol_style_define( $raggu_web_front_gallery_card, {
 		background: { color: $bog_builderui_tokens.card },
-		border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
+		border: { width: '2px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
 		padding: {
-			top: '13px',
-			bottom: '13px',
-			left: '13px',
-			right: '13px',
+			top: '12px',
+			bottom: '12px',
+			left: '12px',
+			right: '12px',
 		},
 		flex: { direction: 'column' },
 		cursor: 'pointer',
+		'@': {
+			raggu_web_front_gallery_card_active: {
+				true: {
+					border: { color: $bog_builderui_tokens.current },
+					background: { color: $bog_builderui_tokens.field },
+				},
+			},
+		},
 
 		Preview: {
 			height: '118px',
