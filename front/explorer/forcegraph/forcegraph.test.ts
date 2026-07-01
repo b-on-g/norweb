@@ -164,28 +164,28 @@ namespace $.$$ {
 		},
 
 		// --- Stress test: how heavy is one force-layout tick at scale?
-		// Reports ms/tick so you can size the demo data. 60fps budget = 16.67ms/frame.
-		// 'STRESS tick_layout perf across graph sizes'( $ ) {
-		// 	const sizes = [ 80, 200, 500, 1000, 2000 ]
-		// 	const results: Array< { n: number, edges: number, tick_ms: string, init_ms: string } > = []
-		// 	for ( const n of sizes ) {
-		// 		const g = build_mock( 42, n, Math.round( n * 1.6 ) )
-		// 		// Initial layout (120 iterations)
-		// 		const t0 = Date.now()
-		// 		const positions = build_initial_positions( g.nodes, g.edges )
-		// 		const init_ms = Date.now() - t0
-		// 		// One live tick
-		// 		const t1 = Date.now()
-		// 		tick_layout( g.nodes, g.edges, positions, '', 6 )
-		// 		const tick_ms = Date.now() - t1
-		// 		results.push( { n, edges: g.edges.length, tick_ms: `${ tick_ms }ms`, init_ms: `${ init_ms }ms` } )
-		// 	}
-		// 	console.log( '\n[forcegraph STRESS]\n' + results.map( r =>
-		// 		`  n=${ r.n.toString().padStart( 4 ) } edges=${ r.edges.toString().padStart( 4 ) }  init=${ r.init_ms.padStart( 6 ) }  tick=${ r.tick_ms.padStart( 5 ) }`
-		// 	).join( '\n' ) + '\n  (60fps budget = 16.67ms/tick)\n' )
-		// 	// Sanity — even 2000 nodes should finish (no infinite loop / NaN)
-		// 	$mol_assert_equal( results.length, sizes.length )
-		// },
+		// Reports avg ms/tick (10 iters). 60fps budget = 16.67ms/frame.
+		'STRESS tick_layout perf across graph sizes'( $ ) {
+			const sizes = [ 80, 200, 500, 1000, 2000, 5000 ]
+			const results: Array< { n: number, edges: number, tick_ms: string } > = []
+			for ( const n of sizes ) {
+				const g = build_mock( 42, n, Math.round( n * 1.6 ) )
+				const positions: Record< string, { x: number, y: number } > = {}
+				for ( const node of g.nodes ) positions[ node.id ] = { x: node.x, y: node.y }
+				// Warm-up
+				tick_layout( g.nodes, g.edges, positions, '', 6 )
+				// 10-tick avg
+				const t0 = Date.now()
+				let p = positions
+				for ( let i = 0; i < 10; i++ ) p = tick_layout( g.nodes, g.edges, p, '', 6 )
+				const tick_ms = ( ( Date.now() - t0 ) / 10 ).toFixed( 2 )
+				results.push( { n, edges: g.edges.length, tick_ms: `${ tick_ms }ms` } )
+			}
+			console.log( '\n[forcegraph STRESS — Barnes-Hut]\n' + results.map( r =>
+				`  n=${ r.n.toString().padStart( 4 ) } edges=${ r.edges.toString().padStart( 5 ) }  tick=${ r.tick_ms.padStart( 8 ) }`
+			).join( '\n' ) + '\n  (60fps budget = 16.67ms/tick)\n' )
+			$mol_assert_equal( results.length, sizes.length )
+		},
 
 		// --- DOM integration: render → inspect → real events ---
 
