@@ -64,6 +64,7 @@
 	"$bog_norweb_front_explorer_legend_person_label_text": "PERSON",
 	"$bog_norweb_front_explorer_legend_title_text": "Entity Types",
 	"$bog_norweb_front_explorer_legend_work_label_text": "WORK_OF_ART",
+	"$bog_norweb_front_explorer_mock_badge_text": "⚠ Mock data — backend is not connected",
 	"$bog_norweb_front_explorer_relations_title_template": "Relations (%s)",
 	"$bog_norweb_front_explorer_sources_text": "chunk #418 · chunk #902 …",
 	"$bog_norweb_front_explorer_sources_title_text": "Sources (provenance)",

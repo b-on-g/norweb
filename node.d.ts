@@ -8666,10 +8666,12 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_26 = $mol_type_enforce<
-		readonly(any)[]
+	type $bog_builderui_div__attr_bog_norweb_front_explorer_26 = $mol_type_enforce<
+		({ 
+			'bog_norweb_front_explorer_mock_badge_showed': ReturnType< $bog_norweb_front_explorer['is_mock'] >,
+		})  & ReturnType< $bog_builderui_div['attr'] >
 		,
-		ReturnType< $bog_builderui_div['sub'] >
+		ReturnType< $bog_builderui_div['attr'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_27 = $mol_type_enforce<
 		readonly(any)[]
@@ -8717,7 +8719,7 @@ declare namespace $ {
 		ReturnType< $bog_builderui_div['sub'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_36 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_explorer['rel_rows'] >
+		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
@@ -8727,7 +8729,7 @@ declare namespace $ {
 		ReturnType< $bog_builderui_div['sub'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_38 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_norweb_front_explorer['rel_rows'] >
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
@@ -8736,14 +8738,24 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__event_bog_norweb_front_explorer_40 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_explorer_40 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_div['sub'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_explorer_41 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_div['sub'] >
+	>
+	type $bog_builderui_div__event_bog_norweb_front_explorer_42 = $mol_type_enforce<
 		({ 
 			click( next?: ReturnType< $bog_norweb_front_explorer['ask_click'] > ): ReturnType< $bog_norweb_front_explorer['ask_click'] >,
 		}) 
 		,
 		ReturnType< $bog_builderui_div['event'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_41 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_explorer_43 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
@@ -8781,6 +8793,8 @@ declare namespace $ {
 		Legend_law_label( ): $bog_builderui_div
 		Legend_law( ): $bog_builderui_div
 		Legend( ): $bog_builderui_div
+		is_mock( ): boolean
+		Mock_badge( ): $bog_builderui_div
 		Canvas( ): $bog_builderui_div
 		Aside_title( ): $bog_builderui_div
 		Entity_dot( ): $bog_builderui_div
@@ -8825,6 +8839,7 @@ declare namespace $ {
 		legend_date_label_text( ): string
 		legend_work_label_text( ): string
 		legend_law_label_text( ): string
+		mock_badge_text( ): string
 		sub( ): readonly(any)[]
 	}
 	
@@ -8840,6 +8855,7 @@ declare namespace $.$$ {
             nodes: GraphNode[];
             edges: GraphEdge[];
         } | null;
+        is_mock(): boolean;
         graph_data(): {
             nodes: readonly GraphNode[];
             edges: readonly GraphEdge[];

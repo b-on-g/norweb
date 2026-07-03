@@ -17089,12 +17089,22 @@ var $;
 			]);
 			return obj;
 		}
+		is_mock(){
+			return false;
+		}
+		Mock_badge(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_mock_badge_showed": (this.is_mock())});
+			(obj.sub) = () => ([(this.mock_badge_text())]);
+			return obj;
+		}
 		Canvas(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([
 				(this.Canvas_bg()), 
 				(this.Filters()), 
-				(this.Legend())
+				(this.Legend()), 
+				(this.Mock_badge())
 			]);
 			return obj;
 		}
@@ -17269,6 +17279,9 @@ var $;
 		legend_law_label_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_law_label_text"));
 		}
+		mock_badge_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_mock_badge_text"));
+		}
 		sub(){
 			return [(this.Canvas()), (this.Aside())];
 		}
@@ -17303,6 +17316,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Mock_badge"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Canvas"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Aside_title"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_dot"));
@@ -17375,6 +17389,10 @@ var $;
                     console.warn('Graph fetch failed, falling back to mock:', error);
                     return null;
                 }
+            }
+            // Показываем юзеру плашку, что перед ним мок-граф, а не данные с бэка.
+            is_mock() {
+                return this.graph_remote() === null;
             }
             graph_data() {
                 return this.graph_remote()
@@ -17621,6 +17639,31 @@ var $;
         Legend_date_label: legend_label,
         Legend_work_label: legend_label,
         Legend_law_label: legend_label,
+        Mock_badge: {
+            display: 'none',
+            position: 'absolute',
+            bottom: '14px',
+            left: '14px',
+            font: {
+                family: 'ui-monospace, monospace',
+                weight: 600,
+                size: '11px',
+            },
+            color: '#8a6d1b',
+            background: { color: '#f5c84226' },
+            border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '6px' },
+            padding: {
+                top: '3px',
+                bottom: '3px',
+                left: '8px',
+                right: '8px',
+            },
+            '@': {
+                bog_norweb_front_explorer_mock_badge_showed: {
+                    true: { display: 'flex' },
+                },
+            },
+        },
         Aside: {
             minWidth: '300px',
             maxWidth: '300px',

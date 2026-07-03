@@ -64,6 +64,7 @@
 	"$bog_norweb_front_explorer_legend_person_label_text": "ПЕРСОНА",
 	"$bog_norweb_front_explorer_legend_title_text": "Типы сущностей",
 	"$bog_norweb_front_explorer_legend_work_label_text": "ПРОИЗВЕДЕНИЕ",
+	"$bog_norweb_front_explorer_mock_badge_text": "⚠ Мок-данные — бэкенд не подключён",
 	"$bog_norweb_front_explorer_relations_title_template": "Связи (%s)",
 	"$bog_norweb_front_explorer_sources_text": "chunk #418 · chunk #902 …",
 	"$bog_norweb_front_explorer_sources_title_text": "Источники (provenance)",
