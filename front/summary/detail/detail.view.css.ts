@@ -133,5 +133,14 @@ namespace $ {
 			font: { weight: 600, size: '12px' },
 			color: $bog_builderui_tokens.current,
 		},
+
+		'@media': {
+			'(max-width: 720px)': {
+				Panel: {
+					maxWidth: $mol_style_func.calc( '100vw - 1.5rem' ),
+					maxHeight: $mol_style_func.calc( '100vh - 1.5rem' ),
+				},
+			},
+		},
 	} )
 }

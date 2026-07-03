@@ -15,6 +15,23 @@ namespace $.$$ {
 			return []
 		}
 
+		// Буклетный UX на телефоне: при смене раздела доскролливаем горизонтальный
+		// снап к контенту. На десктопе скролла нет — вызов безвреден.
+		// Таймаут вместо after_tick: на первом рендере layout ещё не готов
+		// и scrollWidth равен clientWidth. Скролл мгновенный: smooth отменяется
+		// браузером при ленивом рендере контента нового экрана.
+		override auto() {
+			void this.screen()
+			new this.$.$mol_after_timeout( 100, () => {
+				const root = this.dom_node() as HTMLElement
+				const main = this.Main().dom_node() as HTMLElement
+				if( !root || !main ) return
+				if( root.scrollWidth <= root.clientWidth ) return
+				root.scroll( { left: main.offsetLeft + main.offsetWidth - root.clientWidth } )
+			} )
+			return [] as any
+		}
+
 		@$mol_mem
 		lights_mode() {
 			return this.Theme_auto().is_light_now() ? 'light' : 'dark'

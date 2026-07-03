@@ -89,5 +89,16 @@ namespace $ {
 			gap: '16px',
 			minWidth: 0,
 		},
+
+		'@media': {
+			'(max-width: 720px)': {
+				padding: {
+					top: '1rem',
+					bottom: '1rem',
+					left: '0.75rem',
+					right: '0.75rem',
+				},
+			},
+		},
 	} )
 }

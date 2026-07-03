@@ -73,5 +73,20 @@ namespace $ {
 			cursor: 'pointer',
 		},
 
+		'@media': {
+			'(max-width: 720px)': {
+				height: 'auto',
+				minHeight: '58px',
+				flexWrap: 'wrap',
+				gap: '0.5rem',
+				padding: {
+					top: '8px',
+					bottom: '8px',
+					left: '0.75rem',
+					right: '0.75rem',
+				},
+			},
+		},
+
 	} )
 }

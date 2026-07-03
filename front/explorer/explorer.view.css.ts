@@ -307,5 +307,27 @@ namespace $ {
 			font: { size: '12px', weight: 600 },
 			cursor: 'pointer',
 		},
+
+		'@media': {
+			'(max-width: 720px)': {
+				flex: { direction: 'column' },
+				overflow: 'auto',
+				Canvas: {
+					minHeight: '55vh',
+				},
+				Aside: {
+					minWidth: 0,
+					maxWidth: '100%',
+					border: {
+						left: { width: 0 },
+						top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+					},
+					overflow: 'visible',
+				},
+				Filters: {
+					maxWidth: $mol_style_func.calc( '100% - 28px' ),
+				},
+			},
+		},
 	} )
 }

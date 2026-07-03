@@ -174,5 +174,13 @@ namespace $ {
 			flex: { grow: 1 },
 		},
 
+		'@media': {
+			'(max-width: 720px)': {
+				Panel: {
+					width: '100vw',
+				},
+			},
+		},
+
 	} )
 }
