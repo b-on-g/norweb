@@ -5953,7 +5953,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_sidebar_nav) = class $raggu_web_front_sidebar_nav extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_sidebar_nav) = class $bog_norweb_front_sidebar_nav extends ($.$bog_builderui_div) {
 		click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -5983,8 +5983,8 @@ var $;
 		attr(){
 			return {
 				...(super.attr()), 
-				"raggu_web_front_sidebar_nav_active": (this.active()), 
-				"raggu_web_front_sidebar_nav_disabled": (this.disabled())
+				"bog_norweb_front_sidebar_nav_active": (this.active()), 
+				"bog_norweb_front_sidebar_nav_disabled": (this.disabled())
 			};
 		}
 		event(){
@@ -5994,9 +5994,9 @@ var $;
 			return [(this.Icon()), (this.Label())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_sidebar_nav.prototype), "click"));
-	($mol_mem(($.$raggu_web_front_sidebar_nav.prototype), "Icon"));
-	($mol_mem(($.$raggu_web_front_sidebar_nav.prototype), "Label"));
+	($mol_mem(($.$bog_norweb_front_sidebar_nav.prototype), "click"));
+	($mol_mem(($.$bog_norweb_front_sidebar_nav.prototype), "Icon"));
+	($mol_mem(($.$bog_norweb_front_sidebar_nav.prototype), "Label"));
 
 
 ;
@@ -6008,7 +6008,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_sidebar_nav, {
+    $mol_style_define($bog_norweb_front_sidebar_nav, {
         flex: { direction: 'row' },
         align: { items: 'center' },
         gap: '0.625rem',
@@ -6027,13 +6027,13 @@ var $;
             textAlign: 'center',
         },
         '@': {
-            raggu_web_front_sidebar_nav_active: {
+            bog_norweb_front_sidebar_nav_active: {
                 true: {
                     background: { color: $bog_builderui_tokens.current },
                     color: '#ffffff',
                 },
             },
-            raggu_web_front_sidebar_nav_disabled: {
+            bog_norweb_front_sidebar_nav_disabled: {
                 true: {
                     opacity: 0.4,
                     cursor: 'not-allowed',
@@ -6707,7 +6707,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_sidebar_lang) = class $raggu_web_front_sidebar_lang extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_sidebar_lang) = class $bog_norweb_front_sidebar_lang extends ($.$bog_builderui_div) {
 		click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -6719,7 +6719,7 @@ var $;
 			return false;
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_sidebar_lang_active": (this.active())};
+			return {...(super.attr()), "bog_norweb_front_sidebar_lang_active": (this.active())};
 		}
 		event(){
 			return {...(super.event()), "click": (next) => (this.click(next))};
@@ -6728,7 +6728,7 @@ var $;
 			return [(this.label())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_sidebar_lang.prototype), "click"));
+	($mol_mem(($.$bog_norweb_front_sidebar_lang.prototype), "click"));
 
 
 ;
@@ -6740,7 +6740,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_sidebar_lang, {
+    $mol_style_define($bog_norweb_front_sidebar_lang, {
         font: {
             family: 'ui-monospace, monospace',
             weight: 700,
@@ -6756,7 +6756,7 @@ var $;
         cursor: 'pointer',
         color: $bog_builderui_tokens.shade,
         '@': {
-            raggu_web_front_sidebar_lang_active: {
+            bog_norweb_front_sidebar_lang_active: {
                 true: {
                     background: { color: $bog_builderui_tokens.current },
                     color: '#ffffff',
@@ -6767,7 +6767,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_sidebar) = class $raggu_web_front_sidebar extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_sidebar) = class $bog_norweb_front_sidebar extends ($.$bog_builderui_div) {
 		Brand_logo(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => (["R"]);
@@ -6805,9 +6805,9 @@ var $;
 			return null;
 		}
 		Nav_gallery(){
-			const obj = new this.$.$raggu_web_front_sidebar_nav();
+			const obj = new this.$.$bog_norweb_front_sidebar_nav();
 			(obj.icon) = () => ("▤");
-			(obj.label) = () => ((this.$.$mol_locale.text("$raggu_web_front_sidebar_Nav_gallery_label")));
+			(obj.label) = () => ((this.$.$mol_locale.text("$bog_norweb_front_sidebar_Nav_gallery_label")));
 			(obj.active) = () => ((this.is_gallery()));
 			(obj.click) = (next) => ((this.click_gallery(next)));
 			return obj;
@@ -6823,9 +6823,9 @@ var $;
 			return null;
 		}
 		Nav_explorer(){
-			const obj = new this.$.$raggu_web_front_sidebar_nav();
+			const obj = new this.$.$bog_norweb_front_sidebar_nav();
 			(obj.icon) = () => ("◉");
-			(obj.label) = () => ((this.$.$mol_locale.text("$raggu_web_front_sidebar_Nav_explorer_label")));
+			(obj.label) = () => ((this.$.$mol_locale.text("$bog_norweb_front_sidebar_Nav_explorer_label")));
 			(obj.active) = () => ((this.is_explorer()));
 			(obj.disabled) = () => ((this.no_dataset()));
 			(obj.click) = (next) => ((this.click_explorer(next)));
@@ -6839,9 +6839,9 @@ var $;
 			return null;
 		}
 		Nav_chat(){
-			const obj = new this.$.$raggu_web_front_sidebar_nav();
+			const obj = new this.$.$bog_norweb_front_sidebar_nav();
 			(obj.icon) = () => ("💬");
-			(obj.label) = () => ((this.$.$mol_locale.text("$raggu_web_front_sidebar_Nav_chat_label")));
+			(obj.label) = () => ((this.$.$mol_locale.text("$bog_norweb_front_sidebar_Nav_chat_label")));
 			(obj.active) = () => ((this.is_chat()));
 			(obj.disabled) = () => ((this.no_dataset()));
 			(obj.click) = (next) => ((this.click_chat(next)));
@@ -6855,9 +6855,9 @@ var $;
 			return null;
 		}
 		Nav_dashboard(){
-			const obj = new this.$.$raggu_web_front_sidebar_nav();
+			const obj = new this.$.$bog_norweb_front_sidebar_nav();
 			(obj.icon) = () => ("▦");
-			(obj.label) = () => ((this.$.$mol_locale.text("$raggu_web_front_sidebar_Nav_dashboard_label")));
+			(obj.label) = () => ((this.$.$mol_locale.text("$bog_norweb_front_sidebar_Nav_dashboard_label")));
 			(obj.active) = () => ((this.is_dashboard()));
 			(obj.disabled) = () => ((this.no_dataset()));
 			(obj.click) = (next) => ((this.click_dashboard(next)));
@@ -6915,7 +6915,7 @@ var $;
 			return null;
 		}
 		Lang_en(){
-			const obj = new this.$.$raggu_web_front_sidebar_lang();
+			const obj = new this.$.$bog_norweb_front_sidebar_lang();
 			(obj.label) = () => ("EN");
 			(obj.active) = () => ((this.is_en()));
 			(obj.click) = (next) => ((this.click_en(next)));
@@ -6929,7 +6929,7 @@ var $;
 			return null;
 		}
 		Lang_ru(){
-			const obj = new this.$.$raggu_web_front_sidebar_lang();
+			const obj = new this.$.$bog_norweb_front_sidebar_lang();
 			(obj.label) = () => ("RU");
 			(obj.active) = () => ((this.is_ru()));
 			(obj.click) = (next) => ((this.click_ru(next)));
@@ -6969,16 +6969,16 @@ var $;
 			return obj;
 		}
 		sections_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_sidebar_sections_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_sidebar_sections_label_text"));
 		}
 		corpus_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_sidebar_corpus_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_sidebar_corpus_label_text"));
 		}
 		corpus_meta_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_sidebar_corpus_meta_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_sidebar_corpus_meta_text"));
 		}
 		lang_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_sidebar_lang_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_sidebar_lang_label_text"));
 		}
 		sub(){
 			return [
@@ -6990,35 +6990,35 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Brand_logo"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Brand_title"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Brand_badge"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Brand"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Sections_label"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_gallery"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Nav_gallery"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_explorer"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Nav_explorer"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_chat"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Nav_chat"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_dashboard"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Nav_dashboard"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Nav"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Spacer"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Corpus_label"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Corpus_name"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Corpus_meta"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Corpus_card"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Theme_switch"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Lang_label"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_en"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Lang_en"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "click_ru"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Lang_ru"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Lang_row"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Footer"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "screen"));
-	($mol_mem(($.$raggu_web_front_sidebar.prototype), "Theme_auto"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Brand_logo"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Brand_title"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Brand_badge"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Brand"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Sections_label"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_gallery"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_gallery"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_explorer"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_explorer"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_chat"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_chat"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_dashboard"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_dashboard"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Corpus_label"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Corpus_name"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Corpus_meta"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Corpus_card"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Theme_switch"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Lang_label"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_en"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Lang_en"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_ru"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Lang_ru"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Lang_row"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Footer"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "screen"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Theme_auto"));
 
 
 ;
@@ -7031,7 +7031,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_sidebar extends $.$raggu_web_front_sidebar {
+        class $bog_norweb_front_sidebar extends $.$bog_norweb_front_sidebar {
             is_gallery() { return this.screen() === 'gallery'; }
             is_explorer() { return this.screen() === 'explorer'; }
             is_chat() { return this.screen() === 'chat'; }
@@ -7048,23 +7048,23 @@ var $;
         }
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_gallery", null);
+        ], $bog_norweb_front_sidebar.prototype, "click_gallery", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_explorer", null);
+        ], $bog_norweb_front_sidebar.prototype, "click_explorer", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_chat", null);
+        ], $bog_norweb_front_sidebar.prototype, "click_chat", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_dashboard", null);
+        ], $bog_norweb_front_sidebar.prototype, "click_dashboard", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_en", null);
+        ], $bog_norweb_front_sidebar.prototype, "click_en", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_sidebar.prototype, "click_ru", null);
-        $$.$raggu_web_front_sidebar = $raggu_web_front_sidebar;
+        ], $bog_norweb_front_sidebar.prototype, "click_ru", null);
+        $$.$bog_norweb_front_sidebar = $bog_norweb_front_sidebar;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -7073,7 +7073,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_sidebar, {
+    $mol_style_define($bog_norweb_front_sidebar, {
         minWidth: '228px',
         maxWidth: '228px',
         background: { color: $bog_builderui_tokens.field },
@@ -7227,7 +7227,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_topbar_preset) = class $raggu_web_front_topbar_preset extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_topbar_preset) = class $bog_norweb_front_topbar_preset extends ($.$bog_builderui_div) {
 		click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -7239,7 +7239,7 @@ var $;
 			return false;
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_topbar_preset_active": (this.active())};
+			return {...(super.attr()), "bog_norweb_front_topbar_preset_active": (this.active())};
 		}
 		event(){
 			return {...(super.event()), "click": (next) => (this.click(next))};
@@ -7248,7 +7248,7 @@ var $;
 			return [(this.label())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_topbar_preset.prototype), "click"));
+	($mol_mem(($.$bog_norweb_front_topbar_preset.prototype), "click"));
 
 
 ;
@@ -7260,7 +7260,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_topbar_preset, {
+    $mol_style_define($bog_norweb_front_topbar_preset, {
         font: { size: '11px', weight: 600 },
         padding: {
             top: '5px',
@@ -7272,7 +7272,7 @@ var $;
         cursor: 'pointer',
         color: $bog_builderui_tokens.shade,
         '@': {
-            raggu_web_front_topbar_preset_active: {
+            bog_norweb_front_topbar_preset_active: {
                 true: {
                     background: { color: $bog_builderui_tokens.card },
                     color: $bog_builderui_tokens.text,
@@ -11674,7 +11674,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_export) = class $raggu_web_front_export extends ($.$mol_pop) {
+	($.$bog_norweb_front_export) = class $bog_norweb_front_export extends ($.$mol_pop) {
 		toggle(next){
 			if(next !== undefined) return next;
 			return null;
@@ -11702,10 +11702,10 @@ var $;
 			return false;
 		}
 		export_btn_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_export_export_btn_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_export_export_btn_text"));
 		}
 		empty_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_export_empty_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_export_empty_text"));
 		}
 		Anchor(){
 			const obj = new this.$.$bog_builderui_div();
@@ -11728,13 +11728,13 @@ var $;
 			return obj;
 		}
 	};
-	($mol_mem(($.$raggu_web_front_export.prototype), "toggle"));
-	($mol_mem(($.$raggu_web_front_export.prototype), "Menu"));
-	($mol_mem_key(($.$raggu_web_front_export.prototype), "item_click"));
-	($mol_mem(($.$raggu_web_front_export.prototype), "showed"));
-	($mol_mem(($.$raggu_web_front_export.prototype), "Anchor"));
-	($mol_mem_key(($.$raggu_web_front_export.prototype), "Item"));
-	($mol_mem(($.$raggu_web_front_export.prototype), "Empty"));
+	($mol_mem(($.$bog_norweb_front_export.prototype), "toggle"));
+	($mol_mem(($.$bog_norweb_front_export.prototype), "Menu"));
+	($mol_mem_key(($.$bog_norweb_front_export.prototype), "item_click"));
+	($mol_mem(($.$bog_norweb_front_export.prototype), "showed"));
+	($mol_mem(($.$bog_norweb_front_export.prototype), "Anchor"));
+	($mol_mem_key(($.$bog_norweb_front_export.prototype), "Item"));
+	($mol_mem(($.$bog_norweb_front_export.prototype), "Empty"));
 
 
 ;
@@ -11746,7 +11746,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_export, {
+    $mol_style_define($bog_norweb_front_export, {
         Anchor: {
             display: 'flex',
             flex: { direction: 'row' },
@@ -11808,18 +11808,18 @@ var $;
     (function ($$) {
         const FORMATS = {
             explorer: [
-                { id: 'graphml', label_key: '$raggu_web_front_export_fmt_graphml', fallback: 'GraphML (.xml)', ext: 'xml', mime: 'application/xml' },
-                { id: 'gexf', label_key: '$raggu_web_front_export_fmt_gexf', fallback: 'GEXF (.gexf)', ext: 'gexf', mime: 'application/xml' },
-                { id: 'json_graph', label_key: '$raggu_web_front_export_fmt_json_graph', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
-                { id: 'png_graph', label_key: '$raggu_web_front_export_fmt_png_graph', fallback: 'PNG (.png)', ext: 'png', mime: 'image/png' },
+                { id: 'graphml', label_key: '$bog_norweb_front_export_fmt_graphml', fallback: 'GraphML (.xml)', ext: 'xml', mime: 'application/xml' },
+                { id: 'gexf', label_key: '$bog_norweb_front_export_fmt_gexf', fallback: 'GEXF (.gexf)', ext: 'gexf', mime: 'application/xml' },
+                { id: 'json_graph', label_key: '$bog_norweb_front_export_fmt_json_graph', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
+                { id: 'png_graph', label_key: '$bog_norweb_front_export_fmt_png_graph', fallback: 'PNG (.png)', ext: 'png', mime: 'image/png' },
             ],
             chat: [
-                { id: 'md_chat', label_key: '$raggu_web_front_export_fmt_md_chat', fallback: 'Markdown (.md)', ext: 'md', mime: 'text/markdown' },
-                { id: 'json_chat', label_key: '$raggu_web_front_export_fmt_json_chat', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
+                { id: 'md_chat', label_key: '$bog_norweb_front_export_fmt_md_chat', fallback: 'Markdown (.md)', ext: 'md', mime: 'text/markdown' },
+                { id: 'json_chat', label_key: '$bog_norweb_front_export_fmt_json_chat', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
             ],
             dashboard: [
-                { id: 'csv_dash', label_key: '$raggu_web_front_export_fmt_csv_dash', fallback: 'CSV (.csv)', ext: 'csv', mime: 'text/csv' },
-                { id: 'json_dash', label_key: '$raggu_web_front_export_fmt_json_dash', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
+                { id: 'csv_dash', label_key: '$bog_norweb_front_export_fmt_csv_dash', fallback: 'CSV (.csv)', ext: 'csv', mime: 'text/csv' },
+                { id: 'json_dash', label_key: '$bog_norweb_front_export_fmt_json_dash', fallback: 'JSON (.json)', ext: 'json', mime: 'application/json' },
             ],
             gallery: [],
         };
@@ -11972,7 +11972,7 @@ ${CHAT.answer}
         function to_json_dash() {
             return JSON.stringify({ metrics: METRICS, stages: STAGES }, null, '\t');
         }
-        class $raggu_web_front_export extends $.$raggu_web_front_export {
+        class $bog_norweb_front_export extends $.$bog_norweb_front_export {
             toggle() {
                 this.showed(!this.showed());
                 return null;
@@ -12033,16 +12033,16 @@ ${CHAT.answer}
         }
         __decorate([
             $mol_action
-        ], $raggu_web_front_export.prototype, "toggle", null);
+        ], $bog_norweb_front_export.prototype, "toggle", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_export.prototype, "item_click", null);
-        $$.$raggu_web_front_export = $raggu_web_front_export;
+        ], $bog_norweb_front_export.prototype, "item_click", null);
+        $$.$bog_norweb_front_export = $bog_norweb_front_export;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_topbar) = class $raggu_web_front_topbar extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_topbar) = class $bog_norweb_front_topbar extends ($.$bog_builderui_div) {
 		Title(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.screen_title())]);
@@ -12075,7 +12075,7 @@ ${CHAT.answer}
 			return null;
 		}
 		Preset_fast(){
-			const obj = new this.$.$raggu_web_front_topbar_preset();
+			const obj = new this.$.$bog_norweb_front_topbar_preset();
 			(obj.label) = () => ((this.preset_fast_label()));
 			(obj.active) = () => ((this.is_fast()));
 			(obj.click) = (next) => ((this.click_fast(next)));
@@ -12089,7 +12089,7 @@ ${CHAT.answer}
 			return null;
 		}
 		Preset_accurate(){
-			const obj = new this.$.$raggu_web_front_topbar_preset();
+			const obj = new this.$.$bog_norweb_front_topbar_preset();
 			(obj.label) = () => ((this.preset_accurate_label()));
 			(obj.active) = () => ((this.is_accurate()));
 			(obj.click) = (next) => ((this.click_accurate(next)));
@@ -12103,7 +12103,7 @@ ${CHAT.answer}
 			return null;
 		}
 		Preset_demo(){
-			const obj = new this.$.$raggu_web_front_topbar_preset();
+			const obj = new this.$.$bog_norweb_front_topbar_preset();
 			(obj.label) = () => ((this.preset_demo_label()));
 			(obj.active) = () => ((this.is_demo()));
 			(obj.click) = (next) => ((this.click_demo(next)));
@@ -12129,7 +12129,7 @@ ${CHAT.answer}
 			return obj;
 		}
 		Export(){
-			const obj = new this.$.$raggu_web_front_export();
+			const obj = new this.$.$bog_norweb_front_export();
 			(obj.screen) = () => ((this.screen()));
 			return obj;
 		}
@@ -12150,19 +12150,19 @@ ${CHAT.answer}
 			return "demo";
 		}
 		preset_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_topbar_preset_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_topbar_preset_label_text"));
 		}
 		settings_btn_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_topbar_settings_btn_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_topbar_settings_btn_text"));
 		}
 		preset_fast_label(){
-			return (this.$.$mol_locale.text("$raggu_web_front_topbar_preset_fast_label"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_topbar_preset_fast_label"));
 		}
 		preset_accurate_label(){
-			return (this.$.$mol_locale.text("$raggu_web_front_topbar_preset_accurate_label"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_topbar_preset_accurate_label"));
 		}
 		preset_demo_label(){
-			return (this.$.$mol_locale.text("$raggu_web_front_topbar_preset_demo_label"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_topbar_preset_demo_label"));
 		}
 		sub(){
 			return [
@@ -12175,22 +12175,22 @@ ${CHAT.answer}
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Title"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Subtitle"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Title_block"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Spacer"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Preset_label"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "click_fast"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Preset_fast"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "click_accurate"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Preset_accurate"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "click_demo"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Preset_demo"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Preset_group"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "open_settings"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Settings_btn"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "Export"));
-	($mol_mem(($.$raggu_web_front_topbar.prototype), "preset"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Subtitle"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Title_block"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Preset_label"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "click_fast"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Preset_fast"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "click_accurate"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Preset_accurate"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "click_demo"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Preset_demo"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Preset_group"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "open_settings"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Settings_btn"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "Export"));
+	($mol_mem(($.$bog_norweb_front_topbar.prototype), "preset"));
 
 
 ;
@@ -12203,7 +12203,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_topbar extends $.$raggu_web_front_topbar {
+        class $bog_norweb_front_topbar extends $.$bog_norweb_front_topbar {
             is_fast() { return this.preset() === 'fast'; }
             is_accurate() { return this.preset() === 'accurate'; }
             is_demo() { return this.preset() === 'demo'; }
@@ -12213,14 +12213,14 @@ var $;
         }
         __decorate([
             $mol_action
-        ], $raggu_web_front_topbar.prototype, "click_fast", null);
+        ], $bog_norweb_front_topbar.prototype, "click_fast", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_topbar.prototype, "click_accurate", null);
+        ], $bog_norweb_front_topbar.prototype, "click_accurate", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_topbar.prototype, "click_demo", null);
-        $$.$raggu_web_front_topbar = $raggu_web_front_topbar;
+        ], $bog_norweb_front_topbar.prototype, "click_demo", null);
+        $$.$bog_norweb_front_topbar = $bog_norweb_front_topbar;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -12229,7 +12229,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_topbar, {
+    $mol_style_define($bog_norweb_front_topbar, {
         height: '58px',
         minHeight: '58px',
         background: { color: $bog_builderui_tokens.card },
@@ -12355,7 +12355,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_settings_group) = class $raggu_web_front_settings_group extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_settings_group) = class $bog_norweb_front_settings_group extends ($.$bog_builderui_div) {
 		Step(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.step())]);
@@ -12363,7 +12363,7 @@ var $;
 		}
 		Reindex(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({"raggu_web_front_settings_group_reindex": (this.reindex())});
+			(obj.attr) = () => ({"bog_norweb_front_settings_group_reindex": (this.reindex())});
 			(obj.sub) = () => ([(this.reindex_text())]);
 			return obj;
 		}
@@ -12403,7 +12403,7 @@ var $;
 			return true;
 		}
 		reindex_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_settings_group_reindex_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_settings_group_reindex_text"));
 		}
 		sub(){
 			return [
@@ -12414,12 +12414,12 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Step"));
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Reindex"));
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Head"));
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Title"));
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Opts"));
-	($mol_mem(($.$raggu_web_front_settings_group.prototype), "Controls"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Step"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Reindex"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Head"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Opts"));
+	($mol_mem(($.$bog_norweb_front_settings_group.prototype), "Controls"));
 
 
 ;
@@ -12431,7 +12431,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_settings_group, {
+    $mol_style_define($bog_norweb_front_settings_group, {
         flex: { direction: 'column' },
         Head: {
             flex: { direction: 'row' },
@@ -12461,7 +12461,7 @@ var $;
             font: { size: '9px', weight: 600 },
             display: 'none',
             '@': {
-                raggu_web_front_settings_group_reindex: {
+                bog_norweb_front_settings_group_reindex: {
                     true: { display: 'flex' },
                 },
             },
@@ -12869,7 +12869,7 @@ var $;
 
 
 ;
-	($.$raggu_web_front_settings) = class $raggu_web_front_settings extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_settings) = class $bog_norweb_front_settings extends ($.$bog_builderui_div) {
 		close(next){
 			if(next !== undefined) return next;
 			return null;
@@ -12919,7 +12919,7 @@ var $;
 		}
 		Preset_fast(){
 			const obj = new this.$.$bog_builderui_button();
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Preset_fast_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Preset_fast_title")));
 			(obj.click) = (next) => ((this.preset_fast(next)));
 			return obj;
 		}
@@ -12929,7 +12929,7 @@ var $;
 		}
 		Preset_accurate(){
 			const obj = new this.$.$bog_builderui_button();
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Preset_accurate_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Preset_accurate_title")));
 			(obj.click) = (next) => ((this.preset_accurate(next)));
 			return obj;
 		}
@@ -12939,7 +12939,7 @@ var $;
 		}
 		Preset_demo(){
 			const obj = new this.$.$bog_builderui_button();
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Preset_demo_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Preset_demo_title")));
 			(obj.click) = (next) => ((this.preset_demo(next)));
 			return obj;
 		}
@@ -12967,7 +12967,7 @@ var $;
 			return obj;
 		}
 		chunking_size_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_settings_chunking_size_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_settings_chunking_size_label_text"));
 		}
 		Chunking_size_label(){
 			const obj = new this.$.$bog_builderui_div();
@@ -12990,7 +12990,7 @@ var $;
 			return obj;
 		}
 		chunking_overlap_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_settings_chunking_overlap_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_settings_chunking_overlap_label_text"));
 		}
 		Chunking_overlap_label(){
 			const obj = new this.$.$bog_builderui_div();
@@ -13013,7 +13013,7 @@ var $;
 			return obj;
 		}
 		Group_chunking(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 1");
 			(obj.title) = () => ("Chunking");
 			(obj.opts) = () => ("Simple / SemanticText / SmartSemantic · размер · overlap");
@@ -13032,7 +13032,7 @@ var $;
 		Extraction_mode(){
 			const obj = new this.$.$bog_builderui_select();
 			(obj.value) = (next) => ((this.extraction_mode(next)));
-			(obj.dictionary) = () => ({"single": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_mode_dictionary_single")), "two-stage": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_mode_dictionary_two-stage"))});
+			(obj.dictionary) = () => ({"single": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_mode_dictionary_single")), "two-stage": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_mode_dictionary_two-stage"))});
 			return obj;
 		}
 		extraction_model(next){
@@ -13057,15 +13057,15 @@ var $;
 			const obj = new this.$.$bog_builderui_select();
 			(obj.value) = (next) => ((this.extraction_icl(next)));
 			(obj.dictionary) = () => ({
-				"semantic": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_icl_dictionary_semantic")), 
-				"BM25": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_icl_dictionary_BM25")), 
-				"hybrid": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_icl_dictionary_hybrid")), 
-				"random": (this.$.$mol_locale.text("$raggu_web_front_settings_Extraction_icl_dictionary_random"))
+				"semantic": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_icl_dictionary_semantic")), 
+				"BM25": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_icl_dictionary_BM25")), 
+				"hybrid": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_icl_dictionary_hybrid")), 
+				"random": (this.$.$mol_locale.text("$bog_norweb_front_settings_Extraction_icl_dictionary_random"))
 			});
 			return obj;
 		}
 		Group_extraction(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 2");
 			(obj.title) = () => ("Extraction");
 			(obj.opts) = () => ("single ↔ two-stage · валидация NEREL · ICL (semantic/BM25/hybrid/random) · модель");
@@ -13084,7 +13084,7 @@ var $;
 		Summarization_dbscan(){
 			const obj = new this.$.$mol_check_box();
 			(obj.checked) = (next) => ((this.summarization_dbscan(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Summarization_dbscan_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Summarization_dbscan_title")));
 			return obj;
 		}
 		summarization_llm(next){
@@ -13094,11 +13094,11 @@ var $;
 		Summarization_llm(){
 			const obj = new this.$.$mol_check_box();
 			(obj.checked) = (next) => ((this.summarization_llm(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Summarization_llm_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Summarization_llm_title")));
 			return obj;
 		}
 		Group_summarization(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 3");
 			(obj.title) = () => ("Summarization");
 			(obj.opts) = () => ("DBSCAN (eps, min_samples) · LLM-суммаризация сущностей/связей");
@@ -13117,7 +13117,7 @@ var $;
 			return obj;
 		}
 		communities_resolution_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_settings_communities_resolution_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_settings_communities_resolution_label_text"));
 		}
 		Communities_resolution_label(){
 			const obj = new this.$.$bog_builderui_div();
@@ -13150,7 +13150,7 @@ var $;
 			return obj;
 		}
 		Group_communities(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 4");
 			(obj.title) = () => ("Communities");
 			(obj.opts) = () => ("Hierarchical Leiden (resolution, levels) · суммаризация сообществ");
@@ -13169,11 +13169,11 @@ var $;
 		Refinement_isolated(){
 			const obj = new this.$.$mol_check_box();
 			(obj.checked) = (next) => ((this.refinement_isolated(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Refinement_isolated_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Refinement_isolated_title")));
 			return obj;
 		}
 		Group_refinement(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 5");
 			(obj.title) = () => ("Refinement");
 			(obj.opts) = () => ("RemoveIsolatedNodes и пост-обработчики");
@@ -13204,11 +13204,11 @@ var $;
 		Search_rerank(){
 			const obj = new this.$.$mol_check_box();
 			(obj.checked) = (next) => ((this.search_rerank(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$raggu_web_front_settings_Search_rerank_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_norweb_front_settings_Search_rerank_title")));
 			return obj;
 		}
 		search_topk_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_settings_search_topk_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_settings_search_topk_label_text"));
 		}
 		Search_topk_label(){
 			const obj = new this.$.$bog_builderui_div();
@@ -13241,7 +13241,7 @@ var $;
 			return obj;
 		}
 		Group_search(){
-			const obj = new this.$.$raggu_web_front_settings_group();
+			const obj = new this.$.$bog_norweb_front_settings_group();
 			(obj.step) = () => ("Шаг 6");
 			(obj.title) = () => ("Search");
 			(obj.opts) = () => ("Local/Global/Naive/Mix/QueryPlan · rerank · hybrid (BM25/BM42/SPLADE) · top-k");
@@ -13277,74 +13277,74 @@ var $;
 			return false;
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_settings_showed": (this.showed())};
+			return {...(super.attr()), "bog_norweb_front_settings_showed": (this.showed())};
 		}
 		sub(){
 			return [(this.Backdrop()), (this.Panel())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_settings.prototype), "close"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Backdrop"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Header_title"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Header_sub"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Header_text"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Spacer"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Close_btn"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Header"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "preset_fast"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Preset_fast"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "preset_accurate"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Preset_accurate"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "preset_demo"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Preset_demo"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Presets"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "chunking_strategy"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_strategy"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_size_label"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "chunking_size_str"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_size_input"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_size_row"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_overlap_label"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "chunking_overlap_str"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_overlap_input"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Chunking_overlap_row"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_chunking"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "extraction_mode"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Extraction_mode"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "extraction_model"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Extraction_model"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "extraction_icl"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Extraction_icl"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_extraction"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "summarization_dbscan"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Summarization_dbscan"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "summarization_llm"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Summarization_llm"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_summarization"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "communities_algo"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Communities_algo"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Communities_resolution_label"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Communities_resolution_value"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Communities_resolution_row"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "communities_resolution_x10"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Communities_resolution"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_communities"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "refinement_isolated"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Refinement_isolated"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_refinement"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "search_mode"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_mode"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "search_rerank"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_rerank"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_topk_label"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_topk_value"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_topk_row"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "search_topk"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Search_topk"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Group_search"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Body"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "Panel"));
-	($mol_mem(($.$raggu_web_front_settings.prototype), "showed"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "close"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Backdrop"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Header_title"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Header_sub"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Header_text"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Close_btn"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Header"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "preset_fast"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Preset_fast"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "preset_accurate"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Preset_accurate"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "preset_demo"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Preset_demo"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Presets"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "chunking_strategy"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_strategy"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_size_label"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "chunking_size_str"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_size_input"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_size_row"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_overlap_label"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "chunking_overlap_str"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_overlap_input"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Chunking_overlap_row"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_chunking"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "extraction_mode"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Extraction_mode"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "extraction_model"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Extraction_model"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "extraction_icl"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Extraction_icl"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_extraction"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "summarization_dbscan"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Summarization_dbscan"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "summarization_llm"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Summarization_llm"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_summarization"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "communities_algo"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Communities_algo"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Communities_resolution_label"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Communities_resolution_value"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Communities_resolution_row"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "communities_resolution_x10"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Communities_resolution"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_communities"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "refinement_isolated"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Refinement_isolated"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_refinement"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "search_mode"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_mode"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "search_rerank"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_rerank"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_topk_label"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_topk_value"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_topk_row"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "search_topk"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Search_topk"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Group_search"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Body"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "Panel"));
+	($mol_mem(($.$bog_norweb_front_settings.prototype), "showed"));
 
 
 ;
@@ -13357,7 +13357,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const $raggu_web_front_settings_presets = {
+        const $bog_norweb_front_settings_presets = {
             fast: {
                 chunking_strategy: 'Simple',
                 chunking_size: 256,
@@ -13407,7 +13407,7 @@ var $;
                 search_topk: 8,
             },
         };
-        class $raggu_web_front_settings extends $.$raggu_web_front_settings {
+        class $bog_norweb_front_settings extends $.$bog_norweb_front_settings {
             close() {
                 this.showed(false);
                 return null;
@@ -13426,7 +13426,7 @@ var $;
                 return null;
             }
             apply_preset(name) {
-                const values = $raggu_web_front_settings_presets[name];
+                const values = $bog_norweb_front_settings_presets[name];
                 if (!values)
                     return null;
                 this.chunking_strategy(values.chunking_strategy);
@@ -13447,53 +13447,53 @@ var $;
             }
             // ---- local-state-backed fields ----
             chunking_strategy(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.chunking_strategy', next ?? null) ?? 'SmartSemantic';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.chunking_strategy', next ?? null) ?? 'SmartSemantic';
             }
             chunking_size_str(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.chunking_size_str', next ?? null) ?? '512';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.chunking_size_str', next ?? null) ?? '512';
             }
             chunking_overlap_str(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.chunking_overlap_str', next ?? null) ?? '64';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.chunking_overlap_str', next ?? null) ?? '64';
             }
             extraction_mode(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.extraction_mode', next ?? null) ?? 'two-stage';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.extraction_mode', next ?? null) ?? 'two-stage';
             }
             extraction_model(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.extraction_model', next ?? null) ?? 'meno-lite-7b';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.extraction_model', next ?? null) ?? 'meno-lite-7b';
             }
             extraction_icl(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.extraction_icl', next ?? null) ?? 'hybrid';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.extraction_icl', next ?? null) ?? 'hybrid';
             }
             summarization_dbscan(next) {
-                const v = this.$.$mol_state_local.value('$raggu_web_front_settings.summarization_dbscan', next ?? null);
+                const v = this.$.$mol_state_local.value('$bog_norweb_front_settings.summarization_dbscan', next ?? null);
                 return v ?? true;
             }
             summarization_llm(next) {
-                const v = this.$.$mol_state_local.value('$raggu_web_front_settings.summarization_llm', next ?? null);
+                const v = this.$.$mol_state_local.value('$bog_norweb_front_settings.summarization_llm', next ?? null);
                 return v ?? false;
             }
             communities_algo(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.communities_algo', next ?? null) ?? 'Leiden';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.communities_algo', next ?? null) ?? 'Leiden';
             }
             communities_resolution_x10(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.communities_resolution_x10', next ?? null) ?? 10;
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.communities_resolution_x10', next ?? null) ?? 10;
             }
             communities_resolution_label() {
                 return (this.communities_resolution_x10() / 10).toFixed(1);
             }
             refinement_isolated(next) {
-                const v = this.$.$mol_state_local.value('$raggu_web_front_settings.refinement_isolated', next ?? null);
+                const v = this.$.$mol_state_local.value('$bog_norweb_front_settings.refinement_isolated', next ?? null);
                 return v ?? true;
             }
             search_mode(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.search_mode', next ?? null) ?? 'Local';
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.search_mode', next ?? null) ?? 'Local';
             }
             search_rerank(next) {
-                const v = this.$.$mol_state_local.value('$raggu_web_front_settings.search_rerank', next ?? null);
+                const v = this.$.$mol_state_local.value('$bog_norweb_front_settings.search_rerank', next ?? null);
                 return v ?? true;
             }
             search_topk(next) {
-                return this.$.$mol_state_local.value('$raggu_web_front_settings.search_topk', next ?? null) ?? 8;
+                return this.$.$mol_state_local.value('$bog_norweb_front_settings.search_topk', next ?? null) ?? 8;
             }
             search_topk_label() {
                 return String(this.search_topk());
@@ -13501,62 +13501,62 @@ var $;
         }
         __decorate([
             $mol_action
-        ], $raggu_web_front_settings.prototype, "close", null);
+        ], $bog_norweb_front_settings.prototype, "close", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_settings.prototype, "preset_fast", null);
+        ], $bog_norweb_front_settings.prototype, "preset_fast", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_settings.prototype, "preset_accurate", null);
+        ], $bog_norweb_front_settings.prototype, "preset_accurate", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_settings.prototype, "preset_demo", null);
+        ], $bog_norweb_front_settings.prototype, "preset_demo", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_settings.prototype, "apply_preset", null);
+        ], $bog_norweb_front_settings.prototype, "apply_preset", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "chunking_strategy", null);
+        ], $bog_norweb_front_settings.prototype, "chunking_strategy", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "chunking_size_str", null);
+        ], $bog_norweb_front_settings.prototype, "chunking_size_str", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "chunking_overlap_str", null);
+        ], $bog_norweb_front_settings.prototype, "chunking_overlap_str", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "extraction_mode", null);
+        ], $bog_norweb_front_settings.prototype, "extraction_mode", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "extraction_model", null);
+        ], $bog_norweb_front_settings.prototype, "extraction_model", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "extraction_icl", null);
+        ], $bog_norweb_front_settings.prototype, "extraction_icl", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "summarization_dbscan", null);
+        ], $bog_norweb_front_settings.prototype, "summarization_dbscan", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "summarization_llm", null);
+        ], $bog_norweb_front_settings.prototype, "summarization_llm", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "communities_algo", null);
+        ], $bog_norweb_front_settings.prototype, "communities_algo", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "communities_resolution_x10", null);
+        ], $bog_norweb_front_settings.prototype, "communities_resolution_x10", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "refinement_isolated", null);
+        ], $bog_norweb_front_settings.prototype, "refinement_isolated", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "search_mode", null);
+        ], $bog_norweb_front_settings.prototype, "search_mode", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "search_rerank", null);
+        ], $bog_norweb_front_settings.prototype, "search_rerank", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_settings.prototype, "search_topk", null);
-        $$.$raggu_web_front_settings = $raggu_web_front_settings;
+        ], $bog_norweb_front_settings.prototype, "search_topk", null);
+        $$.$bog_norweb_front_settings = $bog_norweb_front_settings;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -13565,7 +13565,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_settings, {
+    $mol_style_define($bog_norweb_front_settings, {
         position: 'fixed',
         top: 0,
         left: 0,
@@ -13574,7 +13574,7 @@ var $;
         display: 'none',
         zIndex: 40,
         '@': {
-            raggu_web_front_settings_showed: {
+            bog_norweb_front_settings_showed: {
                 true: { display: 'flex' },
             },
         },
@@ -13734,14 +13734,14 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_gallery_card_preview) = class $raggu_web_front_gallery_card_preview extends ($.$bog_builderui_div) {};
+	($.$bog_norweb_front_gallery_card_preview) = class $bog_norweb_front_gallery_card_preview extends ($.$bog_builderui_div) {};
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("raggu/web/front/gallery/card/preview/preview.view.css", "[raggu_web_front_gallery_card_preview] {\n\tbackground-image: repeating-linear-gradient(135deg, #efedea 0 9px, #e7e4e0 9px 18px);\n}\n");
+    $mol_style_attach("bog/norweb/front/gallery/card/preview/preview.view.css", "[bog_norweb_front_gallery_card_preview] {\n\tbackground-image: repeating-linear-gradient(135deg, #efedea 0 9px, #e7e4e0 9px 18px);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -13749,7 +13749,7 @@ var $;
 
 
 ;
-	($.$raggu_web_front_gallery_card) = class $raggu_web_front_gallery_card extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_gallery_card) = class $bog_norweb_front_gallery_card extends ($.$bog_builderui_div) {
 		click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -13765,7 +13765,7 @@ var $;
 			return obj;
 		}
 		Preview(){
-			const obj = new this.$.$raggu_web_front_gallery_card_preview();
+			const obj = new this.$.$bog_norweb_front_gallery_card_preview();
 			(obj.sub) = () => ([(this.Preview_label()), (this.Domain_badge())]);
 			return obj;
 		}
@@ -13837,10 +13837,10 @@ var $;
 			return false;
 		}
 		preview_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_card_preview_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_card_preview_label_text"));
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_gallery_card_active": (this.active())};
+			return {...(super.attr()), "bog_norweb_front_gallery_card_active": (this.active())};
 		}
 		event(){
 			return {...(super.event()), "click": (next) => (this.click(next))};
@@ -13854,16 +13854,16 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "click"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Preview_label"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Domain_badge"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Preview"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Title"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Desc"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Tag_nodes"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Tag_edges"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Tag_comms"));
-	($mol_mem(($.$raggu_web_front_gallery_card.prototype), "Tags"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "click"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Preview_label"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Domain_badge"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Preview"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Desc"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Tag_nodes"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Tag_edges"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Tag_comms"));
+	($mol_mem(($.$bog_norweb_front_gallery_card.prototype), "Tags"));
 
 
 ;
@@ -13876,15 +13876,15 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_gallery_card extends $.$raggu_web_front_gallery_card {
+        class $bog_norweb_front_gallery_card extends $.$bog_norweb_front_gallery_card {
             unit(key) {
-                return this.$.$mol_locale.text(`$raggu_web_front_gallery_card_unit_${key}`) || '';
+                return this.$.$mol_locale.text(`$bog_norweb_front_gallery_card_unit_${key}`) || '';
             }
             tag_nodes() { return `${this.nodes()} ${this.unit('nodes')}`; }
             tag_edges() { return `${this.edges()} ${this.unit('edges')}`; }
             tag_comms() { return `${this.comms()} ${this.unit('comms')}`; }
         }
-        $$.$raggu_web_front_gallery_card = $raggu_web_front_gallery_card;
+        $$.$bog_norweb_front_gallery_card = $bog_norweb_front_gallery_card;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -13909,7 +13909,7 @@ var $;
             right: '7px',
         },
     };
-    $mol_style_define($raggu_web_front_gallery_card, {
+    $mol_style_define($bog_norweb_front_gallery_card, {
         background: { color: $bog_builderui_tokens.card },
         border: { width: '2px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
         padding: {
@@ -13921,7 +13921,7 @@ var $;
         flex: { direction: 'column' },
         cursor: 'pointer',
         '@': {
-            raggu_web_front_gallery_card_active: {
+            bog_norweb_front_gallery_card_active: {
                 true: {
                     border: { color: $bog_builderui_tokens.current },
                     background: { color: $bog_builderui_tokens.field },
@@ -14033,7 +14033,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_gallery_upload) = class $raggu_web_front_gallery_upload extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_gallery_upload) = class $bog_norweb_front_gallery_upload extends ($.$bog_builderui_div) {
 		close(next){
 			if(next !== undefined) return next;
 			return null;
@@ -14175,49 +14175,49 @@ var $;
 			return null;
 		}
 		title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_title_text"));
 		}
 		subtitle_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_subtitle_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_subtitle_text"));
 		}
 		panel_title_document_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_panel_title_document_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_panel_title_document_text"));
 		}
 		panel_title_index_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_panel_title_index_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_panel_title_index_text"));
 		}
 		error_too_large_template(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_error_too_large_template"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_error_too_large_template"));
 		}
 		step_chunking_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_chunking_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_chunking_text"));
 		}
 		step_extraction_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_extraction_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_extraction_text"));
 		}
 		step_summarization_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_summarization_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_summarization_text"));
 		}
 		step_communities_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_communities_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_communities_text"));
 		}
 		step_refinement_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_refinement_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_refinement_text"));
 		}
 		step_search_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_step_search_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_step_search_text"));
 		}
 		progress_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_progress_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_progress_label_text"));
 		}
 		close_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_close_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_close_text"));
 		}
 		error_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_error_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_error_title_text"));
 		}
 		retry_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_retry_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_retry_text"));
 		}
 		body(){
 			return [];
@@ -14226,7 +14226,7 @@ var $;
 			return [];
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_gallery_upload_showed": (this.showed())};
+			return {...(super.attr()), "bog_norweb_front_gallery_upload_showed": (this.showed())};
 		}
 		sub(){
 			return [(this.Backdrop()), (this.Panel())];
@@ -14247,34 +14247,34 @@ var $;
 		}
 		Step(id){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_web_front_gallery_upload_step_status": (this.step_status(id))});
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_gallery_upload_step_status": (this.step_status(id))});
 			(obj.sub) = () => ([(this.Step_marker(id)), (this.Step_name(id))]);
 			return obj;
 		}
 	};
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "close"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Backdrop"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Header_title"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Header_subtitle"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Header_text"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Spacer"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Close_btn"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Header"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Body"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Panel"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Error_title"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Error_text"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Progress_bar"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Progress_label"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Steps_list"));
-	($mol_mem_key(($.$raggu_web_front_gallery_upload.prototype), "Step_marker"));
-	($mol_mem_key(($.$raggu_web_front_gallery_upload.prototype), "Step_name"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "showed"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "step"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "complete"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Error_body"));
-	($mol_mem(($.$raggu_web_front_gallery_upload.prototype), "Progress_body"));
-	($mol_mem_key(($.$raggu_web_front_gallery_upload.prototype), "Step"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "close"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Backdrop"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Header_title"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Header_subtitle"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Header_text"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Close_btn"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Header"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Body"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Panel"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Error_title"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Error_text"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Progress_bar"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Progress_label"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Steps_list"));
+	($mol_mem_key(($.$bog_norweb_front_gallery_upload.prototype), "Step_marker"));
+	($mol_mem_key(($.$bog_norweb_front_gallery_upload.prototype), "Step_name"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "showed"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "step"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "complete"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Error_body"));
+	($mol_mem(($.$bog_norweb_front_gallery_upload.prototype), "Progress_body"));
+	($mol_mem_key(($.$bog_norweb_front_gallery_upload.prototype), "Step"));
 
 
 ;
@@ -14295,7 +14295,7 @@ var $;
             'refinement',
             'search',
         ];
-        class $raggu_web_front_gallery_upload extends $.$raggu_web_front_gallery_upload {
+        class $bog_norweb_front_gallery_upload extends $.$bog_norweb_front_gallery_upload {
             step(next) {
                 return next ?? 0;
             }
@@ -14381,14 +14381,14 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_gallery_upload.prototype, "step", null);
+        ], $bog_norweb_front_gallery_upload.prototype, "step", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_gallery_upload.prototype, "error", null);
+        ], $bog_norweb_front_gallery_upload.prototype, "error", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery_upload.prototype, "close", null);
-        $$.$raggu_web_front_gallery_upload = $raggu_web_front_gallery_upload;
+        ], $bog_norweb_front_gallery_upload.prototype, "close", null);
+        $$.$bog_norweb_front_gallery_upload = $bog_norweb_front_gallery_upload;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -14397,7 +14397,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_gallery_upload, {
+    $mol_style_define($bog_norweb_front_gallery_upload, {
         position: 'fixed',
         top: 0,
         left: 0,
@@ -14408,7 +14408,7 @@ var $;
         justify: { content: 'center' },
         align: { items: 'center' },
         '@': {
-            raggu_web_front_gallery_upload_showed: {
+            bog_norweb_front_gallery_upload_showed: {
                 true: { display: 'flex' },
             },
         },
@@ -14500,7 +14500,7 @@ var $;
             font: { size: '13px' },
             color: $bog_builderui_tokens.shade,
             '@': {
-                raggu_web_front_gallery_upload_step_status: {
+                bog_norweb_front_gallery_upload_step_status: {
                     active: {
                         background: { color: $bog_builderui_tokens.field },
                         color: $bog_builderui_tokens.text,
@@ -14543,7 +14543,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_gallery) = class $raggu_web_front_gallery extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_gallery) = class $bog_norweb_front_gallery extends ($.$bog_builderui_div) {
 		Header_title(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.header_title_text())]);
@@ -14622,7 +14622,7 @@ var $;
 			return null;
 		}
 		Card(id){
-			const obj = new this.$.$raggu_web_front_gallery_card();
+			const obj = new this.$.$bog_norweb_front_gallery_card();
 			(obj.id) = () => ((this.card_id(id)));
 			(obj.title) = () => ((this.card_title(id)));
 			(obj.domain) = () => ((this.card_domain(id)));
@@ -14655,7 +14655,7 @@ var $;
 			return null;
 		}
 		Upload(){
-			const obj = new this.$.$raggu_web_front_gallery_upload();
+			const obj = new this.$.$bog_norweb_front_gallery_upload();
 			(obj.showed) = (next) => ((this.upload_showed(next)));
 			(obj.kind) = () => ((this.upload_kind()));
 			(obj.complete) = (next) => ((this.upload_complete(next)));
@@ -14677,37 +14677,37 @@ var $;
 			return "";
 		}
 		header_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_header_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_header_title_text"));
 		}
 		header_subtitle_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_header_subtitle_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_header_subtitle_text"));
 		}
 		upload_doc_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_doc_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_doc_text"));
 		}
 		upload_idx_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_upload_idx_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_idx_text"));
 		}
 		uploaded_document_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_uploaded_document_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_uploaded_document_title"));
 		}
 		uploaded_index_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_uploaded_index_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_uploaded_index_title"));
 		}
 		uploaded_domain(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_uploaded_domain"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_uploaded_domain"));
 		}
 		uploaded_desc(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_uploaded_desc"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_uploaded_desc"));
 		}
 		dataset_law_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_dataset_law_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_dataset_law_title"));
 		}
 		dataset_law_domain(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_dataset_law_domain"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_dataset_law_domain"));
 		}
 		dataset_law_desc(){
-			return (this.$.$mol_locale.text("$raggu_web_front_gallery_dataset_law_desc"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_dataset_law_desc"));
 		}
 		sub(){
 			return [
@@ -14717,24 +14717,24 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Header_title"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Header_subtitle"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Header_text"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Spacer"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_doc_click"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Upload_doc"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_idx_click"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Upload_idx"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Header"));
-	($mol_mem_key(($.$raggu_web_front_gallery.prototype), "click"));
-	($mol_mem_key(($.$raggu_web_front_gallery.prototype), "Card"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Grid"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_showed"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_complete"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_close"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "Upload"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "select_dataset"));
-	($mol_mem(($.$raggu_web_front_gallery.prototype), "upload_kind"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_title"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_subtitle"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_text"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_doc_click"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Upload_doc"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_idx_click"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Upload_idx"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header"));
+	($mol_mem_key(($.$bog_norweb_front_gallery.prototype), "click"));
+	($mol_mem_key(($.$bog_norweb_front_gallery.prototype), "Card"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Grid"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_showed"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_complete"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_close"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Upload"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "select_dataset"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_kind"));
 
 
 ;
@@ -15011,7 +15011,7 @@ var $;
 var $;
 (function ($) {
     /** Build final URL: substitute `{placeholders}` in route, append querystring. */
-    function $raggu_web_front_api_url(endpoint, route, params, query) {
+    function $bog_norweb_front_api_url(endpoint, route, params, query) {
         let path = route;
         if (params) {
             for (const key in params) {
@@ -15046,14 +15046,14 @@ var $;
      * Endpoint host is baseline `http://localhost:8000` because operation `route`s
      * already carry the `/api/v1/...` prefix from FastAPI's OpenAPI dump.
      */
-    $.$raggu_web_front_api = (() => {
+    $.$bog_norweb_front_api = (() => {
         const endpoint = 'http://localhost:8000';
         const init = {
             credentials: 'omit',
             cache: 'no-cache',
         };
         return function call(op, opts = {}) {
-            const url = $raggu_web_front_api_url(endpoint, op.route, opts.params, opts.query);
+            const url = $bog_norweb_front_api_url(endpoint, op.route, opts.params, opts.query);
             const req = { ...init, method: op.method };
             if (opts.body !== undefined) {
                 req.headers = { ...(init.headers ?? {}), 'content-type': 'application/json' };
@@ -15068,7 +15068,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$raggu_web_front_api_ragu_health = {
+    $.$bog_norweb_front_api_ragu_health = {
         method: "GET",
         route: "/api/v1/health",
         params: undefined,
@@ -15076,7 +15076,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_capabilities = {
+    $.$bog_norweb_front_api_ragu_capabilities = {
         method: "GET",
         route: "/api/v1/capabilities",
         params: undefined,
@@ -15084,7 +15084,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_list_datasets = {
+    $.$bog_norweb_front_api_ragu_list_datasets = {
         method: "GET",
         route: "/api/v1/datasets",
         params: undefined,
@@ -15092,7 +15092,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_dataset = {
+    $.$bog_norweb_front_api_ragu_get_dataset = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}",
         params: {},
@@ -15100,7 +15100,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_graph = {
+    $.$bog_norweb_front_api_ragu_get_graph = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}/graph",
         params: {},
@@ -15108,7 +15108,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_node = {
+    $.$bog_norweb_front_api_ragu_get_node = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}/graph/nodes/{node_id}",
         params: {},
@@ -15116,7 +15116,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_node_neighbors = {
+    $.$bog_norweb_front_api_ragu_get_node_neighbors = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}/graph/nodes/{node_id}/neighbors",
         params: {},
@@ -15124,7 +15124,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_communities = {
+    $.$bog_norweb_front_api_ragu_get_communities = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}/graph/communities",
         params: {},
@@ -15132,7 +15132,7 @@ var $;
         body: undefined,
         out: {},
     };
-    $.$raggu_web_front_api_ragu_create_agent_message = {
+    $.$bog_norweb_front_api_ragu_create_agent_message = {
         method: "POST",
         route: "/api/v1/datasets/{dataset_id}/agent/messages",
         params: {},
@@ -15140,7 +15140,7 @@ var $;
         body: {},
         out: {},
     };
-    $.$raggu_web_front_api_ragu_get_agent_suggestions = {
+    $.$bog_norweb_front_api_ragu_get_agent_suggestions = {
         method: "GET",
         route: "/api/v1/datasets/{dataset_id}/agent/suggestions",
         params: {},
@@ -15183,7 +15183,7 @@ var $;
                 comms: String(comms),
             };
         }
-        class $raggu_web_front_gallery extends $.$raggu_web_front_gallery {
+        class $bog_norweb_front_gallery extends $.$bog_norweb_front_gallery {
             extra_datasets(next) {
                 return next ?? [];
             }
@@ -15196,7 +15196,7 @@ var $;
             remote_datasets() {
                 if (this.mock_flag())
                     return null;
-                const cards = this.$.$raggu_web_front_api($raggu_web_front_api_ragu_list_datasets, { query: { locale: 'ru' } });
+                const cards = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_list_datasets, { query: { locale: 'ru' } });
                 return cards.map((c) => ({
                     id: c.id,
                     nodes: format_count(c.stats.nodes),
@@ -15301,29 +15301,29 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_gallery.prototype, "extra_datasets", null);
+        ], $bog_norweb_front_gallery.prototype, "extra_datasets", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_gallery.prototype, "remote_datasets", null);
+        ], $bog_norweb_front_gallery.prototype, "remote_datasets", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "click", null);
+        ], $bog_norweb_front_gallery.prototype, "click", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "upload_doc_click", null);
+        ], $bog_norweb_front_gallery.prototype, "upload_doc_click", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "upload_idx_click", null);
+        ], $bog_norweb_front_gallery.prototype, "upload_idx_click", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "start_upload", null);
+        ], $bog_norweb_front_gallery.prototype, "start_upload", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "upload_complete", null);
+        ], $bog_norweb_front_gallery.prototype, "upload_complete", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_gallery.prototype, "upload_close", null);
-        $$.$raggu_web_front_gallery = $raggu_web_front_gallery;
+        ], $bog_norweb_front_gallery.prototype, "upload_close", null);
+        $$.$bog_norweb_front_gallery = $bog_norweb_front_gallery;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -15332,7 +15332,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_gallery, {
+    $mol_style_define($bog_norweb_front_gallery, {
         flex: { direction: 'column', shrink: 1 },
         minWidth: 0,
         padding: {
@@ -15645,7 +15645,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_explorer_forcegraph) = class $raggu_web_front_explorer_forcegraph extends ($.$mol_svg_root) {
+	($.$bog_norweb_front_explorer_forcegraph) = class $bog_norweb_front_explorer_forcegraph extends ($.$mol_svg_root) {
 		computed_view_box(){
 			return "-300 -300 600 600";
 		}
@@ -15921,36 +15921,36 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "wheel"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "pan_start"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "pan_move"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "pan_end"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "bg_click"));
-	($mol_mem_key(($.$raggu_web_front_explorer_forcegraph.prototype), "Edge"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "G_edges"));
-	($mol_mem_key(($.$raggu_web_front_explorer_forcegraph.prototype), "click"));
-	($mol_mem_key(($.$raggu_web_front_explorer_forcegraph.prototype), "hover_enter"));
-	($mol_mem_key(($.$raggu_web_front_explorer_forcegraph.prototype), "hover_leave"));
-	($mol_mem_key(($.$raggu_web_front_explorer_forcegraph.prototype), "Node"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "G_nodes"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "Tooltip_bg"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "Tooltip_text"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "Tooltip"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "select"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "selected_id"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "hovered_id"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "drag_id"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "pan_x"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "pan_y"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "zoom"));
-	($mol_mem(($.$raggu_web_front_explorer_forcegraph.prototype), "positions"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "wheel"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "pan_start"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "pan_move"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "pan_end"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "bg_click"));
+	($mol_mem_key(($.$bog_norweb_front_explorer_forcegraph.prototype), "Edge"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "G_edges"));
+	($mol_mem_key(($.$bog_norweb_front_explorer_forcegraph.prototype), "click"));
+	($mol_mem_key(($.$bog_norweb_front_explorer_forcegraph.prototype), "hover_enter"));
+	($mol_mem_key(($.$bog_norweb_front_explorer_forcegraph.prototype), "hover_leave"));
+	($mol_mem_key(($.$bog_norweb_front_explorer_forcegraph.prototype), "Node"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "G_nodes"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "Tooltip_bg"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "Tooltip_text"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "Tooltip"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "select"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "selected_id"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "hovered_id"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "drag_id"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "pan_x"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "pan_y"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "zoom"));
+	($mol_mem(($.$bog_norweb_front_explorer_forcegraph.prototype), "positions"));
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $.$raggu_web_front_explorer_forcegraph_type_color = {
+    $.$bog_norweb_front_explorer_forcegraph_type_color = {
         PERSON: '#e0524f',
         ORG: '#4f8ee0',
         LOC: '#3fb56b',
@@ -15963,7 +15963,7 @@ var $;
      * Map backend EntityType (29 values) to the visual NodeType bucket (7 values).
      * Anything unknown falls back to WORK.
      */
-    function $raggu_web_front_explorer_forcegraph_entity_bucket(t) {
+    function $bog_norweb_front_explorer_forcegraph_entity_bucket(t) {
         if (t === 'PERSON')
             return 'PERSON';
         if (t === 'ORGANIZATION' || t === 'FAMILY')
@@ -15981,7 +15981,7 @@ var $;
             return 'LAW';
         return 'WORK';
     }
-    $.$raggu_web_front_explorer_forcegraph_entity_bucket = $raggu_web_front_explorer_forcegraph_entity_bucket;
+    $.$bog_norweb_front_explorer_forcegraph_entity_bucket = $bog_norweb_front_explorer_forcegraph_entity_bucket;
     // --- Mock generator (kept exported: used by demo playground and stress-tests) ---
     const RELATIONS = [
         'MENTIONS', 'CITES', 'WORKS_AT', 'LOCATED_IN', 'INVOLVES',
@@ -15996,7 +15996,7 @@ var $;
             return s / 233280;
         };
     }
-    function $raggu_web_front_explorer_forcegraph_build_mock(seed = 42, n_nodes = 80, n_edges = 130) {
+    function $bog_norweb_front_explorer_forcegraph_build_mock(seed = 42, n_nodes = 80, n_edges = 130) {
         const r = rand(seed);
         const nodes = [];
         for (let i = 0; i < n_nodes; i++) {
@@ -16032,7 +16032,7 @@ var $;
         }
         return { nodes, edges };
     }
-    $.$raggu_web_front_explorer_forcegraph_build_mock = $raggu_web_front_explorer_forcegraph_build_mock;
+    $.$bog_norweb_front_explorer_forcegraph_build_mock = $bog_norweb_front_explorer_forcegraph_build_mock;
     const FORCE_K = 60;
     const THETA = 0.3; // Barnes-Hut opening angle. Smaller = more accurate, slower
     const THETA2 = THETA * THETA;
@@ -16105,7 +16105,7 @@ var $;
      *   p[i] += v[i] * smoothstep_gate                  ← smooth freeze at low speed
      * Repulsion via Barnes-Hut quadtree ( O(N log N) instead of naive O(N²) ).
      */
-    function $raggu_web_front_explorer_forcegraph_tick_layout(nodes, edges, positions, velocities, pinned_id, params) {
+    function $bog_norweb_front_explorer_forcegraph_tick_layout(nodes, edges, positions, velocities, pinned_id, params) {
         const { gravity, force_scale, damping, min_move, max_speed } = params;
         const k = FORCE_K;
         const k2 = k * k;
@@ -16185,17 +16185,17 @@ var $;
         }
         return { positions: next_pos, velocities: next_vel };
     }
-    $.$raggu_web_front_explorer_forcegraph_tick_layout = $raggu_web_front_explorer_forcegraph_tick_layout;
+    $.$bog_norweb_front_explorer_forcegraph_tick_layout = $bog_norweb_front_explorer_forcegraph_tick_layout;
     // Initial positions from mock coords — no synchronous FR pre-compute.
     // The view auto-starts a live sim that visibly settles the graph
     // ( Obsidian-style spring-in ).
-    function $raggu_web_front_explorer_forcegraph_initial_positions(nodes) {
+    function $bog_norweb_front_explorer_forcegraph_initial_positions(nodes) {
         const positions = {};
         for (const n of nodes)
             positions[n.id] = { x: n.x, y: n.y };
         return positions;
     }
-    $.$raggu_web_front_explorer_forcegraph_initial_positions = $raggu_web_front_explorer_forcegraph_initial_positions;
+    $.$bog_norweb_front_explorer_forcegraph_initial_positions = $bog_norweb_front_explorer_forcegraph_initial_positions;
 })($ || ($ = {}));
 
 ;
@@ -16208,7 +16208,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_explorer_forcegraph extends $.$raggu_web_front_explorer_forcegraph {
+        class $bog_norweb_front_explorer_forcegraph extends $.$bog_norweb_front_explorer_forcegraph {
             // Typed accessors over view.tree's `nodes /` and `edges /` — parents
             // (explorer / demo) feed them via `nodes <= ...` bindings.
             nodes() {
@@ -16356,7 +16356,7 @@ var $;
             // Lazily-computed initial FR layout — memoized so first render already shows
             // nodes settled into the circular bound, not the raw square mock coords.
             initial_positions() {
-                return $raggu_web_front_explorer_forcegraph_initial_positions(this.nodes());
+                return $bog_norweb_front_explorer_forcegraph_initial_positions(this.nodes());
             }
             // Seed positions on first read, or re-seed when the node set changes
             // (e.g. dataset switched, new fetch result arrived) — old cell may still
@@ -16387,7 +16387,7 @@ var $;
             // One sim tick.
             tick() {
                 const positions = this.ensure_positions();
-                const next = $raggu_web_front_explorer_forcegraph_tick_layout(this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), this.layout_params());
+                const next = $bog_norweb_front_explorer_forcegraph_tick_layout(this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), this.layout_params());
                 this.velocities = next.velocities;
                 this.positions(next.positions);
             }
@@ -16487,7 +16487,7 @@ var $;
                 return String(this.node_radius_num(id));
             }
             node_color(id) {
-                return $raggu_web_front_explorer_forcegraph_type_color[this.node_by_id()[id].type];
+                return $bog_norweb_front_explorer_forcegraph_type_color[this.node_by_id()[id].type];
             }
             node_stroke(id) {
                 if (this.selected_id() === id)
@@ -16620,8 +16620,8 @@ var $;
             selected_color() {
                 const n = this.selected_node();
                 return n
-                    ? $raggu_web_front_explorer_forcegraph_type_color[n.type]
-                    : $raggu_web_front_explorer_forcegraph_type_color.WORK;
+                    ? $bog_norweb_front_explorer_forcegraph_type_color[n.type]
+                    : $bog_norweb_front_explorer_forcegraph_type_color.WORK;
             }
             // Edges incident to selected node, with the OTHER node's label
             selected_relations() {
@@ -16639,50 +16639,50 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "computed_view_box", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "computed_view_box", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "wheel", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "wheel", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "pan_start", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "pan_start", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "pan_move", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "pan_move", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "pan_end", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "pan_end", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "initial_positions", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "initial_positions", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "tick", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "tick", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "params_kick", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "params_kick", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "dom_tree", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "dom_tree", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "node_by_id", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "node_by_id", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "hover_enter", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "hover_enter", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "hover_leave", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "hover_leave", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer_forcegraph.prototype, "edge_by_id", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "edge_by_id", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "click", null);
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "click", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_explorer_forcegraph.prototype, "bg_click", null);
-        $$.$raggu_web_front_explorer_forcegraph = $raggu_web_front_explorer_forcegraph;
+        ], $bog_norweb_front_explorer_forcegraph.prototype, "bg_click", null);
+        $$.$bog_norweb_front_explorer_forcegraph = $bog_norweb_front_explorer_forcegraph;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -16691,7 +16691,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_explorer_forcegraph, {
+    $mol_style_define($bog_norweb_front_explorer_forcegraph, {
         width: '100%',
         height: '100%',
         display: 'block',
@@ -16706,7 +16706,7 @@ var $;
     // so wire tokens through raw CSS via style_attach — same trick mol_svg uses
     // for its own text-box background. Selectors match by data-* set on the
     // tooltip elements in view.tree.
-    $mol_style_attach('raggu/web/front/explorer/forcegraph/forcegraph.view.css', '[data-forcegraph-tooltip-bg] {\n'
+    $mol_style_attach('bog/norweb/front/explorer/forcegraph/forcegraph.view.css', '[data-forcegraph-tooltip-bg] {\n'
         + '\tfill: var(--bog_builderui_card);\n'
         + '\tstroke: var(--bog_builderui_line);\n'
         + '}\n'
@@ -16716,7 +16716,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_explorer) = class $raggu_web_front_explorer extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_explorer) = class $bog_norweb_front_explorer extends ($.$bog_builderui_div) {
 		graph_nodes(){
 			return [];
 		}
@@ -16724,7 +16724,7 @@ var $;
 			return [];
 		}
 		Graph(){
-			const obj = new this.$.$raggu_web_front_explorer_forcegraph();
+			const obj = new this.$.$bog_norweb_front_explorer_forcegraph();
 			(obj.nodes) = () => ((this.graph_nodes()));
 			(obj.edges) = () => ((this.graph_edges()));
 			(obj.selected_id) = (next) => ((this.selected_id(next)));
@@ -17009,111 +17009,111 @@ var $;
 			return "";
 		}
 		filter_search_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_filter_search_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_search_text"));
 		}
 		filter_type_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_filter_type_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_type_text"));
 		}
 		filter_thresh_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_filter_thresh_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_thresh_text"));
 		}
 		filter_comm_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_filter_comm_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_comm_text"));
 		}
 		aside_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_aside_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_aside_title_text"));
 		}
 		aside_empty_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_aside_empty_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_aside_empty_text"));
 		}
 		relations_title_template(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_relations_title_template"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_relations_title_template"));
 		}
 		sources_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_sources_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_sources_title_text"));
 		}
 		sources_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_sources_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_sources_text"));
 		}
 		ask_btn_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_ask_btn_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_ask_btn_text"));
 		}
 		legend_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_title_text"));
 		}
 		legend_person_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_person_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_person_label_text"));
 		}
 		legend_org_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_org_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_org_label_text"));
 		}
 		legend_loc_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_loc_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_loc_label_text"));
 		}
 		legend_event_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_event_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_event_label_text"));
 		}
 		legend_date_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_date_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_date_label_text"));
 		}
 		legend_work_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_work_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_work_label_text"));
 		}
 		legend_law_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_explorer_legend_law_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_law_label_text"));
 		}
 		sub(){
 			return [(this.Canvas()), (this.Aside())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Graph"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Canvas_bg"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Filter_search"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Filter_type"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Filter_thresh"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Filter_comm"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Filters"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_title"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_person_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_person_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_person"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_org_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_org_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_org"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_loc_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_loc_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_loc"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_event_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_event_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_event"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_date_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_date_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_date"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_work_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_work_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_work"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_law_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_law_label"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend_law"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Legend"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Canvas"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Aside_title"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Entity_dot"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Entity_name"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Entity_head"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Entity_type"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Entity_desc"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Relations_title"));
-	($mol_mem_key(($.$raggu_web_front_explorer.prototype), "Rel_type"));
-	($mol_mem_key(($.$raggu_web_front_explorer.prototype), "Rel_target"));
-	($mol_mem_key(($.$raggu_web_front_explorer.prototype), "Rel"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Relations_list"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Sources_title"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Sources"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "ask_click"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Ask_btn"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "Aside"));
-	($mol_mem(($.$raggu_web_front_explorer.prototype), "selected_id"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Graph"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Canvas_bg"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_search"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_type"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_thresh"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_comm"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filters"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_title"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_label"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Canvas"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Aside_title"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_dot"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_name"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_head"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_type"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Entity_desc"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Relations_title"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Rel_type"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Rel_target"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Rel"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Relations_list"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Sources_title"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Sources"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "ask_click"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Ask_btn"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Aside"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "selected_id"));
 
 
 ;
@@ -17128,7 +17128,7 @@ var $;
     (function ($$) {
         // Default page size for the graph endpoint. The mock backend caps at 5000.
         const GRAPH_LIMIT = 500;
-        class $raggu_web_front_explorer extends $.$raggu_web_front_explorer {
+        class $bog_norweb_front_explorer extends $.$bog_norweb_front_explorer {
             // URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo
             // and jsdom tests where no live backend is available.
             mock_flag() {
@@ -17142,11 +17142,11 @@ var $;
                     return null;
                 if (this.mock_flag())
                     return null;
-                const res = this.$.$raggu_web_front_api($raggu_web_front_api_ragu_get_graph, { params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } });
+                const res = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_get_graph, { params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } });
                 const nodes = res.nodes.map((n) => ({
                     id: n.id,
                     label: n.label,
-                    type: $raggu_web_front_explorer_forcegraph_entity_bucket(n.entity_type),
+                    type: $bog_norweb_front_explorer_forcegraph_entity_bucket(n.entity_type),
                     degree: n.degree,
                     x: n.x,
                     y: n.y,
@@ -17162,7 +17162,7 @@ var $;
             }
             graph_data() {
                 return this.graph_remote()
-                    ?? $raggu_web_front_explorer_forcegraph_build_mock(42, 80, 130);
+                    ?? $bog_norweb_front_explorer_forcegraph_build_mock(42, 80, 130);
             }
             graph_nodes() { return this.graph_data().nodes; }
             graph_edges() { return this.graph_data().edges; }
@@ -17170,7 +17170,7 @@ var $;
             graph_view() {
                 return this.Graph();
             }
-            // Selected node, mirrors $raggu_web_front_explorer_forcegraph internals
+            // Selected node, mirrors $bog_norweb_front_explorer_forcegraph internals
             selected() {
                 return this.graph_view().selected_node();
             }
@@ -17212,11 +17212,11 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer.prototype, "graph_remote", null);
+        ], $bog_norweb_front_explorer.prototype, "graph_remote", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_explorer.prototype, "graph_data", null);
-        $$.$raggu_web_front_explorer = $raggu_web_front_explorer;
+        ], $bog_norweb_front_explorer.prototype, "graph_data", null);
+        $$.$bog_norweb_front_explorer = $bog_norweb_front_explorer;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -17273,7 +17273,7 @@ var $;
         color: $bog_builderui_tokens.shade,
         margin: { top: '2px' },
     };
-    $mol_style_define($raggu_web_front_explorer, {
+    $mol_style_define($bog_norweb_front_explorer, {
         flex: { direction: 'row', shrink: 1 },
         minWidth: 0,
         height: '100%',
@@ -18588,7 +18588,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_chat) = class $raggu_web_front_chat extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_chat) = class $bog_norweb_front_chat extends ($.$bog_builderui_div) {
 		Modes_label(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.modes_label_text())]);
@@ -18905,85 +18905,85 @@ var $;
 			return obj;
 		}
 		modes_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_modes_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_modes_label_text"));
 		}
 		trace_head_title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_head_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_head_title_text"));
 		}
 		trace_head_meta_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_head_meta_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_head_meta_text"));
 		}
 		trace_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_label_text"));
 		}
 		trace_chip_one_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_chip_one_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_one_text"));
 		}
 		trace_chip_two_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_chip_two_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_two_text"));
 		}
 		trace_chip_three_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_chip_three_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_three_text"));
 		}
 		trace_stat_chunks_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_stat_chunks_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_chunks_text"));
 		}
 		trace_stat_comms_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_stat_comms_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_comms_text"));
 		}
 		trace_stat_retr_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_stat_retr_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_retr_text"));
 		}
 		trace_stat_gen_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_stat_gen_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_gen_text"));
 		}
 		trace_stat_power_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_stat_power_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_power_text"));
 		}
 		trace_link_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_trace_link_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_link_text"));
 		}
 		sug_one_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_sug_one_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_sug_one_text"));
 		}
 		sug_two_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_sug_two_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_sug_two_text"));
 		}
 		input_hint_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_input_hint_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_input_hint_text"));
 		}
 		send_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_send_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_send_label_text"));
 		}
 		seed_user_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_seed_user_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_seed_user_text"));
 		}
 		seed_assistant_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_seed_assistant_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_seed_assistant_text"));
 		}
 		mock_prefix_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mock_prefix_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mock_prefix_text"));
 		}
 		mock_suffix_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mock_suffix_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mock_suffix_text"));
 		}
 		clear_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_clear_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_clear_text"));
 		}
 		mode_llm_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mode_llm_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_llm_text"));
 		}
 		mode_local_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mode_local_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_local_text"));
 		}
 		mode_global_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mode_global_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_global_text"));
 		}
 		mode_mix_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mode_mix_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_mix_text"));
 		}
 		mode_plan_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_chat_mode_plan_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_plan_text"));
 		}
 		mode(next){
 			if(next !== undefined) return next;
@@ -19018,60 +19018,60 @@ var $;
 			return obj;
 		}
 	};
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Modes_label"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "select_llm"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Mode_llm"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "select_local"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Mode_local"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "select_global"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Mode_global"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "select_mix"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Mode_mix"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "select_plan"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Mode_plan"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Modes"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "clear_click"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Clear"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Modes_bar"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Messages"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Skel_line_one"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Skel_line_two"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Skel_line_three"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Status"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Body_flow"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Body"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "use_sug_one"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Sug_one"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "use_sug_two"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Sug_two"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Suggestions"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "prompt_text"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "prompt_submit"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Prompt"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Input_send"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Input_row"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "Footer"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_text"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "trace_toggle"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_head_title"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_head_meta"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_head"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_label"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_chip_one"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_chip_two"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_chip_three"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_chips"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stat_chunks"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stat_comms"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stat_retr"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stat_gen"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stat_power"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_stats"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_link"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace_body"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message_trace"));
-	($mol_mem(($.$raggu_web_front_chat.prototype), "mode"));
-	($mol_mem_key(($.$raggu_web_front_chat.prototype), "Message"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes_label"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_llm"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_llm"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_local"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_local"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_global"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_global"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_mix"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_mix"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_plan"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_plan"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "clear_click"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Clear"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes_bar"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Messages"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Skel_line_one"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Skel_line_two"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Skel_line_three"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Status"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Body_flow"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Body"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "use_sug_one"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Sug_one"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "use_sug_two"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Sug_two"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Suggestions"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "prompt_text"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "prompt_submit"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Prompt"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Input_send"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Input_row"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Footer"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_text"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "trace_toggle"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head_title"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head_meta"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_label"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_one"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_two"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_three"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chips"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_chunks"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_comms"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_retr"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_gen"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_power"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stats"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_link"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_body"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "mode"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message"));
 
 
 ;
@@ -19620,9 +19620,9 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_chat extends $.$raggu_web_front_chat {
+        class $bog_norweb_front_chat extends $.$bog_norweb_front_chat {
             history(next) {
-                const stored = this.$.$mol_state_session.value('$raggu_web_front_chat.history', next);
+                const stored = this.$.$mol_state_session.value('$bog_norweb_front_chat.history', next);
                 if (stored)
                     return stored;
                 return [
@@ -19631,10 +19631,10 @@ var $;
                 ];
             }
             prompt_text(next) {
-                return this.$.$mol_state_session.value('$raggu_web_front_chat.prompt_text', next) ?? '';
+                return this.$.$mol_state_session.value('$bog_norweb_front_chat.prompt_text', next) ?? '';
             }
             mode(next) {
-                return this.$.$mol_state_session.value('$raggu_web_front_chat.mode', next) ?? 'llm';
+                return this.$.$mol_state_session.value('$bog_norweb_front_chat.mode', next) ?? 'llm';
             }
             is_llm() { return this.mode() === 'llm'; }
             is_local() { return this.mode() === 'local'; }
@@ -19762,53 +19762,53 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_chat.prototype, "history", null);
+        ], $bog_norweb_front_chat.prototype, "history", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_chat.prototype, "mode", null);
+        ], $bog_norweb_front_chat.prototype, "mode", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "select_llm", null);
+        ], $bog_norweb_front_chat.prototype, "select_llm", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "select_local", null);
+        ], $bog_norweb_front_chat.prototype, "select_local", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "select_global", null);
+        ], $bog_norweb_front_chat.prototype, "select_global", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "select_mix", null);
+        ], $bog_norweb_front_chat.prototype, "select_mix", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "select_plan", null);
+        ], $bog_norweb_front_chat.prototype, "select_plan", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_chat.prototype, "llm", null);
+        ], $bog_norweb_front_chat.prototype, "llm", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_chat.prototype, "rows", null);
+        ], $bog_norweb_front_chat.prototype, "rows", null);
         __decorate([
             $mol_mem_key
-        ], $raggu_web_front_chat.prototype, "Message_trace", null);
+        ], $bog_norweb_front_chat.prototype, "Message_trace", null);
         __decorate([
             $mol_mem_key
-        ], $raggu_web_front_chat.prototype, "trace_expanded", null);
+        ], $bog_norweb_front_chat.prototype, "trace_expanded", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "trace_toggle", null);
+        ], $bog_norweb_front_chat.prototype, "trace_toggle", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "prompt_submit", null);
+        ], $bog_norweb_front_chat.prototype, "prompt_submit", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "use_sug_one", null);
+        ], $bog_norweb_front_chat.prototype, "use_sug_one", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "use_sug_two", null);
+        ], $bog_norweb_front_chat.prototype, "use_sug_two", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_chat.prototype, "clear_click", null);
-        $$.$raggu_web_front_chat = $raggu_web_front_chat;
+        ], $bog_norweb_front_chat.prototype, "clear_click", null);
+        $$.$bog_norweb_front_chat = $bog_norweb_front_chat;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -19875,7 +19875,7 @@ var $;
         color: $bog_builderui_tokens.shade,
         cursor: 'pointer',
     };
-    $mol_style_define($raggu_web_front_chat, {
+    $mol_style_define($bog_norweb_front_chat, {
         flex: { direction: 'column', shrink: 1 },
         minWidth: 0,
         minHeight: 0,
@@ -20180,14 +20180,14 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_dashboard_dist) = class $raggu_web_front_dashboard_dist extends ($.$bog_builderui_div) {};
+	($.$bog_norweb_front_dashboard_dist) = class $bog_norweb_front_dashboard_dist extends ($.$bog_builderui_div) {};
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("raggu/web/front/dashboard/dist/dist.view.css", "[raggu_web_front_dashboard_dist] {\n\tbackground-image: repeating-linear-gradient(90deg, #efedea 0 7px, #e7e4e0 7px 14px);\n}\n");
+    $mol_style_attach("bog/norweb/front/dashboard/dist/dist.view.css", "[bog_norweb_front_dashboard_dist] {\n\tbackground-image: repeating-linear-gradient(90deg, #efedea 0 7px, #e7e4e0 7px 14px);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -20195,7 +20195,7 @@ var $;
 
 
 ;
-	($.$raggu_web_front_dashboard_metric) = class $raggu_web_front_dashboard_metric extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_dashboard_metric) = class $bog_norweb_front_dashboard_metric extends ($.$bog_builderui_div) {
 		Name(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.name())]);
@@ -20232,10 +20232,10 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_dashboard_metric.prototype), "Name"));
-	($mol_mem(($.$raggu_web_front_dashboard_metric.prototype), "Bar_fill"));
-	($mol_mem(($.$raggu_web_front_dashboard_metric.prototype), "Bar"));
-	($mol_mem(($.$raggu_web_front_dashboard_metric.prototype), "Value"));
+	($mol_mem(($.$bog_norweb_front_dashboard_metric.prototype), "Name"));
+	($mol_mem(($.$bog_norweb_front_dashboard_metric.prototype), "Bar_fill"));
+	($mol_mem(($.$bog_norweb_front_dashboard_metric.prototype), "Bar"));
+	($mol_mem(($.$bog_norweb_front_dashboard_metric.prototype), "Value"));
 
 
 ;
@@ -20248,14 +20248,14 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_dashboard_metric extends $.$raggu_web_front_dashboard_metric {
+        class $bog_norweb_front_dashboard_metric extends $.$bog_norweb_front_dashboard_metric {
             Bar_fill() {
                 const fill = super.Bar_fill();
                 fill.style = () => ({ width: this.pct() });
                 return fill;
             }
         }
-        $$.$raggu_web_front_dashboard_metric = $raggu_web_front_dashboard_metric;
+        $$.$bog_norweb_front_dashboard_metric = $bog_norweb_front_dashboard_metric;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -20264,7 +20264,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_dashboard_metric, {
+    $mol_style_define($bog_norweb_front_dashboard_metric, {
         flex: { direction: 'row' },
         align: { items: 'center' },
         gap: '10px',
@@ -20304,7 +20304,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_dashboard_stage) = class $raggu_web_front_dashboard_stage extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_dashboard_stage) = class $bog_norweb_front_dashboard_stage extends ($.$bog_builderui_div) {
 		Name(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.name())]);
@@ -20341,10 +20341,10 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_dashboard_stage.prototype), "Name"));
-	($mol_mem(($.$raggu_web_front_dashboard_stage.prototype), "Bar_fill"));
-	($mol_mem(($.$raggu_web_front_dashboard_stage.prototype), "Bar"));
-	($mol_mem(($.$raggu_web_front_dashboard_stage.prototype), "Time"));
+	($mol_mem(($.$bog_norweb_front_dashboard_stage.prototype), "Name"));
+	($mol_mem(($.$bog_norweb_front_dashboard_stage.prototype), "Bar_fill"));
+	($mol_mem(($.$bog_norweb_front_dashboard_stage.prototype), "Bar"));
+	($mol_mem(($.$bog_norweb_front_dashboard_stage.prototype), "Time"));
 
 
 ;
@@ -20357,14 +20357,14 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_dashboard_stage extends $.$raggu_web_front_dashboard_stage {
+        class $bog_norweb_front_dashboard_stage extends $.$bog_norweb_front_dashboard_stage {
             Bar_fill() {
                 const fill = super.Bar_fill();
                 fill.style = () => ({ width: this.pct() });
                 return fill;
             }
         }
-        $$.$raggu_web_front_dashboard_stage = $raggu_web_front_dashboard_stage;
+        $$.$bog_norweb_front_dashboard_stage = $bog_norweb_front_dashboard_stage;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -20373,7 +20373,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_dashboard_stage, {
+    $mol_style_define($bog_norweb_front_dashboard_stage, {
         flex: { direction: 'row' },
         align: { items: 'center' },
         gap: '10px',
@@ -20414,7 +20414,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_dashboard_log) = class $raggu_web_front_dashboard_log extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_dashboard_log) = class $bog_norweb_front_dashboard_log extends ($.$bog_builderui_div) {
 		expanded(next){
 			if(next !== undefined) return next;
 			return false;
@@ -20552,29 +20552,29 @@ var $;
 			return "▾";
 		}
 		attr(){
-			return {...(super.attr()), "raggu_web_front_dashboard_log_expanded": (this.expanded())};
+			return {...(super.attr()), "bog_norweb_front_dashboard_log_expanded": (this.expanded())};
 		}
 		sub(){
 			return [(this.Head()), (this.Trace())];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "expanded"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "toggle"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Time"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Text"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Mode"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Dur"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Arrow"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Head"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_label"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stat_chunks"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stat_comms"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stat_retr"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stat_gen"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stat_power"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_stats"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace_link"));
-	($mol_mem(($.$raggu_web_front_dashboard_log.prototype), "Trace"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "expanded"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "toggle"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Time"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Text"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Mode"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Dur"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Arrow"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Head"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_label"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stat_chunks"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stat_comms"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stat_retr"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stat_gen"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stat_power"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_stats"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace_link"));
+	($mol_mem(($.$bog_norweb_front_dashboard_log.prototype), "Trace"));
 
 
 ;
@@ -20587,7 +20587,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_dashboard_log extends $.$raggu_web_front_dashboard_log {
+        class $bog_norweb_front_dashboard_log extends $.$bog_norweb_front_dashboard_log {
             toggle(next) {
                 this.expanded(!this.expanded());
                 return null;
@@ -20598,8 +20598,8 @@ var $;
         }
         __decorate([
             $mol_action
-        ], $raggu_web_front_dashboard_log.prototype, "toggle", null);
-        $$.$raggu_web_front_dashboard_log = $raggu_web_front_dashboard_log;
+        ], $bog_norweb_front_dashboard_log.prototype, "toggle", null);
+        $$.$bog_norweb_front_dashboard_log = $bog_norweb_front_dashboard_log;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -20616,7 +20616,7 @@ var $;
         },
         color: $bog_builderui_tokens.shade,
     };
-    $mol_style_define($raggu_web_front_dashboard_log, {
+    $mol_style_define($bog_norweb_front_dashboard_log, {
         flex: { direction: 'column' },
         border: { radius: '6px' },
         overflow: 'hidden',
@@ -20699,7 +20699,7 @@ var $;
             color: $bog_builderui_tokens.current,
         },
         '@': {
-            raggu_web_front_dashboard_log_expanded: {
+            bog_norweb_front_dashboard_log_expanded: {
                 true: {
                     Trace: {
                         display: 'flex',
@@ -20711,7 +20711,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_dashboard) = class $raggu_web_front_dashboard extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_dashboard) = class $bog_norweb_front_dashboard extends ($.$bog_builderui_div) {
 		Title(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([(this.title_text())]);
@@ -20782,7 +20782,7 @@ var $;
 			return obj;
 		}
 		Stats_dist(){
-			const obj = new this.$.$raggu_web_front_dashboard_dist();
+			const obj = new this.$.$bog_norweb_front_dashboard_dist();
 			(obj.sub) = () => ([(this.stats_dist_text())]);
 			return obj;
 		}
@@ -20810,7 +20810,7 @@ var $;
 			return "0%";
 		}
 		Metric(id){
-			const obj = new this.$.$raggu_web_front_dashboard_metric();
+			const obj = new this.$.$bog_norweb_front_dashboard_metric();
 			(obj.name) = () => ((this.metric_name(id)));
 			(obj.value) = () => ((this.metric_value(id)));
 			(obj.pct) = () => ((this.metric_pct(id)));
@@ -20919,7 +20919,7 @@ var $;
 			return "0%";
 		}
 		Stage(id){
-			const obj = new this.$.$raggu_web_front_dashboard_stage();
+			const obj = new this.$.$bog_norweb_front_dashboard_stage();
 			(obj.name) = () => ((this.stage_name(id)));
 			(obj.time) = () => ((this.stage_time(id)));
 			(obj.pct) = () => ((this.stage_pct(id)));
@@ -20975,7 +20975,7 @@ var $;
 			return "";
 		}
 		Log(id){
-			const obj = new this.$.$raggu_web_front_dashboard_log();
+			const obj = new this.$.$bog_norweb_front_dashboard_log();
 			(obj.time) = () => ((this.log_time(id)));
 			(obj.text) = () => ((this.log_text(id)));
 			(obj.mode) = () => ((this.log_mode(id)));
@@ -21024,58 +21024,58 @@ var $;
 			return [];
 		}
 		title_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_title_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_title_text"));
 		}
 		subtitle_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_subtitle_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_subtitle_text"));
 		}
 		card_stats_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_card_stats_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_card_stats_label_text"));
 		}
 		stat_nodes_lbl_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_stat_nodes_lbl_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_stat_nodes_lbl_text"));
 		}
 		stat_edges_lbl_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_stat_edges_lbl_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_stat_edges_lbl_text"));
 		}
 		stat_comms_lbl_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_stat_comms_lbl_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_stat_comms_lbl_text"));
 		}
 		stats_dist_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_stats_dist_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_stats_dist_text"));
 		}
 		card_quality_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_card_quality_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_card_quality_label_text"));
 		}
 		quality_footer_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_quality_footer_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_quality_footer_text"));
 		}
 		card_energy_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_card_energy_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_card_energy_label_text"));
 		}
 		energy_kwh_lbl_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_energy_kwh_lbl_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_energy_kwh_lbl_text"));
 		}
 		energy_cost_lbl_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_energy_cost_lbl_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_energy_cost_lbl_text"));
 		}
 		energy_formula_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_energy_formula_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_energy_formula_text"));
 		}
 		energy_note_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_energy_note_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_energy_note_text"));
 		}
 		card_timings_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_card_timings_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_card_timings_label_text"));
 		}
 		card_logs_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_card_logs_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_card_logs_label_text"));
 		}
 		trace_label_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_trace_label_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_trace_label_text"));
 		}
 		trace_link_text(){
-			return (this.$.$mol_locale.text("$raggu_web_front_dashboard_trace_link_text"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_dashboard_trace_link_text"));
 		}
 		sub(){
 			return [
@@ -21085,47 +21085,47 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Title"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Subtitle"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_stats_label"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_nodes_val"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_nodes_lbl"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_nodes"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_edges_val"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_edges_lbl"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_edges"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_comms_val"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_comms_lbl"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stat_comms"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stats_row"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stats_dist"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_stats"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_quality_label"));
-	($mol_mem_key(($.$raggu_web_front_dashboard.prototype), "Metric"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Metric_rows"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Quality_footer"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_quality"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_energy_label"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_kwh_val"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_kwh_lbl"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_kwh"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_cost_val"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_cost_lbl"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_cost"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_row"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_formula"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Energy_note"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_energy"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_timings_label"));
-	($mol_mem_key(($.$raggu_web_front_dashboard.prototype), "Stage"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Stage_rows"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_timings"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_logs_label"));
-	($mol_mem_key(($.$raggu_web_front_dashboard.prototype), "log_expanded"));
-	($mol_mem_key(($.$raggu_web_front_dashboard.prototype), "Log"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Log_list"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Card_logs"));
-	($mol_mem(($.$raggu_web_front_dashboard.prototype), "Grid"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Subtitle"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_stats_label"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_nodes_val"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_nodes_lbl"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_nodes"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_edges_val"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_edges_lbl"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_edges"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_comms_val"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_comms_lbl"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stat_comms"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stats_row"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stats_dist"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_stats"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_quality_label"));
+	($mol_mem_key(($.$bog_norweb_front_dashboard.prototype), "Metric"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Metric_rows"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Quality_footer"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_quality"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_energy_label"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_kwh_val"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_kwh_lbl"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_kwh"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_cost_val"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_cost_lbl"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_cost"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_row"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_formula"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Energy_note"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_energy"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_timings_label"));
+	($mol_mem_key(($.$bog_norweb_front_dashboard.prototype), "Stage"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Stage_rows"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_timings"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_logs_label"));
+	($mol_mem_key(($.$bog_norweb_front_dashboard.prototype), "log_expanded"));
+	($mol_mem_key(($.$bog_norweb_front_dashboard.prototype), "Log"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Log_list"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Card_logs"));
+	($mol_mem(($.$bog_norweb_front_dashboard.prototype), "Grid"));
 
 
 ;
@@ -21188,7 +21188,7 @@ var $;
                 return parseFloat(trimmed);
             return parseFloat(trimmed) || 0;
         }
-        class $raggu_web_front_dashboard extends $.$raggu_web_front_dashboard {
+        class $bog_norweb_front_dashboard extends $.$bog_norweb_front_dashboard {
             metrics() { return METRICS; }
             stages() { return STAGES; }
             logs() { return LOGS; }
@@ -21240,7 +21240,7 @@ var $;
                 return `${sign}${Math.abs(saved_pct)}%`;
             }
         }
-        $$.$raggu_web_front_dashboard = $raggu_web_front_dashboard;
+        $$.$bog_norweb_front_dashboard = $bog_norweb_front_dashboard;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -21281,7 +21281,7 @@ var $;
         },
         color: $bog_builderui_tokens.shade,
     };
-    $mol_style_define($raggu_web_front_dashboard, {
+    $mol_style_define($bog_norweb_front_dashboard, {
         flex: { direction: 'column', shrink: 1 },
         minWidth: 0,
         padding: {
@@ -21402,7 +21402,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$raggu_web_front_app) = class $raggu_web_front_app extends ($.$bog_builderui_div) {
+	($.$bog_norweb_front_app) = class $bog_norweb_front_app extends ($.$bog_builderui_div) {
 		favicon_icon(){
 			const obj = new this.$.$mol_icon_graph();
 			return obj;
@@ -21420,7 +21420,7 @@ var $;
 			return "";
 		}
 		Sidebar(){
-			const obj = new this.$.$raggu_web_front_sidebar();
+			const obj = new this.$.$bog_norweb_front_sidebar();
 			(obj.screen) = (next) => ((this.screen(next)));
 			(obj.dataset_id) = () => ((this.dataset_id()));
 			(obj.dataset_title) = () => ((this.dataset_title()));
@@ -21435,7 +21435,7 @@ var $;
 			return null;
 		}
 		Topbar(){
-			const obj = new this.$.$raggu_web_front_topbar();
+			const obj = new this.$.$bog_norweb_front_topbar();
 			(obj.screen) = () => ((this.screen()));
 			(obj.dataset_id) = () => ((this.dataset_id()));
 			(obj.dataset_title) = () => ((this.dataset_title()));
@@ -21455,7 +21455,7 @@ var $;
 			return obj;
 		}
 		Settings(){
-			const obj = new this.$.$raggu_web_front_settings();
+			const obj = new this.$.$bog_norweb_front_settings();
 			(obj.showed) = (next) => ((this.settings_open(next)));
 			return obj;
 		}
@@ -21490,16 +21490,16 @@ var $;
 			return "light";
 		}
 		screen_gallery_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_app_screen_gallery_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_gallery_title"));
 		}
 		screen_explorer_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_app_screen_explorer_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_explorer_title"));
 		}
 		screen_chat_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_app_screen_chat_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_chat_title"));
 		}
 		screen_dashboard_title(){
-			return (this.$.$mol_locale.text("$raggu_web_front_app_screen_dashboard_title"));
+			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_dashboard_title"));
 		}
 		attr(){
 			return {
@@ -21524,45 +21524,45 @@ var $;
 			];
 		}
 		Gallery(){
-			const obj = new this.$.$raggu_web_front_gallery();
+			const obj = new this.$.$bog_norweb_front_gallery();
 			(obj.dataset_id) = () => ((this.dataset_id()));
 			(obj.select_dataset) = (next) => ((this.select_dataset(next)));
 			return obj;
 		}
 		Explorer(){
-			const obj = new this.$.$raggu_web_front_explorer();
+			const obj = new this.$.$bog_norweb_front_explorer();
 			(obj.dataset_id) = () => ((this.dataset_id()));
 			(obj.ask_click) = (next) => ((this.ask_chat(next)));
 			return obj;
 		}
 		Chat(){
-			const obj = new this.$.$raggu_web_front_chat();
+			const obj = new this.$.$bog_norweb_front_chat();
 			return obj;
 		}
 		Dashboard(){
-			const obj = new this.$.$raggu_web_front_dashboard();
+			const obj = new this.$.$bog_norweb_front_dashboard();
 			return obj;
 		}
 	};
-	($mol_mem(($.$raggu_web_front_app.prototype), "favicon_icon"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Favicon"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Theme_auto"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Sidebar"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "open_settings"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Topbar"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Body"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Main"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Settings"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "select_dataset"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "ask_chat"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "screen"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "preset"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "dataset_id"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "settings_open"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Gallery"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Explorer"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Chat"));
-	($mol_mem(($.$raggu_web_front_app.prototype), "Dashboard"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "favicon_icon"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Favicon"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Theme_auto"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Sidebar"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "open_settings"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Topbar"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Body"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Main"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Settings"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "select_dataset"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "ask_chat"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "screen"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "preset"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "dataset_id"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "settings_open"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Gallery"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Explorer"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Chat"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Dashboard"));
 
 
 ;
@@ -21575,7 +21575,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $raggu_web_front_app extends $.$raggu_web_front_app {
+        class $bog_norweb_front_app extends $.$bog_norweb_front_app {
             body() {
                 // Без выбранного датасета всегда показываем Gallery — остальные экраны бессмысленны.
                 const s = this.dataset_id() ? this.screen() : 'gallery';
@@ -21630,26 +21630,26 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $raggu_web_front_app.prototype, "lights_mode", null);
+        ], $bog_norweb_front_app.prototype, "lights_mode", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_app.prototype, "open_settings", null);
+        ], $bog_norweb_front_app.prototype, "open_settings", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_app.prototype, "select_dataset", null);
+        ], $bog_norweb_front_app.prototype, "select_dataset", null);
         __decorate([
             $mol_action
-        ], $raggu_web_front_app.prototype, "ask_chat", null);
+        ], $bog_norweb_front_app.prototype, "ask_chat", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_app.prototype, "screen", null);
+        ], $bog_norweb_front_app.prototype, "screen", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_app.prototype, "preset", null);
+        ], $bog_norweb_front_app.prototype, "preset", null);
         __decorate([
             $mol_mem
-        ], $raggu_web_front_app.prototype, "dataset_id", null);
-        $$.$raggu_web_front_app = $raggu_web_front_app;
+        ], $bog_norweb_front_app.prototype, "dataset_id", null);
+        $$.$bog_norweb_front_app = $bog_norweb_front_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -21658,7 +21658,7 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    $mol_style_define($raggu_web_front_app, {
+    $mol_style_define($bog_norweb_front_app, {
         height: '100vh',
         width: '100%',
         background: { color: $bog_builderui_tokens.back },
@@ -25417,8 +25417,8 @@ var $;
         // view.tree `nodes /` and `edges /` inputs — mirrors the parent-owned
         // data-source pattern (explorer / demo do the same).
         function make_graph($, n_nodes = 80, n_edges = 130) {
-            const g = $raggu_web_front_explorer_forcegraph.make({ $ });
-            const mock = $raggu_web_front_explorer_forcegraph_build_mock(42, n_nodes, n_edges);
+            const g = $bog_norweb_front_explorer_forcegraph.make({ $ });
+            const mock = $bog_norweb_front_explorer_forcegraph_build_mock(42, n_nodes, n_edges);
             g.nodes = () => mock.nodes;
             g.edges = () => mock.edges;
             return { g, mock };
@@ -25549,17 +25549,17 @@ var $;
                 const results = [];
                 const params = { gravity: 0.09, force_scale: 0.06, damping: 0.82, min_move: 0.15, max_speed: 12 };
                 for (const n of sizes) {
-                    const g = $raggu_web_front_explorer_forcegraph_build_mock(42, n, Math.round(n * 1.6));
+                    const g = $bog_norweb_front_explorer_forcegraph_build_mock(42, n, Math.round(n * 1.6));
                     const positions = {};
                     const velocities = {};
                     for (const node of g.nodes)
                         positions[node.id] = { x: node.x, y: node.y };
                     // Warm-up
-                    let state = $raggu_web_front_explorer_forcegraph_tick_layout(g.nodes, g.edges, positions, velocities, '', params);
+                    let state = $bog_norweb_front_explorer_forcegraph_tick_layout(g.nodes, g.edges, positions, velocities, '', params);
                     // 10-tick avg
                     const t0 = Date.now();
                     for (let i = 0; i < 10; i++)
-                        state = $raggu_web_front_explorer_forcegraph_tick_layout(g.nodes, g.edges, state.positions, state.velocities, '', params);
+                        state = $bog_norweb_front_explorer_forcegraph_tick_layout(g.nodes, g.edges, state.positions, state.velocities, '', params);
                     const tick_ms = ((Date.now() - t0) / 10).toFixed(2);
                     results.push({ n, edges: g.edges.length, tick_ms: `${tick_ms}ms` });
                 }
@@ -25904,30 +25904,30 @@ var $;
         }
         $mol_test({
             'app.Body: $mol_scroll override is flex column'($) {
-                const rule = style_rule('$raggu_web_front_app', 'raggu_web_front_app_body');
+                const rule = style_rule('$bog_norweb_front_app', 'bog_norweb_front_app_body');
                 $mol_assert_equal(/display: flex/.test(rule), true);
                 $mol_assert_equal(/flex-direction: column/.test(rule), true);
             },
             'settings.Body: $mol_scroll override is flex column'($) {
-                const rule = style_rule('$raggu_web_front_settings', 'raggu_web_front_settings_body');
+                const rule = style_rule('$bog_norweb_front_settings', 'bog_norweb_front_settings_body');
                 $mol_assert_equal(/display: flex/.test(rule), true);
                 $mol_assert_equal(/flex-direction: column/.test(rule), true);
             },
             'settings: 6 distinct groups + presets row under Body'($) {
-                const v = $raggu_web_front_settings.make({ $ });
+                const v = $bog_norweb_front_settings.make({ $ });
                 v.showed(true);
                 // 1 presets row + 6 step groups
                 $mol_assert_equal(v.Body().sub().length, 7);
             },
             'app: every screen exists as sub-view'($) {
-                const v = $raggu_web_front_app.make({ $ });
-                $mol_assert_equal(v.Gallery() instanceof $raggu_web_front_gallery, true);
-                $mol_assert_equal(v.Explorer() instanceof $raggu_web_front_explorer, true);
-                $mol_assert_equal(v.Chat() instanceof $raggu_web_front_chat, true);
-                $mol_assert_equal(v.Dashboard() instanceof $raggu_web_front_dashboard, true);
+                const v = $bog_norweb_front_app.make({ $ });
+                $mol_assert_equal(v.Gallery() instanceof $bog_norweb_front_gallery, true);
+                $mol_assert_equal(v.Explorer() instanceof $bog_norweb_front_explorer, true);
+                $mol_assert_equal(v.Chat() instanceof $bog_norweb_front_chat, true);
+                $mol_assert_equal(v.Dashboard() instanceof $bog_norweb_front_dashboard, true);
             },
             'app.body: switches by screen()'($) {
-                const v = $raggu_web_front_app.make({ $ });
+                const v = $bog_norweb_front_app.make({ $ });
                 // body() forces Gallery when no dataset selected — задать датасет чтобы проверить остальные экраны
                 v.dataset_id('wiki');
                 v.screen('gallery');
@@ -25940,13 +25940,13 @@ var $;
                 $mol_assert_equal(v.body()[0], v.Dashboard());
             },
             'app.body: forces Gallery when no dataset selected'($) {
-                const v = $raggu_web_front_app.make({ $ });
+                const v = $bog_norweb_front_app.make({ $ });
                 v.screen('explorer');
                 $mol_assert_equal(v.dataset_id(), '');
                 $mol_assert_equal(v.body()[0], v.Gallery());
             },
             'dashboard: metric and stage rows match data'($) {
-                const v = $raggu_web_front_dashboard.make({ $ });
+                const v = $bog_norweb_front_dashboard.make({ $ });
                 $mol_assert_equal(v.Metric_rows().sub().length, 3);
                 $mol_assert_equal(v.Stage_rows().sub().length, 5);
             },
@@ -25954,11 +25954,11 @@ var $;
                 // No live backend in node tests → force ?mock=1 so remote_datasets returns null
                 // and falls back to BUILTIN; otherwise $mol_fetch leaks a pending promise.
                 $.$mol_state_arg.value('mock', '1');
-                const v = $raggu_web_front_gallery.make({ $ });
+                const v = $bog_norweb_front_gallery.make({ $ });
                 $mol_assert_equal(v.Grid().sub().length, 1);
             },
             'url state: screen / preset / dataset_id round-trip through $mol_state_arg'($) {
-                const app = $raggu_web_front_app.make({ $ });
+                const app = $bog_norweb_front_app.make({ $ });
                 const arg = $.$mol_state_arg;
                 // defaults are NOT written to URL (kept clean)
                 $mol_assert_equal(app.screen(), 'gallery');
@@ -25976,7 +25976,7 @@ var $;
             },
             'e2e: full user flow through all screens'($) {
                 $.$mol_state_arg.value('mock', '1');
-                const app = $raggu_web_front_app.make({ $ });
+                const app = $bog_norweb_front_app.make({ $ });
                 // initial: gallery screen, BUILTIN mock has just one card (law)
                 $mol_assert_equal(app.screen(), 'gallery');
                 $mol_assert_equal(app.body()[0], app.Gallery());
@@ -26022,7 +26022,7 @@ var $;
             // уже с destroy'нутыми $-контекстами → wire ретраит locale fetch → warn'ы.
             // ---- settings real controls ----
             'settings.apply_preset(fast): key fields land at fast values'($) {
-                const s = $raggu_web_front_settings.make({ $ });
+                const s = $bog_norweb_front_settings.make({ $ });
                 s.apply_preset('fast');
                 $mol_assert_equal(s.chunking_strategy(), 'Simple');
                 $mol_assert_equal(s.chunking_size_str(), '256');
@@ -26030,7 +26030,7 @@ var $;
                 $mol_assert_equal(s.extraction_model(), 'meno-lite-7b');
             },
             'settings.apply_preset(accurate): key fields land at accurate values'($) {
-                const s = $raggu_web_front_settings.make({ $ });
+                const s = $bog_norweb_front_settings.make({ $ });
                 s.apply_preset('accurate');
                 $mol_assert_equal(s.chunking_strategy(), 'SmartSemantic');
                 $mol_assert_equal(s.summarization_llm(), true);
@@ -26038,14 +26038,14 @@ var $;
                 $mol_assert_equal(s.search_mode(), 'Mix');
             },
             'settings.apply_preset(demo): key fields land at demo values'($) {
-                const s = $raggu_web_front_settings.make({ $ });
+                const s = $bog_norweb_front_settings.make({ $ });
                 s.apply_preset('demo');
                 $mol_assert_equal(s.chunking_size_str(), '512');
                 $mol_assert_equal(s.search_mode(), 'Local');
                 $mol_assert_equal(s.refinement_isolated(), true);
             },
             'settings: every group renders Controls array (sub > 0)'($) {
-                const s = $raggu_web_front_settings.make({ $ });
+                const s = $bog_norweb_front_settings.make({ $ });
                 $mol_assert_equal(s.Group_chunking().Controls().sub().length > 0, true);
                 $mol_assert_equal(s.Group_extraction().Controls().sub().length > 0, true);
                 $mol_assert_equal(s.Group_summarization().Controls().sub().length > 0, true);
@@ -26057,29 +26057,29 @@ var $;
             },
             // ---- dashboard energy formula ----
             'dashboard.pipeline_seconds: sum of STAGES.time'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 // 1.2 + 8.4 + 3.1 + 2.0 + 0.6 = 15.3
                 $mol_assert_equal(d.pipeline_seconds().toFixed(1), '15.3');
             },
             'dashboard.energy_kwh: TDP × time × PUE / 1000'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 // 300 × (15.3 / 3600) × 1.4 / 1000 ≈ 0.001785
                 const kwh = d.energy_kwh();
                 $mol_assert_equal(kwh > 0.0017 && kwh < 0.0019, true);
                 $mol_assert_equal(d.energy_kwh_val(), '0.00');
             },
             'dashboard.energy_cost_val: formatted % vs gpt-4 baseline'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 const val = d.energy_cost_val();
                 $mol_assert_equal(/^[−+]\d+%$/.test(val), true);
             },
             // ---- dashboard log expand ----
             'dashboard.log: default not expanded'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 $mol_assert_equal(d.Log('q1').expanded(), false);
             },
             'dashboard.log.toggle: flips expanded'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 const log = d.Log('q1');
                 $mol_assert_equal(log.expanded(), false);
                 log.toggle();
@@ -26088,15 +26088,15 @@ var $;
                 $mol_assert_equal(log.expanded(), false);
             },
             'dashboard.log: Trace sub-view exists, attr reflects expanded state'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 const log = d.Log('q1');
                 $mol_assert_equal(!!log.Trace(), true);
-                $mol_assert_equal(log.attr().raggu_web_front_dashboard_log_expanded, false);
+                $mol_assert_equal(log.attr().bog_norweb_front_dashboard_log_expanded, false);
                 log.toggle();
-                $mol_assert_equal(log.attr().raggu_web_front_dashboard_log_expanded, true);
+                $mol_assert_equal(log.attr().bog_norweb_front_dashboard_log_expanded, true);
             },
             'dashboard.log.arrow: glyph depends on expanded'($) {
-                const d = $raggu_web_front_dashboard.make({ $ });
+                const d = $bog_norweb_front_dashboard.make({ $ });
                 const log = d.Log('q2');
                 $mol_assert_equal(log.arrow(), '▾');
                 log.toggle();
@@ -26104,39 +26104,39 @@ var $;
             },
             // ---- export ----
             'export.formats: explorer has 4 items'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 ex.screen = () => 'explorer';
                 $mol_assert_equal(ex.formats().length, 4);
                 $mol_assert_equal(ex.formats()[0].id, 'graphml');
             },
             'export.formats: chat has 2 items'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 ex.screen = () => 'chat';
                 $mol_assert_equal(ex.formats().length, 2);
                 $mol_assert_equal(ex.formats()[0].id, 'md_chat');
             },
             'export.formats: dashboard has 2 items'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 ex.screen = () => 'dashboard';
                 $mol_assert_equal(ex.formats().length, 2);
                 $mol_assert_equal(ex.formats()[0].id, 'csv_dash');
             },
             'export.formats: gallery → empty list, Items renders Empty placeholder'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 ex.screen = () => 'gallery';
                 $mol_assert_equal(ex.formats().length, 0);
                 $mol_assert_equal(ex.items().length, 1);
                 $mol_assert_equal(ex.items()[0], ex.Empty());
             },
             'export.items: count matches formats across screens'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 ex.screen = () => 'explorer';
                 $mol_assert_equal(ex.items().length, 4);
                 ex.screen = () => 'chat';
                 $mol_assert_equal(ex.items().length, 2);
             },
             'export.payload: returns Blob for each format id'($) {
-                const ex = $raggu_web_front_export.make({ $ });
+                const ex = $bog_norweb_front_export.make({ $ });
                 const ids = [
                     'graphml', 'gexf', 'json_graph', 'png_graph',
                     'md_chat', 'json_chat',
