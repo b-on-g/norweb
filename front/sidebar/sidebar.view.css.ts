@@ -1,6 +1,6 @@
 /** @see $bog_builderui_tokens */
 namespace $ {
-	$mol_style_define( $raggu_web_front_sidebar, {
+	$mol_style_define( $bog_norweb_front_sidebar, {
 		minWidth: '228px',
 		maxWidth: '228px',
 		background: { color: $bog_builderui_tokens.field },

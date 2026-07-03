@@ -1,4 +1,4 @@
-$raggu_web_front_app $bog_builderui_div
+$bog_norweb_front_app $bog_builderui_div
 	screen? \gallery
 	preset? \demo
 	dataset_id? \
@@ -23,13 +23,13 @@ $raggu_web_front_app $bog_builderui_div
 			Icon <= favicon_icon $mol_icon_graph
 		<= Theme_auto $bog_theme_auto
 	sub /
-		<= Sidebar $raggu_web_front_sidebar
+		<= Sidebar $bog_norweb_front_sidebar
 			screen? <=> screen?
 			dataset_id <= dataset_id
 			dataset_title <= dataset_title \
 			Theme_auto <= Theme_auto
 		<= Main $bog_builderui_div sub /
-			<= Topbar $raggu_web_front_topbar
+			<= Topbar $bog_norweb_front_topbar
 				screen <= screen
 				dataset_id <= dataset_id
 				dataset_title <= dataset_title \
@@ -37,13 +37,13 @@ $raggu_web_front_app $bog_builderui_div
 				preset? <=> preset?
 				open_settings? <=> open_settings? null
 			<= Body $mol_scroll sub <= body
-		<= Settings $raggu_web_front_settings
+		<= Settings $bog_norweb_front_settings
 			showed? <=> settings_open?
-	Gallery $raggu_web_front_gallery
+	Gallery $bog_norweb_front_gallery
 		dataset_id <= dataset_id
 		select_dataset? <=> select_dataset? null
-	Explorer $raggu_web_front_explorer
+	Explorer $bog_norweb_front_explorer
 		dataset_id <= dataset_id
 		ask_click? <=> ask_chat? null
-	Chat $raggu_web_front_chat
-	Dashboard $raggu_web_front_dashboard
+	Chat $bog_norweb_front_chat
+	Dashboard $bog_norweb_front_dashboard

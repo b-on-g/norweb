@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $raggu_web_front_app extends $.$raggu_web_front_app {
+	export class $bog_norweb_front_app extends $.$bog_norweb_front_app {
 
 		body() {
 			// Без выбранного датасета всегда показываем Gallery — остальные экраны бессмысленны.

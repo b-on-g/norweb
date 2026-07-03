@@ -1,4 +1,4 @@
-$raggu_web_front_chat $bog_builderui_div
+$bog_norweb_front_chat $bog_builderui_div
 	modes_label_text @ \Search engine
 	trace_head_title_text @ \▾ Answer trace
 	trace_head_meta_text @ \LocalSearch · top-k 8 · rerank ✓

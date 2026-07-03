@@ -1,4 +1,4 @@
-$raggu_web_front_explorer $bog_builderui_div
+$bog_norweb_front_explorer $bog_builderui_div
 	dataset_id \
 	selected_id? \
 	ask_click? null
@@ -23,7 +23,7 @@ $raggu_web_front_explorer $bog_builderui_div
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
-				<= Graph $raggu_web_front_explorer_forcegraph
+				<= Graph $bog_norweb_front_explorer_forcegraph
 					nodes <= graph_nodes /
 					edges <= graph_edges /
 					selected_id? <=> selected_id?

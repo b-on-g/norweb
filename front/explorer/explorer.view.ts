@@ -1,12 +1,12 @@
 namespace $.$$ {
 
-	type GraphNode = $raggu_web_front_explorer_forcegraph_node
-	type GraphEdge = $raggu_web_front_explorer_forcegraph_edge
+	type GraphNode = $bog_norweb_front_explorer_forcegraph_node
+	type GraphEdge = $bog_norweb_front_explorer_forcegraph_edge
 
 	// Default page size for the graph endpoint. The mock backend caps at 5000.
 	const GRAPH_LIMIT = 500
 
-	export class $raggu_web_front_explorer extends $.$raggu_web_front_explorer {
+	export class $bog_norweb_front_explorer extends $.$bog_norweb_front_explorer {
 
 		// URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo
 		// and jsdom tests where no live backend is available.
@@ -21,14 +21,14 @@ namespace $.$$ {
 			const id = this.dataset_id()
 			if ( !id ) return null
 			if ( this.mock_flag() ) return null
-			const res = this.$.$raggu_web_front_api(
-				$raggu_web_front_api_ragu_get_graph,
+			const res = this.$.$bog_norweb_front_api(
+				$bog_norweb_front_api_ragu_get_graph,
 				{ params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } },
 			)
 			const nodes: GraphNode[] = res.nodes.map( (n: any) => ( {
 				id: n.id,
 				label: n.label,
-				type: $raggu_web_front_explorer_forcegraph_entity_bucket( n.entity_type ),
+				type: $bog_norweb_front_explorer_forcegraph_entity_bucket( n.entity_type ),
 				degree: n.degree,
 				x: n.x,
 				y: n.y,
@@ -46,7 +46,7 @@ namespace $.$$ {
 		@$mol_mem
 		graph_data(): { nodes: readonly GraphNode[], edges: readonly GraphEdge[] } {
 			return this.graph_remote()
-				?? $raggu_web_front_explorer_forcegraph_build_mock( 42, 80, 130 )
+				?? $bog_norweb_front_explorer_forcegraph_build_mock( 42, 80, 130 )
 		}
 
 		graph_nodes(): readonly GraphNode[] { return this.graph_data().nodes }
@@ -54,10 +54,10 @@ namespace $.$$ {
 
 		// Cast to extended class to access TS-only methods (selected_node/selected_color/...)
 		graph_view() {
-			return this.Graph() as $.$$.$raggu_web_front_explorer_forcegraph
+			return this.Graph() as $.$$.$bog_norweb_front_explorer_forcegraph
 		}
 
-		// Selected node, mirrors $raggu_web_front_explorer_forcegraph internals
+		// Selected node, mirrors $bog_norweb_front_explorer_forcegraph internals
 		selected() {
 			return this.graph_view().selected_node()
 		}

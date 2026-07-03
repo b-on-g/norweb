@@ -8,11 +8,11 @@ namespace $.$$ {
 		trace?: boolean
 	}
 
-	export class $raggu_web_front_chat extends $.$raggu_web_front_chat {
+	export class $bog_norweb_front_chat extends $.$bog_norweb_front_chat {
 
 		@ $mol_mem
 		history( next?: Raggu_chat_item[] ): Raggu_chat_item[] {
-			const stored = this.$.$mol_state_session.value( '$raggu_web_front_chat.history', next as any ) as Raggu_chat_item[] | null
+			const stored = this.$.$mol_state_session.value( '$bog_norweb_front_chat.history', next as any ) as Raggu_chat_item[] | null
 			if( stored ) return stored
 			return [
 				{ role: 'user', text: this.seed_user_text() },
@@ -21,12 +21,12 @@ namespace $.$$ {
 		}
 
 		override prompt_text( next?: string ) {
-			return this.$.$mol_state_session.value( '$raggu_web_front_chat.prompt_text', next ) ?? ''
+			return this.$.$mol_state_session.value( '$bog_norweb_front_chat.prompt_text', next ) ?? ''
 		}
 
 		@ $mol_mem
 		override mode( next?: string ): string {
-			return this.$.$mol_state_session.value( '$raggu_web_front_chat.mode', next ) ?? 'llm'
+			return this.$.$mol_state_session.value( '$bog_norweb_front_chat.mode', next ) ?? 'llm'
 		}
 
 		is_llm() { return this.mode() === 'llm' }

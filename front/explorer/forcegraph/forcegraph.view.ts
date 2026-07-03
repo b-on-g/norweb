@@ -1,12 +1,12 @@
 namespace $.$$ {
 
 	// Local type aliases — view code reads better with short names,
-	// while shared identifiers live in `types.ts` under `$raggu_web_front_explorer_forcegraph_*`.
-	type GraphNode = $raggu_web_front_explorer_forcegraph_node
-	type GraphEdge = $raggu_web_front_explorer_forcegraph_edge
-	type LayoutParams = $raggu_web_front_explorer_forcegraph_layout_params
+	// while shared identifiers live in `types.ts` under `$bog_norweb_front_explorer_forcegraph_*`.
+	type GraphNode = $bog_norweb_front_explorer_forcegraph_node
+	type GraphEdge = $bog_norweb_front_explorer_forcegraph_edge
+	type LayoutParams = $bog_norweb_front_explorer_forcegraph_layout_params
 
-	export class $raggu_web_front_explorer_forcegraph extends $.$raggu_web_front_explorer_forcegraph {
+	export class $bog_norweb_front_explorer_forcegraph extends $.$bog_norweb_front_explorer_forcegraph {
 
 		// Typed accessors over view.tree's `nodes /` and `edges /` — parents
 		// (explorer / demo) feed them via `nodes <= ...` bindings.
@@ -165,7 +165,7 @@ namespace $.$$ {
 		// nodes settled into the circular bound, not the raw square mock coords.
 		@$mol_mem
 		initial_positions(): Record< string, { x: number, y: number } > {
-			return $raggu_web_front_explorer_forcegraph_initial_positions( this.nodes() as GraphNode[] )
+			return $bog_norweb_front_explorer_forcegraph_initial_positions( this.nodes() as GraphNode[] )
 		}
 
 		// Seed positions on first read, or re-seed when the node set changes
@@ -201,7 +201,7 @@ namespace $.$$ {
 		@$mol_action
 		tick() {
 			const positions = this.ensure_positions()
-			const next = $raggu_web_front_explorer_forcegraph_tick_layout(
+			const next = $bog_norweb_front_explorer_forcegraph_tick_layout(
 				this.nodes() as GraphNode[],
 				this.edges() as GraphEdge[],
 				positions,
@@ -313,7 +313,7 @@ namespace $.$$ {
 			return String( this.node_radius_num( id ) )
 		}
 		node_color( id: string ) {
-			return $raggu_web_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
+			return $bog_norweb_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
 		}
 		node_stroke( id: string ) {
 			if ( this.selected_id() === id ) return '#ffffff'
@@ -457,8 +457,8 @@ namespace $.$$ {
 		selected_color() {
 			const n = this.selected_node()
 			return n
-				? $raggu_web_front_explorer_forcegraph_type_color[ n.type ]
-				: $raggu_web_front_explorer_forcegraph_type_color.WORK
+				? $bog_norweb_front_explorer_forcegraph_type_color[ n.type ]
+				: $bog_norweb_front_explorer_forcegraph_type_color.WORK
 		}
 
 		// Edges incident to selected node, with the OTHER node's label

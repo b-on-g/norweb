@@ -5,7 +5,7 @@ namespace $ {
 	 * Each entry carries HTTP method, route template with `{placeholders}`,
 	 * plus typed `params` / `query` / `body` / `out` marker fields.
 	 */
-	export type $raggu_web_front_api_operation = {
+	export type $bog_norweb_front_api_operation = {
 		method: string
 		route: string
 		params: any
@@ -15,14 +15,14 @@ namespace $ {
 	}
 
 	/** Options passed alongside operation call. */
-	export type $raggu_web_front_api_options< Op extends $raggu_web_front_api_operation > = {
+	export type $bog_norweb_front_api_options< Op extends $bog_norweb_front_api_operation > = {
 		params?: Op[ 'params' ]
 		query?: Op[ 'query' ]
 		body?: Op[ 'body' ]
 	}
 
 	/** Build final URL: substitute `{placeholders}` in route, append querystring. */
-	function $raggu_web_front_api_url(
+	function $bog_norweb_front_api_url(
 		endpoint: string,
 		route: string,
 		params: Record< string, any > | undefined,
@@ -60,17 +60,17 @@ namespace $ {
 	 * Endpoint host is baseline `http://localhost:8000` because operation `route`s
 	 * already carry the `/api/v1/...` prefix from FastAPI's OpenAPI dump.
 	 */
-	export const $raggu_web_front_api = ( () => {
+	export const $bog_norweb_front_api = ( () => {
 		const endpoint = 'http://localhost:8000'
 		const init: RequestInit = {
 			credentials: 'omit',
 			cache: 'no-cache',
 		}
-		return function call< Op extends $raggu_web_front_api_operation >(
+		return function call< Op extends $bog_norweb_front_api_operation >(
 			op: Op,
-			opts: $raggu_web_front_api_options< Op > = {},
+			opts: $bog_norweb_front_api_options< Op > = {},
 		): Op[ 'out' ] {
-			const url = $raggu_web_front_api_url( endpoint, op.route, opts.params, opts.query )
+			const url = $bog_norweb_front_api_url( endpoint, op.route, opts.params, opts.query )
 			const req: RequestInit = { ... init, method: op.method }
 			if ( opts.body !== undefined ) {
 				req.headers = { ... ( init.headers ?? {} ), 'content-type': 'application/json' }
