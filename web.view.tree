@@ -46,6 +46,23 @@ $bog_theme_auto $mol_plugin
 	is_light_now false
 	attr * mol_theme <= theme \
 
+$mol_image $mol_view
+	dom_name \img
+	attr *any
+		^
+		src <= uri \
+		title <= hint
+		alt <= title \
+		loading <= loading \lazy
+		decoding <= decoding \async
+		crossOrigin <= cors null
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
 $bog_norweb_front_sidebar_nav $bog_builderui_div
 	icon \
 	label \
@@ -152,8 +169,10 @@ $bog_norweb_front_sidebar $bog_builderui_div
 	lang_label_text @ \LANG
 	sub /
 		<= Brand $bog_builderui_div sub /
-			<= Brand_logo $bog_builderui_div sub / \R
-			<= Brand_title $bog_builderui_div sub / \RAGU
+			<= Brand_logo $mol_image
+				uri \bog/norweb/front/assets/nornickel_mark.png
+				title \Nornickel
+			<= Brand_title $bog_builderui_div sub / \Nornickel
 			<= Brand_badge $bog_builderui_div sub / \demo
 		<= Sections_label $bog_builderui_div sub / <= sections_label_text
 		<= Nav $bog_builderui_div sub /
@@ -180,6 +199,11 @@ $bog_norweb_front_sidebar $bog_builderui_div
 				active <= is_dashboard false
 				disabled <= no_dataset false
 				click? <=> click_dashboard? null
+			<= Nav_summary $bog_norweb_front_sidebar_nav
+				icon \✦
+				label @ \Summary
+				active <= is_summary false
+				click? <=> click_summary? null
 		<= Spacer $bog_builderui_div
 		<= Footer $bog_builderui_div sub /
 			<= Corpus_label $bog_builderui_div sub / <= corpus_label_text
@@ -1162,6 +1186,7 @@ $bog_norweb_front_gallery $bog_builderui_div
 	upload_close? null
 	header_title_text @ \Corpus gallery
 	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
+	mock_badge_text @ \⚠ Mock data — backend is not connected
 	upload_doc_text @ \＋ Upload document
 	upload_idx_text @ \⇪ Upload prebuilt index
 	uploaded_document_title @ \Uploaded document
@@ -1176,6 +1201,11 @@ $bog_norweb_front_gallery $bog_builderui_div
 			<= Header_text $bog_builderui_div sub /
 				<= Header_title $bog_builderui_div sub / <= header_title_text
 				<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
+				<= Mock_badge $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_gallery_mock_badge_showed <= is_mock false
+					sub / <= mock_badge_text
 			<= Spacer $bog_builderui_div
 			<= Upload_doc $bog_builderui_div
 				sub / <= upload_doc_text
@@ -1853,6 +1883,138 @@ $bog_norweb_front_dashboard $bog_builderui_div
 						trace_label <= trace_label_text
 						trace_link <= trace_link_text
 
+$bog_norweb_front_summary_card $bog_builderui_div
+	icon \
+	badge \
+	title \
+	desc \
+	more \
+	click? null
+	event *
+		^
+		click? <=> click? null
+	sub /
+		<= Head $bog_builderui_div sub /
+			<= Icon $bog_builderui_div sub / <= icon
+			<= Spacer $bog_builderui_div
+			<= Badge $bog_builderui_div sub / <= badge
+		<= Title $bog_builderui_div sub / <= title
+		<= Desc $bog_builderui_div sub / <= desc
+		<= More $bog_builderui_div sub / <= more
+
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click? <=> click? <=> event_click? null
+
+$bog_norweb_front_summary_detail $bog_builderui_div
+	showed false
+	icon \
+	badge \
+	title \
+	image \
+	facts /
+	links /
+	body /
+	close? null
+	attr *
+		^
+		bog_norweb_front_summary_detail_showed <= showed
+	sub /
+		<= Backdrop $bog_builderui_div
+			event * click? <=> close? null
+		<= Panel $bog_builderui_div sub /
+			<= Header $bog_builderui_div sub /
+				<= Icon $bog_builderui_div sub / <= icon
+				<= Header_text $bog_builderui_div sub /
+					<= Title $bog_builderui_div sub / <= title
+					<= Badge $bog_builderui_div sub / <= badge
+				<= Spacer $bog_builderui_div
+				<= Close_btn $bog_builderui_div
+					event * click? <=> close? null
+					sub / \✕
+			<= Body $mol_scroll sub /
+				<= Content $bog_builderui_div sub <= body
+	Image $mol_image
+		uri <= image
+	Fact* $bog_builderui_div sub /
+		<= Fact_marker* $bog_builderui_div sub / \—
+		<= Fact_text* $bog_builderui_div sub / <= fact* \
+	Links $bog_builderui_div sub <= link_rows /
+	Link* $mol_link
+		uri <= link_uri* \
+		title <= link_label* \
+		attr *
+			^
+			target \_blank
+
+$bog_norweb_front_summary $bog_builderui_div
+	opened? \
+	header_title_text @ \Solution overview
+	header_subtitle_text @ \Key technologies of the pipeline — click a card for details
+	more_text @ \Details →
+	ragu_badge @ \GraphRAG engine
+	ragu_desc @ \Open-source GraphRAG engine: builds a knowledge graph from documents and answers questions with sources.
+	ragu_fact_1 @ \Indexing pipeline: chunking → entity and relation extraction → community summarization → search index.
+	ragu_fact_2 @ \Combines local graph search, global community summaries and a vector index.
+	ragu_fact_3 @ \Fully open stack, runs on-premise — data stays inside the contour.
+	mol_badge @ \Frontend
+	mol_desc @ \This interface is built with $mol — a reactive TypeScript framework with lazy rendering.
+	mol_fact_1 @ \Lazy rendering out of the box: a knowledge graph with thousands of nodes stays responsive.
+	mol_fact_2 @ \Tiny bundle and zero runtime dependencies.
+	mol_fact_3 @ \UI source code is open.
+	menolite_badge @ \LLM
+	menolite_desc @ \Open LLM (bond005/meno-lite-0.1) used for entity and relation extraction.
+	menolite_fact_1 @ \Open weights on Hugging Face — fits the open-source stack requirement.
+	menolite_fact_2 @ \Extracts typed entities and relations from Russian scientific text.
+	menolite_fact_3 @ \Used at indexing time; answers are generated with the same open stack.
+	nerel_badge @ \Annotation schema
+	nerel_desc @ \NEREL schema (29 entity types, 49 relation types) extended with materials-science domain types.
+	nerel_fact_1 @ \Domain entities added: MATERIAL, PROCESS, EQUIPMENT, PROPERTY, EXPERIMENT, PUBLICATION, EXPERT, FACILITY.
+	nerel_fact_2 @ \Domain relations added: USES_MATERIAL, OPERATES_AT_CONDITION, PRODUCES_OUTPUT, DESCRIBED_IN, VALIDATED_BY, CONTRADICTS.
+	nerel_fact_3 @ \The schema lives at prompt level — extends without model retraining.
+	ocr_badge @ \Preprocessing
+	ocr_desc @ \Document preprocessing: PDF and DOCX are converted to clean text before indexing.
+	ocr_fact_1 @ \A 93-page, 7 MB PDF is extracted in about 4 minutes.
+	ocr_fact_2 @ \Tables are preserved; images, XLSX and PPTX are next in line.
+	sub /
+		<= Header $bog_builderui_div sub /
+			<= Header_title $bog_builderui_div sub / <= header_title_text
+			<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
+		<= Grid $bog_builderui_div sub <= rows /
+			<= Card* $bog_norweb_front_summary_card
+				icon <= card_icon* \
+				badge <= card_badge* \
+				title <= card_title* \
+				desc <= card_desc* \
+				more <= more_text
+				click? <=> click*? null
+	Detail $bog_norweb_front_summary_detail
+		showed <= detail_showed false
+		icon <= opened_icon \
+		badge <= opened_badge \
+		title <= opened_title \
+		facts <= opened_facts /
+		links <= opened_links /
+		image <= opened_image \
+		close? <=> close? null
+
 $bog_norweb_front_app $bog_builderui_div
 	screen? \gallery
 	preset? \demo
@@ -1864,6 +2026,7 @@ $bog_norweb_front_app $bog_builderui_div
 	screen_explorer_title @ \Knowledge graph
 	screen_chat_title @ \Chat with agent
 	screen_dashboard_title @ \Dashboard
+	screen_summary_title @ \Solution overview
 	attr *
 		^
 		bog_builderui_lights <= lights_mode
@@ -1894,6 +2057,7 @@ $bog_norweb_front_app $bog_builderui_div
 			<= Body $mol_scroll sub <= body
 		<= Settings $bog_norweb_front_settings
 			showed? <=> settings_open?
+		<= Summary_popup $mol_view
 	Gallery $bog_norweb_front_gallery
 		dataset_id <= dataset_id
 		select_dataset? <=> select_dataset? null
@@ -1902,3 +2066,4 @@ $bog_norweb_front_app $bog_builderui_div
 		ask_click? <=> ask_chat? null
 	Chat $bog_norweb_front_chat
 	Dashboard $bog_norweb_front_dashboard
+	Summary $bog_norweb_front_summary

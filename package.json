@@ -218,6 +218,7 @@
     "$mol_state_arg",
     "$mol_media",
     "$bog_norweb_front_sidebar",
+    "$mol_image",
     "$bog_norweb_front_sidebar_nav",
     "$bog_theme_switch",
     "$mol_icon_white_balance_sunny",
@@ -293,7 +294,11 @@
     "$bog_norweb_front_dashboard_dist",
     "$bog_norweb_front_dashboard_metric",
     "$bog_norweb_front_dashboard_stage",
-    "$bog_norweb_front_dashboard_log"
+    "$bog_norweb_front_dashboard_log",
+    "$bog_norweb_front_summary",
+    "$bog_norweb_front_summary_card",
+    "$bog_norweb_front_summary_detail",
+    "$mol_link"
   ],
   "dependencies": {
     "autoinstall": "*",

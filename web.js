@@ -4595,6 +4595,109 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_image) = class $mol_image extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		loading(){
+			return "lazy";
+		}
+		decoding(){
+			return "async";
+		}
+		cors(){
+			return null;
+		}
+		natural_width(){
+			return 0;
+		}
+		natural_height(){
+			return 0;
+		}
+		load(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "img";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"src": (this.uri()), 
+				"title": (this.hint()), 
+				"alt": (this.title()), 
+				"loading": (this.loading()), 
+				"decoding": (this.decoding()), 
+				"crossOrigin": (this.cors()), 
+				"width": (this.natural_width()), 
+				"height": (this.natural_height())
+			};
+		}
+		event(){
+			return {"load": (next) => (this.load(next))};
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+	};
+	($mol_mem(($.$mol_image.prototype), "load"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_image extends $.$mol_image {
+            natural_width(next) {
+                const dom = this.dom_node();
+                if (dom.naturalWidth)
+                    return dom.naturalWidth;
+                const found = this.uri().match(/\bwidth=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            natural_height(next) {
+                const dom = this.dom_node();
+                if (dom.naturalHeight)
+                    return dom.naturalHeight;
+                const found = this.uri().match(/\bheight=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            load() {
+                this.natural_width(null);
+                this.natural_height(null);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_height", null);
+        $$.$mol_image = $mol_image;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$bog_norweb_front_sidebar_nav) = class $bog_norweb_front_sidebar_nav extends ($.$bog_builderui_div) {
 		click(next){
 			if(next !== undefined) return next;
@@ -6357,13 +6460,14 @@ var $;
 ;
 	($.$bog_norweb_front_sidebar) = class $bog_norweb_front_sidebar extends ($.$bog_builderui_div) {
 		Brand_logo(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => (["R"]);
+			const obj = new this.$.$mol_image();
+			(obj.uri) = () => ("bog/norweb/front/assets/nornickel_mark.png");
+			(obj.title) = () => ("Nornickel");
 			return obj;
 		}
 		Brand_title(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => (["RAGU"]);
+			(obj.sub) = () => (["Nornickel"]);
 			return obj;
 		}
 		Brand_badge(){
@@ -6451,13 +6555,29 @@ var $;
 			(obj.click) = (next) => ((this.click_dashboard(next)));
 			return obj;
 		}
+		is_summary(){
+			return false;
+		}
+		click_summary(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Nav_summary(){
+			const obj = new this.$.$bog_norweb_front_sidebar_nav();
+			(obj.icon) = () => ("✦");
+			(obj.label) = () => ((this.$.$mol_locale.text("$bog_norweb_front_sidebar_Nav_summary_label")));
+			(obj.active) = () => ((this.is_summary()));
+			(obj.click) = (next) => ((this.click_summary(next)));
+			return obj;
+		}
 		Nav(){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.sub) = () => ([
 				(this.Nav_gallery()), 
 				(this.Nav_explorer()), 
 				(this.Nav_chat()), 
-				(this.Nav_dashboard())
+				(this.Nav_dashboard()), 
+				(this.Nav_summary())
 			]);
 			return obj;
 		}
@@ -6591,6 +6711,8 @@ var $;
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_chat"));
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_dashboard"));
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_dashboard"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "click_summary"));
+	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav_summary"));
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Nav"));
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Spacer"));
 	($mol_mem(($.$bog_norweb_front_sidebar.prototype), "Corpus_label"));
@@ -6624,6 +6746,7 @@ var $;
             is_explorer() { return this.screen() === 'explorer'; }
             is_chat() { return this.screen() === 'chat'; }
             is_dashboard() { return this.screen() === 'dashboard'; }
+            is_summary() { return this.screen() === 'summary'; }
             no_dataset() { return !this.dataset_id(); }
             is_en() { return this.$.$mol_locale.lang() === 'en'; }
             is_ru() { return this.$.$mol_locale.lang() === 'ru'; }
@@ -6631,6 +6754,7 @@ var $;
             click_explorer() { this.screen('explorer'); return null; }
             click_chat() { this.screen('chat'); return null; }
             click_dashboard() { this.screen('dashboard'); return null; }
+            click_summary() { this.screen('summary'); return null; }
             click_en() { this.$.$mol_locale.lang('en'); return null; }
             click_ru() { this.$.$mol_locale.lang('ru'); return null; }
         }
@@ -6646,6 +6770,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_norweb_front_sidebar.prototype, "click_dashboard", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_sidebar.prototype, "click_summary", null);
         __decorate([
             $mol_action
         ], $bog_norweb_front_sidebar.prototype, "click_en", null);
@@ -6690,11 +6817,6 @@ var $;
             minWidth: '26px',
             maxWidth: '26px',
             height: '26px',
-            border: { width: '2px', style: 'solid', color: $bog_builderui_tokens.current, radius: '6px' },
-            align: { items: 'center' },
-            justify: { content: 'center' },
-            font: { weight: 800, size: '14px' },
-            color: $bog_builderui_tokens.current,
         },
         Brand_title: {
             font: { weight: 700, size: '16px' },
@@ -14142,9 +14264,22 @@ var $;
 			(obj.sub) = () => ([(this.header_subtitle_text())]);
 			return obj;
 		}
+		is_mock(){
+			return false;
+		}
+		Mock_badge(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_gallery_mock_badge_showed": (this.is_mock())});
+			(obj.sub) = () => ([(this.mock_badge_text())]);
+			return obj;
+		}
 		Header_text(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.Header_title()), (this.Header_subtitle())]);
+			(obj.sub) = () => ([
+				(this.Header_title()), 
+				(this.Header_subtitle()), 
+				(this.Mock_badge())
+			]);
 			return obj;
 		}
 		Spacer(){
@@ -14270,6 +14405,9 @@ var $;
 		header_subtitle_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_header_subtitle_text"));
 		}
+		mock_badge_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_mock_badge_text"));
+		}
 		upload_doc_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_gallery_upload_doc_text"));
 		}
@@ -14307,6 +14445,7 @@ var $;
 	};
 	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_title"));
 	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_subtitle"));
+	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Mock_badge"));
 	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Header_text"));
 	($mol_mem(($.$bog_norweb_front_gallery.prototype), "Spacer"));
 	($mol_mem(($.$bog_norweb_front_gallery.prototype), "upload_doc_click"));
@@ -14510,19 +14649,32 @@ var $;
             mock_flag() {
                 return this.$.$mol_state_arg.value('mock') === '1';
             }
-            // Reactive fetch of preindexed datasets. Any transport error propagates
-            // via $mol_wire so the view frame shows an error plate instead of moks.
+            // Reactive fetch of preindexed datasets. While loading, the wire promise
+            // is rethrown as usual; a real transport error falls back to BUILTIN moks
+            // so the demo stays alive without the backend.
             remote_datasets() {
                 if (this.mock_flag())
                     return null;
-                const cards = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_list_datasets, { query: { locale: 'ru' } });
-                return cards.map((c) => ({
-                    id: c.id,
-                    nodes: format_count(c.stats.nodes),
-                    edges: format_count(c.stats.edges),
-                    comms: String(c.stats.communities),
-                    dynamic: { title: c.title, domain: c.domain, desc: c.description },
-                }));
+                try {
+                    const cards = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_list_datasets, { query: { locale: 'ru' } });
+                    return cards.map((c) => ({
+                        id: c.id,
+                        nodes: format_count(c.stats.nodes),
+                        edges: format_count(c.stats.edges),
+                        comms: String(c.stats.communities),
+                        dynamic: { title: c.title, domain: c.domain, desc: c.description },
+                    }));
+                }
+                catch (error) {
+                    if ($mol_promise_like(error))
+                        $mol_fail_hidden(error);
+                    console.warn('Datasets fetch failed, falling back to mock:', error);
+                    return null;
+                }
+            }
+            // Показываем юзеру плашку, что перед ним моки, а не данные с бэка.
+            is_mock() {
+                return this.remote_datasets() === null;
             }
             datasets() {
                 const base = this.remote_datasets() ?? BUILTIN;
@@ -14678,6 +14830,30 @@ var $;
             font: { size: '13px' },
             color: $bog_builderui_tokens.shade,
             margin: { top: '3px' },
+        },
+        Mock_badge: {
+            display: 'none',
+            alignSelf: 'flex-start',
+            font: {
+                family: 'ui-monospace, monospace',
+                weight: 600,
+                size: '11px',
+            },
+            color: '#8a6d1b',
+            background: { color: '#f5c84226' },
+            border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '6px' },
+            padding: {
+                top: '3px',
+                bottom: '3px',
+                left: '8px',
+                right: '8px',
+            },
+            margin: { top: '8px' },
+            '@': {
+                bog_norweb_front_gallery_mock_badge_showed: {
+                    true: { display: 'flex' },
+                },
+            },
         },
         Spacer: {
             flex: { grow: 1 },
@@ -20729,6 +20905,1032 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_norweb_front_summary_card) = class $bog_norweb_front_summary_card extends ($.$bog_builderui_div) {
+		click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Icon(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.icon())]);
+			return obj;
+		}
+		Spacer(){
+			const obj = new this.$.$bog_builderui_div();
+			return obj;
+		}
+		Badge(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.badge())]);
+			return obj;
+		}
+		Head(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([
+				(this.Icon()), 
+				(this.Spacer()), 
+				(this.Badge())
+			]);
+			return obj;
+		}
+		Title(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Desc(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.desc())]);
+			return obj;
+		}
+		More(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.more())]);
+			return obj;
+		}
+		icon(){
+			return "";
+		}
+		badge(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		desc(){
+			return "";
+		}
+		more(){
+			return "";
+		}
+		event(){
+			return {...(super.event()), "click": (next) => (this.click(next))};
+		}
+		sub(){
+			return [
+				(this.Head()), 
+				(this.Title()), 
+				(this.Desc()), 
+				(this.More())
+			];
+		}
+	};
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "click"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Icon"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Badge"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Head"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "Desc"));
+	($mol_mem(($.$bog_norweb_front_summary_card.prototype), "More"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_norweb_front_summary_card, {
+        background: { color: $bog_builderui_tokens.card },
+        border: { width: '2px', style: 'solid', color: $bog_builderui_tokens.line, radius: '10px' },
+        padding: {
+            top: '12px',
+            bottom: '12px',
+            left: '12px',
+            right: '12px',
+        },
+        flex: { direction: 'column' },
+        cursor: 'pointer',
+        ':hover': {
+            border: { color: $bog_builderui_tokens.current },
+        },
+        Head: {
+            flex: { direction: 'row' },
+            align: { items: 'center' },
+        },
+        Icon: {
+            font: { size: '22px' },
+        },
+        Spacer: {
+            flex: { grow: 1 },
+        },
+        Badge: {
+            font: {
+                family: 'ui-monospace, monospace',
+                weight: 600,
+                size: '10px',
+            },
+            color: $bog_builderui_tokens.shade,
+            background: { color: $bog_builderui_tokens.field },
+            border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '5px' },
+            padding: {
+                top: '2px',
+                bottom: '2px',
+                left: '7px',
+                right: '7px',
+            },
+        },
+        Title: {
+            font: { weight: 700, size: '14px' },
+            margin: { top: '11px' },
+        },
+        Desc: {
+            font: { size: '11px' },
+            color: $bog_builderui_tokens.shade,
+            margin: { top: '4px' },
+            lineHeight: '1.4',
+            flex: { grow: 1 },
+        },
+        More: {
+            font: { weight: 600, size: '11px' },
+            color: $bog_builderui_tokens.current,
+            margin: { top: '10px' },
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_link) = class $mol_link extends ($.$mol_view) {
+		uri_toggle(){
+			return "";
+		}
+		hint(){
+			return "";
+		}
+		hint_safe(){
+			return (this.hint());
+		}
+		target(){
+			return "_self";
+		}
+		file_name(){
+			return "";
+		}
+		current(){
+			return false;
+		}
+		relation(){
+			return "";
+		}
+		event_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		click(next){
+			return (this.event_click(next));
+		}
+		uri(){
+			return "";
+		}
+		dom_name(){
+			return "a";
+		}
+		uri_off(){
+			return "";
+		}
+		uri_native(){
+			return null;
+		}
+		external(){
+			return false;
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"href": (this.uri_toggle()), 
+				"title": (this.hint_safe()), 
+				"target": (this.target()), 
+				"download": (this.file_name()), 
+				"mol_link_current": (this.current()), 
+				"rel": (this.relation())
+			};
+		}
+		sub(){
+			return [(this.title())];
+		}
+		arg(){
+			return {};
+		}
+		event(){
+			return {...(super.event()), "click": (next) => (this.click(next))};
+		}
+	};
+	($mol_mem(($.$mol_link.prototype), "event_click"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Dynamic hyperlink. It can add, change or remove parameters. A link that leads to the current page has [mol_link_current] attribute set to true.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_link_demo
+         */
+        class $mol_link extends $.$mol_link {
+            uri_toggle() {
+                return this.current() ? this.uri_off() : this.uri();
+            }
+            uri() {
+                return new this.$.$mol_state_arg(this.state_key()).link(this.arg());
+            }
+            uri_off() {
+                const arg2 = {};
+                for (let i in this.arg())
+                    arg2[i] = null;
+                return new this.$.$mol_state_arg(this.state_key()).link(arg2);
+            }
+            uri_native() {
+                const base = this.$.$mol_state_arg.href();
+                return new URL(this.uri(), base);
+            }
+            current() {
+                const base = this.$.$mol_state_arg.href_normal();
+                const target = this.uri_native().toString();
+                if (base === target)
+                    return true;
+                const args = this.arg();
+                const keys = Object.keys(args).filter(key => args[key] != null);
+                if (keys.length === 0)
+                    return false;
+                for (const key of keys) {
+                    if (this.$.$mol_state_arg.value(key) != args[key])
+                        return false;
+                }
+                return true;
+            }
+            file_name() {
+                return null;
+            }
+            minimal_height() {
+                return Math.max(super.minimal_height(), 24);
+            }
+            external() {
+                return this.uri_native().origin !== $mol_dom_context.location.origin;
+            }
+            target() {
+                return this.external() ? '_blank' : '_self';
+            }
+            hint_safe() {
+                try {
+                    return this.hint();
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    if (error instanceof Error)
+                        return '💥' + error.message;
+                    return '';
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_link.prototype, "uri_toggle", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link.prototype, "uri", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link.prototype, "uri_off", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link.prototype, "uri_native", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link.prototype, "current", null);
+        $$.$mol_link = $mol_link;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const { rem } = $mol_style_unit;
+    $mol_style_define($mol_link, {
+        textDecoration: 'none',
+        color: $mol_theme.control,
+        stroke: 'currentcolor',
+        cursor: 'pointer',
+        padding: $mol_gap.text,
+        boxSizing: 'border-box',
+        position: 'relative',
+        minWidth: rem(2.5),
+        minHeight: rem(2.5),
+        gap: $mol_gap.space,
+        border: {
+            radius: $mol_gap.round,
+        },
+        ':hover': {
+            background: {
+                color: $mol_theme.hover,
+            },
+        },
+        ':focus': {
+            outline: 'none',
+        },
+        ':focus-visible': {
+            outline: 'none',
+            background: {
+                color: $mol_theme.hover,
+            }
+        },
+        ':active': {
+            color: $mol_theme.focus,
+        },
+        '@': {
+            mol_link_current: {
+                'true': {
+                    color: $mol_theme.current,
+                    textShadow: '0 0',
+                }
+            }
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$bog_norweb_front_summary_detail) = class $bog_norweb_front_summary_detail extends ($.$bog_builderui_div) {
+		close(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Backdrop(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.event) = () => ({"click": (next) => (this.close(next))});
+			return obj;
+		}
+		Icon(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.icon())]);
+			return obj;
+		}
+		Title(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Badge(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.badge())]);
+			return obj;
+		}
+		Header_text(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.Title()), (this.Badge())]);
+			return obj;
+		}
+		Spacer(){
+			const obj = new this.$.$bog_builderui_div();
+			return obj;
+		}
+		Close_btn(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.event) = () => ({"click": (next) => (this.close(next))});
+			(obj.sub) = () => (["✕"]);
+			return obj;
+		}
+		Header(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([
+				(this.Icon()), 
+				(this.Header_text()), 
+				(this.Spacer()), 
+				(this.Close_btn())
+			]);
+			return obj;
+		}
+		Content(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ((this.body()));
+			return obj;
+		}
+		Body(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ([(this.Content())]);
+			return obj;
+		}
+		Panel(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.Header()), (this.Body())]);
+			return obj;
+		}
+		Fact_marker(id){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => (["—"]);
+			return obj;
+		}
+		fact(id){
+			return "";
+		}
+		Fact_text(id){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.fact(id))]);
+			return obj;
+		}
+		link_rows(){
+			return [];
+		}
+		link_uri(id){
+			return "";
+		}
+		link_label(id){
+			return "";
+		}
+		showed(){
+			return false;
+		}
+		icon(){
+			return "";
+		}
+		badge(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		image(){
+			return "";
+		}
+		facts(){
+			return [];
+		}
+		links(){
+			return [];
+		}
+		body(){
+			return [];
+		}
+		attr(){
+			return {...(super.attr()), "bog_norweb_front_summary_detail_showed": (this.showed())};
+		}
+		sub(){
+			return [(this.Backdrop()), (this.Panel())];
+		}
+		Image(){
+			const obj = new this.$.$mol_image();
+			(obj.uri) = () => ((this.image()));
+			return obj;
+		}
+		Fact(id){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.Fact_marker(id)), (this.Fact_text(id))]);
+			return obj;
+		}
+		Links(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ((this.link_rows()));
+			return obj;
+		}
+		Link(id){
+			const obj = new this.$.$mol_link();
+			(obj.uri) = () => ((this.link_uri(id)));
+			(obj.title) = () => ((this.link_label(id)));
+			(obj.attr) = () => ({...(this.$.$mol_link.prototype.attr.call(obj)), "target": "_blank"});
+			return obj;
+		}
+	};
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "close"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Backdrop"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Icon"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Title"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Badge"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Header_text"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Spacer"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Close_btn"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Header"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Content"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Body"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Panel"));
+	($mol_mem_key(($.$bog_norweb_front_summary_detail.prototype), "Fact_marker"));
+	($mol_mem_key(($.$bog_norweb_front_summary_detail.prototype), "Fact_text"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Image"));
+	($mol_mem_key(($.$bog_norweb_front_summary_detail.prototype), "Fact"));
+	($mol_mem(($.$bog_norweb_front_summary_detail.prototype), "Links"));
+	($mol_mem_key(($.$bog_norweb_front_summary_detail.prototype), "Link"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_norweb_front_summary_detail extends $.$bog_norweb_front_summary_detail {
+            body() {
+                return [
+                    ...this.image() ? [this.Image()] : [],
+                    ...this.facts().map((_, i) => this.Fact(i)),
+                    ...this.links().length ? [this.Links()] : [],
+                ];
+            }
+            fact(i) {
+                return this.facts()[i];
+            }
+            link_rows() {
+                return this.links().map((_, i) => this.Link(i));
+            }
+            link_uri(i) {
+                return this.links()[i].uri;
+            }
+            link_label(i) {
+                return this.links()[i].label;
+            }
+        }
+        $$.$bog_norweb_front_summary_detail = $bog_norweb_front_summary_detail;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_norweb_front_summary_detail, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'none',
+        zIndex: 40,
+        '@': {
+            bog_norweb_front_summary_detail_showed: {
+                true: { display: 'flex' },
+            },
+        },
+        Backdrop: {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            background: { color: '#1c1b1a59' },
+        },
+        Panel: {
+            position: 'relative',
+            zIndex: 1,
+            margin: 'auto',
+            width: '760px',
+            maxWidth: $mol_style_func.calc('100vw - 4rem'),
+            maxHeight: $mol_style_func.calc('100vh - 4rem'),
+            background: { color: $bog_builderui_tokens.card },
+            border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '12px' },
+            flex: { direction: 'column' },
+            box: {
+                shadow: [{
+                        x: 0,
+                        y: '12px',
+                        blur: '40px',
+                        spread: 0,
+                        color: '#0000001f',
+                    }],
+            },
+        },
+        Header: {
+            padding: {
+                top: '18px',
+                bottom: '18px',
+                left: '20px',
+                right: '20px',
+            },
+            border: {
+                bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+            },
+            flex: { direction: 'row' },
+            align: { items: 'center' },
+            gap: '12px',
+        },
+        Icon: {
+            font: { size: '24px' },
+        },
+        Header_text: {
+            flex: { direction: 'column' },
+        },
+        Title: {
+            font: { weight: 700, size: '16px' },
+        },
+        Badge: {
+            font: {
+                family: 'ui-monospace, monospace',
+                weight: 500,
+                size: '10px',
+            },
+            color: $bog_builderui_tokens.shade,
+            margin: { top: '2px' },
+        },
+        Spacer: {
+            flex: { grow: 1 },
+        },
+        Close_btn: {
+            cursor: 'pointer',
+            color: $bog_builderui_tokens.shade,
+            font: { size: '14px' },
+            padding: {
+                top: '4px',
+                bottom: '4px',
+                left: '8px',
+                right: '8px',
+            },
+        },
+        Content: {
+            padding: {
+                top: '18px',
+                bottom: '18px',
+                left: '20px',
+                right: '20px',
+            },
+            flex: { direction: 'column' },
+            gap: '12px',
+        },
+        Image: {
+            maxWidth: '100%',
+            border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '8px' },
+        },
+        Fact: {
+            flex: { direction: 'row' },
+            gap: '8px',
+            align: { items: 'flex-start' },
+        },
+        Fact_marker: {
+            color: $bog_builderui_tokens.current,
+            font: { weight: 700, size: '13px' },
+        },
+        Fact_text: {
+            font: { size: '13px' },
+            lineHeight: '1.5',
+            flex: { shrink: 1 },
+            minWidth: 0,
+        },
+        Links: {
+            flex: { direction: 'row' },
+            flexWrap: 'wrap',
+            gap: '10px',
+            margin: { top: '4px' },
+        },
+        Link: {
+            font: { weight: 600, size: '12px' },
+            color: $bog_builderui_tokens.current,
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$bog_norweb_front_summary) = class $bog_norweb_front_summary extends ($.$bog_builderui_div) {
+		Header_title(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.header_title_text())]);
+			return obj;
+		}
+		Header_subtitle(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.header_subtitle_text())]);
+			return obj;
+		}
+		Header(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ([(this.Header_title()), (this.Header_subtitle())]);
+			return obj;
+		}
+		card_icon(id){
+			return "";
+		}
+		card_badge(id){
+			return "";
+		}
+		card_title(id){
+			return "";
+		}
+		card_desc(id){
+			return "";
+		}
+		click(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Card(id){
+			const obj = new this.$.$bog_norweb_front_summary_card();
+			(obj.icon) = () => ((this.card_icon(id)));
+			(obj.badge) = () => ((this.card_badge(id)));
+			(obj.title) = () => ((this.card_title(id)));
+			(obj.desc) = () => ((this.card_desc(id)));
+			(obj.more) = () => ((this.more_text()));
+			(obj.click) = (next) => ((this.click(id, next)));
+			return obj;
+		}
+		rows(){
+			return [(this.Card(id))];
+		}
+		Grid(){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.sub) = () => ((this.rows()));
+			return obj;
+		}
+		detail_showed(){
+			return false;
+		}
+		opened_icon(){
+			return "";
+		}
+		opened_badge(){
+			return "";
+		}
+		opened_title(){
+			return "";
+		}
+		opened_facts(){
+			return [];
+		}
+		opened_links(){
+			return [];
+		}
+		opened_image(){
+			return "";
+		}
+		close(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		opened(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		header_title_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_header_title_text"));
+		}
+		header_subtitle_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_header_subtitle_text"));
+		}
+		more_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_more_text"));
+		}
+		ragu_badge(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ragu_badge"));
+		}
+		ragu_desc(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ragu_desc"));
+		}
+		ragu_fact_1(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ragu_fact_1"));
+		}
+		ragu_fact_2(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ragu_fact_2"));
+		}
+		ragu_fact_3(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ragu_fact_3"));
+		}
+		mol_badge(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_mol_badge"));
+		}
+		mol_desc(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_mol_desc"));
+		}
+		mol_fact_1(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_mol_fact_1"));
+		}
+		mol_fact_2(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_mol_fact_2"));
+		}
+		mol_fact_3(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_mol_fact_3"));
+		}
+		menolite_badge(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_menolite_badge"));
+		}
+		menolite_desc(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_menolite_desc"));
+		}
+		menolite_fact_1(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_menolite_fact_1"));
+		}
+		menolite_fact_2(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_menolite_fact_2"));
+		}
+		menolite_fact_3(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_menolite_fact_3"));
+		}
+		nerel_badge(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_nerel_badge"));
+		}
+		nerel_desc(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_nerel_desc"));
+		}
+		nerel_fact_1(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_nerel_fact_1"));
+		}
+		nerel_fact_2(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_nerel_fact_2"));
+		}
+		nerel_fact_3(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_nerel_fact_3"));
+		}
+		ocr_badge(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ocr_badge"));
+		}
+		ocr_desc(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ocr_desc"));
+		}
+		ocr_fact_1(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ocr_fact_1"));
+		}
+		ocr_fact_2(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_summary_ocr_fact_2"));
+		}
+		sub(){
+			return [(this.Header()), (this.Grid())];
+		}
+		Detail(){
+			const obj = new this.$.$bog_norweb_front_summary_detail();
+			(obj.showed) = () => ((this.detail_showed()));
+			(obj.icon) = () => ((this.opened_icon()));
+			(obj.badge) = () => ((this.opened_badge()));
+			(obj.title) = () => ((this.opened_title()));
+			(obj.facts) = () => ((this.opened_facts()));
+			(obj.links) = () => ((this.opened_links()));
+			(obj.image) = () => ((this.opened_image()));
+			(obj.close) = (next) => ((this.close(next)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "Header_title"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "Header_subtitle"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "Header"));
+	($mol_mem_key(($.$bog_norweb_front_summary.prototype), "click"));
+	($mol_mem_key(($.$bog_norweb_front_summary.prototype), "Card"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "Grid"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "close"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "opened"));
+	($mol_mem(($.$bog_norweb_front_summary.prototype), "Detail"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_norweb_front_summary extends $.$bog_norweb_front_summary {
+            ids() {
+                return ['ragu', 'mol', 'menolite', 'nerel', 'ocr'];
+            }
+            rows() {
+                return this.ids().map(id => this.Card(id));
+            }
+            card_icon(id) {
+                switch (id) {
+                    case 'ragu': return '🧠';
+                    case 'mol': return '⚡';
+                    case 'menolite': return '🤖';
+                    case 'nerel': return '🏷';
+                    case 'ocr': return '📄';
+                }
+                return '';
+            }
+            card_title(id) {
+                switch (id) {
+                    case 'ragu': return 'RAGU';
+                    case 'mol': return '$mol';
+                    case 'menolite': return 'Meno-Lite-0.1';
+                    case 'nerel': return 'NEREL+';
+                    case 'ocr': return 'OCR';
+                }
+                return '';
+            }
+            card_badge(id) {
+                switch (id) {
+                    case 'ragu': return this.ragu_badge();
+                    case 'mol': return this.mol_badge();
+                    case 'menolite': return this.menolite_badge();
+                    case 'nerel': return this.nerel_badge();
+                    case 'ocr': return this.ocr_badge();
+                }
+                return '';
+            }
+            card_desc(id) {
+                switch (id) {
+                    case 'ragu': return this.ragu_desc();
+                    case 'mol': return this.mol_desc();
+                    case 'menolite': return this.menolite_desc();
+                    case 'nerel': return this.nerel_desc();
+                    case 'ocr': return this.ocr_desc();
+                }
+                return '';
+            }
+            card_facts(id) {
+                switch (id) {
+                    case 'ragu': return [this.ragu_fact_1(), this.ragu_fact_2(), this.ragu_fact_3()];
+                    case 'mol': return [this.mol_fact_1(), this.mol_fact_2(), this.mol_fact_3()];
+                    case 'menolite': return [this.menolite_fact_1(), this.menolite_fact_2(), this.menolite_fact_3()];
+                    case 'nerel': return [this.nerel_fact_1(), this.nerel_fact_2(), this.nerel_fact_3()];
+                    case 'ocr': return [this.ocr_fact_1(), this.ocr_fact_2()];
+                }
+                return [];
+            }
+            card_links(id) {
+                switch (id) {
+                    case 'ragu': return [
+                        { label: 'github.com/RaguTeam/RAGU', uri: 'https://github.com/RaguTeam/RAGU' },
+                    ];
+                    case 'mol': return [
+                        { label: 'github.com/b-on-g/norweb', uri: 'https://github.com/b-on-g/norweb' },
+                        { label: 'mol.hyoo.ru', uri: 'https://mol.hyoo.ru/' },
+                    ];
+                    case 'menolite': return [
+                        { label: 'huggingface.co/bond005/meno-lite-0.1', uri: 'https://huggingface.co/bond005/meno-lite-0.1' },
+                    ];
+                    case 'nerel': return [
+                        { label: 'NEREL paper (arXiv:2108.13112)', uri: 'https://arxiv.org/abs/2108.13112' },
+                    ];
+                }
+                return [];
+            }
+            card_image(id) {
+                // Архитектура RAGU из статьи, лежит в assets и деплоится через meta.tree.
+                if (id === 'ragu')
+                    return 'bog/norweb/front/assets/ragu.jpg';
+                return '';
+            }
+            detail_showed() {
+                return !!this.opened();
+            }
+            opened_icon() { return this.card_icon(this.opened()); }
+            opened_badge() { return this.card_badge(this.opened()); }
+            opened_title() { return this.card_title(this.opened()); }
+            opened_facts() { return this.card_facts(this.opened()); }
+            opened_links() { return this.card_links(this.opened()); }
+            opened_image() { return this.card_image(this.opened()); }
+            click(id) {
+                this.opened(id);
+                return null;
+            }
+            close() {
+                this.opened('');
+                return null;
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_summary.prototype, "click", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_summary.prototype, "close", null);
+        $$.$bog_norweb_front_summary = $bog_norweb_front_summary;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_norweb_front_summary, {
+        flex: { direction: 'column', shrink: 1 },
+        minWidth: 0,
+        padding: {
+            top: '1.5rem',
+            bottom: '1.5rem',
+            left: '1.75rem',
+            right: '1.75rem',
+        },
+        Header: {
+            flex: { direction: 'column' },
+            margin: { bottom: '1.25rem' },
+        },
+        Header_title: {
+            font: { weight: 700, size: '20px' },
+        },
+        Header_subtitle: {
+            font: { size: '13px' },
+            color: $bog_builderui_tokens.shade,
+            margin: { top: '3px' },
+        },
+        Grid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: '16px',
+            minWidth: 0,
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_norweb_front_app) = class $bog_norweb_front_app extends ($.$bog_builderui_div) {
 		favicon_icon(){
 			const obj = new this.$.$mol_icon_graph();
@@ -20786,6 +21988,10 @@ var $;
 			(obj.showed) = (next) => ((this.settings_open(next)));
 			return obj;
 		}
+		Summary_popup(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
 		select_dataset(next){
 			if(next !== undefined) return next;
 			return null;
@@ -20828,6 +22034,9 @@ var $;
 		screen_dashboard_title(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_dashboard_title"));
 		}
+		screen_summary_title(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_app_screen_summary_title"));
+		}
 		attr(){
 			return {
 				...(super.attr()), 
@@ -20847,7 +22056,8 @@ var $;
 			return [
 				(this.Sidebar()), 
 				(this.Main()), 
-				(this.Settings())
+				(this.Settings()), 
+				(this.Summary_popup())
 			];
 		}
 		Gallery(){
@@ -20870,6 +22080,10 @@ var $;
 			const obj = new this.$.$bog_norweb_front_dashboard();
 			return obj;
 		}
+		Summary(){
+			const obj = new this.$.$bog_norweb_front_summary();
+			return obj;
+		}
 	};
 	($mol_mem(($.$bog_norweb_front_app.prototype), "favicon_icon"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Favicon"));
@@ -20880,6 +22094,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Body"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Main"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Settings"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Summary_popup"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "select_dataset"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "ask_chat"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "screen"));
@@ -20890,6 +22105,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Explorer"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Chat"));
 	($mol_mem(($.$bog_norweb_front_app.prototype), "Dashboard"));
+	($mol_mem(($.$bog_norweb_front_app.prototype), "Summary"));
 
 
 ;
@@ -20904,7 +22120,9 @@ var $;
     (function ($$) {
         class $bog_norweb_front_app extends $.$bog_norweb_front_app {
             body() {
-                // Без выбранного датасета всегда показываем Gallery — остальные экраны бессмысленны.
+                // Сводка не зависит от датасета, для остальных экранов без него показываем Gallery.
+                if (this.screen() === 'summary')
+                    return [this.Summary()];
                 const s = this.dataset_id() ? this.screen() : 'gallery';
                 switch (s) {
                     case 'gallery': return [this.Gallery()];
@@ -20916,6 +22134,11 @@ var $;
             }
             lights_mode() {
                 return this.Theme_auto().is_light_now() ? 'light' : 'dark';
+            }
+            // Попап деталей сводки рендерим на уровне app: внутри Body его ломает
+            // contain:content у скролла — fixed-оверлей позиционируется не от вьюпорта.
+            Summary_popup() {
+                return this.Summary().Detail();
             }
             open_settings() {
                 this.settings_open(true);
@@ -20935,6 +22158,7 @@ var $;
                     case 'explorer': return this.screen_explorer_title();
                     case 'chat': return this.screen_chat_title();
                     case 'dashboard': return this.screen_dashboard_title();
+                    case 'summary': return this.screen_summary_title();
                 }
                 return '';
             }
