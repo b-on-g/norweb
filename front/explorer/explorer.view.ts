@@ -14,33 +14,40 @@ namespace $.$$ {
 			return this.$.$mol_state_arg.value( 'mock' ) === '1'
 		}
 
-		// Reactive live fetch. Any transport error propagates via $mol_wire so
-		// the view frame surfaces an error plate instead of silently falling back.
+		// Reactive live fetch. While loading, the wire promise is rethrown as
+		// usual; a real transport error falls back to the built-in mock graph
+		// so the demo stays alive without the backend.
 		@$mol_mem
 		graph_remote(): { nodes: GraphNode[], edges: GraphEdge[] } | null {
 			const id = this.dataset_id()
 			if ( !id ) return null
 			if ( this.mock_flag() ) return null
-			const res = this.$.$bog_norweb_front_api(
-				$bog_norweb_front_api_ragu_get_graph,
-				{ params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } },
-			)
-			const nodes: GraphNode[] = res.nodes.map( (n: any) => ( {
-				id: n.id,
-				label: n.label,
-				type: $bog_norweb_front_explorer_forcegraph_entity_bucket( n.entity_type ),
-				degree: n.degree,
-				x: n.x,
-				y: n.y,
-			} ) )
-			const edges: GraphEdge[] = res.edges.map( (e: any) => ( {
-				id: e.id,
-				source: e.source,
-				target: e.target,
-				strength: e.strength,
-				relation: e.relation_type,
-			} ) )
-			return { nodes, edges }
+			try {
+				const res = this.$.$bog_norweb_front_api(
+					$bog_norweb_front_api_ragu_get_graph,
+					{ params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } },
+				)
+				const nodes: GraphNode[] = res.nodes.map( (n: any) => ( {
+					id: n.id,
+					label: n.label,
+					type: $bog_norweb_front_explorer_forcegraph_entity_bucket( n.entity_type ),
+					degree: n.degree,
+					x: n.x,
+					y: n.y,
+				} ) )
+				const edges: GraphEdge[] = res.edges.map( (e: any) => ( {
+					id: e.id,
+					source: e.source,
+					target: e.target,
+					strength: e.strength,
+					relation: e.relation_type,
+				} ) )
+				return { nodes, edges }
+			} catch( error ) {
+				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
+				console.warn( 'Graph fetch failed, falling back to mock:', error )
+				return null
+			}
 		}
 
 		@$mol_mem
