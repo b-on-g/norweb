@@ -16,5 +16,6 @@
 	"$bog_norweb_front_explorer_legend_event_label_text": "СОБЫТИЕ",
 	"$bog_norweb_front_explorer_legend_date_label_text": "ДАТА",
 	"$bog_norweb_front_explorer_legend_work_label_text": "ПРОИЗВЕДЕНИЕ",
-	"$bog_norweb_front_explorer_legend_law_label_text": "ЗАКОН"
+	"$bog_norweb_front_explorer_legend_law_label_text": "ЗАКОН",
+	"$bog_norweb_front_explorer_mock_badge_text": "⚠ Мок-данные — бэкенд не подключён"
 }

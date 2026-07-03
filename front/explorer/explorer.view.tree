@@ -20,6 +20,7 @@ $bog_norweb_front_explorer $bog_builderui_div
 	legend_date_label_text @ \DATE
 	legend_work_label_text @ \WORK_OF_ART
 	legend_law_label_text @ \LAW
+	mock_badge_text @ \⚠ Mock data — backend is not connected
 	sub /
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
@@ -55,6 +56,11 @@ $bog_norweb_front_explorer $bog_builderui_div
 				<= Legend_law $bog_builderui_div sub /
 					<= Legend_law_dot $bog_builderui_div
 					<= Legend_law_label $bog_builderui_div sub / <= legend_law_label_text
+			<= Mock_badge $bog_builderui_div
+				attr *
+					^
+					bog_norweb_front_explorer_mock_badge_showed <= is_mock false
+				sub / <= mock_badge_text
 		<= Aside $bog_builderui_div sub /
 			<= Aside_title $bog_builderui_div sub / <= aside_title_text
 			<= Entity_head $bog_builderui_div sub /

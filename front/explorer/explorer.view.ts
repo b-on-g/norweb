@@ -50,6 +50,11 @@ namespace $.$$ {
 			}
 		}
 
+		// Показываем юзеру плашку, что перед ним мок-граф, а не данные с бэка.
+		is_mock() {
+			return this.graph_remote() === null
+		}
+
 		@$mol_mem
 		graph_data(): { nodes: readonly GraphNode[], edges: readonly GraphEdge[] } {
 			return this.graph_remote()

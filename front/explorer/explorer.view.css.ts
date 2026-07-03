@@ -191,6 +191,32 @@ namespace $ {
 		Legend_work_label: legend_label,
 		Legend_law_label: legend_label,
 
+		Mock_badge: {
+			display: 'none',
+			position: 'absolute',
+			bottom: '14px',
+			left: '14px',
+			font: {
+				family: 'ui-monospace, monospace',
+				weight: 600,
+				size: '11px',
+			},
+			color: '#8a6d1b',
+			background: { color: '#f5c84226' },
+			border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '6px' },
+			padding: {
+				top: '3px',
+				bottom: '3px',
+				left: '8px',
+				right: '8px',
+			},
+			'@': {
+				bog_norweb_front_explorer_mock_badge_showed: {
+					true: { display: 'flex' },
+				},
+			},
+		},
+
 		Aside: {
 			minWidth: '300px',
 			maxWidth: '300px',
