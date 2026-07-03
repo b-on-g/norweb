@@ -1,0 +1,1904 @@
+$bog_builderui_div $mol_view
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_graph $mol_icon path \M19.5 17C19.37 17 19.24 17 19.11 17.04L17.5 13.79C17.95 13.34 18.25 12.71 18.25 12C18.25 10.62 17.13 9.5 15.75 9.5C15.62 9.5 15.5 9.5 15.36 9.54L13.73 6.29C14.21 5.84 14.5 5.21 14.5 4.5C14.5 3.12 13.38 2 12 2S9.5 3.12 9.5 4.5C9.5 5.21 9.79 5.84 10.26 6.29L8.64 9.54C8.5 9.5 8.38 9.5 8.25 9.5C6.87 9.5 5.75 10.62 5.75 12C5.75 12.71 6.05 13.34 6.5 13.79L4.89 17.04C4.76 17 4.63 17 4.5 17C3.12 17 2 18.12 2 19.5C2 20.88 3.12 22 4.5 22S7 20.88 7 19.5C7 18.8 6.71 18.16 6.24 17.71L7.86 14.46C8 14.5 8.12 14.5 8.25 14.5C8.38 14.5 8.5 14.5 8.64 14.46L10.27 17.71C9.8 18.16 9.5 18.8 9.5 19.5C9.5 20.88 10.62 22 12 22S14.5 20.88 14.5 19.5C14.5 18.12 13.38 17 12 17C11.87 17 11.74 17 11.61 17.04L10 13.79C10.46 13.34 10.75 12.71 10.75 12S10.46 10.66 10 10.21L11.61 6.96C11.74 7 11.87 7 12 7S12.26 7 12.39 6.96L14 10.21C13.55 10.66 13.25 11.3 13.25 12C13.25 13.38 14.37 14.5 15.75 14.5C15.88 14.5 16 14.5 16.14 14.46L17.77 17.71C17.3 18.16 17 18.8 17 19.5C17 20.88 18.12 22 19.5 22S22 20.88 22 19.5C22 18.12 20.88 17 19.5 17Z
+
+$bog_favicon $mol_plugin
+	Icon $mol_view
+
+$bog_theme_auto $mol_plugin
+	themes <= themes_default /
+	theme_light \$mol_theme_light
+	theme_dark \$mol_theme_dark
+	mode? \system
+	mode_next? null
+	theme_next? null
+	theme_prev? null
+	theme_set? null
+	is_light_now false
+	attr * mol_theme <= theme \
+
+$raggu_web_front_sidebar_nav $bog_builderui_div
+	icon \
+	label \
+	active false
+	disabled false
+	click? null
+	attr *
+		^
+		raggu_web_front_sidebar_nav_active <= active
+		raggu_web_front_sidebar_nav_disabled <= disabled
+	event *
+		^
+		click? <=> click? null
+	sub /
+		<= Icon $bog_builderui_div sub / <= icon
+		<= Label $bog_builderui_div sub / <= label
+
+$mol_icon_white_balance_sunny $mol_icon path \M3.55 19.09L4.96 20.5L6.76 18.71L5.34 17.29M12 6C8.69 6 6 8.69 6 12S8.69 18 12 18 18 15.31 18 12C18 8.68 15.31 6 12 6M20 13H23V11H20M17.24 18.71L19.04 20.5L20.45 19.09L18.66 17.29M20.45 5L19.04 3.6L17.24 5.39L18.66 6.81M13 1H11V4H13M6.76 5.39L4.96 3.6L3.55 5L5.34 6.81L6.76 5.39M1 13H4V11H1M13 20H11V23H13
+
+$mol_speck $mol_view
+	theme \$mol_theme_accent
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click? null
+	event_click? null
+	status? /
+	event *
+		^
+		click? <=> activate? <=> event_activate? null
+		dblclick? <=> clicks? null
+		keydown? <=> key_press? <=> event_key_press? null
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
+
+$mol_icon_monitor $mol_icon path \M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z
+
+$mol_icon_weather_night $mol_icon path \M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.64 6.35,17.66C9.37,20.67 14.19,20.78 17.33,17.97Z
+
+$bog_theme_switch $mol_view
+	theme_auto $bog_theme_auto
+	sub /
+		<= Light $mol_button_minor
+			attr *
+				^
+				bog_theme_switch_active <= light_active false
+			hint <= light_hint @ \Светлая
+			click?event <=> set_light?event null
+			sub /
+				<= Light_icon $mol_icon_white_balance_sunny
+		<= System $mol_button_minor
+			attr *
+				^
+				bog_theme_switch_active <= system_active false
+			hint <= system_hint @ \Как в системе
+			click?event <=> set_system?event null
+			sub /
+				<= System_icon $mol_icon_monitor
+		<= Dark $mol_button_minor
+			attr *
+				^
+				bog_theme_switch_active <= dark_active false
+			hint <= dark_hint @ \Тёмная
+			click?event <=> set_dark?event null
+			sub /
+				<= Dark_icon $mol_icon_weather_night
+
+$raggu_web_front_sidebar_lang $bog_builderui_div
+	label \
+	active false
+	click? null
+	attr *
+		^
+		raggu_web_front_sidebar_lang_active <= active
+	event *
+		^
+		click? <=> click? null
+	sub / <= label
+
+$raggu_web_front_sidebar $bog_builderui_div
+	screen? \gallery
+	dataset_id \wiki
+	dataset_title \
+	Theme_auto $bog_theme_auto
+	sections_label_text @ \Sections
+	corpus_label_text @ \Active corpus
+	corpus_meta_text @ \2,410 nodes · 38 communities
+	lang_label_text @ \LANG
+	sub /
+		<= Brand $bog_builderui_div sub /
+			<= Brand_logo $bog_builderui_div sub / \R
+			<= Brand_title $bog_builderui_div sub / \RAGU
+			<= Brand_badge $bog_builderui_div sub / \demo
+		<= Sections_label $bog_builderui_div sub / <= sections_label_text
+		<= Nav $bog_builderui_div sub /
+			<= Nav_gallery $raggu_web_front_sidebar_nav
+				icon \▤
+				label @ \Datasets
+				active <= is_gallery false
+				click? <=> click_gallery? null
+			<= Nav_explorer $raggu_web_front_sidebar_nav
+				icon \◉
+				label @ \Graph
+				active <= is_explorer false
+				disabled <= no_dataset false
+				click? <=> click_explorer? null
+			<= Nav_chat $raggu_web_front_sidebar_nav
+				icon \💬
+				label @ \Chat
+				active <= is_chat false
+				disabled <= no_dataset false
+				click? <=> click_chat? null
+			<= Nav_dashboard $raggu_web_front_sidebar_nav
+				icon \▦
+				label @ \Dashboard
+				active <= is_dashboard false
+				disabled <= no_dataset false
+				click? <=> click_dashboard? null
+		<= Spacer $bog_builderui_div
+		<= Footer $bog_builderui_div sub /
+			<= Corpus_label $bog_builderui_div sub / <= corpus_label_text
+			<= Corpus_card $bog_builderui_div sub /
+				<= Corpus_name $bog_builderui_div sub / <= dataset_title
+				<= Corpus_meta $bog_builderui_div sub / <= corpus_meta_text
+			<= Lang_row $bog_builderui_div sub /
+				<= Theme_switch $bog_theme_switch
+					theme_auto <= Theme_auto
+				<= Lang_label $bog_builderui_div sub / <= lang_label_text
+				<= Lang_en $raggu_web_front_sidebar_lang
+					label \EN
+					active <= is_en false
+					click? <=> click_en? null
+				<= Lang_ru $raggu_web_front_sidebar_lang
+					label \RU
+					active <= is_ru false
+					click? <=> click_ru? null
+
+$raggu_web_front_topbar_preset $bog_builderui_div
+	label \
+	active false
+	click? null
+	attr *
+		^
+		raggu_web_front_topbar_preset_active <= active
+	event *
+		^
+		click? <=> click? null
+	sub / <= label
+
+$mol_ghost $mol_view
+	Sub $mol_view
+
+$mol_follower $mol_ghost
+	Anchor $mol_view
+	align /number
+		-.5
+		-.5
+	offset /number
+		0
+		0
+	style *
+		^
+		transform <= transform \
+
+$mol_pop $mol_view
+	showed? false
+	align_vert \
+	align_hor \
+	align \bottom_center
+	prefer \vert
+	auto /
+		<= bubble null
+	sub /
+		<= Anchor null
+	sub_visible /
+		<= Anchor
+		<= Follower $mol_follower
+			offset <= bubble_offset /number
+				0
+				1
+			align <= bubble_align /number
+				0
+				0
+			Anchor <= Anchor
+			Sub <= Bubble $mol_pop_bubble
+				content <= bubble_content /$mol_view_content
+				height_max <= height_max 9999
+
+$mol_pop_bubble $mol_view
+	sub <= content /$mol_view_content
+	style *
+		^
+		maxHeight <= height_max 9999
+	attr *
+		^
+		tabindex 0
+		popover \manual
+
+$mol_scroll $mol_view
+	scroll_top? 0
+	scroll_left? 0
+	attr *
+		^
+		tabindex <= tabindex -1
+	event *
+		^
+		scroll? <=> event_scroll? null
+
+$bog_builderui_card $bog_builderui_div
+
+$mol_hotkey $mol_plugin
+	event *
+		^
+		keydown? <=> keydown? null
+	key *
+	mod_ctrl false
+	mod_alt false
+	mod_shift false
+
+$mol_string $mol_view
+	dom_name \input
+	enabled true
+	minimal_height 40
+	autocomplete false
+	selection? /number
+		0
+		0
+	auto /
+		<= selection_watcher null
+		<= error_report null
+	field *
+		^
+		disabled <= disabled false
+		value <= value_changed? <=> value? \
+		placeholder <= hint_visible <= hint \
+		spellcheck <= spellcheck true
+		autocomplete <= autocomplete_native \
+		selectionEnd <= selection_end 0
+		selectionStart <= selection_start 0
+		inputMode <= keyboard \text
+		enterkeyhint <= enter \go
+	attr *
+		^
+		maxlength <= length_max +Infinity
+		type <= type? \text
+	event *
+		^
+		input? <=> event_change? null
+	plugins /
+		<= Submit $mol_hotkey
+			mod_ctrl <= submit_with_ctrl false
+			key * enter? <=> submit? null
+
+$bog_builderui_field $mol_string
+	minimal_height 36
+
+$mol_gallery $mol_view
+	sub <= items /$mol_view
+	Side* $mol_gallery
+		style *
+			flexGrow <= side_size* \1
+		items <= side_items* /$mol_view
+
+$mol_chart_legend $mol_scroll
+	graphs /$mol_plot_graph
+	graphs_front /$mol_plot_graph
+	sub /
+		<= Gallery $mol_gallery items <= graph_legends /$mol_view
+	-
+	Graph_legend* $mol_view
+		sub /
+			<= Graph_sample_box* $mol_view
+				sub /
+					<= Graph_sample* null
+			<= Graph_title* $mol_view
+				sub /
+					<= graph_title* \
+
+$mol_svg_group $mol_svg
+	dom_name \g
+
+$mol_svg_title $mol_svg
+	dom_name \title
+	sub /
+		<= title
+
+$mol_plot_graph $mol_svg_group
+	series_x /number
+	series_y /number
+	-
+	attr *
+		^
+		mol_plot_graph_type <= type \solid
+	-
+	style *
+		^
+		color <= color \
+	-
+	viewport $mol_vector_2d<$mol_vector_range<number>> /
+		<= viewport_x $mol_vector_range<number> /
+			Infinity
+			-Infinity
+		<= viewport_y $mol_vector_range<number> /
+			Infinity
+			-Infinity
+	shift /number
+		0
+		0
+	scale /number
+		1
+		1
+	cursor_position $mol_vector_2d<number> /
+		NaN
+		NaN
+	dimensions_pane $mol_vector_2d<$mol_vector_range<number>> /
+		<= dimensions_pane_x $mol_vector_range<number> /
+			Infinity
+			-Infinity
+		<= dimensions_pane_y $mol_vector_range<number> /
+			Infinity
+			-Infinity
+	dimensions $mol_vector_2d<$mol_vector_range<number>> /
+		<= dimensions_x $mol_vector_range<number> /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range<number> /
+			Infinity
+			-Infinity
+	size_real $mol_vector_2d<number> /
+		0
+		0
+	gap $mol_vector_2d<$mol_vector_range<number>> /
+		<= gap_x $mol_vector_range<number> /
+			0
+			0
+		<= gap_y $mol_vector_range<number> /
+			0
+			0
+	repos_x* 0
+	repos_y* 0
+	indexes /number
+	points /readonly(number)[]
+	front /$mol_svg
+	back /$mol_svg
+	Hint $mol_svg_title
+		title <= hint <= title \
+	hue? +NaN
+	Sample null
+
+$mol_plot_graph_sample $mol_view
+	attr *
+		^
+		mol_plot_graph_type <= type \solid
+	style *
+		^
+		color <= color \black
+
+$mol_touch $mol_plugin
+	start_zoom? 0
+	start_distance? 0
+	zoom? 1
+	allow_draw true
+	allow_pan true
+	allow_zoom true
+	action_type? \
+	action_point? $mol_vector_2d<number> /
+		NaN
+		NaN
+	-
+	start_pan? /
+		0
+		0
+	pan? $mol_vector_2d<number> /
+		0
+		0
+	pointer_center $mol_vector_2d<number> /
+		NaN
+		NaN
+	-
+	start_pos? null
+	swipe_precision 16
+	-
+	swipe_right? null
+	swipe_bottom? null
+	swipe_left? null
+	swipe_top? null
+	-
+	swipe_from_right? null
+	swipe_from_bottom? null
+	swipe_from_left? null
+	swipe_from_top? null
+	-
+	swipe_to_right? null
+	swipe_to_bottom? null
+	swipe_to_left? null
+	swipe_to_top? null
+	-
+	draw_start?event null
+	draw?event null
+	draw_end?event null
+	-
+	style *
+		^
+		touch-action \none
+		overscroll-behavior \none
+	-
+	event *
+		^
+		pointerdown?event <=> event_start?event null
+		pointermove?event <=> event_move?event null
+		pointerup?event <=> event_end?event null
+		pointerleave?event <=> event_leave?event null
+		wheel?event <=> event_wheel?event null
+
+$mol_plot_pane $mol_svg_root
+	aspect \none
+	-
+	hue_base? +NaN
+	hue_shift? 111
+	-
+	gap_hor 48
+	gap_vert 24
+	gap_left <= gap_hor
+	gap_right <= gap_hor
+	gap_top <= gap_vert
+	gap_bottom <= gap_vert
+	gap $mol_vector_2d<$mol_vector_range<number>> /
+		<= gap_x $mol_vector_range<number> /
+			<= gap_left
+			<= gap_right
+		<= gap_y $mol_vector_range<number> /
+			<= gap_bottom
+			<= gap_top
+	-
+	shift_limit $mol_vector_2d<$mol_vector_range<number>> /
+		<= shift_limit_x $mol_vector_range<number> /
+			0
+			0
+		<= shift_limit_y $mol_vector_range<number> /
+			0
+			0
+	shift_default $mol_vector_2d<number> /
+		0
+		0
+	shift? $mol_vector_2d<number> /
+		0
+		0
+	scale_limit $mol_vector_2d<$mol_vector_range<number>> /
+		<= scale_limit_x $mol_vector_range<number> /
+			0
+			Infinity
+		<= scale_limit_y $mol_vector_range<number> /
+			0
+			-Infinity
+	scale_default $mol_vector_2d<number> /
+		0
+		0
+	scale? $mol_vector_2d<number> /
+		1
+		-1
+	scale_x? 1
+	scale_y? -1
+	size $mol_vector_2d<number> /
+		0
+		0
+	size_real $mol_vector_2d<number> /
+		1
+		1
+	dimensions $mol_vector_2d<$mol_vector_range<number>> /
+		<= dimensions_x $mol_vector_range<number> /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range<number> /
+			Infinity
+			-Infinity
+	dimensions_viewport $mol_vector_2d<$mol_vector_range<number>> /
+		<= dimensions_viewport_x $mol_vector_range<number> /
+			Infinity
+			-Infinity
+		<= dimensions_viewport_y $mol_vector_range<number> /
+			Infinity
+			-Infinity
+	-
+	sub <= graphs_sorted /$mol_svg
+	graphs_colored <= graphs_visible <= graphs_positioned <= graphs /$mol_plot_graph
+	-
+	plugins /
+		^
+		<= Touch $mol_touch
+			zoom? <=> zoom? 1
+			pan? <=> shift?
+			pointer_center => cursor_position
+			allow_draw <= allow_draw true
+			allow_pan <= allow_pan true
+			allow_zoom <= allow_zoom true
+			action_type => action_type
+			action_point => action_point
+			draw_start?event <=> draw_start?event null
+			draw?event <=> draw?event null
+			draw_end?event <=> draw_end?event null
+	- event *
+		^
+		dblclick?event <=> reset?event null
+
+$mol_chart $mol_view
+	gap_hor 48
+	gap_vert 24
+	gap_left <= gap_hor
+	gap_right <= gap_hor
+	gap_bottom <= gap_vert
+	gap_top <= gap_vert
+	graphs /$mol_plot_graph
+	sub /
+		<= Legend $mol_chart_legend
+			graphs <= graphs_colored
+		<= Plot $mol_plot_pane
+			scale_x? => zoom?
+			zoom? <=> zoom?
+			gap_left <= gap_left
+			gap_right <= gap_right
+			gap_bottom <= gap_bottom
+			gap_top <= gap_top
+			graphs <= graphs
+			graphs_colored => graphs_colored
+			hue_base <= hue_base 210
+			hue_shift <= hue_shift 163
+
+$bog_builderui_chart $mol_chart
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_pick $mol_pop
+	event *
+		^
+		keydown? <=> keydown? null
+	Anchor <= Trigger $mol_check
+		minimal_width 40
+		minimal_height 40
+		enabled <= trigger_enabled true
+		checked? <=> showed?
+		clicks? <=> clicks? null
+		sub <= trigger_content /$mol_view_content
+			<= title
+		hint <= hint \
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
+$mol_dimmer $mol_paragraph
+	haystack \
+	needle \
+	sub <= parts /$mol_view_content
+	Low* $mol_paragraph
+		sub /
+			<= string* \
+	High* $mol_paragraph
+		sub /
+			<= string* \
+
+$mol_nav $mol_plugin
+	cycle? false
+	-
+	mod_ctrl false
+	mod_shift false
+	mod_alt false
+	-
+	keys_x? /
+	keys_y? /
+	-
+	current_x? null
+	current_y? null
+	-
+	event_up? null
+	event_down? null
+	event_left? null
+	event_right? null
+	event *
+		^
+		keydown? <=> event_key? null
+
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0.1
+	sub <= rows /$mol_view
+		<= Gap_before $mol_view style * paddingTop <= gap_before 0
+		<= Empty $mol_view
+		<= Gap_after $mol_view style * paddingTop <= gap_after 0
+	item_height_min* 1
+	item_width_min* 1
+	view_window_shift? 0
+	view_window /
+		0
+		0
+
+$mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
+
+$mol_search $mol_pop
+	query? \
+	suggests /string
+	plugins /$mol_plugin
+		^
+		<= Hotkey $mol_hotkey
+			key * escape? <=> clear? null
+		<= Nav $mol_nav
+			keys_y <= nav_components /$mol_view
+			current_y? <=> nav_focused? null
+	showed? <=> suggests_showed? false
+	align_hor \right
+	Anchor $mol_view
+		sub <= anchor_content /
+			<= Query $mol_string
+				value? <=> query? \
+				hint <= hint @ \Search...
+				submit? <=> submit? null
+				enabled <= enabled true
+				keyboard <= keyboard \search
+				enter <= enter \search
+				bring => bring
+			<= Clear $mol_button_minor
+				hint @ \Clear
+				enabled <= enabled true
+				click? <=> clear? null
+				sub /
+					<= Clear_icon $mol_icon_close
+	bubble_content /$mol_view_content
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_items /$mol_view
+	Suggest* $mol_button_minor
+		click? <=> suggest_select*? null
+		sub <= suggest_content* /$mol_view_content
+			<= Suggest_label* $mol_dimmer
+				haystack <= suggest_label* \
+				needle <= query? \
+
+$mol_icon_dots_vertical $mol_icon path \M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
+
+$mol_select $mol_pick
+	dictionary? *
+	options /string
+	value? \
+	option_label_default \
+	Option_row* $mol_button_minor
+		enabled <= enabled true
+		event_click? <=> event_select*? null
+		sub <= option_content* /
+			<= Option_label* $mol_dimmer
+				haystack <= option_label* \
+				needle <= filter_pattern? \
+	No_options $mol_view
+		sub /
+			<= no_options_message @ \No options
+	plugins /
+		^
+		<= Nav $mol_nav
+			keys_y <= nav_components /$mol_view
+			current_y? <=> option_focused? null
+			cycle? <=> nav_cycle? true
+	hint @ \Pick..
+	bubble_content /
+		<= Filter
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_content /$mol_view
+	Filter $mol_search
+		query? <=> filter_pattern? \
+		hint <= filter_hint @ \Filter..
+		submit? <=> submit? null
+		enabled <= enabled true
+	Trigger_icon $mol_icon_dots_vertical
+	trigger_enabled <= enabled
+
+$bog_builderui_select $mol_select
+
+$mol_pop_over $mol_pop
+	showed <= hovered? false
+	attr *
+		^
+		tabindex 0
+	event *
+		^
+		mouseenter? <=> event_show? null
+		mouseleave? <=> event_hide? null
+
+$bog_builderui_tooltip $mol_pop_over
+
+$bog_builderui_menu $bog_builderui_card
+	items /
+	sub <= items
+
+$bog_builderui_menu_item $mol_button_minor
+
+$raggu_web_front_export $mol_pop
+	screen \gallery
+	showed? false
+	export_btn_text @ \↓ Export
+	empty_text @ \Nothing to export
+	Anchor $bog_builderui_div
+		event * click? <=> toggle? null
+		sub / <= export_btn_text
+	bubble_content /
+		<= Menu $bog_builderui_menu
+			items <= items /
+	Item* $bog_builderui_menu_item
+		title <= item_label* \
+		click? <=> item_click*? null
+	Empty $bog_builderui_div
+		sub / <= empty_text
+
+$raggu_web_front_topbar $bog_builderui_div
+	screen \gallery
+	dataset_id \wiki
+	dataset_title \
+	screen_title \
+	preset? \demo
+	open_settings? null
+	preset_label_text @ \Preset
+	settings_btn_text @ \⚙ Settings
+	preset_fast_label @ \⚡ Fast
+	preset_accurate_label @ \🎯 Accurate
+	preset_demo_label @ \🎬 Demo
+	sub /
+		<= Title_block $bog_builderui_div sub /
+			<= Title $bog_builderui_div sub / <= screen_title
+			<= Subtitle $bog_builderui_div sub / <= dataset_title
+		<= Spacer $bog_builderui_div
+		<= Preset_label $bog_builderui_div sub / <= preset_label_text
+		<= Preset_group $bog_builderui_div sub /
+			<= Preset_fast $raggu_web_front_topbar_preset
+				label <= preset_fast_label
+				active <= is_fast false
+				click? <=> click_fast? null
+			<= Preset_accurate $raggu_web_front_topbar_preset
+				label <= preset_accurate_label
+				active <= is_accurate false
+				click? <=> click_accurate? null
+			<= Preset_demo $raggu_web_front_topbar_preset
+				label <= preset_demo_label
+				active <= is_demo false
+				click? <=> click_demo? null
+		<= Settings_btn $bog_builderui_div
+			event * click? <=> open_settings? null
+			sub / <= settings_btn_text
+		<= Export $raggu_web_front_export
+			screen <= screen
+
+$bog_builderui_button $mol_button_minor
+	minimal_height 32
+	minimal_width 0
+	variant \default
+	attr *
+		^
+		bog_builderui_button_variant <= variant
+
+$raggu_web_front_settings_group $bog_builderui_div
+	step \
+	title \
+	opts \
+	controls /
+	reindex true
+	reindex_text @ \requires reindexing
+	sub /
+		<= Head $bog_builderui_div sub /
+			<= Step $bog_builderui_div sub / <= step
+			<= Reindex $bog_builderui_div
+				attr * raggu_web_front_settings_group_reindex <= reindex
+				sub / <= reindex_text
+		<= Title $bog_builderui_div sub / <= title
+		<= Opts $bog_builderui_div sub / <= opts
+		<= Controls $bog_builderui_div sub <= controls
+
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
+$rise_range $mol_view
+	minimal_height 48
+	unit \
+	medium? 5
+	enabled true
+	sub /
+		<= Labels $mol_view
+			sub /
+				<= Min $mol_view
+					sub / <= label_min \
+				<= Medium $mol_view
+					sub / <= label_medium \
+				<= Max $mol_view
+					sub / <= label_max \
+		<= Input $rise_range_input
+			disabled <= disabled false
+			min <= min? 0
+			max <= max? 10
+			step <= step? 1
+			value? <=> value? 0
+			event_input? <=> event_input? null
+		<= Current $mol_view
+			sub /
+				<= Value $rise_range_value
+					sub / <= value
+					disabled <= disabled
+	attr *
+		^
+		disabled <= disabled
+	style *
+		^
+		--rise_range_percent <= percent \0%
+
+$rise_range_input $mol_view
+	dom_name \input
+	attr *
+		^
+		type \range
+		disabled <= disabled false
+	field *
+		^
+		min <= min? 0
+		max <= max? 10
+		step <= step? 1
+		value <= value? 0
+	event *
+		^
+		input? <=> event_input? null
+
+$rise_range_value $mol_view
+	attr *
+		^
+		disabled <= disabled false
+
+$bog_builderui_slider $rise_range
+
+$raggu_web_front_settings $bog_builderui_div
+	showed? false
+	close? null
+	attr *
+		^
+		raggu_web_front_settings_showed <= showed?
+	sub /
+		<= Backdrop $bog_builderui_div
+			event * click? <=> close? null
+		<= Panel $bog_builderui_div sub /
+			<= Header $bog_builderui_div sub /
+				<= Header_text $bog_builderui_div sub /
+					<= Header_title $bog_builderui_div sub / \Настройки движка RAGU
+					<= Header_sub $bog_builderui_div sub / \пресет + ручной режим
+				<= Spacer $bog_builderui_div
+				<= Close_btn $bog_builderui_div
+					event * click? <=> close? null
+					sub / \✕
+			<= Body $mol_scroll sub /
+				<= Presets $bog_builderui_div sub /
+					<= Preset_fast $bog_builderui_button
+						title @ \⚡ Fast
+						click? <=> preset_fast? null
+					<= Preset_accurate $bog_builderui_button
+						title @ \🎯 Accurate
+						click? <=> preset_accurate? null
+					<= Preset_demo $bog_builderui_button
+						title @ \🎬 Demo
+						click? <=> preset_demo? null
+				<= Group_chunking $raggu_web_front_settings_group
+					step \Шаг 1
+					title \Chunking
+					opts \Simple / SemanticText / SmartSemantic · размер · overlap
+					reindex true
+					controls /
+						<= Chunking_strategy $bog_builderui_select
+							value? <=> chunking_strategy? \SmartSemantic
+							dictionary *
+								Simple \Simple
+								SemanticText \SemanticText
+								SmartSemantic \SmartSemantic
+						<= Chunking_size_row $bog_builderui_div sub /
+							<= Chunking_size_label $bog_builderui_div sub / <= chunking_size_label_text @ \chunk size
+							<= Chunking_size_input $bog_builderui_field
+								type \number
+								value? <=> chunking_size_str? \512
+						<= Chunking_overlap_row $bog_builderui_div sub /
+							<= Chunking_overlap_label $bog_builderui_div sub / <= chunking_overlap_label_text @ \overlap
+							<= Chunking_overlap_input $bog_builderui_field
+								type \number
+								value? <=> chunking_overlap_str? \64
+				<= Group_extraction $raggu_web_front_settings_group
+					step \Шаг 2
+					title \Extraction
+					opts \single ↔ two-stage · валидация NEREL · ICL (semantic/BM25/hybrid/random) · модель
+					reindex true
+					controls /
+						<= Extraction_mode $bog_builderui_select
+							value? <=> extraction_mode? \two-stage
+							dictionary *
+								single @ \single-stage
+								two-stage @ \two-stage
+						<= Extraction_model $bog_builderui_select
+							value? <=> extraction_model? \meno-lite-7b
+							dictionary *
+								meno-lite-7b \meno-lite 7B
+								gpt-4 \GPT-4
+								llama3-70b \Llama 3 70B
+						<= Extraction_icl $bog_builderui_select
+							value? <=> extraction_icl? \hybrid
+							dictionary *
+								semantic @ \ICL semantic
+								BM25 @ \ICL BM25
+								hybrid @ \ICL hybrid
+								random @ \ICL random
+				<= Group_summarization $raggu_web_front_settings_group
+					step \Шаг 3
+					title \Summarization
+					opts \DBSCAN (eps, min_samples) · LLM-суммаризация сущностей/связей
+					reindex true
+					controls /
+						<= Summarization_dbscan $mol_check_box
+							checked? <=> summarization_dbscan? false
+							title @ \DBSCAN clustering
+						<= Summarization_llm $mol_check_box
+							checked? <=> summarization_llm? false
+							title @ \LLM summarization
+				<= Group_communities $raggu_web_front_settings_group
+					step \Шаг 4
+					title \Communities
+					opts \Hierarchical Leiden (resolution, levels) · суммаризация сообществ
+					reindex true
+					controls /
+						<= Communities_algo $bog_builderui_select
+							value? <=> communities_algo? \Leiden
+							dictionary *
+								Leiden \Leiden
+						<= Communities_resolution_row $bog_builderui_div sub /
+							<= Communities_resolution_label $bog_builderui_div sub / <= communities_resolution_label_text @ \resolution
+							<= Communities_resolution_value $bog_builderui_div sub / <= communities_resolution_label \1.0
+						<= Communities_resolution $bog_builderui_slider
+							value? <=> communities_resolution_x10? 10
+							min 5
+							max 20
+							step 1
+				<= Group_refinement $raggu_web_front_settings_group
+					step \Шаг 5
+					title \Refinement
+					opts \RemoveIsolatedNodes и пост-обработчики
+					reindex true
+					controls /
+						<= Refinement_isolated $mol_check_box
+							checked? <=> refinement_isolated? false
+							title @ \RemoveIsolatedNodes
+				<= Group_search $raggu_web_front_settings_group
+					step \Шаг 6
+					title \Search
+					opts \Local/Global/Naive/Mix/QueryPlan · rerank · hybrid (BM25/BM42/SPLADE) · top-k
+					reindex false
+					controls /
+						<= Search_mode $bog_builderui_select
+							value? <=> search_mode? \Local
+							dictionary *
+								Local \LocalSearch
+								Global \GlobalSearch
+								Naive \NaiveSearch
+								Mix \MixSearch
+								QueryPlan \QueryPlan
+						<= Search_rerank $mol_check_box
+							checked? <=> search_rerank? false
+							title @ \rerank
+						<= Search_topk_row $bog_builderui_div sub /
+							<= Search_topk_label $bog_builderui_div sub / <= search_topk_label_text @ \top-k
+							<= Search_topk_value $bog_builderui_div sub / <= search_topk_label \8
+						<= Search_topk $bog_builderui_slider
+							value? <=> search_topk? 8
+							min 1
+							max 50
+							step 1
+
+$raggu_web_front_gallery_card_preview $bog_builderui_div
+
+$raggu_web_front_gallery_card $bog_builderui_div
+	id \
+	title \
+	domain \
+	desc \
+	nodes \
+	edges \
+	comms \
+	active false
+	click? null
+	preview_label_text @ \graph preview
+	attr *
+		^
+		raggu_web_front_gallery_card_active <= active
+	event *
+		^
+		click? <=> click? null
+	sub /
+		<= Preview $raggu_web_front_gallery_card_preview sub /
+			<= Preview_label $bog_builderui_div sub / <= preview_label_text
+			<= Domain_badge $bog_builderui_div sub / <= domain
+		<= Title $bog_builderui_div sub / <= title
+		<= Desc $bog_builderui_div sub / <= desc
+		<= Tags $bog_builderui_div sub /
+			<= Tag_nodes $bog_builderui_div sub / <= tag_nodes \
+			<= Tag_edges $bog_builderui_div sub / <= tag_edges \
+			<= Tag_comms $bog_builderui_div sub / <= tag_comms \
+
+$bog_builderui_progress $mol_view
+	dom_name \progress
+	value 50
+	max 100
+	attr *
+		^
+		value <= value 50
+		max <= max 100
+
+$raggu_web_front_gallery_upload $bog_builderui_div
+	showed? false
+	kind \document
+	step? 0
+	total_steps 6
+	error \
+	close? null
+	complete? null
+	title_text @ \Indexing document
+	subtitle_text @ \Mock pipeline run · 6 stages · about 4 seconds
+	panel_title_document_text @ \Indexing document
+	panel_title_index_text @ \Uploading prebuilt index
+	error_too_large_template @ \File too large: %s MB. Limit is 10 MB.
+	step_chunking_text @ \Chunking
+	step_extraction_text @ \Extraction
+	step_summarization_text @ \Summarization
+	step_communities_text @ \Communities
+	step_refinement_text @ \Refinement
+	step_search_text @ \Search index
+	progress_label_text @ \Stage
+	close_text @ \✕
+	error_title_text @ \Upload rejected
+	retry_text @ \Close
+	body /
+	step_rows /
+	attr *
+		^
+		raggu_web_front_gallery_upload_showed <= showed?
+	sub /
+		<= Backdrop $bog_builderui_div
+			event * click? <=> close? null
+		<= Panel $bog_builderui_card sub /
+			<= Header $bog_builderui_div sub /
+				<= Header_text $bog_builderui_div sub /
+					<= Header_title $bog_builderui_div sub / <= panel_title \
+					<= Header_subtitle $bog_builderui_div sub / <= subtitle_text
+				<= Spacer $bog_builderui_div
+				<= Close_btn $bog_builderui_div
+					event * click? <=> close? null
+					sub / <= close_text
+			<= Body $bog_builderui_div sub <= body
+	Error_body $bog_builderui_div sub /
+		<= Error_title $bog_builderui_div sub / <= error_title_text
+		<= Error_text $bog_builderui_div sub / <= error
+	Progress_body $bog_builderui_div sub /
+		<= Progress_bar $bog_builderui_progress
+			max <= total_steps
+			value <= step?
+		<= Progress_label $bog_builderui_div sub /
+			<= progress_label_text
+			<= progress_label_separator \
+			<= step_label \
+			<= progress_label_slash \ /
+			<= total_steps_text \6
+		<= Steps_list $bog_builderui_div sub <= step_rows
+	Step* $bog_builderui_div
+		attr *
+			^
+			raggu_web_front_gallery_upload_step_status <= step_status* \pending
+		sub /
+			<= Step_marker* $bog_builderui_div sub / <= step_marker_text* \○
+			<= Step_name* $bog_builderui_div sub / <= step_name_text* \
+
+$raggu_web_front_gallery $bog_builderui_div
+	dataset_id \wiki
+	select_dataset? null
+	datasets /
+	upload_kind? \
+	upload_complete? null
+	upload_close? null
+	header_title_text @ \Corpus gallery
+	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
+	upload_doc_text @ \＋ Upload document
+	upload_idx_text @ \⇪ Upload prebuilt index
+	uploaded_document_title @ \Uploaded document
+	uploaded_index_title @ \Uploaded index
+	uploaded_domain @ \User upload
+	uploaded_desc @ \Mock dataset built by the demo indexing pipeline.
+	dataset_law_title @ \Russian Codes & Laws
+	dataset_law_domain @ \Law
+	dataset_law_desc @ \Network of norms, references, bodies and concepts of Russian law.
+	sub /
+		<= Header $bog_builderui_div sub /
+			<= Header_text $bog_builderui_div sub /
+				<= Header_title $bog_builderui_div sub / <= header_title_text
+				<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
+			<= Spacer $bog_builderui_div
+			<= Upload_doc $bog_builderui_div
+				sub / <= upload_doc_text
+				event * click? <=> upload_doc_click? null
+			<= Upload_idx $bog_builderui_div
+				sub / <= upload_idx_text
+				event * click? <=> upload_idx_click? null
+		<= Grid $bog_builderui_div sub <= rows /
+			<= Card* $raggu_web_front_gallery_card
+				id <= card_id* \
+				title <= card_title* \
+				domain <= card_domain* \
+				desc <= card_desc* \
+				nodes <= card_nodes* \
+				edges <= card_edges* \
+				comms <= card_comms* \
+				active <= card_active* false
+				click? <=> click*? null
+		<= Upload $raggu_web_front_gallery_upload
+			showed? <=> upload_showed? false
+			kind <= upload_kind?
+			complete? <=> upload_complete? null
+			close? <=> upload_close? null
+
+$mol_svg_line $mol_svg
+	dom_name \line
+	pos /
+		<= from /
+		<= to /
+	attr *
+		^
+		x1 <= from_x \
+		y1 <= from_y \
+		x2 <= to_x \
+		y2 <= to_y \
+
+$mol_svg_circle $mol_svg
+	dom_name \circle
+	pos /
+	attr *
+		^
+		r <= radius \.5%
+		cx <= pos_x \
+		cy <= pos_y \
+
+$mol_svg_rect $mol_svg
+	dom_name \rect
+	pos /
+	attr *
+		^
+		width <= width \0
+		height <= height \0
+		x <= pos_x \
+		y <= pos_y \
+
+$mol_svg_text $mol_svg
+	dom_name \text
+	pos /
+	attr *
+		^
+		x <= pos_x \
+		y <= pos_y \
+		text-anchor <= align_hor <= align \middle
+		alignment-baseline <= align_vert \baseline
+	sub /
+		<= text \
+
+$raggu_web_front_explorer_forcegraph $mol_svg_root
+	view_box <= computed_view_box \-300 -300 600 600
+	aspect \xMidYMid meet
+	select?val null
+	selected_id? \
+	hovered_id? \
+	drag_id? \
+	nodes /
+	edges /
+	pan_x? +0
+	pan_y? +0
+	zoom? +1
+	positions? *
+	gravity +0.04
+	force_scale +0.06
+	damping +0.82
+	min_move +0.15
+	max_speed +12
+	node_size_base +4
+	node_size_growth +1.5
+	event *
+		^
+		wheel?event <=> wheel?event null
+		pointerdown?event <=> pan_start?event null
+		pointermove?event <=> pan_move?event null
+		pointerup?event <=> pan_end?event null
+		pointercancel?event <=> pan_end?event null
+		click?event <=> bg_click?event null
+	sub /
+		<= G_edges $mol_svg_group
+			sub <= edge_views /
+				<= Edge* $mol_svg_line
+					from_x <= edge_x1* \
+					from_y <= edge_y1* \
+					to_x <= edge_x2* \
+					to_y <= edge_y2* \
+					attr *
+						^
+						stroke <= edge_color* \#7a7672
+						stroke-width <= edge_width* \1
+						stroke-opacity <= edge_opacity* \0.55
+		<= G_nodes $mol_svg_group
+			sub <= node_views /
+				<= Node* $mol_svg_circle
+					pos_x <= node_x* \
+					pos_y <= node_y* \
+					radius <= node_radius* \6
+					attr *
+						^
+						data-node-id <= node_id* \
+						fill <= node_color* \#7c6ce0
+						stroke <= node_stroke* \transparent
+						stroke-width <= node_stroke_width* \0
+						cursor \pointer
+					event *
+						^
+						click? <=> click*? null
+						pointerenter? <=> hover_enter*? null
+						pointerleave? <=> hover_leave*? null
+		<= Tooltip $mol_svg_group
+			attr *
+				^
+				pointer-events \none
+			sub <= tooltip_sub /
+				<= Tooltip_bg $mol_svg_rect
+					pos_x <= tooltip_bg_x \0
+					pos_y <= tooltip_bg_y \0
+					width <= tooltip_bg_w \0
+					height <= tooltip_bg_h \0
+					attr *
+						^
+						rx \3
+						ry \3
+						stroke-width \1
+						data-forcegraph-tooltip-bg \
+				<= Tooltip_text $mol_svg_text
+					pos_x <= tooltip_x \0
+					pos_y <= tooltip_y \0
+					align \middle
+					align_vert \middle
+					text <= tooltip_text \
+					attr *
+						^
+						font-size <= tooltip_font_size \11
+						font-weight \600
+						data-forcegraph-tooltip-text \
+
+$raggu_web_front_explorer $bog_builderui_div
+	dataset_id \
+	selected_id? \
+	ask_click? null
+	filter_search_text @ \🔍 Find node…
+	filter_type_text @ \Entity type ▾
+	filter_thresh_text @ \Strength threshold ▾
+	filter_comm_text @ \◉ Communities: on
+	aside_title_text @ \Entity card
+	aside_empty_text @ \Click a node on the graph
+	relations_title_template @ \Relations (%s)
+	sources_title_text @ \Sources (provenance)
+	sources_text @ \chunk #418 · chunk #902 …
+	ask_btn_text @ \💬 Ask about this entity
+	legend_title_text @ \Entity Types
+	legend_person_label_text @ \PERSON
+	legend_org_label_text @ \ORGANIZATION
+	legend_loc_label_text @ \LOCATION
+	legend_event_label_text @ \EVENT
+	legend_date_label_text @ \DATE
+	legend_work_label_text @ \WORK_OF_ART
+	legend_law_label_text @ \LAW
+	sub /
+		<= Canvas $bog_builderui_div sub /
+			<= Canvas_bg $bog_builderui_div sub /
+				<= Graph $raggu_web_front_explorer_forcegraph
+					nodes <= graph_nodes /
+					edges <= graph_edges /
+					selected_id? <=> selected_id?
+			<= Filters $bog_builderui_div sub /
+				<= Filter_search $bog_builderui_div sub / <= filter_search_text
+				<= Filter_type $bog_builderui_div sub / <= filter_type_text
+				<= Filter_thresh $bog_builderui_div sub / <= filter_thresh_text
+				<= Filter_comm $bog_builderui_div sub / <= filter_comm_text
+			<= Legend $bog_builderui_div sub /
+				<= Legend_title $bog_builderui_div sub / <= legend_title_text
+				<= Legend_person $bog_builderui_div sub /
+					<= Legend_person_dot $bog_builderui_div
+					<= Legend_person_label $bog_builderui_div sub / <= legend_person_label_text
+				<= Legend_org $bog_builderui_div sub /
+					<= Legend_org_dot $bog_builderui_div
+					<= Legend_org_label $bog_builderui_div sub / <= legend_org_label_text
+				<= Legend_loc $bog_builderui_div sub /
+					<= Legend_loc_dot $bog_builderui_div
+					<= Legend_loc_label $bog_builderui_div sub / <= legend_loc_label_text
+				<= Legend_event $bog_builderui_div sub /
+					<= Legend_event_dot $bog_builderui_div
+					<= Legend_event_label $bog_builderui_div sub / <= legend_event_label_text
+				<= Legend_date $bog_builderui_div sub /
+					<= Legend_date_dot $bog_builderui_div
+					<= Legend_date_label $bog_builderui_div sub / <= legend_date_label_text
+				<= Legend_work $bog_builderui_div sub /
+					<= Legend_work_dot $bog_builderui_div
+					<= Legend_work_label $bog_builderui_div sub / <= legend_work_label_text
+				<= Legend_law $bog_builderui_div sub /
+					<= Legend_law_dot $bog_builderui_div
+					<= Legend_law_label $bog_builderui_div sub / <= legend_law_label_text
+		<= Aside $bog_builderui_div sub /
+			<= Aside_title $bog_builderui_div sub / <= aside_title_text
+			<= Entity_head $bog_builderui_div sub /
+				<= Entity_dot $bog_builderui_div
+				<= Entity_name $bog_builderui_div sub / <= entity_name \
+			<= Entity_type $bog_builderui_div sub / <= entity_type \
+			<= Entity_desc $bog_builderui_div sub / <= entity_desc \
+			<= Relations_title $bog_builderui_div sub / <= relations_title \
+			<= Relations_list $bog_builderui_div sub <= rel_rows /
+				<= Rel* $bog_builderui_div sub /
+					<= Rel_type* $bog_builderui_div sub / <= rel_type* \
+					<= Rel_target* $bog_builderui_div sub / <= rel_target* \
+			<= Sources_title $bog_builderui_div sub / <= sources_title_text
+			<= Sources $bog_builderui_div sub / <= sources_text
+			<= Ask_btn $bog_builderui_div
+				sub / <= ask_btn_text
+				event * click? <=> ask_click? null
+
+$bog_builderui_skeleton $bog_builderui_div
+	attr *
+		mol_view_error \Promise
+
+$mol_stack $mol_view
+
+$mol_text_code_token $mol_dimmer
+	attr *
+		^
+		mol_text_code_token_type <= type \
+
+$mol_text_code_token_link $mol_text_code_token
+	dom_name \a
+	type \code-link
+	attr *
+		^
+		href <= uri \
+		target \_blank
+
+$mol_text_code_line $mol_paragraph
+	text \
+	minimal_height 24
+	numb_showed true
+	syntax null
+	uri_resolve* \
+	Numb $mol_view
+		sub /
+			<= numb 0
+	Token* $mol_text_code_token
+		type <= token_type* \
+		haystack <= token_text* \
+		needle <= highlight \
+	Token_link* $mol_text_code_token_link
+		haystack <= token_text* \
+		needle <= highlight \
+		uri <= token_uri* \
+	find_pos* null
+
+$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
+
+$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
+
+$mol_button_copy $mol_button_minor
+	blobs /$mol_blob
+		<= text_blob? $mol_blob /
+			/BlobPart <= text <= title
+			* type \text/plain
+		<= html_blob? $mol_blob /
+			/BlobPart <= html \
+			* type \text/html
+	data *
+	sub /
+		<= Icon $mol_icon_clipboard_outline
+		<= title \
+
+$mol_text_code $mol_stack
+	attr *
+		^
+		mol_text_code_sidebar_showed <= sidebar_showed false
+	text \
+	text_lines /string
+	find_pos* null
+	uri_base \
+	row_themes /string
+	sub /
+		<= Rows $mol_list
+			render_visible_only <= render_visible_only false
+			rows <= rows /
+				<= Row*0 $mol_text_code_line
+					numb_showed <= sidebar_showed
+					numb <= row_numb* 0
+					theme <= row_theme* \
+					text <= row_text* \
+					syntax <= syntax null
+					uri_resolve* <= uri_resolve* \
+					highlight <= highlight \
+		<= Copy $mol_button_copy
+			hint @ \Copy whole code
+			text <= text_export \
+
+$mol_textarea $mol_stack
+	attr *
+		^
+		mol_textarea_clickable <= clickable? false
+		mol_textarea_sidebar_showed <= sidebar_showed false
+	event *
+		keydown? <=> press? null
+		pointermove? <=> hover? null
+	sub /
+		<= Edit $mol_textarea_edit
+			value? <=> value? \
+			hint <= hint \ 
+			enabled <= enabled true
+			spellcheck <= spellcheck true
+			length_max <= length_max +Infinity
+			selection? <=> selection? /number
+			bring => bring
+			submit? <=> submit? null
+			submit_with_ctrl <= submit_with_ctrl true
+		<= View $mol_text_code
+			text <= value
+			render_visible_only false
+			row_numb* <= row_numb* 0
+			sidebar_showed <= sidebar_showed
+			highlight <= highlight \
+			syntax <= syntax $mol_syntax2
+	symbols_alt *string
+		comma \<
+		period \>
+		dash \−
+		equals \≈
+		graveAccent \́
+		forwardSlash \÷
+		E \€
+		V \✔
+		X \×
+		C \©
+		P \§
+		H \₽
+		key0 \°
+		key8 \•
+		key2 \@
+		key3 \#
+		key4 \$
+		key6 \^
+		key7 \&
+		bracketOpen \[
+		bracketClose \]
+		slashBack \|
+	symbols_alt_ctrl *string
+		space \ 
+	symbols_alt_shift *string
+		V \✅
+		X \❌
+		O \⭕
+		key1 \❗
+		key4 \💲
+		key7 \❓
+		comma \«
+		period \»
+		semicolon \“
+		quoteSingle \”
+		dash \—
+		equals \≠
+		graveAccent \̱
+		bracketOpen \{
+		bracketClose \}
+
+$mol_textarea_edit $mol_string
+	dom_name \textarea
+	enter \enter
+	field *
+		^
+		scrollTop 0
+
+$raggu_web_front_chat $bog_builderui_div
+	modes_label_text @ \Search engine
+	trace_head_title_text @ \▾ Answer trace
+	trace_head_meta_text @ \LocalSearch · top-k 8 · rerank ✓
+	trace_label_text @ \ENTITIES IN CONTEXT
+	trace_chip_one_text @ \Bjørnson
+	trace_chip_two_text @ \Norwegian anthem
+	trace_chip_three_text @ \1859
+	trace_stat_chunks_text @ \chunks: 3
+	trace_stat_comms_text @ \communities: 1
+	trace_stat_retr_text @ \retrieval 140ms
+	trace_stat_gen_text @ \gen 1.2s
+	trace_stat_power_text @ \≈0.4 Wh
+	trace_link_text @ \↳ highlight on graph
+	sug_one_text @ \Who received the Nobel Prize?
+	sug_two_text @ \Connection between Ibsen and Bjørnson?
+	input_hint_text @ \Ask anything about the corpus…
+	send_label_text @ \Send
+	seed_user_text @ \Who wrote the Norwegian anthem and when?
+	seed_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
+	mock_prefix_text @ \Thanks for the question:
+	mock_suffix_text @ \(Mock response. Real retrieval will be wired to the backend.)
+	clear_text @ \Clear
+	mode_llm_text @ \$Mol LLM
+	mode_local_text @ \LocalSearch
+	mode_global_text @ \Global
+	mode_mix_text @ \Mix
+	mode_plan_text @ \QueryPlan
+	mode? \llm
+	prompt_text? \
+	prompt_submit? null
+	use_sug_one? null
+	use_sug_two? null
+	clear_click? null
+	select_llm? null
+	select_local? null
+	select_global? null
+	select_mix? null
+	select_plan? null
+	rows /
+	message_text* \
+	message_role* \
+	message_with_trace* false
+	trace_expanded* false
+	trace_toggle*? null
+	sub /
+		<= Modes_bar $bog_builderui_div sub /
+			<= Modes_label $bog_builderui_div sub / <= modes_label_text
+			<= Modes $bog_builderui_div sub /
+				<= Mode_llm $bog_builderui_div
+					sub / <= mode_llm_text
+					attr *
+						^
+						raggu_chat_mode_active <= is_llm false
+					event *
+						^
+						click? <=> select_llm? null
+				<= Mode_local $bog_builderui_div
+					sub / <= mode_local_text
+					attr *
+						^
+						raggu_chat_mode_active <= is_local false
+					event *
+						^
+						click? <=> select_local? null
+				<= Mode_global $bog_builderui_div
+					sub / <= mode_global_text
+					attr *
+						^
+						raggu_chat_mode_active <= is_global false
+					event *
+						^
+						click? <=> select_global? null
+				<= Mode_mix $bog_builderui_div
+					sub / <= mode_mix_text
+					attr *
+						^
+						raggu_chat_mode_active <= is_mix false
+					event *
+						^
+						click? <=> select_mix? null
+				<= Mode_plan $bog_builderui_div
+					sub / <= mode_plan_text
+					attr *
+						^
+						raggu_chat_mode_active <= is_plan false
+					event *
+						^
+						click? <=> select_plan? null
+			<= Clear $mol_button_minor
+				hint <= clear_text
+				click? <=> clear_click? null
+				sub / \✕
+		<= Body $mol_scroll
+			sub /
+				<= Body_flow $bog_builderui_div sub /
+					<= Messages $mol_list rows <= rows
+					<= Status $bog_builderui_card
+						attr *
+							^
+							raggu_loading <= is_communicating false
+						sub /
+							<= Skel_line_one $bog_builderui_skeleton
+							<= Skel_line_two $bog_builderui_skeleton
+							<= Skel_line_three $bog_builderui_skeleton
+		<= Footer $bog_builderui_div sub /
+			<= Suggestions $bog_builderui_div sub /
+				<= Sug_one $bog_builderui_div
+					sub / <= sug_one_text
+					event * click? <=> use_sug_one? null
+				<= Sug_two $bog_builderui_div
+					sub / <= sug_two_text
+					event * click? <=> use_sug_two? null
+			<= Input_row $bog_builderui_div sub /
+				<= Prompt $mol_textarea
+					hint <= input_hint_text
+					value? <=> prompt_text? \
+					submit? <=> prompt_submit? null
+				<= Input_send $mol_button_minor
+					hint <= send_label_text
+					click? <=> prompt_submit? null
+					sub / \↑
+	Message* $bog_builderui_div
+		attr *
+			^
+			raggu_role <= message_role*
+		sub /
+			<= Message_text* $bog_builderui_div sub / <= message_text*
+			<= Message_trace* $bog_builderui_div
+				attr *
+					raggu_visible <= message_with_trace*
+				sub /
+					<= Message_trace_head* $bog_builderui_div
+						event * click? <=> trace_toggle*? null
+						sub /
+							<= Message_trace_head_title* $bog_builderui_div sub / <= trace_head_title_text
+							<= Message_trace_head_meta* $bog_builderui_div sub / <= trace_head_meta_text
+					<= Message_trace_body* $bog_builderui_div
+						attr *
+							raggu_expanded <= trace_expanded*
+						sub /
+							<= Message_trace_label* $bog_builderui_div sub / <= trace_label_text
+							<= Message_trace_chips* $bog_builderui_div sub /
+								<= Message_trace_chip_one* $bog_builderui_div sub / <= trace_chip_one_text
+								<= Message_trace_chip_two* $bog_builderui_div sub / <= trace_chip_two_text
+								<= Message_trace_chip_three* $bog_builderui_div sub / <= trace_chip_three_text
+							<= Message_trace_stats* $bog_builderui_div sub /
+								<= Message_trace_stat_chunks* $bog_builderui_div sub / <= trace_stat_chunks_text
+								<= Message_trace_stat_comms* $bog_builderui_div sub / <= trace_stat_comms_text
+								<= Message_trace_stat_retr* $bog_builderui_div sub / <= trace_stat_retr_text
+								<= Message_trace_stat_gen* $bog_builderui_div sub / <= trace_stat_gen_text
+								<= Message_trace_stat_power* $bog_builderui_div sub / <= trace_stat_power_text
+							<= Message_trace_link* $bog_builderui_div sub / <= trace_link_text
+
+$raggu_web_front_dashboard_dist $bog_builderui_div
+
+$raggu_web_front_dashboard_metric $bog_builderui_div
+	name \
+	value \
+	pct \0%
+	sub /
+		<= Name $bog_builderui_div sub / <= name
+		<= Bar $bog_builderui_div sub /
+			<= Bar_fill $bog_builderui_div
+		<= Value $bog_builderui_div sub / <= value
+
+$raggu_web_front_dashboard_stage $bog_builderui_div
+	name \
+	time \
+	pct \0%
+	sub /
+		<= Name $bog_builderui_div sub / <= name
+		<= Bar $bog_builderui_div sub /
+			<= Bar_fill $bog_builderui_div
+		<= Time $bog_builderui_div sub / <= time
+
+$raggu_web_front_dashboard_log $bog_builderui_div
+	time \
+	text \
+	mode \
+	dur \
+	expanded? false
+	chunks \
+	communities \
+	retrieval \
+	generation \
+	power \
+	trace_label \
+	trace_link \
+	arrow \▾
+	attr *
+		^
+		raggu_web_front_dashboard_log_expanded <= expanded? false
+	sub /
+		<= Head $bog_builderui_div sub /
+			event * click? <=> toggle? null
+			<= Time $bog_builderui_div sub / <= time
+			<= Text $bog_builderui_div sub / <= text
+			<= Mode $bog_builderui_div sub / <= mode
+			<= Dur $bog_builderui_div sub / <= dur
+			<= Arrow $bog_builderui_div sub / <= arrow
+		<= Trace $bog_builderui_div sub /
+			<= Trace_label $bog_builderui_div sub / <= trace_label
+			<= Trace_stats $bog_builderui_div sub /
+				<= Trace_stat_chunks $bog_builderui_div sub / <= chunks
+				<= Trace_stat_comms $bog_builderui_div sub / <= communities
+				<= Trace_stat_retr $bog_builderui_div sub / <= retrieval
+				<= Trace_stat_gen $bog_builderui_div sub / <= generation
+				<= Trace_stat_power $bog_builderui_div sub / <= power
+			<= Trace_link $bog_builderui_div sub / <= trace_link
+
+$raggu_web_front_dashboard $bog_builderui_div
+	metrics /
+	stages /
+	logs /
+	title_text @ \Corpus dashboard
+	subtitle_text @ \Graph stats · quality · energy and cost · timings and logs
+	card_stats_label_text @ \① Graph stats
+	stat_nodes_lbl_text @ \nodes
+	stat_edges_lbl_text @ \edges
+	stat_comms_lbl_text @ \communities
+	stats_dist_text @ \entity type distribution
+	card_quality_label_text @ \② Quality (benchmarks)
+	quality_footer_text @ \RAGU vs LightRAG / HippoRAG2 / Naive
+	card_energy_label_text @ \③ Energy and cost
+	energy_kwh_lbl_text @ \kWh / corpus
+	energy_cost_lbl_text @ \$ vs GPT-4 API
+	energy_formula_text @ \kWh = TDP × time × PUE
+	energy_note_text @ \TDP 300W · PUE 1.4 · meno-lite 7B locally vs ~40k tokens/doc on gpt-4o pricing
+	card_timings_label_text @ \④ Pipeline timings
+	card_logs_label_text @ \Query logs (expand into trace)
+	trace_label_text @ \ENTITIES IN CONTEXT
+	trace_link_text @ \↳ highlight on graph
+	sub /
+		<= Title $bog_builderui_div sub / <= title_text
+		<= Subtitle $bog_builderui_div sub / <= subtitle_text
+		<= Grid $bog_builderui_div sub /
+			<= Card_stats $bog_builderui_div sub /
+				<= Card_stats_label $bog_builderui_div sub / <= card_stats_label_text
+				<= Stats_row $bog_builderui_div sub /
+					<= Stat_nodes $bog_builderui_div sub /
+						<= Stat_nodes_val $bog_builderui_div sub / \2 410
+						<= Stat_nodes_lbl $bog_builderui_div sub / <= stat_nodes_lbl_text
+					<= Stat_edges $bog_builderui_div sub /
+						<= Stat_edges_val $bog_builderui_div sub / \7 088
+						<= Stat_edges_lbl $bog_builderui_div sub / <= stat_edges_lbl_text
+					<= Stat_comms $bog_builderui_div sub /
+						<= Stat_comms_val $bog_builderui_div sub / \38
+						<= Stat_comms_lbl $bog_builderui_div sub / <= stat_comms_lbl_text
+				<= Stats_dist $raggu_web_front_dashboard_dist sub / <= stats_dist_text
+			<= Card_quality $bog_builderui_div sub /
+				<= Card_quality_label $bog_builderui_div sub / <= card_quality_label_text
+				<= Metric_rows $bog_builderui_div sub <= metric_rows /
+					<= Metric* $raggu_web_front_dashboard_metric
+						name <= metric_name* \
+						value <= metric_value* \
+						pct <= metric_pct* \0%
+				<= Quality_footer $bog_builderui_div sub / <= quality_footer_text
+			<= Card_energy $bog_builderui_div sub /
+				<= Card_energy_label $bog_builderui_div sub / <= card_energy_label_text
+				<= Energy_row $bog_builderui_div sub /
+					<= Energy_kwh $bog_builderui_div sub /
+						<= Energy_kwh_val $bog_builderui_div sub / <= energy_kwh_val \
+						<= Energy_kwh_lbl $bog_builderui_div sub / <= energy_kwh_lbl_text
+					<= Energy_cost $bog_builderui_div sub /
+						<= Energy_cost_val $bog_builderui_div sub / <= energy_cost_val \
+						<= Energy_cost_lbl $bog_builderui_div sub / <= energy_cost_lbl_text
+				<= Energy_formula $bog_builderui_div sub / <= energy_formula_text
+				<= Energy_note $bog_builderui_div sub / <= energy_note_text
+			<= Card_timings $bog_builderui_div sub /
+				<= Card_timings_label $bog_builderui_div sub / <= card_timings_label_text
+				<= Stage_rows $bog_builderui_div sub <= stage_rows /
+					<= Stage* $raggu_web_front_dashboard_stage
+						name <= stage_name* \
+						time <= stage_time* \
+						pct <= stage_pct* \0%
+			<= Card_logs $bog_builderui_div sub /
+				<= Card_logs_label $bog_builderui_div sub / <= card_logs_label_text
+				<= Log_list $bog_builderui_div sub <= log_rows /
+					<= Log* $raggu_web_front_dashboard_log
+						time <= log_time* \
+						text <= log_text* \
+						mode <= log_mode* \
+						dur <= log_dur* \
+						expanded? <=> log_expanded*? false
+						chunks <= log_chunks* \
+						communities <= log_communities* \
+						retrieval <= log_retrieval* \
+						generation <= log_generation* \
+						power <= log_power* \
+						trace_label <= trace_label_text
+						trace_link <= trace_link_text
+
+$raggu_web_front_app $bog_builderui_div
+	screen? \gallery
+	preset? \demo
+	dataset_id? \
+	settings_open? false
+	body /
+	lights_mode \light
+	screen_gallery_title @ \Datasets
+	screen_explorer_title @ \Knowledge graph
+	screen_chat_title @ \Chat with agent
+	screen_dashboard_title @ \Dashboard
+	attr *
+		^
+		bog_builderui_lights <= lights_mode
+		bog_builderui_base \stone
+		bog_builderui_theme \violet
+		bog_builderui_chart \purple
+		bog_builderui_radius \medium
+		bog_builderui_font_body \inter
+		bog_builderui_font_head \inter
+	plugins /
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_graph
+		<= Theme_auto $bog_theme_auto
+	sub /
+		<= Sidebar $raggu_web_front_sidebar
+			screen? <=> screen?
+			dataset_id <= dataset_id
+			dataset_title <= dataset_title \
+			Theme_auto <= Theme_auto
+		<= Main $bog_builderui_div sub /
+			<= Topbar $raggu_web_front_topbar
+				screen <= screen
+				dataset_id <= dataset_id
+				dataset_title <= dataset_title \
+				screen_title <= screen_title \
+				preset? <=> preset?
+				open_settings? <=> open_settings? null
+			<= Body $mol_scroll sub <= body
+		<= Settings $raggu_web_front_settings
+			showed? <=> settings_open?
+	Gallery $raggu_web_front_gallery
+		dataset_id <= dataset_id
+		select_dataset? <=> select_dataset? null
+	Explorer $raggu_web_front_explorer
+		dataset_id <= dataset_id
+		ask_click? <=> ask_chat? null
+	Chat $raggu_web_front_chat
+	Dashboard $raggu_web_front_dashboard
