@@ -18,8 +18,7 @@ namespace $.$$ {
 		// Буклетный UX на телефоне: при смене раздела доскролливаем горизонтальный
 		// снап к контенту. На десктопе скролла нет — вызов безвреден.
 		// Таймаут вместо after_tick: на первом рендере layout ещё не готов
-		// и scrollWidth равен clientWidth. Скролл мгновенный: smooth отменяется
-		// браузером при ленивом рендере контента нового экрана.
+		// и scrollWidth равен clientWidth.
 		override auto() {
 			void this.screen()
 			new this.$.$mol_after_timeout( 100, () => {
@@ -27,7 +26,10 @@ namespace $.$$ {
 				const main = this.Main().dom_node() as HTMLElement
 				if( !root || !main ) return
 				if( root.scrollWidth <= root.clientWidth ) return
-				root.scroll( { left: main.offsetLeft + main.offsetWidth - root.clientWidth } )
+				root.scroll( {
+					left: main.offsetLeft + main.offsetWidth - root.clientWidth,
+					behavior: 'smooth',
+				} )
 			} )
 			return [] as any
 		}
