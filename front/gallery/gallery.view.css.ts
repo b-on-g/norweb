@@ -29,6 +29,30 @@ namespace $ {
 			color: $bog_builderui_tokens.shade,
 			margin: { top: '3px' },
 		},
+		Mock_badge: {
+			display: 'none',
+			alignSelf: 'flex-start',
+			font: {
+				family: 'ui-monospace, monospace',
+				weight: 600,
+				size: '11px',
+			},
+			color: '#8a6d1b',
+			background: { color: '#f5c84226' },
+			border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '6px' },
+			padding: {
+				top: '3px',
+				bottom: '3px',
+				left: '8px',
+				right: '8px',
+			},
+			margin: { top: '8px' },
+			'@': {
+				bog_norweb_front_gallery_mock_badge_showed: {
+					true: { display: 'flex' },
+				},
+			},
+		},
 		Spacer: {
 			flex: { grow: 1 },
 		},

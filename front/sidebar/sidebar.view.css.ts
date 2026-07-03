@@ -30,11 +30,6 @@ namespace $ {
 			minWidth: '26px',
 			maxWidth: '26px',
 			height: '26px',
-			border: { width: '2px', style: 'solid', color: $bog_builderui_tokens.current, radius: '6px' },
-			align: { items: 'center' },
-			justify: { content: 'center' },
-			font: { weight: 800, size: '14px' },
-			color: $bog_builderui_tokens.current,
 		},
 		Brand_title: {
 			font: { weight: 700, size: '16px' },

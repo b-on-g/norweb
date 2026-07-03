@@ -6,5 +6,6 @@
 	"$bog_norweb_front_sidebar_Nav_gallery_label": "Датасеты",
 	"$bog_norweb_front_sidebar_Nav_explorer_label": "Граф",
 	"$bog_norweb_front_sidebar_Nav_chat_label": "Чат",
-	"$bog_norweb_front_sidebar_Nav_dashboard_label": "Дашборд"
+	"$bog_norweb_front_sidebar_Nav_dashboard_label": "Дашборд",
+	"$bog_norweb_front_sidebar_Nav_summary_label": "Сводка"
 }

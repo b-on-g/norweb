@@ -3,7 +3,8 @@ namespace $.$$ {
 	export class $bog_norweb_front_app extends $.$bog_norweb_front_app {
 
 		body() {
-			// Без выбранного датасета всегда показываем Gallery — остальные экраны бессмысленны.
+			// Сводка не зависит от датасета, для остальных экранов без него показываем Gallery.
+			if( this.screen() === 'summary' ) return [ this.Summary() ]
 			const s = this.dataset_id() ? this.screen() : 'gallery'
 			switch( s ) {
 				case 'gallery': return [ this.Gallery() ]
@@ -17,6 +18,12 @@ namespace $.$$ {
 		@$mol_mem
 		lights_mode() {
 			return this.Theme_auto().is_light_now() ? 'light' : 'dark'
+		}
+
+		// Попап деталей сводки рендерим на уровне app: внутри Body его ломает
+		// contain:content у скролла — fixed-оверлей позиционируется не от вьюпорта.
+		Summary_popup() {
+			return this.Summary().Detail()
 		}
 
 		@$mol_action
@@ -43,6 +50,7 @@ namespace $.$$ {
 				case 'explorer': return this.screen_explorer_title()
 				case 'chat': return this.screen_chat_title()
 				case 'dashboard': return this.screen_dashboard_title()
+				case 'summary': return this.screen_summary_title()
 			}
 			return ''
 		}

@@ -7,6 +7,7 @@ $bog_norweb_front_gallery $bog_builderui_div
 	upload_close? null
 	header_title_text @ \Corpus gallery
 	header_subtitle_text @ \Pick a ready knowledge graph or upload your own document / index
+	mock_badge_text @ \⚠ Mock data — backend is not connected
 	upload_doc_text @ \＋ Upload document
 	upload_idx_text @ \⇪ Upload prebuilt index
 	uploaded_document_title @ \Uploaded document
@@ -21,6 +22,11 @@ $bog_norweb_front_gallery $bog_builderui_div
 			<= Header_text $bog_builderui_div sub /
 				<= Header_title $bog_builderui_div sub / <= header_title_text
 				<= Header_subtitle $bog_builderui_div sub / <= header_subtitle_text
+				<= Mock_badge $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_gallery_mock_badge_showed <= is_mock false
+					sub / <= mock_badge_text
 			<= Spacer $bog_builderui_div
 			<= Upload_doc $bog_builderui_div
 				sub / <= upload_doc_text

@@ -9,8 +9,10 @@ $bog_norweb_front_sidebar $bog_builderui_div
 	lang_label_text @ \LANG
 	sub /
 		<= Brand $bog_builderui_div sub /
-			<= Brand_logo $bog_builderui_div sub / \R
-			<= Brand_title $bog_builderui_div sub / \RAGU
+			<= Brand_logo $mol_image
+				uri \bog/norweb/front/assets/nornickel_mark.png
+				title \Nornickel
+			<= Brand_title $bog_builderui_div sub / \Nornickel
 			<= Brand_badge $bog_builderui_div sub / \demo
 		<= Sections_label $bog_builderui_div sub / <= sections_label_text
 		<= Nav $bog_builderui_div sub /
@@ -37,6 +39,11 @@ $bog_norweb_front_sidebar $bog_builderui_div
 				active <= is_dashboard false
 				disabled <= no_dataset false
 				click? <=> click_dashboard? null
+			<= Nav_summary $bog_norweb_front_sidebar_nav
+				icon \✦
+				label @ \Summary
+				active <= is_summary false
+				click? <=> click_summary? null
 		<= Spacer $bog_builderui_div
 		<= Footer $bog_builderui_div sub /
 			<= Corpus_label $bog_builderui_div sub / <= corpus_label_text
