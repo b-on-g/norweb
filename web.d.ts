@@ -12235,6 +12235,7 @@ declare namespace $ {
 declare namespace $.$$ {
     class $bog_norweb_front_app extends $.$bog_norweb_front_app {
         body(): $.$bog_norweb_front_summary[] | $.$bog_norweb_front_gallery[] | $.$bog_norweb_front_explorer[] | $.$bog_norweb_front_chat[] | $.$bog_norweb_front_dashboard[];
+        auto(): any;
         lights_mode(): "light" | "dark";
         Summary_popup(): $.$bog_norweb_front_summary_detail;
         open_settings(): null;
@@ -12247,6 +12248,9 @@ declare namespace $.$$ {
         preset(next?: string): string;
         dataset_id(next?: string): string;
     }
+}
+
+declare namespace $ {
 }
 
 /** @see $bog_builderui_tokens */

@@ -12418,6 +12418,20 @@ var $;
             font: { size: '12px', weight: 600 },
             cursor: 'pointer',
         },
+        '@media': {
+            '(max-width: 720px)': {
+                height: 'auto',
+                minHeight: '58px',
+                flexWrap: 'wrap',
+                gap: '0.5rem',
+                padding: {
+                    top: '8px',
+                    bottom: '8px',
+                    left: '0.75rem',
+                    right: '0.75rem',
+                },
+            },
+        },
     });
 })($ || ($ = {}));
 
@@ -13851,6 +13865,13 @@ var $;
         },
         Chunking_overlap_input: {
             flex: { grow: 1 },
+        },
+        '@media': {
+            '(max-width: 720px)': {
+                Panel: {
+                    width: '100vw',
+                },
+            },
         },
     });
 })($ || ($ = {}));
@@ -15570,6 +15591,16 @@ var $;
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: '16px',
             minWidth: 0,
+        },
+        '@media': {
+            '(max-width: 720px)': {
+                padding: {
+                    top: '1rem',
+                    bottom: '1rem',
+                    left: '0.75rem',
+                    right: '0.75rem',
+                },
+            },
         },
     });
 })($ || ($ = {}));
@@ -17694,6 +17725,27 @@ var $;
             textAlign: 'center',
             font: { size: '12px', weight: 600 },
             cursor: 'pointer',
+        },
+        '@media': {
+            '(max-width: 720px)': {
+                flex: { direction: 'column' },
+                overflow: 'auto',
+                Canvas: {
+                    minHeight: '55vh',
+                },
+                Aside: {
+                    minWidth: 0,
+                    maxWidth: '100%',
+                    border: {
+                        left: { width: 0 },
+                        top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
+                    },
+                    overflow: 'visible',
+                },
+                Filters: {
+                    maxWidth: $mol_style_func.calc('100% - 28px'),
+                },
+            },
         },
     });
 })($ || ($ = {}));
@@ -22258,6 +22310,14 @@ var $;
             font: { weight: 600, size: '12px' },
             color: $bog_builderui_tokens.current,
         },
+        '@media': {
+            '(max-width: 720px)': {
+                Panel: {
+                    maxWidth: $mol_style_func.calc('100vw - 1.5rem'),
+                    maxHeight: $mol_style_func.calc('100vh - 1.5rem'),
+                },
+            },
+        },
     });
 })($ || ($ = {}));
 
@@ -22600,6 +22660,16 @@ var $;
             gap: '16px',
             minWidth: 0,
         },
+        '@media': {
+            '(max-width: 720px)': {
+                padding: {
+                    top: '1rem',
+                    bottom: '1rem',
+                    left: '0.75rem',
+                    right: '0.75rem',
+                },
+            },
+        },
     });
 })($ || ($ = {}));
 
@@ -22805,6 +22875,24 @@ var $;
                 }
                 return [];
             }
+            // Буклетный UX на телефоне: при смене раздела доскролливаем горизонтальный
+            // снап к контенту. На десктопе скролла нет — вызов безвреден.
+            // Таймаут вместо after_tick: на первом рендере layout ещё не готов
+            // и scrollWidth равен clientWidth. Скролл мгновенный: smooth отменяется
+            // браузером при ленивом рендере контента нового экрана.
+            auto() {
+                void this.screen();
+                new this.$.$mol_after_timeout(100, () => {
+                    const root = this.dom_node();
+                    const main = this.Main().dom_node();
+                    if (!root || !main)
+                        return;
+                    if (root.scrollWidth <= root.clientWidth)
+                        return;
+                    root.scroll({ left: main.offsetLeft + main.offsetWidth - root.clientWidth });
+                });
+                return [];
+            }
             lights_mode() {
                 return this.Theme_auto().is_light_now() ? 'light' : 'dark';
             }
@@ -22875,6 +22963,13 @@ var $;
         ], $bog_norweb_front_app.prototype, "dataset_id", null);
         $$.$bog_norweb_front_app = $bog_norweb_front_app;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/norweb/front/app/app.view.css", "/* Буклетный UX на телефоне (как в $mol_book2): сайдбар и контент — снап-страницы\n   горизонтального скролла. Свайп вправо открывает меню, выбор раздела доскролливает\n   обратно к контенту (см. auto() в app.view.ts).\n   Селекторы задвоены/вложены, чтобы перебить базовые правила из app.view.css.ts. */\n@media (max-width: 720px) {\n\n\t[bog_norweb_front_app][bog_norweb_front_app] {\n\t\toverflow-x: auto;\n\t\toverflow-y: hidden;\n\t\tscroll-snap-type: x mandatory;\n\t}\n\n\t[bog_norweb_front_app] > [bog_norweb_front_app_sidebar] {\n\t\tmin-width: 84vw;\n\t\tmax-width: 84vw;\n\t\tscroll-snap-align: start;\n\t\tscroll-snap-stop: always;\n\t}\n\n\t[bog_norweb_front_app] > [bog_norweb_front_app_main] {\n\t\tmin-width: 100vw;\n\t\tscroll-snap-align: end;\n\t\tscroll-snap-stop: always;\n\t}\n\n}\n");
 })($ || ($ = {}));
 
 ;
