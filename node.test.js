@@ -16073,6 +16073,9 @@ var $;
 		search(){
 			return "";
 		}
+		filter_type(){
+			return "";
+		}
 		nodes(){
 			return [];
 		}
@@ -16703,15 +16706,23 @@ var $;
             node_color(id) {
                 return $bog_norweb_front_explorer_forcegraph_type_color[this.node_by_id()[id].type];
             }
-            // Поиск по label: непустой запрос приглушает узлы и рёбра, которые не матчатся.
+            // Фильтры подсветки: поиск по label и/или тип из легенды. Непустой фильтр
+            // приглушает узлы и рёбра, которые не матчатся.
             search_lc() {
                 return this.search().trim().toLowerCase();
             }
+            filter_active() {
+                return Boolean(this.search_lc() || this.filter_type());
+            }
             node_matches(id) {
+                const n = this.node_by_id()[id];
+                const t = this.filter_type();
+                if (t && n?.type !== t)
+                    return false;
                 const s = this.search_lc();
-                if (!s)
-                    return true;
-                return (this.node_by_id()[id]?.label ?? '').toLowerCase().includes(s);
+                if (s && !(n?.label ?? '').toLowerCase().includes(s))
+                    return false;
+                return true;
             }
             node_opacity(id) {
                 return this.node_matches(id) ? '1' : '0.12';
@@ -16758,7 +16769,7 @@ var $;
             }
             edge_opacity(id) {
                 const e = this.edge_by_id()[id];
-                if (this.search_lc() && !(this.node_matches(e.source) && this.node_matches(e.target)))
+                if (this.filter_active() && !(this.node_matches(e.source) && this.node_matches(e.target)))
                     return '0.08';
                 const hid = this.hovered_id() || this.selected_id();
                 if (!hid)
@@ -16958,6 +16969,7 @@ var $;
 			(obj.edges) = () => ((this.graph_edges()));
 			(obj.selected_id) = (next) => ((this.selected_id(next)));
 			(obj.search) = () => ((this.search()));
+			(obj.filter_type) = () => ((this.type_filter()));
 			return obj;
 		}
 		Canvas_bg(){
@@ -16981,6 +16993,13 @@ var $;
 			(obj.sub) = () => ([(this.legend_title_text())]);
 			return obj;
 		}
+		is_type_person(){
+			return false;
+		}
+		click_type_person(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		Legend_person_dot(){
 			const obj = new this.$.$bog_builderui_div();
 			return obj;
@@ -16992,8 +17011,17 @@ var $;
 		}
 		Legend_person(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_person())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_person(next))});
 			(obj.sub) = () => ([(this.Legend_person_dot()), (this.Legend_person_label())]);
 			return obj;
+		}
+		is_type_org(){
+			return false;
+		}
+		click_type_org(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_org_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17006,8 +17034,17 @@ var $;
 		}
 		Legend_org(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_org())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_org(next))});
 			(obj.sub) = () => ([(this.Legend_org_dot()), (this.Legend_org_label())]);
 			return obj;
+		}
+		is_type_loc(){
+			return false;
+		}
+		click_type_loc(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_loc_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17020,8 +17057,17 @@ var $;
 		}
 		Legend_loc(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_loc())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_loc(next))});
 			(obj.sub) = () => ([(this.Legend_loc_dot()), (this.Legend_loc_label())]);
 			return obj;
+		}
+		is_type_event(){
+			return false;
+		}
+		click_type_event(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_event_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17034,8 +17080,17 @@ var $;
 		}
 		Legend_event(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_event())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_event(next))});
 			(obj.sub) = () => ([(this.Legend_event_dot()), (this.Legend_event_label())]);
 			return obj;
+		}
+		is_type_date(){
+			return false;
+		}
+		click_type_date(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_date_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17048,8 +17103,17 @@ var $;
 		}
 		Legend_date(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_date())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_date(next))});
 			(obj.sub) = () => ([(this.Legend_date_dot()), (this.Legend_date_label())]);
 			return obj;
+		}
+		is_type_work(){
+			return false;
+		}
+		click_type_work(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_work_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17062,8 +17126,17 @@ var $;
 		}
 		Legend_work(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_work())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_work(next))});
 			(obj.sub) = () => ([(this.Legend_work_dot()), (this.Legend_work_label())]);
 			return obj;
+		}
+		is_type_law(){
+			return false;
+		}
+		click_type_law(next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Legend_law_dot(){
 			const obj = new this.$.$bog_builderui_div();
@@ -17076,6 +17149,8 @@ var $;
 		}
 		Legend_law(){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_law())});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_law(next))});
 			(obj.sub) = () => ([(this.Legend_law_dot()), (this.Legend_law_label())]);
 			return obj;
 		}
@@ -17233,6 +17308,10 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		type_filter(next){
+			if(next !== undefined) return next;
+			return "";
+		}
 		filter_search_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_search_text"));
 		}
@@ -17290,24 +17369,31 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_search"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filters"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_title"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_person"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_org"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_loc"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_event"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_date"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_work"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_law"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_dot"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_label"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law"));
@@ -17332,6 +17418,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Aside"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "selected_id"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "search"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "type_filter"));
 
 
 ;
@@ -17391,6 +17478,26 @@ var $;
             is_mock() {
                 return this.graph_remote() === null;
             }
+            // Клик по типу в легенде подсвечивает все узлы этого типа (как поиск).
+            // Повторный клик по активному типу снимает фильтр.
+            toggle_type(t) {
+                this.type_filter(this.type_filter() === t ? '' : t);
+                return null;
+            }
+            is_type_person() { return this.type_filter() === 'PERSON'; }
+            is_type_org() { return this.type_filter() === 'ORG'; }
+            is_type_loc() { return this.type_filter() === 'LOC'; }
+            is_type_event() { return this.type_filter() === 'EVENT'; }
+            is_type_date() { return this.type_filter() === 'DATE'; }
+            is_type_work() { return this.type_filter() === 'WORK'; }
+            is_type_law() { return this.type_filter() === 'LAW'; }
+            click_type_person() { return this.toggle_type('PERSON'); }
+            click_type_org() { return this.toggle_type('ORG'); }
+            click_type_loc() { return this.toggle_type('LOC'); }
+            click_type_event() { return this.toggle_type('EVENT'); }
+            click_type_date() { return this.toggle_type('DATE'); }
+            click_type_work() { return this.toggle_type('WORK'); }
+            click_type_law() { return this.toggle_type('LAW'); }
             graph_data() {
                 return this.graph_remote()
                     ?? $bog_norweb_front_explorer_forcegraph_build_mock(42, 80, 130);
@@ -17445,6 +17552,30 @@ var $;
             $mol_mem
         ], $bog_norweb_front_explorer.prototype, "graph_remote", null);
         __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "toggle_type", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_person", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_org", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_loc", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_event", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_date", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_work", null);
+        __decorate([
+            $mol_action
+        ], $bog_norweb_front_explorer.prototype, "click_type_law", null);
+        __decorate([
             $mol_mem
         ], $bog_norweb_front_explorer.prototype, "graph_data", null);
         $$.$bog_norweb_front_explorer = $bog_norweb_front_explorer;
@@ -17470,6 +17601,17 @@ var $;
         padding: {
             top: '2px',
             bottom: '2px',
+            left: '4px',
+            right: '4px',
+        },
+        cursor: 'pointer',
+        border: { radius: '5px' },
+        '@': {
+            bog_norweb_front_explorer_legend_on: {
+                true: {
+                    background: { color: '#ffffff26' },
+                },
+            },
         },
     };
     const legend_label = {
