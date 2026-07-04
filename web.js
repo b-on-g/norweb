@@ -15253,6 +15253,9 @@ var $;
 		node_color(id){
 			return "#7c6ce0";
 		}
+		node_opacity(id){
+			return "1";
+		}
 		node_stroke(id){
 			return "transparent";
 		}
@@ -15280,6 +15283,7 @@ var $;
 				...(this.$.$mol_svg_circle.prototype.attr.call(obj)), 
 				"data-node-id": (this.node_id(id)), 
 				"fill": (this.node_color(id)), 
+				"fill-opacity": (this.node_opacity(id)), 
 				"stroke": (this.node_stroke(id)), 
 				"stroke-width": (this.node_stroke_width(id)), 
 				"cursor": "pointer"
@@ -15383,6 +15387,9 @@ var $;
 		}
 		drag_id(next){
 			if(next !== undefined) return next;
+			return "";
+		}
+		search(){
 			return "";
 		}
 		nodes(){
@@ -16015,6 +16022,19 @@ var $;
             node_color(id) {
                 return $bog_norweb_front_explorer_forcegraph_type_color[this.node_by_id()[id].type];
             }
+            // Поиск по label: непустой запрос приглушает узлы и рёбра, которые не матчатся.
+            search_lc() {
+                return this.search().trim().toLowerCase();
+            }
+            node_matches(id) {
+                const s = this.search_lc();
+                if (!s)
+                    return true;
+                return (this.node_by_id()[id]?.label ?? '').toLowerCase().includes(s);
+            }
+            node_opacity(id) {
+                return this.node_matches(id) ? '1' : '0.12';
+            }
             node_stroke(id) {
                 if (this.selected_id() === id)
                     return '#ffffff';
@@ -16057,6 +16077,8 @@ var $;
             }
             edge_opacity(id) {
                 const e = this.edge_by_id()[id];
+                if (this.search_lc() && !(this.node_matches(e.source) && this.node_matches(e.target)))
+                    return '0.08';
                 const hid = this.hovered_id() || this.selected_id();
                 if (!hid)
                     return '0.55';
@@ -16254,6 +16276,7 @@ var $;
 			(obj.nodes) = () => ((this.graph_nodes()));
 			(obj.edges) = () => ((this.graph_edges()));
 			(obj.selected_id) = (next) => ((this.selected_id(next)));
+			(obj.search) = () => ((this.search()));
 			return obj;
 		}
 		Canvas_bg(){
@@ -16262,33 +16285,14 @@ var $;
 			return obj;
 		}
 		Filter_search(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.filter_search_text())]);
-			return obj;
-		}
-		Filter_type(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.filter_type_text())]);
-			return obj;
-		}
-		Filter_thresh(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.filter_thresh_text())]);
-			return obj;
-		}
-		Filter_comm(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.filter_comm_text())]);
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.filter_search_text()));
+			(obj.value) = (next) => ((this.search(next)));
 			return obj;
 		}
 		Filters(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Filter_search()), 
-				(this.Filter_type()), 
-				(this.Filter_thresh()), 
-				(this.Filter_comm())
-			]);
+			(obj.sub) = () => ([(this.Filter_search())]);
 			return obj;
 		}
 		Legend_title(){
@@ -16544,17 +16548,12 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		search(next){
+			if(next !== undefined) return next;
+			return "";
+		}
 		filter_search_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_search_text"));
-		}
-		filter_type_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_type_text"));
-		}
-		filter_thresh_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_thresh_text"));
-		}
-		filter_comm_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_filter_comm_text"));
 		}
 		aside_title_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_aside_title_text"));
@@ -16608,9 +16607,6 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Graph"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Canvas_bg"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_search"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_type"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_thresh"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_comm"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filters"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_title"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_dot"));
@@ -16654,6 +16650,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Ask_btn"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Aside"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "selected_id"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "search"));
 
 
 ;
@@ -16863,7 +16860,7 @@ var $;
         Filter_search: {
             background: { color: $bog_builderui_tokens.field },
             color: $bog_builderui_tokens.text,
-            border: { radius: '7px' },
+            border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '7px' },
             padding: {
                 top: '8px',
                 bottom: '8px',
@@ -16871,45 +16868,7 @@ var $;
                 right: '11px',
             },
             font: { size: '11px', weight: 600 },
-            flex: { direction: 'row' },
-            align: { items: 'center' },
-            gap: '7px',
-        },
-        Filter_type: {
-            background: { color: $bog_builderui_tokens.field },
-            color: $bog_builderui_tokens.text,
-            border: { radius: '7px' },
-            padding: {
-                top: '8px',
-                bottom: '8px',
-                left: '11px',
-                right: '11px',
-            },
-            font: { size: '11px', weight: 600 },
-        },
-        Filter_thresh: {
-            background: { color: $bog_builderui_tokens.field },
-            color: $bog_builderui_tokens.text,
-            border: { radius: '7px' },
-            padding: {
-                top: '8px',
-                bottom: '8px',
-                left: '11px',
-                right: '11px',
-            },
-            font: { size: '11px', weight: 600 },
-        },
-        Filter_comm: {
-            background: { color: $bog_builderui_tokens.current },
-            color: '#ffffff',
-            border: { radius: '7px' },
-            padding: {
-                top: '8px',
-                bottom: '8px',
-                left: '11px',
-                right: '11px',
-            },
-            font: { size: '11px', weight: 600 },
+            width: '200px',
         },
         Legend: {
             position: 'absolute',
@@ -16984,8 +16943,8 @@ var $;
             },
         },
         Aside: {
-            minWidth: '300px',
-            maxWidth: '300px',
+            minWidth: '240px',
+            maxWidth: '240px',
             background: { color: $bog_builderui_tokens.card },
             border: {
                 left: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
@@ -18196,112 +18155,6 @@ var $;
 
 ;
 	($.$bog_norweb_front_chat) = class $bog_norweb_front_chat extends ($.$bog_builderui_div) {
-		Modes_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.modes_label_text())]);
-			return obj;
-		}
-		is_llm(){
-			return false;
-		}
-		select_llm(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Mode_llm(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.mode_llm_text())]);
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_chat_mode_active": (this.is_llm())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.select_llm(next))});
-			return obj;
-		}
-		is_local(){
-			return false;
-		}
-		select_local(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Mode_local(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.mode_local_text())]);
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_chat_mode_active": (this.is_local())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.select_local(next))});
-			return obj;
-		}
-		is_global(){
-			return false;
-		}
-		select_global(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Mode_global(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.mode_global_text())]);
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_chat_mode_active": (this.is_global())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.select_global(next))});
-			return obj;
-		}
-		is_mix(){
-			return false;
-		}
-		select_mix(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Mode_mix(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.mode_mix_text())]);
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_chat_mode_active": (this.is_mix())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.select_mix(next))});
-			return obj;
-		}
-		is_plan(){
-			return false;
-		}
-		select_plan(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Mode_plan(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.mode_plan_text())]);
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_chat_mode_active": (this.is_plan())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.select_plan(next))});
-			return obj;
-		}
-		Modes(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Mode_llm()), 
-				(this.Mode_local()), 
-				(this.Mode_global()), 
-				(this.Mode_mix()), 
-				(this.Mode_plan())
-			]);
-			return obj;
-		}
-		clear_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Clear(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.hint) = () => ((this.clear_text()));
-			(obj.click) = (next) => ((this.clear_click(next)));
-			(obj.sub) = () => (["✕"]);
-			return obj;
-		}
-		Modes_bar(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Modes_label()), 
-				(this.Modes()), 
-				(this.Clear())
-			]);
-			return obj;
-		}
 		Messages(){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ((this.rows()));
@@ -18362,9 +18215,24 @@ var $;
 			(obj.event) = () => ({"click": (next) => (this.use_sug_two(next))});
 			return obj;
 		}
+		clear_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Clear(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.clear_text()));
+			(obj.click) = (next) => ((this.clear_click(next)));
+			(obj.sub) = () => (["✕"]);
+			return obj;
+		}
 		Suggestions(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.Sug_one()), (this.Sug_two())]);
+			(obj.sub) = () => ([
+				(this.Sug_one()), 
+				(this.Sug_two()), 
+				(this.Clear())
+			]);
 			return obj;
 		}
 		prompt_text(next){
@@ -18401,154 +18269,9 @@ var $;
 		}
 		Message_text(id){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_role": (this.message_role(id))});
 			(obj.sub) = () => ([(this.message_text(id))]);
 			return obj;
-		}
-		trace_toggle(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Message_trace_head_title(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_head_title_text())]);
-			return obj;
-		}
-		Message_trace_head_meta(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_head_meta_text())]);
-			return obj;
-		}
-		Message_trace_head(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.event) = () => ({"click": (next) => (this.trace_toggle(id, next))});
-			(obj.sub) = () => ([(this.Message_trace_head_title(id)), (this.Message_trace_head_meta(id))]);
-			return obj;
-		}
-		Message_trace_label(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_label_text())]);
-			return obj;
-		}
-		Message_trace_chip_one(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_chip_one_text())]);
-			return obj;
-		}
-		Message_trace_chip_two(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_chip_two_text())]);
-			return obj;
-		}
-		Message_trace_chip_three(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_chip_three_text())]);
-			return obj;
-		}
-		Message_trace_chips(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Message_trace_chip_one(id)), 
-				(this.Message_trace_chip_two(id)), 
-				(this.Message_trace_chip_three(id))
-			]);
-			return obj;
-		}
-		Message_trace_stat_chunks(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_stat_chunks_text())]);
-			return obj;
-		}
-		Message_trace_stat_comms(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_stat_comms_text())]);
-			return obj;
-		}
-		Message_trace_stat_retr(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_stat_retr_text())]);
-			return obj;
-		}
-		Message_trace_stat_gen(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_stat_gen_text())]);
-			return obj;
-		}
-		Message_trace_stat_power(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_stat_power_text())]);
-			return obj;
-		}
-		Message_trace_stats(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Message_trace_stat_chunks(id)), 
-				(this.Message_trace_stat_comms(id)), 
-				(this.Message_trace_stat_retr(id)), 
-				(this.Message_trace_stat_gen(id)), 
-				(this.Message_trace_stat_power(id))
-			]);
-			return obj;
-		}
-		Message_trace_link(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.trace_link_text())]);
-			return obj;
-		}
-		Message_trace_body(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({"raggu_expanded": (this.trace_expanded(id))});
-			(obj.sub) = () => ([
-				(this.Message_trace_label(id)), 
-				(this.Message_trace_chips(id)), 
-				(this.Message_trace_stats(id)), 
-				(this.Message_trace_link(id))
-			]);
-			return obj;
-		}
-		Message_trace(id){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({"raggu_visible": (this.message_with_trace(id))});
-			(obj.sub) = () => ([(this.Message_trace_head(id)), (this.Message_trace_body(id))]);
-			return obj;
-		}
-		modes_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_modes_label_text"));
-		}
-		trace_head_title_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_head_title_text"));
-		}
-		trace_head_meta_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_head_meta_text"));
-		}
-		trace_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_label_text"));
-		}
-		trace_chip_one_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_one_text"));
-		}
-		trace_chip_two_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_two_text"));
-		}
-		trace_chip_three_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_chip_three_text"));
-		}
-		trace_stat_chunks_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_chunks_text"));
-		}
-		trace_stat_comms_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_comms_text"));
-		}
-		trace_stat_retr_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_retr_text"));
-		}
-		trace_stat_gen_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_gen_text"));
-		}
-		trace_stat_power_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_stat_power_text"));
-		}
-		trace_link_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_trace_link_text"));
 		}
 		sug_one_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_chat_sug_one_text"));
@@ -18568,33 +18291,8 @@ var $;
 		seed_assistant_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_chat_seed_assistant_text"));
 		}
-		mock_prefix_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mock_prefix_text"));
-		}
-		mock_suffix_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mock_suffix_text"));
-		}
 		clear_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_chat_clear_text"));
-		}
-		mode_llm_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_llm_text"));
-		}
-		mode_local_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_local_text"));
-		}
-		mode_global_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_global_text"));
-		}
-		mode_mix_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_mix_text"));
-		}
-		mode_plan_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_chat_mode_plan_text"));
-		}
-		mode(next){
-			if(next !== undefined) return next;
-			return "llm";
 		}
 		rows(){
 			return [];
@@ -18605,41 +18303,16 @@ var $;
 		message_role(id){
 			return "";
 		}
-		message_with_trace(id){
-			return false;
-		}
-		trace_expanded(id){
-			return false;
-		}
 		sub(){
-			return [
-				(this.Modes_bar()), 
-				(this.Body()), 
-				(this.Footer())
-			];
+			return [(this.Body()), (this.Footer())];
 		}
 		Message(id){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_role": (this.message_role(id))});
-			(obj.sub) = () => ([(this.Message_text(id)), (this.Message_trace(id))]);
+			(obj.sub) = () => ([(this.Message_text(id))]);
 			return obj;
 		}
 	};
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes_label"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_llm"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_llm"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_local"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_local"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_global"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_global"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_mix"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_mix"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "select_plan"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Mode_plan"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "clear_click"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Clear"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "Modes_bar"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Messages"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Skel_line_one"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Skel_line_two"));
@@ -18651,6 +18324,8 @@ var $;
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Sug_one"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "use_sug_two"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Sug_two"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "clear_click"));
+	($mol_mem(($.$bog_norweb_front_chat.prototype), "Clear"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Suggestions"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "prompt_text"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "prompt_submit"));
@@ -18659,25 +18334,6 @@ var $;
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Input_row"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Footer"));
 	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_text"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "trace_toggle"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head_title"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head_meta"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_head"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_label"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_one"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_two"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chip_three"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_chips"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_chunks"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_comms"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_retr"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_gen"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stat_power"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_stats"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_link"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace_body"));
-	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_trace"));
-	($mol_mem(($.$bog_norweb_front_chat.prototype), "mode"));
 	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message"));
 
 
@@ -19234,25 +18890,12 @@ var $;
                     return stored;
                 return [
                     { role: 'user', text: this.seed_user_text() },
-                    { role: 'assistant', text: this.seed_assistant_text(), trace: true },
+                    { role: 'assistant', text: this.seed_assistant_text() },
                 ];
             }
             prompt_text(next) {
                 return this.$.$mol_state_session.value('$bog_norweb_front_chat.prompt_text', next) ?? '';
             }
-            mode(next) {
-                return this.$.$mol_state_session.value('$bog_norweb_front_chat.mode', next) ?? 'llm';
-            }
-            is_llm() { return this.mode() === 'llm'; }
-            is_local() { return this.mode() === 'local'; }
-            is_global() { return this.mode() === 'global'; }
-            is_mix() { return this.mode() === 'mix'; }
-            is_plan() { return this.mode() === 'plan'; }
-            select_llm() { this.mode('llm'); return null; }
-            select_local() { this.mode('local'); return null; }
-            select_global() { this.mode('global'); return null; }
-            select_mix() { this.mode('mix'); return null; }
-            select_plan() { this.mode('plan'); return null; }
             llm() {
                 // GitHub Models API forces response_format: json_object и требует чтобы
                 // слово "json" присутствовало в messages — иначе 400 Bad Request.
@@ -19280,50 +18923,21 @@ var $;
             message_role(index) {
                 return this.history()[index]?.role ?? 'user';
             }
-            message_with_trace(index) {
-                return index % 2 !== 0;
-            }
-            // Условный рендер trace-блока: чётные индексы (user) без trace, нечётные (assistant) с trace.
-            // Возвращаем null → mol_view.render() пропускает пустой child в sub-массиве.
-            Message_trace(index) {
-                if (!this.message_with_trace(index))
-                    return null;
-                return super.Message_trace(index);
-            }
-            trace_expanded(index, next) {
-                return next ?? false;
-            }
-            trace_toggle(index) {
-                this.trace_expanded(index, !this.trace_expanded(index));
-                return null;
-            }
             prompt_submit() {
                 const text = this.prompt_text().trim();
                 if (!text)
                     return null;
                 this.history([...this.history(), { role: 'user', text }]);
                 this.prompt_text('');
-                if (this.mode() === 'llm') {
-                    // LLM в detached wire — не блокирует action, не мутирует state внутри fiber body,
-                    // сам ретаинится при suspension от model.response().
-                    $mol_wire_async(this).ask_llm(text);
-                }
-                else {
-                    // Мок для search-режимов
-                    const mock = `${this.mock_prefix_text()} "${text}". ${this.mock_suffix_text()}`;
-                    setTimeout(() => {
-                        const cur = this.history();
-                        this.history([...cur, { role: 'assistant', text: mock, trace: true }]);
-                    }, 500);
-                }
+                // LLM в detached wire — не блокирует action, не мутирует state внутри fiber body,
+                // сам ретаинится при suspension от model.response().
+                $mol_wire_async(this).ask_llm(text);
                 return null;
             }
-            // Скелет виден когда мы ждём ответа LLM: последнее сообщение = user + режим llm.
+            // Скелет виден когда мы ждём ответа LLM: последнее сообщение = user.
             // Реактивно, без ловли suspension: ask_llm сам мутирует history когда ответ придёт,
             // last=assistant → is_communicating становится false → скелет скрывается.
             is_communicating() {
-                if (this.mode() !== 'llm')
-                    return false;
                 const h = this.history();
                 if (h.length === 0)
                     return false;
@@ -19372,37 +18986,10 @@ var $;
         ], $bog_norweb_front_chat.prototype, "history", null);
         __decorate([
             $mol_mem
-        ], $bog_norweb_front_chat.prototype, "mode", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "select_llm", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "select_local", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "select_global", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "select_mix", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "select_plan", null);
-        __decorate([
-            $mol_mem
         ], $bog_norweb_front_chat.prototype, "llm", null);
         __decorate([
             $mol_mem
         ], $bog_norweb_front_chat.prototype, "rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $bog_norweb_front_chat.prototype, "Message_trace", null);
-        __decorate([
-            $mol_mem_key
-        ], $bog_norweb_front_chat.prototype, "trace_expanded", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_chat.prototype, "trace_toggle", null);
         __decorate([
             $mol_action
         ], $bog_norweb_front_chat.prototype, "prompt_submit", null);
@@ -19424,52 +19011,6 @@ var $;
 /** @see $bog_builderui_tokens */
 var $;
 (function ($) {
-    const mode_pill = {
-        background: { color: $bog_builderui_tokens.field },
-        border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '6px' },
-        padding: {
-            top: '5px',
-            bottom: '5px',
-            left: '10px',
-            right: '10px',
-        },
-        font: { size: '11px', weight: 600 },
-        color: $bog_builderui_tokens.shade,
-        cursor: 'pointer',
-        '@': {
-            raggu_chat_mode_active: {
-                true: {
-                    background: { color: $bog_builderui_tokens.current },
-                    color: '#ffffff',
-                    border: { color: $bog_builderui_tokens.current },
-                },
-            },
-        },
-    };
-    const chip = {
-        background: { color: $bog_builderui_tokens.field },
-        color: $bog_builderui_tokens.current,
-        border: { radius: '5px' },
-        padding: {
-            top: '3px',
-            bottom: '3px',
-            left: '8px',
-            right: '8px',
-        },
-        font: {
-            family: 'ui-monospace, monospace',
-            weight: 600,
-            size: '10px',
-        },
-    };
-    const trace_stat = {
-        font: {
-            family: 'ui-monospace, monospace',
-            weight: 500,
-            size: '10px',
-        },
-        color: $bog_builderui_tokens.shade,
-    };
     const suggestion = {
         border: { width: '1px', style: 'dashed', color: $bog_builderui_tokens.line, radius: '14px' },
         padding: {
@@ -19487,38 +19028,6 @@ var $;
         minWidth: 0,
         minHeight: 0,
         height: '100%',
-        Modes_bar: {
-            flex: { direction: 'row' },
-            align: { items: 'center' },
-            gap: '9px',
-            padding: {
-                top: '14px',
-                bottom: '14px',
-                left: '22px',
-                right: '22px',
-            },
-            border: {
-                bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
-            },
-        },
-        Modes_label: {
-            font: {
-                family: 'ui-monospace, monospace',
-                weight: 600,
-                size: '10px',
-            },
-            color: $bog_builderui_tokens.shade,
-            textTransform: 'uppercase',
-        },
-        Modes: {
-            flex: { direction: 'row' },
-            gap: '5px',
-        },
-        Mode_llm: mode_pill,
-        Mode_local: mode_pill,
-        Mode_global: mode_pill,
-        Mode_mix: mode_pill,
-        Mode_plan: mode_pill,
         Clear: {
             marginLeft: 'auto',
             minWidth: '40px',
@@ -19642,94 +19151,6 @@ var $;
                 },
             },
         },
-        Message_trace: {
-            margin: { top: '8px' },
-            border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '9px' },
-            background: { color: $bog_builderui_tokens.back },
-            overflow: 'hidden',
-            flex: { direction: 'column' },
-        },
-        Message_trace_head: {
-            flex: { direction: 'row' },
-            align: { items: 'center' },
-            gap: '7px',
-            cursor: 'pointer',
-            userSelect: 'none',
-            padding: {
-                top: '9px',
-                bottom: '9px',
-                left: '13px',
-                right: '13px',
-            },
-            font: {
-                family: 'ui-monospace, monospace',
-                weight: 600,
-                size: '11px',
-            },
-            color: $bog_builderui_tokens.current,
-        },
-        Message_trace_head_meta: {
-            marginLeft: 'auto',
-            color: $bog_builderui_tokens.shade,
-            font: { weight: 500 },
-        },
-        Message_trace_body: {
-            padding: {
-                top: '11px',
-                bottom: '11px',
-                left: '13px',
-                right: '13px',
-            },
-            gap: '8px',
-            border: {
-                top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },
-            },
-            // По дефолту скрыт. Показываем только когда trace_expanded=true.
-            // Boolean false → mol удаляет атрибут → CSS [attr="false"] не сработает.
-            display: 'none',
-            '@': {
-                raggu_expanded: {
-                    true: {
-                        display: 'flex',
-                        flexDirection: 'column',
-                    },
-                },
-            },
-        },
-        Message_trace_label: {
-            font: {
-                family: 'ui-monospace, monospace',
-                weight: 600,
-                size: '10px',
-            },
-            color: $bog_builderui_tokens.shade,
-        },
-        Message_trace_chips: {
-            flex: { direction: 'row' },
-            flexWrap: 'wrap',
-            gap: '5px',
-        },
-        Message_trace_chip_one: chip,
-        Message_trace_chip_two: chip,
-        Message_trace_chip_three: chip,
-        Message_trace_stats: {
-            flex: { direction: 'row' },
-            gap: '14px',
-            margin: { top: '2px' },
-        },
-        Message_trace_stat_chunks: trace_stat,
-        Message_trace_stat_comms: trace_stat,
-        Message_trace_stat_retr: trace_stat,
-        Message_trace_stat_gen: trace_stat,
-        Message_trace_stat_power: trace_stat,
-        Message_trace_link: {
-            font: {
-                family: 'ui-monospace, monospace',
-                weight: 500,
-                size: '10px',
-            },
-            color: $bog_builderui_tokens.current,
-        },
         Footer: {
             padding: {
                 top: '14px',
@@ -19747,6 +19168,7 @@ var $;
             flexWrap: 'wrap',
             gap: '7px',
             margin: { bottom: '10px' },
+            align: { items: 'center' },
         },
         Sug_one: suggestion,
         Sug_two: suggestion,
@@ -21969,6 +21391,9 @@ var $;
                     ];
                     case 'nerel': return [
                         { label: 'NEREL paper (arXiv:2108.13112)', uri: 'https://arxiv.org/abs/2108.13112' },
+                    ];
+                    case 'ocr': return [
+                        { label: 'github.com/AleksanderMerkulov/text_extractor', uri: 'https://github.com/AleksanderMerkulov/text_extractor' },
                     ];
                 }
                 return [];

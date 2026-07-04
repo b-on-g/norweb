@@ -8049,6 +8049,7 @@ declare namespace $ {
 		({ 
 			'data-node-id': ReturnType< $bog_norweb_front_explorer_forcegraph['node_id'] >,
 			'fill': ReturnType< $bog_norweb_front_explorer_forcegraph['node_color'] >,
+			'fill-opacity': ReturnType< $bog_norweb_front_explorer_forcegraph['node_opacity'] >,
 			'stroke': ReturnType< $bog_norweb_front_explorer_forcegraph['node_stroke'] >,
 			'stroke-width': ReturnType< $bog_norweb_front_explorer_forcegraph['node_stroke_width'] >,
 			'cursor': string,
@@ -8168,6 +8169,7 @@ declare namespace $ {
 		node_radius( id: any): string
 		node_id( id: any): string
 		node_color( id: any): string
+		node_opacity( id: any): string
 		node_stroke( id: any): string
 		node_stroke_width( id: any): string
 		click( id: any, next?: any ): any
@@ -8194,6 +8196,7 @@ declare namespace $ {
 		selected_id( next?: string ): string
 		hovered_id( next?: string ): string
 		drag_id( next?: string ): string
+		search( ): string
 		nodes( ): readonly(any)[]
 		edges( ): readonly(any)[]
 		pan_x( next?: number ): number
@@ -8282,6 +8285,9 @@ declare namespace $.$$ {
         node_radius_num(id: string): number;
         node_radius(id: string): string;
         node_color(id: string): string;
+        search_lc(): string;
+        node_matches(id: string): boolean;
+        node_opacity(id: string): "1" | "0.12";
         node_stroke(id: string): "#ffffff" | "transparent";
         node_stroke_width(id: string): "2.5" | "1.5" | "0";
         hover_enter(id: string): null;
@@ -8292,7 +8298,7 @@ declare namespace $.$$ {
         edge_x2(id: string): string;
         edge_y2(id: string): string;
         edge_width(id: string): string;
-        edge_opacity(id: string): "0.55" | "0.95" | "0.18";
+        edge_opacity(id: string): "0.08" | "0.55" | "0.95" | "0.18";
         edge_color(id: string): "#ffffff" | "#7a7672";
         just_dragged: string;
         click(id: string): null;
@@ -8343,25 +8349,25 @@ declare namespace $ {
 		,
 		ReturnType< $bog_norweb_front_explorer_forcegraph['selected_id'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_4 = $mol_type_enforce<
-		readonly(any)[]
+	type $bog_norweb_front_explorer_forcegraph__search_bog_norweb_front_explorer_4 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_explorer['search'] >
 		,
-		ReturnType< $bog_builderui_div['sub'] >
+		ReturnType< $bog_norweb_front_explorer_forcegraph['search'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_6 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_string__hint_bog_norweb_front_explorer_6 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_explorer['filter_search_text'] >
 		,
-		ReturnType< $bog_builderui_div['sub'] >
+		ReturnType< $mol_string['hint'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_7 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_string__value_bog_norweb_front_explorer_7 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_explorer['search'] >
 		,
-		ReturnType< $bog_builderui_div['sub'] >
+		ReturnType< $mol_string['value'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_8 = $mol_type_enforce<
 		readonly(any)[]
@@ -8448,17 +8454,17 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_25 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_explorer_26 = $mol_type_enforce<
+	type $bog_builderui_div__attr_bog_norweb_front_explorer_25 = $mol_type_enforce<
 		({ 
 			'bog_norweb_front_explorer_mock_badge_showed': ReturnType< $bog_norweb_front_explorer['is_mock'] >,
 		})  & ReturnType< $bog_builderui_div['attr'] >
 		,
 		ReturnType< $bog_builderui_div['attr'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_explorer_26 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_div['sub'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_27 = $mol_type_enforce<
 		readonly(any)[]
@@ -8511,12 +8517,12 @@ declare namespace $ {
 		ReturnType< $bog_builderui_div['sub'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_37 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_norweb_front_explorer['rel_rows'] >
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
 	type $bog_builderui_div__sub_bog_norweb_front_explorer_38 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_explorer['rel_rows'] >
+		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
@@ -8530,19 +8536,14 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_41 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_explorer_42 = $mol_type_enforce<
+	type $bog_builderui_div__event_bog_norweb_front_explorer_41 = $mol_type_enforce<
 		({ 
 			click( next?: ReturnType< $bog_norweb_front_explorer['ask_click'] > ): ReturnType< $bog_norweb_front_explorer['ask_click'] >,
 		}) 
 		,
 		ReturnType< $bog_builderui_div['event'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_explorer_43 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_explorer_42 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
@@ -8552,10 +8553,7 @@ declare namespace $ {
 		graph_edges( ): readonly(any)[]
 		Graph( ): $bog_norweb_front_explorer_forcegraph
 		Canvas_bg( ): $bog_builderui_div
-		Filter_search( ): $bog_builderui_div
-		Filter_type( ): $bog_builderui_div
-		Filter_thresh( ): $bog_builderui_div
-		Filter_comm( ): $bog_builderui_div
+		Filter_search( ): $mol_string
 		Filters( ): $bog_builderui_div
 		Legend_title( ): $bog_builderui_div
 		Legend_person_dot( ): $bog_builderui_div
@@ -8608,10 +8606,8 @@ declare namespace $ {
 		Aside( ): $bog_builderui_div
 		dataset_id( ): string
 		selected_id( next?: string ): string
+		search( next?: string ): string
 		filter_search_text( ): string
-		filter_type_text( ): string
-		filter_thresh_text( ): string
-		filter_comm_text( ): string
 		aside_title_text( ): string
 		aside_empty_text( ): string
 		relations_title_template( ): string
@@ -10524,46 +10520,42 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $bog_builderui_div__sub_bog_norweb_front_chat_1 = $mol_type_enforce<
+	type $mol_list__rows_bog_norweb_front_chat_1 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $bog_builderui_card__attr_bog_norweb_front_chat_2 = $mol_type_enforce<
+		({ 
+			'raggu_loading': ReturnType< $bog_norweb_front_chat['is_communicating'] >,
+		})  & ReturnType< $bog_builderui_card['attr'] >
+		,
+		ReturnType< $bog_builderui_card['attr'] >
+	>
+	type $bog_builderui_card__sub_bog_norweb_front_chat_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_chat_4 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_2 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_norweb_front_chat_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_chat_6 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_3 = $mol_type_enforce<
-		({ 
-			'raggu_chat_mode_active': ReturnType< $bog_norweb_front_chat['is_llm'] >,
-		})  & ReturnType< $bog_builderui_div['attr'] >
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_4 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['select_llm'] > ): ReturnType< $bog_norweb_front_chat['select_llm'] >,
-		})  & ReturnType< $bog_builderui_div['event'] >
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_6 = $mol_type_enforce<
-		({ 
-			'raggu_chat_mode_active': ReturnType< $bog_norweb_front_chat['is_local'] >,
-		})  & ReturnType< $bog_builderui_div['attr'] >
-		,
-		ReturnType< $bog_builderui_div['attr'] >
 	>
 	type $bog_builderui_div__event_bog_norweb_front_chat_7 = $mol_type_enforce<
 		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['select_local'] > ): ReturnType< $bog_norweb_front_chat['select_local'] >,
-		})  & ReturnType< $bog_builderui_div['event'] >
+			click( next?: ReturnType< $bog_norweb_front_chat['use_sug_one'] > ): ReturnType< $bog_norweb_front_chat['use_sug_one'] >,
+		}) 
 		,
 		ReturnType< $bog_builderui_div['event'] >
 	>
@@ -10572,323 +10564,98 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_9 = $mol_type_enforce<
-		({ 
-			'raggu_chat_mode_active': ReturnType< $bog_norweb_front_chat['is_global'] >,
-		})  & ReturnType< $bog_builderui_div['attr'] >
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_10 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['select_global'] > ): ReturnType< $bog_norweb_front_chat['select_global'] >,
-		})  & ReturnType< $bog_builderui_div['event'] >
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_11 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_12 = $mol_type_enforce<
-		({ 
-			'raggu_chat_mode_active': ReturnType< $bog_norweb_front_chat['is_mix'] >,
-		})  & ReturnType< $bog_builderui_div['attr'] >
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_13 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['select_mix'] > ): ReturnType< $bog_norweb_front_chat['select_mix'] >,
-		})  & ReturnType< $bog_builderui_div['event'] >
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_14 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_15 = $mol_type_enforce<
-		({ 
-			'raggu_chat_mode_active': ReturnType< $bog_norweb_front_chat['is_plan'] >,
-		})  & ReturnType< $bog_builderui_div['attr'] >
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_16 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['select_plan'] > ): ReturnType< $bog_norweb_front_chat['select_plan'] >,
-		})  & ReturnType< $bog_builderui_div['event'] >
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_17 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $mol_button_minor__hint_bog_norweb_front_chat_18 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['clear_text'] >
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__click_bog_norweb_front_chat_19 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['clear_click'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__sub_bog_norweb_front_chat_20 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_21 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $mol_list__rows_bog_norweb_front_chat_22 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['rows'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $bog_builderui_card__attr_bog_norweb_front_chat_23 = $mol_type_enforce<
-		({ 
-			'raggu_loading': ReturnType< $bog_norweb_front_chat['is_communicating'] >,
-		})  & ReturnType< $bog_builderui_card['attr'] >
-		,
-		ReturnType< $bog_builderui_card['attr'] >
-	>
-	type $bog_builderui_card__sub_bog_norweb_front_chat_24 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_card['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_25 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $mol_scroll__sub_bog_norweb_front_chat_26 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_27 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_28 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['use_sug_one'] > ): ReturnType< $bog_norweb_front_chat['use_sug_one'] >,
-		}) 
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_29 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_30 = $mol_type_enforce<
+	type $bog_builderui_div__event_bog_norweb_front_chat_9 = $mol_type_enforce<
 		({ 
 			click( next?: ReturnType< $bog_norweb_front_chat['use_sug_two'] > ): ReturnType< $bog_norweb_front_chat['use_sug_two'] >,
 		}) 
 		,
 		ReturnType< $bog_builderui_div['event'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_31 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $mol_textarea__hint_bog_norweb_front_chat_32 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['input_hint_text'] >
-		,
-		ReturnType< $mol_textarea['hint'] >
-	>
-	type $mol_textarea__value_bog_norweb_front_chat_33 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['prompt_text'] >
-		,
-		ReturnType< $mol_textarea['value'] >
-	>
-	type $mol_textarea__submit_bog_norweb_front_chat_34 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['prompt_submit'] >
-		,
-		ReturnType< $mol_textarea['submit'] >
-	>
-	type $mol_button_minor__hint_bog_norweb_front_chat_35 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['send_label_text'] >
+	type $mol_button_minor__hint_bog_norweb_front_chat_10 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['clear_text'] >
 		,
 		ReturnType< $mol_button_minor['hint'] >
 	>
-	type $mol_button_minor__click_bog_norweb_front_chat_36 = $mol_type_enforce<
-		ReturnType< $bog_norweb_front_chat['prompt_submit'] >
+	type $mol_button_minor__click_bog_norweb_front_chat_11 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['clear_click'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_minor__sub_bog_norweb_front_chat_37 = $mol_type_enforce<
+	type $mol_button_minor__sub_bog_norweb_front_chat_12 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_minor['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_38 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_chat_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_39 = $mol_type_enforce<
+	type $mol_textarea__hint_bog_norweb_front_chat_14 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['input_hint_text'] >
+		,
+		ReturnType< $mol_textarea['hint'] >
+	>
+	type $mol_textarea__value_bog_norweb_front_chat_15 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['prompt_text'] >
+		,
+		ReturnType< $mol_textarea['value'] >
+	>
+	type $mol_textarea__submit_bog_norweb_front_chat_16 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['prompt_submit'] >
+		,
+		ReturnType< $mol_textarea['submit'] >
+	>
+	type $mol_button_minor__hint_bog_norweb_front_chat_17 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['send_label_text'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_norweb_front_chat_18 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_chat['prompt_submit'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_norweb_front_chat_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_chat_20 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_40 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_chat_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_41 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_42 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__event_bog_norweb_front_chat_43 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_norweb_front_chat['trace_toggle'] > ): ReturnType< $bog_norweb_front_chat['trace_toggle'] >,
-		}) 
-		,
-		ReturnType< $bog_builderui_div['event'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_44 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_45 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_46 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_47 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_48 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_49 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_50 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_51 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_52 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_53 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_54 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_55 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_56 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_57 = $mol_type_enforce<
-		({ 
-			'raggu_expanded': ReturnType< $bog_norweb_front_chat['trace_expanded'] >,
-		}) 
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_58 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_59 = $mol_type_enforce<
-		({ 
-			'raggu_visible': ReturnType< $bog_norweb_front_chat['message_with_trace'] >,
-		}) 
-		,
-		ReturnType< $bog_builderui_div['attr'] >
-	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_60 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_div['sub'] >
-	>
-	type $bog_builderui_div__attr_bog_norweb_front_chat_61 = $mol_type_enforce<
+	type $bog_builderui_div__attr_bog_norweb_front_chat_22 = $mol_type_enforce<
 		({ 
 			'raggu_role': ReturnType< $bog_norweb_front_chat['message_role'] >,
 		})  & ReturnType< $bog_builderui_div['attr'] >
 		,
 		ReturnType< $bog_builderui_div['attr'] >
 	>
-	type $bog_builderui_div__sub_bog_norweb_front_chat_62 = $mol_type_enforce<
+	type $bog_builderui_div__sub_bog_norweb_front_chat_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_div['sub'] >
+	>
+	type $bog_builderui_div__attr_bog_norweb_front_chat_24 = $mol_type_enforce<
+		({ 
+			'raggu_role': ReturnType< $bog_norweb_front_chat['message_role'] >,
+		})  & ReturnType< $bog_builderui_div['attr'] >
+		,
+		ReturnType< $bog_builderui_div['attr'] >
+	>
+	type $bog_builderui_div__sub_bog_norweb_front_chat_25 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_div['sub'] >
 	>
 	export class $bog_norweb_front_chat extends $bog_builderui_div {
-		Modes_label( ): $bog_builderui_div
-		is_llm( ): boolean
-		select_llm( next?: any ): any
-		Mode_llm( ): $bog_builderui_div
-		is_local( ): boolean
-		select_local( next?: any ): any
-		Mode_local( ): $bog_builderui_div
-		is_global( ): boolean
-		select_global( next?: any ): any
-		Mode_global( ): $bog_builderui_div
-		is_mix( ): boolean
-		select_mix( next?: any ): any
-		Mode_mix( ): $bog_builderui_div
-		is_plan( ): boolean
-		select_plan( next?: any ): any
-		Mode_plan( ): $bog_builderui_div
-		Modes( ): $bog_builderui_div
-		clear_click( next?: any ): any
-		Clear( ): $mol_button_minor
-		Modes_bar( ): $bog_builderui_div
 		Messages( ): $mol_list
 		is_communicating( ): boolean
 		Skel_line_one( ): $bog_builderui_skeleton
@@ -10901,6 +10668,8 @@ declare namespace $ {
 		Sug_one( ): $bog_builderui_div
 		use_sug_two( next?: any ): any
 		Sug_two( ): $bog_builderui_div
+		clear_click( next?: any ): any
+		Clear( ): $mol_button_minor
 		Suggestions( ): $bog_builderui_div
 		prompt_text( next?: string ): string
 		prompt_submit( next?: any ): any
@@ -10909,57 +10678,16 @@ declare namespace $ {
 		Input_row( ): $bog_builderui_div
 		Footer( ): $bog_builderui_div
 		Message_text( id: any): $bog_builderui_div
-		trace_toggle( id: any, next?: any ): any
-		Message_trace_head_title( id: any): $bog_builderui_div
-		Message_trace_head_meta( id: any): $bog_builderui_div
-		Message_trace_head( id: any): $bog_builderui_div
-		Message_trace_label( id: any): $bog_builderui_div
-		Message_trace_chip_one( id: any): $bog_builderui_div
-		Message_trace_chip_two( id: any): $bog_builderui_div
-		Message_trace_chip_three( id: any): $bog_builderui_div
-		Message_trace_chips( id: any): $bog_builderui_div
-		Message_trace_stat_chunks( id: any): $bog_builderui_div
-		Message_trace_stat_comms( id: any): $bog_builderui_div
-		Message_trace_stat_retr( id: any): $bog_builderui_div
-		Message_trace_stat_gen( id: any): $bog_builderui_div
-		Message_trace_stat_power( id: any): $bog_builderui_div
-		Message_trace_stats( id: any): $bog_builderui_div
-		Message_trace_link( id: any): $bog_builderui_div
-		Message_trace_body( id: any): $bog_builderui_div
-		Message_trace( id: any): $bog_builderui_div
-		modes_label_text( ): string
-		trace_head_title_text( ): string
-		trace_head_meta_text( ): string
-		trace_label_text( ): string
-		trace_chip_one_text( ): string
-		trace_chip_two_text( ): string
-		trace_chip_three_text( ): string
-		trace_stat_chunks_text( ): string
-		trace_stat_comms_text( ): string
-		trace_stat_retr_text( ): string
-		trace_stat_gen_text( ): string
-		trace_stat_power_text( ): string
-		trace_link_text( ): string
 		sug_one_text( ): string
 		sug_two_text( ): string
 		input_hint_text( ): string
 		send_label_text( ): string
 		seed_user_text( ): string
 		seed_assistant_text( ): string
-		mock_prefix_text( ): string
-		mock_suffix_text( ): string
 		clear_text( ): string
-		mode_llm_text( ): string
-		mode_local_text( ): string
-		mode_global_text( ): string
-		mode_mix_text( ): string
-		mode_plan_text( ): string
-		mode( next?: string ): string
 		rows( ): readonly(any)[]
 		message_text( id: any): string
 		message_role( id: any): string
-		message_with_trace( id: any): boolean
-		trace_expanded( id: any): boolean
 		sub( ): readonly(any)[]
 		Message( id: any): $bog_builderui_div
 	}
@@ -10972,31 +10700,15 @@ declare namespace $.$$ {
     type Raggu_chat_item = {
         role: Raggu_chat_role;
         text: string;
-        trace?: boolean;
     };
     class $bog_norweb_front_chat extends $.$bog_norweb_front_chat {
         history(next?: Raggu_chat_item[]): Raggu_chat_item[];
         prompt_text(next?: string): string;
-        mode(next?: string): string;
-        is_llm(): boolean;
-        is_local(): boolean;
-        is_global(): boolean;
-        is_mix(): boolean;
-        is_plan(): boolean;
-        select_llm(): null;
-        select_local(): null;
-        select_global(): null;
-        select_mix(): null;
-        select_plan(): null;
         llm(): $mol_github_model;
         rows(): $bog_builderui_div[];
         auto(): any;
         message_text(index: number): string;
         message_role(index: number): Raggu_chat_role;
-        message_with_trace(index: number): boolean;
-        Message_trace(index: number): any;
-        trace_expanded(index: number, next?: boolean): boolean;
-        trace_toggle(index: number): null;
         prompt_submit(): null;
         is_communicating(): boolean;
         ask_llm(text: string): void;
