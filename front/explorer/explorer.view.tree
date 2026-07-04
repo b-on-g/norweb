@@ -2,6 +2,7 @@ $bog_norweb_front_explorer $bog_builderui_div
 	dataset_id \
 	selected_id? \
 	search? \
+	type_filter? \
 	ask_click? null
 	filter_search_text @ \🔍 Find node…
 	aside_title_text @ \Entity card
@@ -27,33 +28,83 @@ $bog_norweb_front_explorer $bog_builderui_div
 					edges <= graph_edges /
 					selected_id? <=> selected_id?
 					search <= search?
+					filter_type <= type_filter?
 			<= Filters $bog_builderui_div sub /
 				<= Filter_search $mol_string
 					hint <= filter_search_text
 					value? <=> search?
 			<= Legend $bog_builderui_div sub /
 				<= Legend_title $bog_builderui_div sub / <= legend_title_text
-				<= Legend_person $bog_builderui_div sub /
-					<= Legend_person_dot $bog_builderui_div
-					<= Legend_person_label $bog_builderui_div sub / <= legend_person_label_text
-				<= Legend_org $bog_builderui_div sub /
-					<= Legend_org_dot $bog_builderui_div
-					<= Legend_org_label $bog_builderui_div sub / <= legend_org_label_text
-				<= Legend_loc $bog_builderui_div sub /
-					<= Legend_loc_dot $bog_builderui_div
-					<= Legend_loc_label $bog_builderui_div sub / <= legend_loc_label_text
-				<= Legend_event $bog_builderui_div sub /
-					<= Legend_event_dot $bog_builderui_div
-					<= Legend_event_label $bog_builderui_div sub / <= legend_event_label_text
-				<= Legend_date $bog_builderui_div sub /
-					<= Legend_date_dot $bog_builderui_div
-					<= Legend_date_label $bog_builderui_div sub / <= legend_date_label_text
-				<= Legend_work $bog_builderui_div sub /
-					<= Legend_work_dot $bog_builderui_div
-					<= Legend_work_label $bog_builderui_div sub / <= legend_work_label_text
-				<= Legend_law $bog_builderui_div sub /
-					<= Legend_law_dot $bog_builderui_div
-					<= Legend_law_label $bog_builderui_div sub / <= legend_law_label_text
+				<= Legend_person $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_person false
+					event *
+						^
+						click? <=> click_type_person? null
+					sub /
+						<= Legend_person_dot $bog_builderui_div
+						<= Legend_person_label $bog_builderui_div sub / <= legend_person_label_text
+				<= Legend_org $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_org false
+					event *
+						^
+						click? <=> click_type_org? null
+					sub /
+						<= Legend_org_dot $bog_builderui_div
+						<= Legend_org_label $bog_builderui_div sub / <= legend_org_label_text
+				<= Legend_loc $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_loc false
+					event *
+						^
+						click? <=> click_type_loc? null
+					sub /
+						<= Legend_loc_dot $bog_builderui_div
+						<= Legend_loc_label $bog_builderui_div sub / <= legend_loc_label_text
+				<= Legend_event $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_event false
+					event *
+						^
+						click? <=> click_type_event? null
+					sub /
+						<= Legend_event_dot $bog_builderui_div
+						<= Legend_event_label $bog_builderui_div sub / <= legend_event_label_text
+				<= Legend_date $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_date false
+					event *
+						^
+						click? <=> click_type_date? null
+					sub /
+						<= Legend_date_dot $bog_builderui_div
+						<= Legend_date_label $bog_builderui_div sub / <= legend_date_label_text
+				<= Legend_work $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_work false
+					event *
+						^
+						click? <=> click_type_work? null
+					sub /
+						<= Legend_work_dot $bog_builderui_div
+						<= Legend_work_label $bog_builderui_div sub / <= legend_work_label_text
+				<= Legend_law $bog_builderui_div
+					attr *
+						^
+						bog_norweb_front_explorer_legend_on <= is_type_law false
+					event *
+						^
+						click? <=> click_type_law? null
+					sub /
+						<= Legend_law_dot $bog_builderui_div
+						<= Legend_law_label $bog_builderui_div sub / <= legend_law_label_text
 			<= Mock_badge $bog_builderui_div
 				attr *
 					^

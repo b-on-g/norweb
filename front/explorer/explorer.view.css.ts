@@ -17,6 +17,17 @@ namespace $ {
 		padding: {
 			top: '2px',
 			bottom: '2px',
+			left: '4px',
+			right: '4px',
+		},
+		cursor: 'pointer',
+		border: { radius: '5px' },
+		'@': {
+			bog_norweb_front_explorer_legend_on: {
+				true: {
+					background: { color: '#ffffff26' },
+				},
+			},
 		},
 	} as const
 

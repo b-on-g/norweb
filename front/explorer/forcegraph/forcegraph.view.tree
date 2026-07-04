@@ -6,6 +6,7 @@ $bog_norweb_front_explorer_forcegraph $mol_svg_root
 	hovered_id? \
 	drag_id? \
 	search \
+	filter_type \
 	nodes /
 	edges /
 	pan_x? +0

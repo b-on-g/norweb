@@ -55,6 +55,30 @@ namespace $.$$ {
 			return this.graph_remote() === null
 		}
 
+		// Клик по типу в легенде подсвечивает все узлы этого типа (как поиск).
+		// Повторный клик по активному типу снимает фильтр.
+		@$mol_action
+		toggle_type( t: string ) {
+			this.type_filter( this.type_filter() === t ? '' : t )
+			return null
+		}
+
+		is_type_person() { return this.type_filter() === 'PERSON' }
+		is_type_org() { return this.type_filter() === 'ORG' }
+		is_type_loc() { return this.type_filter() === 'LOC' }
+		is_type_event() { return this.type_filter() === 'EVENT' }
+		is_type_date() { return this.type_filter() === 'DATE' }
+		is_type_work() { return this.type_filter() === 'WORK' }
+		is_type_law() { return this.type_filter() === 'LAW' }
+
+		@$mol_action click_type_person() { return this.toggle_type( 'PERSON' ) }
+		@$mol_action click_type_org() { return this.toggle_type( 'ORG' ) }
+		@$mol_action click_type_loc() { return this.toggle_type( 'LOC' ) }
+		@$mol_action click_type_event() { return this.toggle_type( 'EVENT' ) }
+		@$mol_action click_type_date() { return this.toggle_type( 'DATE' ) }
+		@$mol_action click_type_work() { return this.toggle_type( 'WORK' ) }
+		@$mol_action click_type_law() { return this.toggle_type( 'LAW' ) }
+
 		@$mol_mem
 		graph_data(): { nodes: readonly GraphNode[], edges: readonly GraphEdge[] } {
 			return this.graph_remote()

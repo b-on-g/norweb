@@ -316,14 +316,21 @@ namespace $.$$ {
 			return $bog_norweb_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
 		}
 
-		// Поиск по label: непустой запрос приглушает узлы и рёбра, которые не матчатся.
+		// Фильтры подсветки: поиск по label и/или тип из легенды. Непустой фильтр
+		// приглушает узлы и рёбра, которые не матчатся.
 		search_lc() {
 			return this.search().trim().toLowerCase()
 		}
+		filter_active() {
+			return Boolean( this.search_lc() || this.filter_type() )
+		}
 		node_matches( id: string ) {
+			const n = this.node_by_id()[ id ]
+			const t = this.filter_type()
+			if( t && n?.type !== t ) return false
 			const s = this.search_lc()
-			if( !s ) return true
-			return ( this.node_by_id()[ id ]?.label ?? '' ).toLowerCase().includes( s )
+			if( s && !( n?.label ?? '' ).toLowerCase().includes( s ) ) return false
+			return true
 		}
 		node_opacity( id: string ) {
 			return this.node_matches( id ) ? '1' : '0.12'
@@ -372,7 +379,7 @@ namespace $.$$ {
 		}
 		edge_opacity( id: string ) {
 			const e = this.edge_by_id()[ id ]
-			if ( this.search_lc() && !( this.node_matches( e.source ) && this.node_matches( e.target ) ) ) return '0.08'
+			if ( this.filter_active() && !( this.node_matches( e.source ) && this.node_matches( e.target ) ) ) return '0.08'
 			const hid = this.hovered_id() || this.selected_id()
 			if ( !hid ) return '0.55'
 			return ( e.source === hid || e.target === hid ) ? '0.95' : '0.18'
