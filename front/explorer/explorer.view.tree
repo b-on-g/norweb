@@ -1,11 +1,9 @@
 $bog_norweb_front_explorer $bog_builderui_div
 	dataset_id \
 	selected_id? \
+	search? \
 	ask_click? null
 	filter_search_text @ \🔍 Find node…
-	filter_type_text @ \Entity type ▾
-	filter_thresh_text @ \Strength threshold ▾
-	filter_comm_text @ \◉ Communities: on
 	aside_title_text @ \Entity card
 	aside_empty_text @ \Click a node on the graph
 	relations_title_template @ \Relations (%s)
@@ -28,11 +26,11 @@ $bog_norweb_front_explorer $bog_builderui_div
 					nodes <= graph_nodes /
 					edges <= graph_edges /
 					selected_id? <=> selected_id?
+					search <= search?
 			<= Filters $bog_builderui_div sub /
-				<= Filter_search $bog_builderui_div sub / <= filter_search_text
-				<= Filter_type $bog_builderui_div sub / <= filter_type_text
-				<= Filter_thresh $bog_builderui_div sub / <= filter_thresh_text
-				<= Filter_comm $bog_builderui_div sub / <= filter_comm_text
+				<= Filter_search $mol_string
+					hint <= filter_search_text
+					value? <=> search?
 			<= Legend $bog_builderui_div sub /
 				<= Legend_title $bog_builderui_div sub / <= legend_title_text
 				<= Legend_person $bog_builderui_div sub /

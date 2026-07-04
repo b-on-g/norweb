@@ -94,7 +94,7 @@ namespace $ {
 		Filter_search: {
 			background: { color: $bog_builderui_tokens.field },
 			color: $bog_builderui_tokens.text,
-			border: { radius: '7px' },
+			border: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line, radius: '7px' },
 			padding: {
 				top: '8px',
 				bottom: '8px',
@@ -102,45 +102,7 @@ namespace $ {
 				right: '11px',
 			},
 			font: { size: '11px', weight: 600 },
-			flex: { direction: 'row' },
-			align: { items: 'center' },
-			gap: '7px',
-		},
-		Filter_type: {
-			background: { color: $bog_builderui_tokens.field },
-			color: $bog_builderui_tokens.text,
-			border: { radius: '7px' },
-			padding: {
-				top: '8px',
-				bottom: '8px',
-				left: '11px',
-				right: '11px',
-			},
-			font: { size: '11px', weight: 600 },
-		},
-		Filter_thresh: {
-			background: { color: $bog_builderui_tokens.field },
-			color: $bog_builderui_tokens.text,
-			border: { radius: '7px' },
-			padding: {
-				top: '8px',
-				bottom: '8px',
-				left: '11px',
-				right: '11px',
-			},
-			font: { size: '11px', weight: 600 },
-		},
-		Filter_comm: {
-			background: { color: $bog_builderui_tokens.current },
-			color: '#ffffff',
-			border: { radius: '7px' },
-			padding: {
-				top: '8px',
-				bottom: '8px',
-				left: '11px',
-				right: '11px',
-			},
-			font: { size: '11px', weight: 600 },
+			width: '200px',
 		},
 
 		Legend: {
@@ -218,8 +180,8 @@ namespace $ {
 		},
 
 		Aside: {
-			minWidth: '300px',
-			maxWidth: '300px',
+			minWidth: '240px',
+			maxWidth: '240px',
 			background: { color: $bog_builderui_tokens.card },
 			border: {
 				left: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line },

@@ -82,6 +82,9 @@ namespace $.$$ {
 				case 'nerel': return [
 					{ label: 'NEREL paper (arXiv:2108.13112)', uri: 'https://arxiv.org/abs/2108.13112' },
 				]
+				case 'ocr': return [
+					{ label: 'github.com/AleksanderMerkulov/text_extractor', uri: 'https://github.com/AleksanderMerkulov/text_extractor' },
+				]
 			}
 			return []
 		}

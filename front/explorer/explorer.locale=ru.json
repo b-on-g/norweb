@@ -1,8 +1,5 @@
 {
 	"$bog_norweb_front_explorer_filter_search_text": "🔍 Поиск узла…",
-	"$bog_norweb_front_explorer_filter_type_text": "Тип сущности ▾",
-	"$bog_norweb_front_explorer_filter_thresh_text": "Порог strength ▾",
-	"$bog_norweb_front_explorer_filter_comm_text": "◉ Сообщества: вкл",
 	"$bog_norweb_front_explorer_aside_title_text": "Карточка сущности",
 	"$bog_norweb_front_explorer_aside_empty_text": "Кликни узел на графе",
 	"$bog_norweb_front_explorer_relations_title_template": "Связи (%s)",

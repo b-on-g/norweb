@@ -315,6 +315,19 @@ namespace $.$$ {
 		node_color( id: string ) {
 			return $bog_norweb_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
 		}
+
+		// Поиск по label: непустой запрос приглушает узлы и рёбра, которые не матчатся.
+		search_lc() {
+			return this.search().trim().toLowerCase()
+		}
+		node_matches( id: string ) {
+			const s = this.search_lc()
+			if( !s ) return true
+			return ( this.node_by_id()[ id ]?.label ?? '' ).toLowerCase().includes( s )
+		}
+		node_opacity( id: string ) {
+			return this.node_matches( id ) ? '1' : '0.12'
+		}
 		node_stroke( id: string ) {
 			if ( this.selected_id() === id ) return '#ffffff'
 			if ( this.hovered_id() === id ) return '#ffffff'
@@ -359,6 +372,7 @@ namespace $.$$ {
 		}
 		edge_opacity( id: string ) {
 			const e = this.edge_by_id()[ id ]
+			if ( this.search_lc() && !( this.node_matches( e.source ) && this.node_matches( e.target ) ) ) return '0.08'
 			const hid = this.hovered_id() || this.selected_id()
 			if ( !hid ) return '0.55'
 			return ( e.source === hid || e.target === hid ) ? '0.95' : '0.18'
