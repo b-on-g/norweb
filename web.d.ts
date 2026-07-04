@@ -6247,14 +6247,24 @@ declare namespace $ {
         body?: Op['body'];
     };
     /**
+     * Backend base URL — the ONE line to change when the backend is deployed.
+     * No path suffix here: operation `route`s already carry `/api/v1/...`
+     * from FastAPI's OpenAPI dump.
+     */
+    const $bog_norweb_front_api_endpoint_default = "http://localhost:8000";
+    /**
+     * Effective endpoint: the `?api=<url>` app argument overrides the default,
+     * so a freshly deployed backend can be pointed at WITHOUT a rebuild —
+     * e.g. `...test.html#!api=https%3A%2F%2Fback.example.com`.
+     * Reactive: reads propagate via $mol_state_arg, so changing the arg refetches.
+     */
+    function $bog_norweb_front_api_endpoint(): string;
+    /**
      * Typed REST client factory for OpenAPI-generated operation descriptors.
      *
      * Returns a callable that takes an operation constant plus options and
      * synchronously (via wire) returns the parsed JSON body. Any network
      * error propagates as an exception so `$mol_view` shows an error plate.
-     *
-     * Endpoint host is baseline `http://localhost:8000` because operation `route`s
-     * already carry the `/api/v1/...` prefix from FastAPI's OpenAPI dump.
      */
     const $bog_norweb_front_api: <Op extends $bog_norweb_front_api_operation>(op: Op, opts?: $bog_norweb_front_api_options<Op>) => Op["out"];
 }

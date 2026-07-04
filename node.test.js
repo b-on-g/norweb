@@ -15197,23 +15197,35 @@ var $;
         return `${endpoint}${path}${suffix}`;
     }
     /**
+     * Backend base URL — the ONE line to change when the backend is deployed.
+     * No path suffix here: operation `route`s already carry `/api/v1/...`
+     * from FastAPI's OpenAPI dump.
+     */
+    $.$bog_norweb_front_api_endpoint_default = 'http://localhost:8000';
+    /**
+     * Effective endpoint: the `?api=<url>` app argument overrides the default,
+     * so a freshly deployed backend can be pointed at WITHOUT a rebuild —
+     * e.g. `...test.html#!api=https%3A%2F%2Fback.example.com`.
+     * Reactive: reads propagate via $mol_state_arg, so changing the arg refetches.
+     */
+    function $bog_norweb_front_api_endpoint() {
+        return $mol_state_arg.value('api') || $.$bog_norweb_front_api_endpoint_default;
+    }
+    $.$bog_norweb_front_api_endpoint = $bog_norweb_front_api_endpoint;
+    /**
      * Typed REST client factory for OpenAPI-generated operation descriptors.
      *
      * Returns a callable that takes an operation constant plus options and
      * synchronously (via wire) returns the parsed JSON body. Any network
      * error propagates as an exception so `$mol_view` shows an error plate.
-     *
-     * Endpoint host is baseline `http://localhost:8000` because operation `route`s
-     * already carry the `/api/v1/...` prefix from FastAPI's OpenAPI dump.
      */
     $.$bog_norweb_front_api = (() => {
-        const endpoint = 'http://localhost:8000';
         const init = {
             credentials: 'omit',
             cache: 'no-cache',
         };
         return function call(op, opts = {}) {
-            const url = $bog_norweb_front_api_url(endpoint, op.route, opts.params, opts.query);
+            const url = $bog_norweb_front_api_url($bog_norweb_front_api_endpoint(), op.route, opts.params, opts.query);
             const req = { ...init, method: op.method };
             if (opts.body !== undefined) {
                 req.headers = { ...(init.headers ?? {}), 'content-type': 'application/json' };
