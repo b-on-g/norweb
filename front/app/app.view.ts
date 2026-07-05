@@ -59,7 +59,13 @@ namespace $.$$ {
 
 		@$mol_action
 		ask_chat() {
+			// Переносим выбранную в графе сущность в чат: переключаем экран и
+			// сразу кладём заготовку вопроса про неё в поле ввода.
+			const node = ( this.Explorer() as $.$$.$bog_norweb_front_explorer ).selected()
 			this.screen( 'chat' )
+			if( node?.label ) {
+				this.Chat().prompt_text( this.ask_entity_template().replace( '%s', node.label ) )
+			}
 			return null
 		}
 

@@ -10,6 +10,7 @@ $bog_norweb_front_app $bog_builderui_div
 	screen_chat_title @ \Chat with agent
 	screen_dashboard_title @ \Dashboard
 	screen_summary_title @ \Solution overview
+	ask_entity_template @ \Tell me about the entity «%s» from the knowledge graph.
 	attr *
 		^
 		bog_builderui_lights <= lights_mode

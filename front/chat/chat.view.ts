@@ -120,7 +120,7 @@ namespace $.$$ {
 						message: text,
 						history,
 						engine: 'local',
-						top_k: 8,
+						top_k: 15,
 						rerank: true,
 						include_trace: false,
 						locale: this.$.$mol_locale.lang() === 'en' ? 'en' : 'ru',
@@ -131,10 +131,38 @@ namespace $.$$ {
 			this.history( [ ... this.history(), { role: 'assistant', text: reply } ] )
 		}
 
-		// Фолбэк: прямой LLM без графа (мок-датасет или бэк лёг).
+		// Лёгкий контекст для фолбэка: сущности графа (лейбл + тип, топ по degree)
+		// прямо с бэка. Полноценного RAG-ретривала тут нет, но модель хотя бы
+		// «видит» какие сущности есть в корпусе и отвечает ближе к теме.
+		// Возвращает '' если графа нет (мок без бэка) — тогда чистый LLM.
+		graph_context(): string {
+			const id = this.dataset_id()
+			if( !id ) return ''
+			try {
+				const res = this.$.$bog_norweb_front_api(
+					$bog_norweb_front_api_ragu_get_graph,
+					{ params: { dataset_id: id }, query: { limit: 200 } },
+				)
+				const labels = ( res as any ).nodes
+					.slice()
+					.sort( ( a: any, b: any ) => ( b.degree ?? 0 ) - ( a.degree ?? 0 ) )
+					.slice( 0, 60 )
+					.map( ( n: any ) => `${ n.label } (${ n.entity_type })` )
+				if( !labels.length ) return ''
+				return `Ключевые сущности из графа знаний этого корпуса: ${ labels.join( '; ' ) }. Отвечай, опираясь на них, если вопрос по теме корпуса.`
+			} catch( error: any ) {
+				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
+				return ''
+			}
+		}
+
+		// Фолбэк: прямой LLM. Если удаётся достать граф с бэка — подмешиваем
+		// сущности как контекст, чтобы ответ был ближе к корпусу.
 		ask_llm( text: string ) {
 			const history = this.history()
+			const context = this.graph_context()
 			const model = this.llm().fork()
+			if( context ) model.tell( [ context ] )
 			for( const item of history ) {
 				if( item.role === 'user' ) model.ask( [ item.text ] )
 				else model.tell( [ item.text ] )
