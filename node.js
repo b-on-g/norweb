@@ -16097,6 +16097,9 @@ var $;
 		filter_type(){
 			return "";
 		}
+		graph_key(){
+			return "";
+		}
 		nodes(){
 			return [];
 		}
@@ -16447,6 +16450,10 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
+        // Module-scoped layout cache keyed by graph_key (dataset_id). Survives
+        // component remount so returning to the graph shows the settled layout
+        // instantly instead of replaying the spring-in from scratch every time.
+        const $bog_norweb_front_explorer_forcegraph_layout_cache = new Map();
         class $bog_norweb_front_explorer_forcegraph extends $.$bog_norweb_front_explorer_forcegraph {
             // Typed accessors over view.tree's `nodes /` and `edges /` — parents
             // (explorer / demo) feed them via `nodes <= ...` bindings.
@@ -16604,7 +16611,16 @@ var $;
                 let p = this.positions();
                 const nodes = this.nodes();
                 if (Object.keys(p).length !== nodes.length) {
-                    p = { ...this.initial_positions() };
+                    // После ремоунта positions-ячейка пуста — восстанавливаем осевшую
+                    // раскладку из module-кэша, чтобы не переигрывать spring-in.
+                    const key = this.graph_key();
+                    const cached = key ? $bog_norweb_front_explorer_forcegraph_layout_cache.get(key) : undefined;
+                    if (cached && Object.keys(cached).length === nodes.length) {
+                        p = { ...cached };
+                    }
+                    else {
+                        p = { ...this.initial_positions() };
+                    }
                     this.velocities = {};
                     this.positions(p);
                 }
@@ -16629,6 +16645,10 @@ var $;
                 const next = $bog_norweb_front_explorer_forcegraph_tick_layout(this.nodes(), this.edges(), positions, this.velocities, this.drag_id(), this.layout_params());
                 this.velocities = next.velocities;
                 this.positions(next.positions);
+                // Кэшируем осевшую раскладку по dataset_id — переживёт ремоунт вкладки.
+                const key = this.graph_key();
+                if (key)
+                    $bog_norweb_front_explorer_forcegraph_layout_cache.set(key, next.positions);
             }
             // Continuous simulation loop driven by requestAnimationFrame.
             // Runs until frame budget exhausted AND no drag is active. While the
@@ -16686,7 +16706,11 @@ var $;
                 const tree = super.dom_tree();
                 if (!this.initial_sim_started) {
                     this.initial_sim_started = true;
-                    this.start_sim(this.SIM_INITIAL_FRAMES);
+                    // Уже раскладывали этот граф — берём осевшие позиции из кэша и
+                    // гоняем лишь короткую стабилизацию вместо полного spring-in.
+                    const key = this.graph_key();
+                    const cached = key && $bog_norweb_front_explorer_forcegraph_layout_cache.has(key);
+                    this.start_sim(cached ? this.SIM_DRAG_FRAMES : this.SIM_INITIAL_FRAMES);
                 }
                 return tree;
             }
@@ -16989,6 +17013,7 @@ var $;
 		}
 		Graph(){
 			const obj = new this.$.$bog_norweb_front_explorer_forcegraph();
+			(obj.graph_key) = () => ((this.dataset_id()));
 			(obj.nodes) = () => ((this.graph_nodes()));
 			(obj.edges) = () => ((this.graph_edges()));
 			(obj.selected_id) = (next) => ((this.selected_id(next)));
@@ -17290,6 +17315,10 @@ var $;
     (function ($$) {
         // Default page size for the graph endpoint. The mock backend caps at 5000.
         const GRAPH_LIMIT = 500;
+        // Module-scoped cache keyed by dataset_id. Survives component remount:
+        // switching tabs drops the @$mol_mem cell's subscribers and resets it, so
+        // without this every return to the graph re-fetches and re-runs the layout.
+        const $bog_norweb_front_explorer_graph_cache = new Map();
         class $bog_norweb_front_explorer extends $.$bog_norweb_front_explorer {
             // URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo
             // and jsdom tests where no live backend is available.
@@ -17305,6 +17334,11 @@ var $;
                     return null;
                 if (this.mock_flag())
                     return null;
+                // Возврат на вкладку не должен снова дёргать бэк — отдаём тот же объект,
+                // стабильная identity сохраняет раскладку графа.
+                const cached = $bog_norweb_front_explorer_graph_cache.get(id);
+                if (cached)
+                    return cached;
                 try {
                     const res = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_get_graph, { params: { dataset_id: id }, query: { limit: GRAPH_LIMIT } });
                     const nodes = res.nodes.map((n) => ({
@@ -17322,7 +17356,9 @@ var $;
                         strength: e.strength,
                         relation: e.relation_type,
                     }));
-                    return { nodes, edges };
+                    const result = { nodes, edges };
+                    $bog_norweb_front_explorer_graph_cache.set(id, result);
+                    return result;
                 }
                 catch (error) {
                     if ($mol_promise_like(error))
@@ -18945,6 +18981,12 @@ var $;
 			(obj.sub) = () => ([(this.message_text(id))]);
 			return obj;
 		}
+		Message_badge(id){
+			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_off_graph": (this.message_off_graph(id))});
+			(obj.sub) = () => ([(this.off_graph_text())]);
+			return obj;
+		}
 		dataset_id(){
 			return "";
 		}
@@ -18969,6 +19011,9 @@ var $;
 		clear_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_chat_clear_text"));
 		}
+		off_graph_text(){
+			return (this.$.$mol_locale.text("$bog_norweb_front_chat_off_graph_text"));
+		}
 		rows(){
 			return [];
 		}
@@ -18978,13 +19023,16 @@ var $;
 		message_role(id){
 			return "";
 		}
+		message_off_graph(id){
+			return false;
+		}
 		sub(){
 			return [(this.Body()), (this.Footer())];
 		}
 		Message(id){
 			const obj = new this.$.$bog_builderui_div();
 			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "raggu_role": (this.message_role(id))});
-			(obj.sub) = () => ([(this.Message_text(id))]);
+			(obj.sub) = () => ([(this.Message_text(id)), (this.Message_badge(id))]);
 			return obj;
 		}
 	};
@@ -19009,6 +19057,7 @@ var $;
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Input_row"));
 	($mol_mem(($.$bog_norweb_front_chat.prototype), "Footer"));
 	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_text"));
+	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message_badge"));
 	($mol_mem_key(($.$bog_norweb_front_chat.prototype), "Message"));
 
 
@@ -19598,6 +19647,9 @@ var $;
             message_role(index) {
                 return this.history()[index]?.role ?? 'user';
             }
+            message_off_graph(index) {
+                return this.history()[index]?.off_graph ?? false;
+            }
             prompt_submit() {
                 const text = this.prompt_text().trim();
                 if (!text)
@@ -19631,7 +19683,7 @@ var $;
                     catch (error) {
                         if ($mol_promise_like(error))
                             $mol_fail_hidden(error);
-                        $mol_fail_log(error);
+                        console.error('[norweb chat] GraphRAG backend failed, falling back to direct LLM:', error);
                         // провалились в фолбэк ниже
                     }
                 }
@@ -19671,13 +19723,13 @@ var $;
                 try {
                     const resp = model.response();
                     const reply = typeof resp === 'string' ? resp : resp?.reply ?? JSON.stringify(resp, null, 2);
-                    this.history([...this.history(), { role: 'assistant', text: reply }]);
+                    this.history([...this.history(), { role: 'assistant', text: reply, off_graph: true }]);
                 }
                 catch (error) {
                     if ($mol_promise_like(error))
                         $mol_fail_hidden(error);
                     if ($mol_fail_log(error)) {
-                        this.history([...this.history(), { role: 'assistant', text: '📛 ' + (error.message || String(error)) }]);
+                        this.history([...this.history(), { role: 'assistant', text: '📛 ' + (error.message || String(error)), off_graph: true }]);
                     }
                 }
             }
@@ -19861,6 +19913,30 @@ var $;
                         },
                         color: $bog_builderui_tokens.text,
                     },
+                },
+            },
+        },
+        Message_badge: {
+            display: 'none',
+            alignSelf: 'flex-start',
+            margin: { top: '6px' },
+            font: {
+                family: 'ui-monospace, monospace',
+                weight: 600,
+                size: '10px',
+            },
+            color: '#8a6d1b',
+            background: { color: '#f5c84226' },
+            border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '5px' },
+            padding: {
+                top: '2px',
+                bottom: '2px',
+                left: '7px',
+                right: '7px',
+            },
+            '@': {
+                raggu_off_graph: {
+                    true: { display: 'flex' },
                 },
             },
         },

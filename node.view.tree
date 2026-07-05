@@ -1282,6 +1282,7 @@ $bog_norweb_front_explorer_forcegraph $mol_svg_root
 	drag_id? \
 	search \
 	filter_type \
+	graph_key \
 	nodes /
 	edges /
 	pan_x? +0
@@ -1386,6 +1387,7 @@ $bog_norweb_front_explorer $bog_builderui_div
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
 				<= Graph $bog_norweb_front_explorer_forcegraph
+					graph_key <= dataset_id
 					nodes <= graph_nodes /
 					edges <= graph_edges /
 					selected_id? <=> selected_id?
@@ -1596,6 +1598,7 @@ $bog_norweb_front_chat $bog_builderui_div
 	seed_user_text @ \Who wrote the Norwegian anthem and when?
 	seed_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
 	clear_text @ \Clear
+	off_graph_text @ \⚠ Off-graph answer (LLM without retrieval)
 	prompt_text? \
 	prompt_submit? null
 	use_sug_one? null
@@ -1604,6 +1607,7 @@ $bog_norweb_front_chat $bog_builderui_div
 	rows /
 	message_text* \
 	message_role* \
+	message_off_graph* false
 	sub /
 		<= Body $mol_scroll
 			sub /
@@ -1648,6 +1652,11 @@ $bog_norweb_front_chat $bog_builderui_div
 					^
 					raggu_role <= message_role*
 				sub / <= message_text*
+			<= Message_badge* $bog_builderui_div
+				attr *
+					^
+					raggu_off_graph <= message_off_graph*
+				sub / <= off_graph_text
 
 $bog_norweb_front_dashboard_dist $bog_builderui_div
 

@@ -6,6 +6,7 @@
 	"$bog_norweb_front_app_screen_summary_title": "Solution overview",
 	"$bog_norweb_front_chat_clear_text": "Clear",
 	"$bog_norweb_front_chat_input_hint_text": "Ask anything about the corpus…",
+	"$bog_norweb_front_chat_off_graph_text": "⚠ Off-graph answer (LLM without retrieval)",
 	"$bog_norweb_front_chat_seed_assistant_text": "The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…",
 	"$bog_norweb_front_chat_seed_user_text": "Who wrote the Norwegian anthem and when?",
 	"$bog_norweb_front_chat_send_label_text": "Send",
