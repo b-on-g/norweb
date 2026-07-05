@@ -48,5 +48,6 @@ $bog_norweb_front_app $bog_builderui_div
 		dataset_id <= dataset_id
 		ask_click? <=> ask_chat? null
 	Chat $bog_norweb_front_chat
+		dataset_id <= dataset_id
 	Dashboard $bog_norweb_front_dashboard
 	Summary $bog_norweb_front_summary

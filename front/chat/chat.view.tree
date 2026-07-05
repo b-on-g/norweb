@@ -1,4 +1,5 @@
 $bog_norweb_front_chat $bog_builderui_div
+	dataset_id \
 	sug_one_text @ \Who received the Nobel Prize?
 	sug_two_text @ \Connection between Ibsen and Bjørnson?
 	input_hint_text @ \Ask anything about the corpus…
