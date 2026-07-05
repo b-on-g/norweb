@@ -30,7 +30,7 @@ namespace $.$$ {
 				const nodes: GraphNode[] = res.nodes.map( (n: any) => ( {
 					id: n.id,
 					label: n.label,
-					type: $bog_norweb_front_explorer_forcegraph_entity_bucket( n.entity_type ),
+					type: n.entity_type ?? '',
 					degree: n.degree,
 					x: n.x,
 					y: n.y,
@@ -55,29 +55,53 @@ namespace $.$$ {
 			return this.graph_remote() === null
 		}
 
-		// Клик по типу в легенде подсвечивает все узлы этого типа (как поиск).
+		// Легенда строится из фактических типов графа (топ по количеству узлов),
+		// а не из фиксированного NEREL-набора — схемы разных доменов различаются.
+		@$mol_mem
+		legend_entries(): Array< { type: string, count: number } > {
+			const counts: Record< string, number > = {}
+			for( const n of this.graph_nodes() ) {
+				counts[ n.type ] = ( counts[ n.type ] ?? 0 ) + 1
+			}
+			return Object.entries( counts )
+				.map( ( [ type, count ] ) => ( { type, count } ) )
+				.sort( ( a, b ) => b.count - a.count )
+				.slice( 0, 12 )
+		}
+
+		legend_rows() {
+			return this.legend_entries().map( ( _, i ) => this.Legend_row( i ) )
+		}
+
+		legend_label( i: number ) {
+			return this.legend_entries()[ i ]?.type ?? ''
+		}
+		legend_count( i: number ) {
+			return String( this.legend_entries()[ i ]?.count ?? '' )
+		}
+		legend_active( i: number ) {
+			return this.type_filter() === this.legend_entries()[ i ]?.type
+		}
+
+		// Цвет точки легенды = цвет узлов этого типа. Style override, т.к. цвет
+		// вычисляется рантайм-функцией, не токеном.
+		Legend_dot( i: number ) {
+			const dot = super.Legend_dot( i )
+			const type = this.legend_entries()[ i ]?.type ?? ''
+			dot.style = () => ( {
+				background: $bog_norweb_front_explorer_forcegraph_type_color( type ),
+			} )
+			return dot
+		}
+
+		// Клик по типу подсвечивает все узлы этого типа (как поиск).
 		// Повторный клик по активному типу снимает фильтр.
 		@$mol_action
-		toggle_type( t: string ) {
+		legend_click( i: number ) {
+			const t = this.legend_entries()[ i ]?.type ?? ''
 			this.type_filter( this.type_filter() === t ? '' : t )
 			return null
 		}
-
-		is_type_person() { return this.type_filter() === 'PERSON' }
-		is_type_org() { return this.type_filter() === 'ORG' }
-		is_type_loc() { return this.type_filter() === 'LOC' }
-		is_type_event() { return this.type_filter() === 'EVENT' }
-		is_type_date() { return this.type_filter() === 'DATE' }
-		is_type_work() { return this.type_filter() === 'WORK' }
-		is_type_law() { return this.type_filter() === 'LAW' }
-
-		@$mol_action click_type_person() { return this.toggle_type( 'PERSON' ) }
-		@$mol_action click_type_org() { return this.toggle_type( 'ORG' ) }
-		@$mol_action click_type_loc() { return this.toggle_type( 'LOC' ) }
-		@$mol_action click_type_event() { return this.toggle_type( 'EVENT' ) }
-		@$mol_action click_type_date() { return this.toggle_type( 'DATE' ) }
-		@$mol_action click_type_work() { return this.toggle_type( 'WORK' ) }
-		@$mol_action click_type_law() { return this.toggle_type( 'LAW' ) }
 
 		@$mol_mem
 		graph_data(): { nodes: readonly GraphNode[], edges: readonly GraphEdge[] } {

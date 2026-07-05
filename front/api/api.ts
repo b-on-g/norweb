@@ -55,7 +55,7 @@ namespace $ {
 	 * No path suffix here: operation `route`s already carry `/api/v1/...`
 	 * from FastAPI's OpenAPI dump.
 	 */
-	export const $bog_norweb_front_api_endpoint_default = 'http://localhost:8000'
+	export const $bog_norweb_front_api_endpoint_default = 'https://ragu-back.duckdns.org'
 
 	/**
 	 * Effective endpoint: the `?api=<url>` app argument overrides the default,

@@ -1,11 +1,9 @@
 namespace $ {
 
-	/**
-	 * Visual node bucket. The API returns a 29-value EntityType enum — we bucket it
-	 * into a small palette so the graph stays readable. Anything unknown falls to WORK.
-	 */
-	export type $bog_norweb_front_explorer_forcegraph_node_type =
-		'PERSON' | 'ORG' | 'LOC' | 'EVENT' | 'DATE' | 'WORK' | 'LAW'
+	// Node type is the raw entity_type string from the backend — schemas differ
+	// per domain (NEREL, medical, …), so we don't bucket to a fixed enum anymore.
+	// Colors come from a deterministic palette keyed by the string itself.
+	export type $bog_norweb_front_explorer_forcegraph_node_type = string
 
 	export type $bog_norweb_front_explorer_forcegraph_node = {
 		id: string
@@ -24,8 +22,17 @@ namespace $ {
 		relation: string
 	}
 
-	export const $bog_norweb_front_explorer_forcegraph_type_color:
-		Record< $bog_norweb_front_explorer_forcegraph_node_type, string > = {
+	// Distinct, theme-agnostic categorical palette. Assigned to types
+	// deterministically so the same type always gets the same color.
+	const $bog_norweb_front_explorer_forcegraph_palette = [
+		'#e0524f', '#4f8ee0', '#3fb56b', '#d97ad9', '#e0a73f',
+		'#7c6ce0', '#3fb8b8', '#e07a4f', '#7ab54f', '#4f6ce0',
+		'#d94f7a', '#b8873f', '#4fb8a0', '#a04fe0', '#8ea04f',
+	]
+
+	// Fixed colors for well-known NEREL buckets — keeps the mock graph's
+	// legend stable. Unknown types fall through to the hashed palette.
+	const $bog_norweb_front_explorer_forcegraph_known_color: Record< string, string > = {
 		PERSON: '#e0524f',
 		ORG: '#4f8ee0',
 		LOC: '#3fb56b',
@@ -35,22 +42,17 @@ namespace $ {
 		LAW: '#3fb8b8',
 	}
 
-	/**
-	 * Map backend EntityType (29 values) to the visual NodeType bucket (7 values).
-	 * Anything unknown falls back to WORK.
-	 */
-	export function $bog_norweb_front_explorer_forcegraph_entity_bucket(
-		t: string,
-	): $bog_norweb_front_explorer_forcegraph_node_type {
-		if ( t === 'PERSON' ) return 'PERSON'
-		if ( t === 'ORGANIZATION' || t === 'FAMILY' ) return 'ORG'
-		if ( t === 'LOCATION' || t === 'CITY' || t === 'COUNTRY' || t === 'STATE_OR_PROV'
-			|| t === 'DISTRICT' || t === 'FACILITY' ) return 'LOC'
-		if ( t === 'EVENT' || t === 'CRIME' ) return 'EVENT'
-		if ( t === 'DATE' || t === 'TIME' || t === 'AGE' ) return 'DATE'
-		if ( t === 'WORK_OF_ART' || t === 'PRODUCT' ) return 'WORK'
-		if ( t === 'LAW' || t === 'IDEOLOGY' || t === 'RELIGION' ) return 'LAW'
-		return 'WORK'
+	/** Deterministic color for any entity_type string. */
+	export function $bog_norweb_front_explorer_forcegraph_type_color( type: string ): string {
+		if ( !type ) return '#8a8a8a'
+		const known = $bog_norweb_front_explorer_forcegraph_known_color[ type ]
+		if ( known ) return known
+		let hash = 0
+		for ( let i = 0; i < type.length; i++ ) {
+			hash = ( hash * 31 + type.charCodeAt( i ) ) | 0
+		}
+		const palette = $bog_norweb_front_explorer_forcegraph_palette
+		return palette[ Math.abs( hash ) % palette.length ]
 	}
 
 	// --- Mock generator (kept exported: used by demo playground and stress-tests) ---

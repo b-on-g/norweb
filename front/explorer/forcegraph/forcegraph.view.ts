@@ -305,15 +305,19 @@ namespace $.$$ {
 		// radius = base + growth * degree. Linear scale — hubs visually dominate,
 		// which is what we want for a demo graph where the whole point is spotting
 		// the well-connected nodes at a glance.
+		// Radius scales with sqrt(degree), not degree — real graphs have hubs with
+		// degree in the hundreds, and a linear scale blows them up to cover the
+		// whole canvas. Capped so even a 500-degree hub stays readable.
 		node_radius_num( id: string ): number {
 			const n = this.node_by_id()[ id ]
-			return this.node_size_base() + this.node_size_growth() * n.degree
+			const r = this.node_size_base() + this.node_size_growth() * Math.sqrt( n.degree )
+			return Math.min( r, 22 )
 		}
 		node_radius( id: string ) {
 			return String( this.node_radius_num( id ) )
 		}
 		node_color( id: string ) {
-			return $bog_norweb_front_explorer_forcegraph_type_color[ this.node_by_id()[ id ].type ]
+			return $bog_norweb_front_explorer_forcegraph_type_color( this.node_by_id()[ id ].type )
 		}
 
 		// Фильтры подсветки: поиск по label и/или тип из легенды. Непустой фильтр
@@ -477,9 +481,7 @@ namespace $.$$ {
 
 		selected_color() {
 			const n = this.selected_node()
-			return n
-				? $bog_norweb_front_explorer_forcegraph_type_color[ n.type ]
-				: $bog_norweb_front_explorer_forcegraph_type_color.WORK
+			return $bog_norweb_front_explorer_forcegraph_type_color( n?.type ?? '' )
 		}
 
 		// Edges incident to selected node, with the OTHER node's label
