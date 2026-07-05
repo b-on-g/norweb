@@ -10915,6 +10915,7 @@ declare namespace $.$$ {
         is_communicating(): boolean;
         ask(text: string): void;
         ask_backend(text: string): void;
+        graph_context(): string;
         ask_llm(text: string): void;
         use_sug_one(): null;
         use_sug_two(): null;
@@ -12148,6 +12149,7 @@ declare namespace $ {
 		screen_chat_title( ): string
 		screen_dashboard_title( ): string
 		screen_summary_title( ): string
+		ask_entity_template( ): string
 		attr( ): ({ 
 			'bog_builderui_lights': ReturnType< $bog_norweb_front_app['lights_mode'] >,
 			'bog_builderui_base': string,

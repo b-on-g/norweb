@@ -1,4 +1,5 @@
 {
+	"$bog_norweb_front_app_ask_entity_template": "Расскажи про сущность «%s» из графа знаний.",
 	"$bog_norweb_front_app_screen_chat_title": "Чат с агентом",
 	"$bog_norweb_front_app_screen_dashboard_title": "Дашборд",
 	"$bog_norweb_front_app_screen_explorer_title": "Граф знаний",
