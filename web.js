@@ -18926,8 +18926,12 @@ var $;
     var $$;
     (function ($$) {
         class $bog_norweb_front_chat extends $.$bog_norweb_front_chat {
+            // История привязана к dataset_id — у каждого корпуса своя ветка чата.
+            // Иначе фолбэк-плашка, полученная на одном датасете (напр. мок без бэка),
+            // висела бы на сообщениях другого, где бэк отвечает через граф.
             history(next) {
-                const stored = this.$.$mol_state_session.value('$bog_norweb_front_chat.history', next);
+                const key = `$bog_norweb_front_chat.history@${this.dataset_id() || ''}`;
+                const stored = this.$.$mol_state_session.value(key, next);
                 if (stored)
                     return stored;
                 return [
