@@ -15201,7 +15201,7 @@ var $;
      * No path suffix here: operation `route`s already carry `/api/v1/...`
      * from FastAPI's OpenAPI dump.
      */
-    $.$bog_norweb_front_api_endpoint_default = 'http://localhost:8000';
+    $.$bog_norweb_front_api_endpoint_default = 'https://ragu-back.duckdns.org';
     /**
      * Effective endpoint: the `?api=<url>` app argument overrides the default,
      * so a freshly deployed backend can be pointed at WITHOUT a rebuild —
@@ -16179,7 +16179,16 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$bog_norweb_front_explorer_forcegraph_type_color = {
+    // Distinct, theme-agnostic categorical palette. Assigned to types
+    // deterministically so the same type always gets the same color.
+    const $bog_norweb_front_explorer_forcegraph_palette = [
+        '#e0524f', '#4f8ee0', '#3fb56b', '#d97ad9', '#e0a73f',
+        '#7c6ce0', '#3fb8b8', '#e07a4f', '#7ab54f', '#4f6ce0',
+        '#d94f7a', '#b8873f', '#4fb8a0', '#a04fe0', '#8ea04f',
+    ];
+    // Fixed colors for well-known NEREL buckets — keeps the mock graph's
+    // legend stable. Unknown types fall through to the hashed palette.
+    const $bog_norweb_front_explorer_forcegraph_known_color = {
         PERSON: '#e0524f',
         ORG: '#4f8ee0',
         LOC: '#3fb56b',
@@ -16188,29 +16197,21 @@ var $;
         WORK: '#7c6ce0',
         LAW: '#3fb8b8',
     };
-    /**
-     * Map backend EntityType (29 values) to the visual NodeType bucket (7 values).
-     * Anything unknown falls back to WORK.
-     */
-    function $bog_norweb_front_explorer_forcegraph_entity_bucket(t) {
-        if (t === 'PERSON')
-            return 'PERSON';
-        if (t === 'ORGANIZATION' || t === 'FAMILY')
-            return 'ORG';
-        if (t === 'LOCATION' || t === 'CITY' || t === 'COUNTRY' || t === 'STATE_OR_PROV'
-            || t === 'DISTRICT' || t === 'FACILITY')
-            return 'LOC';
-        if (t === 'EVENT' || t === 'CRIME')
-            return 'EVENT';
-        if (t === 'DATE' || t === 'TIME' || t === 'AGE')
-            return 'DATE';
-        if (t === 'WORK_OF_ART' || t === 'PRODUCT')
-            return 'WORK';
-        if (t === 'LAW' || t === 'IDEOLOGY' || t === 'RELIGION')
-            return 'LAW';
-        return 'WORK';
+    /** Deterministic color for any entity_type string. */
+    function $bog_norweb_front_explorer_forcegraph_type_color(type) {
+        if (!type)
+            return '#8a8a8a';
+        const known = $bog_norweb_front_explorer_forcegraph_known_color[type];
+        if (known)
+            return known;
+        let hash = 0;
+        for (let i = 0; i < type.length; i++) {
+            hash = (hash * 31 + type.charCodeAt(i)) | 0;
+        }
+        const palette = $bog_norweb_front_explorer_forcegraph_palette;
+        return palette[Math.abs(hash) % palette.length];
     }
-    $.$bog_norweb_front_explorer_forcegraph_entity_bucket = $bog_norweb_front_explorer_forcegraph_entity_bucket;
+    $.$bog_norweb_front_explorer_forcegraph_type_color = $bog_norweb_front_explorer_forcegraph_type_color;
     // --- Mock generator (kept exported: used by demo playground and stress-tests) ---
     const RELATIONS = [
         'MENTIONS', 'CITES', 'WORKS_AT', 'LOCATED_IN', 'INVOLVES',
@@ -16708,15 +16709,19 @@ var $;
             // radius = base + growth * degree. Linear scale — hubs visually dominate,
             // which is what we want for a demo graph where the whole point is spotting
             // the well-connected nodes at a glance.
+            // Radius scales with sqrt(degree), not degree — real graphs have hubs with
+            // degree in the hundreds, and a linear scale blows them up to cover the
+            // whole canvas. Capped so even a 500-degree hub stays readable.
             node_radius_num(id) {
                 const n = this.node_by_id()[id];
-                return this.node_size_base() + this.node_size_growth() * n.degree;
+                const r = this.node_size_base() + this.node_size_growth() * Math.sqrt(n.degree);
+                return Math.min(r, 22);
             }
             node_radius(id) {
                 return String(this.node_radius_num(id));
             }
             node_color(id) {
-                return $bog_norweb_front_explorer_forcegraph_type_color[this.node_by_id()[id].type];
+                return $bog_norweb_front_explorer_forcegraph_type_color(this.node_by_id()[id].type);
             }
             // Фильтры подсветки: поиск по label и/или тип из легенды. Непустой фильтр
             // приглушает узлы и рёбра, которые не матчатся.
@@ -16871,9 +16876,7 @@ var $;
             }
             selected_color() {
                 const n = this.selected_node();
-                return n
-                    ? $bog_norweb_front_explorer_forcegraph_type_color[n.type]
-                    : $bog_norweb_front_explorer_forcegraph_type_color.WORK;
+                return $bog_norweb_front_explorer_forcegraph_type_color(n?.type ?? '');
             }
             // Edges incident to selected node, with the OTHER node's label
             selected_relations() {
@@ -17005,179 +17008,55 @@ var $;
 			(obj.sub) = () => ([(this.legend_title_text())]);
 			return obj;
 		}
-		is_type_person(){
+		legend_active(id){
 			return false;
 		}
-		click_type_person(next){
+		legend_click(id, next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		Legend_person_dot(){
+		Legend_dot(id){
 			const obj = new this.$.$bog_builderui_div();
 			return obj;
 		}
-		Legend_person_label(){
+		legend_label(id){
+			return "";
+		}
+		Legend_label(id){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_person_label_text())]);
+			(obj.sub) = () => ([(this.legend_label(id))]);
 			return obj;
 		}
-		Legend_person(){
+		legend_count(id){
+			return "";
+		}
+		Legend_count(id){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_person())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_person(next))});
-			(obj.sub) = () => ([(this.Legend_person_dot()), (this.Legend_person_label())]);
+			(obj.sub) = () => ([(this.legend_count(id))]);
 			return obj;
 		}
-		is_type_org(){
-			return false;
-		}
-		click_type_org(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_org_dot(){
+		Legend_row(id){
 			const obj = new this.$.$bog_builderui_div();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.legend_active(id))});
+			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.legend_click(id, next))});
+			(obj.sub) = () => ([
+				(this.Legend_dot(id)), 
+				(this.Legend_label(id)), 
+				(this.Legend_count(id))
+			]);
 			return obj;
 		}
-		Legend_org_label(){
+		legend_rows(){
+			return [(this.Legend_row(id))];
+		}
+		Legend_list(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_org_label_text())]);
-			return obj;
-		}
-		Legend_org(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_org())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_org(next))});
-			(obj.sub) = () => ([(this.Legend_org_dot()), (this.Legend_org_label())]);
-			return obj;
-		}
-		is_type_loc(){
-			return false;
-		}
-		click_type_loc(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_loc_dot(){
-			const obj = new this.$.$bog_builderui_div();
-			return obj;
-		}
-		Legend_loc_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_loc_label_text())]);
-			return obj;
-		}
-		Legend_loc(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_loc())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_loc(next))});
-			(obj.sub) = () => ([(this.Legend_loc_dot()), (this.Legend_loc_label())]);
-			return obj;
-		}
-		is_type_event(){
-			return false;
-		}
-		click_type_event(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_event_dot(){
-			const obj = new this.$.$bog_builderui_div();
-			return obj;
-		}
-		Legend_event_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_event_label_text())]);
-			return obj;
-		}
-		Legend_event(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_event())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_event(next))});
-			(obj.sub) = () => ([(this.Legend_event_dot()), (this.Legend_event_label())]);
-			return obj;
-		}
-		is_type_date(){
-			return false;
-		}
-		click_type_date(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_date_dot(){
-			const obj = new this.$.$bog_builderui_div();
-			return obj;
-		}
-		Legend_date_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_date_label_text())]);
-			return obj;
-		}
-		Legend_date(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_date())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_date(next))});
-			(obj.sub) = () => ([(this.Legend_date_dot()), (this.Legend_date_label())]);
-			return obj;
-		}
-		is_type_work(){
-			return false;
-		}
-		click_type_work(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_work_dot(){
-			const obj = new this.$.$bog_builderui_div();
-			return obj;
-		}
-		Legend_work_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_work_label_text())]);
-			return obj;
-		}
-		Legend_work(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_work())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_work(next))});
-			(obj.sub) = () => ([(this.Legend_work_dot()), (this.Legend_work_label())]);
-			return obj;
-		}
-		is_type_law(){
-			return false;
-		}
-		click_type_law(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Legend_law_dot(){
-			const obj = new this.$.$bog_builderui_div();
-			return obj;
-		}
-		Legend_law_label(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([(this.legend_law_label_text())]);
-			return obj;
-		}
-		Legend_law(){
-			const obj = new this.$.$bog_builderui_div();
-			(obj.attr) = () => ({...(this.$.$bog_builderui_div.prototype.attr.call(obj)), "bog_norweb_front_explorer_legend_on": (this.is_type_law())});
-			(obj.event) = () => ({...(this.$.$bog_builderui_div.prototype.event.call(obj)), "click": (next) => (this.click_type_law(next))});
-			(obj.sub) = () => ([(this.Legend_law_dot()), (this.Legend_law_label())]);
+			(obj.sub) = () => ((this.legend_rows()));
 			return obj;
 		}
 		Legend(){
 			const obj = new this.$.$bog_builderui_div();
-			(obj.sub) = () => ([
-				(this.Legend_title()), 
-				(this.Legend_person()), 
-				(this.Legend_org()), 
-				(this.Legend_loc()), 
-				(this.Legend_event()), 
-				(this.Legend_date()), 
-				(this.Legend_work()), 
-				(this.Legend_law())
-			]);
+			(obj.sub) = () => ([(this.Legend_title()), (this.Legend_list())]);
 			return obj;
 		}
 		is_mock(){
@@ -17348,27 +17227,6 @@ var $;
 		legend_title_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_title_text"));
 		}
-		legend_person_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_person_label_text"));
-		}
-		legend_org_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_org_label_text"));
-		}
-		legend_loc_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_loc_label_text"));
-		}
-		legend_event_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_event_label_text"));
-		}
-		legend_date_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_date_label_text"));
-		}
-		legend_work_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_work_label_text"));
-		}
-		legend_law_label_text(){
-			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_legend_law_label_text"));
-		}
 		mock_badge_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_explorer_mock_badge_text"));
 		}
@@ -17381,34 +17239,12 @@ var $;
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filter_search"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Filters"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_title"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_person"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_person"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_org"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_org"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_loc"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_loc"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_event"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_event"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_date"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_date"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_work"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_work"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "click_type_law"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_dot"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law_label"));
-	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_law"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "legend_click"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Legend_dot"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Legend_label"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Legend_count"));
+	($mol_mem_key(($.$bog_norweb_front_explorer.prototype), "Legend_row"));
+	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend_list"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Legend"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Mock_badge"));
 	($mol_mem(($.$bog_norweb_front_explorer.prototype), "Canvas"));
@@ -17465,7 +17301,7 @@ var $;
                     const nodes = res.nodes.map((n) => ({
                         id: n.id,
                         label: n.label,
-                        type: $bog_norweb_front_explorer_forcegraph_entity_bucket(n.entity_type),
+                        type: n.entity_type ?? '',
                         degree: n.degree,
                         x: n.x,
                         y: n.y,
@@ -17490,26 +17326,47 @@ var $;
             is_mock() {
                 return this.graph_remote() === null;
             }
-            // Клик по типу в легенде подсвечивает все узлы этого типа (как поиск).
+            // Легенда строится из фактических типов графа (топ по количеству узлов),
+            // а не из фиксированного NEREL-набора — схемы разных доменов различаются.
+            legend_entries() {
+                const counts = {};
+                for (const n of this.graph_nodes()) {
+                    counts[n.type] = (counts[n.type] ?? 0) + 1;
+                }
+                return Object.entries(counts)
+                    .map(([type, count]) => ({ type, count }))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, 12);
+            }
+            legend_rows() {
+                return this.legend_entries().map((_, i) => this.Legend_row(i));
+            }
+            legend_label(i) {
+                return this.legend_entries()[i]?.type ?? '';
+            }
+            legend_count(i) {
+                return String(this.legend_entries()[i]?.count ?? '');
+            }
+            legend_active(i) {
+                return this.type_filter() === this.legend_entries()[i]?.type;
+            }
+            // Цвет точки легенды = цвет узлов этого типа. Style override, т.к. цвет
+            // вычисляется рантайм-функцией, не токеном.
+            Legend_dot(i) {
+                const dot = super.Legend_dot(i);
+                const type = this.legend_entries()[i]?.type ?? '';
+                dot.style = () => ({
+                    background: $bog_norweb_front_explorer_forcegraph_type_color(type),
+                });
+                return dot;
+            }
+            // Клик по типу подсвечивает все узлы этого типа (как поиск).
             // Повторный клик по активному типу снимает фильтр.
-            toggle_type(t) {
+            legend_click(i) {
+                const t = this.legend_entries()[i]?.type ?? '';
                 this.type_filter(this.type_filter() === t ? '' : t);
                 return null;
             }
-            is_type_person() { return this.type_filter() === 'PERSON'; }
-            is_type_org() { return this.type_filter() === 'ORG'; }
-            is_type_loc() { return this.type_filter() === 'LOC'; }
-            is_type_event() { return this.type_filter() === 'EVENT'; }
-            is_type_date() { return this.type_filter() === 'DATE'; }
-            is_type_work() { return this.type_filter() === 'WORK'; }
-            is_type_law() { return this.type_filter() === 'LAW'; }
-            click_type_person() { return this.toggle_type('PERSON'); }
-            click_type_org() { return this.toggle_type('ORG'); }
-            click_type_loc() { return this.toggle_type('LOC'); }
-            click_type_event() { return this.toggle_type('EVENT'); }
-            click_type_date() { return this.toggle_type('DATE'); }
-            click_type_work() { return this.toggle_type('WORK'); }
-            click_type_law() { return this.toggle_type('LAW'); }
             graph_data() {
                 return this.graph_remote()
                     ?? $bog_norweb_front_explorer_forcegraph_build_mock(42, 80, 130);
@@ -17564,29 +17421,11 @@ var $;
             $mol_mem
         ], $bog_norweb_front_explorer.prototype, "graph_remote", null);
         __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "toggle_type", null);
+            $mol_mem
+        ], $bog_norweb_front_explorer.prototype, "legend_entries", null);
         __decorate([
             $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_person", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_org", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_loc", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_event", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_date", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_work", null);
-        __decorate([
-            $mol_action
-        ], $bog_norweb_front_explorer.prototype, "click_type_law", null);
+        ], $bog_norweb_front_explorer.prototype, "legend_click", null);
         __decorate([
             $mol_mem
         ], $bog_norweb_front_explorer.prototype, "graph_data", null);
@@ -17717,7 +17556,9 @@ var $;
                 left: '13px',
                 right: '13px',
             },
-            width: '150px',
+            width: '184px',
+            maxHeight: $mol_style_func.calc('100% - 28px'),
+            overflow: 'auto',
             flex: { direction: 'column' },
         },
         Legend_title: {
@@ -17731,27 +17572,22 @@ var $;
             letterSpacing: '0.6px',
             margin: { bottom: '8px' },
         },
-        Legend_person: legend_row,
-        Legend_org: legend_row,
-        Legend_loc: legend_row,
-        Legend_event: legend_row,
-        Legend_date: legend_row,
-        Legend_work: legend_row,
-        Legend_law: legend_row,
-        Legend_person_dot: { ...dot_base, background: { color: '#e0524f' } },
-        Legend_org_dot: { ...dot_base, background: { color: '#4f8ee0' } },
-        Legend_loc_dot: { ...dot_base, background: { color: '#3fb56b' } },
-        Legend_event_dot: { ...dot_base, background: { color: '#d97ad9' } },
-        Legend_date_dot: { ...dot_base, background: { color: '#e0a73f' } },
-        Legend_work_dot: { ...dot_base, background: { color: '#7c6ce0' } },
-        Legend_law_dot: { ...dot_base, background: { color: '#3fb8b8' } },
-        Legend_person_label: legend_label,
-        Legend_org_label: legend_label,
-        Legend_loc_label: legend_label,
-        Legend_event_label: legend_label,
-        Legend_date_label: legend_label,
-        Legend_work_label: legend_label,
-        Legend_law_label: legend_label,
+        Legend_list: {
+            flex: { direction: 'column' },
+        },
+        Legend_row: legend_row,
+        Legend_dot: dot_base,
+        Legend_label: {
+            ...legend_label,
+            flex: { grow: 1 },
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+        },
+        Legend_count: {
+            ...legend_label,
+            color: '#8a8a8a',
+        },
         Mock_badge: {
             display: 'none',
             position: 'absolute',
