@@ -1588,6 +1588,7 @@ $mol_textarea_edit $mol_string
 		scrollTop 0
 
 $bog_norweb_front_chat $bog_builderui_div
+	dataset_id \
 	sug_one_text @ \Who received the Nobel Prize?
 	sug_two_text @ \Connection between Ibsen and Bjørnson?
 	input_hint_text @ \Ask anything about the corpus…
@@ -1969,5 +1970,6 @@ $bog_norweb_front_app $bog_builderui_div
 		dataset_id <= dataset_id
 		ask_click? <=> ask_chat? null
 	Chat $bog_norweb_front_chat
+		dataset_id <= dataset_id
 	Dashboard $bog_norweb_front_dashboard
 	Summary $bog_norweb_front_summary

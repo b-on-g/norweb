@@ -10644,6 +10644,7 @@ declare namespace $ {
 		Input_row( ): $bog_builderui_div
 		Footer( ): $bog_builderui_div
 		Message_text( id: any): $bog_builderui_div
+		dataset_id( ): string
 		sug_one_text( ): string
 		sug_two_text( ): string
 		input_hint_text( ): string
@@ -10677,6 +10678,8 @@ declare namespace $.$$ {
         message_role(index: number): Raggu_chat_role;
         prompt_submit(): null;
         is_communicating(): boolean;
+        ask(text: string): void;
+        ask_backend(text: string): void;
         ask_llm(text: string): void;
         use_sug_one(): null;
         use_sug_two(): null;
@@ -11878,6 +11881,11 @@ declare namespace $ {
 		ReturnType< $bog_norweb_front_app['ask_chat'] >
 		,
 		ReturnType< $bog_norweb_front_explorer['ask_click'] >
+	>
+	type $bog_norweb_front_chat__dataset_id_bog_norweb_front_app_19 = $mol_type_enforce<
+		ReturnType< $bog_norweb_front_app['dataset_id'] >
+		,
+		ReturnType< $bog_norweb_front_chat['dataset_id'] >
 	>
 	export class $bog_norweb_front_app extends $bog_builderui_div {
 		favicon_icon( ): $mol_icon_graph

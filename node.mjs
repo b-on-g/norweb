@@ -18945,6 +18945,9 @@ var $;
 			(obj.sub) = () => ([(this.message_text(id))]);
 			return obj;
 		}
+		dataset_id(){
+			return "";
+		}
 		sug_one_text(){
 			return (this.$.$mol_locale.text("$bog_norweb_front_chat_sug_one_text"));
 		}
@@ -19601,13 +19604,13 @@ var $;
                     return null;
                 this.history([...this.history(), { role: 'user', text }]);
                 this.prompt_text('');
-                // LLM в detached wire — не блокирует action, не мутирует state внутри fiber body,
-                // сам ретаинится при suspension от model.response().
-                $mol_wire_async(this).ask_llm(text);
+                // Ответ в detached wire — не блокирует action, не мутирует state внутри fiber body,
+                // сам ретаинится при suspension от fetch/model.
+                $mol_wire_async(this).ask(text);
                 return null;
             }
-            // Скелет виден когда мы ждём ответа LLM: последнее сообщение = user.
-            // Реактивно, без ловли suspension: ask_llm сам мутирует history когда ответ придёт,
+            // Скелет виден когда мы ждём ответа: последнее сообщение = user.
+            // Реактивно, без ловли suspension: ask сам мутирует history когда ответ придёт,
             // last=assistant → is_communicating становится false → скелет скрывается.
             is_communicating() {
                 const h = this.history();
@@ -19615,9 +19618,47 @@ var $;
                     return false;
                 return h[h.length - 1].role === 'user';
             }
-            // Запуск LLM в detached wire. Аргумент text — для уникальности fiber-slot
-            // в $mol_wire_async cache, чтобы разные запросы не переиспользовали один слот.
-            // model.response() кинет Promise → wire ретаинится, при resolve дожмёт ветку с writeback.
+            // Роутинг ответа. Аргумент text — для уникальности fiber-slot в
+            // $mol_wire_async cache. Основной путь — GraphRAG-агент на бэке RAGU:
+            // он сам достаёт контекст из графа знаний и подмешивает его перед
+            // генерацией. Если датасет не выбран или бэк недоступен — фолбэк на
+            // прямой LLM, чтобы демо не умирало.
+            ask(text) {
+                if (this.dataset_id()) {
+                    try {
+                        return this.ask_backend(text);
+                    }
+                    catch (error) {
+                        if ($mol_promise_like(error))
+                            $mol_fail_hidden(error);
+                        $mol_fail_log(error);
+                        // провалились в фолбэк ниже
+                    }
+                }
+                this.ask_llm(text);
+            }
+            // GraphRAG-агент бэка: возвращает готовый ответ с подмешанным контекстом
+            // графа. Промис fetch пробрасывается через wire, реальная ошибка — наверх.
+            ask_backend(text) {
+                const history = this.history()
+                    .slice(0, -1)
+                    .map(m => ({ role: m.role, content: m.text }));
+                const resp = this.$.$bog_norweb_front_api($bog_norweb_front_api_ragu_create_agent_message, {
+                    params: { dataset_id: this.dataset_id() },
+                    body: {
+                        message: text,
+                        history,
+                        engine: 'local',
+                        top_k: 8,
+                        rerank: true,
+                        include_trace: false,
+                        locale: this.$.$mol_locale.lang() === 'en' ? 'en' : 'ru',
+                    },
+                });
+                const reply = resp?.message?.content ?? '';
+                this.history([...this.history(), { role: 'assistant', text: reply }]);
+            }
+            // Фолбэк: прямой LLM без графа (мок-датасет или бэк лёг).
             ask_llm(text) {
                 const history = this.history();
                 const model = this.llm().fork();
@@ -22293,6 +22334,7 @@ var $;
 		}
 		Chat(){
 			const obj = new this.$.$bog_norweb_front_chat();
+			(obj.dataset_id) = () => ((this.dataset_id()));
 			return obj;
 		}
 		Dashboard(){
