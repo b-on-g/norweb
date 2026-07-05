@@ -7,6 +7,7 @@ $bog_norweb_front_chat $bog_builderui_div
 	seed_user_text @ \Who wrote the Norwegian anthem and when?
 	seed_assistant_text @ \The Norwegian anthem was written by Bjørnstjerne Bjørnson in 1859…
 	clear_text @ \Clear
+	off_graph_text @ \⚠ Off-graph answer (LLM without retrieval)
 	prompt_text? \
 	prompt_submit? null
 	use_sug_one? null
@@ -15,6 +16,7 @@ $bog_norweb_front_chat $bog_builderui_div
 	rows /
 	message_text* \
 	message_role* \
+	message_off_graph* false
 	sub /
 		<= Body $mol_scroll
 			sub /
@@ -59,3 +61,8 @@ $bog_norweb_front_chat $bog_builderui_div
 					^
 					raggu_role <= message_role*
 				sub / <= message_text*
+			<= Message_badge* $bog_builderui_div
+				attr *
+					^
+					raggu_off_graph <= message_off_graph*
+				sub / <= off_graph_text

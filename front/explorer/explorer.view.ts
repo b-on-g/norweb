@@ -6,6 +6,11 @@ namespace $.$$ {
 	// Default page size for the graph endpoint. The mock backend caps at 5000.
 	const GRAPH_LIMIT = 500
 
+	// Module-scoped cache keyed by dataset_id. Survives component remount:
+	// switching tabs drops the @$mol_mem cell's subscribers and resets it, so
+	// without this every return to the graph re-fetches and re-runs the layout.
+	const $bog_norweb_front_explorer_graph_cache = new Map< string, { nodes: GraphNode[], edges: GraphEdge[] } >()
+
 	export class $bog_norweb_front_explorer extends $.$bog_norweb_front_explorer {
 
 		// URL flag `?mock=1` forces the built-in PRNG mock — used for offline demo
@@ -22,6 +27,10 @@ namespace $.$$ {
 			const id = this.dataset_id()
 			if ( !id ) return null
 			if ( this.mock_flag() ) return null
+			// Возврат на вкладку не должен снова дёргать бэк — отдаём тот же объект,
+			// стабильная identity сохраняет раскладку графа.
+			const cached = $bog_norweb_front_explorer_graph_cache.get( id )
+			if ( cached ) return cached
 			try {
 				const res = this.$.$bog_norweb_front_api(
 					$bog_norweb_front_api_ragu_get_graph,
@@ -42,7 +51,9 @@ namespace $.$$ {
 					strength: e.strength,
 					relation: e.relation_type,
 				} ) )
-				return { nodes, edges }
+				const result = { nodes, edges }
+				$bog_norweb_front_explorer_graph_cache.set( id, result )
+				return result
 			} catch( error ) {
 				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
 				console.warn( 'Graph fetch failed, falling back to mock:', error )

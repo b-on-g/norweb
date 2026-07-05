@@ -6,6 +6,11 @@ namespace $.$$ {
 	type GraphEdge = $bog_norweb_front_explorer_forcegraph_edge
 	type LayoutParams = $bog_norweb_front_explorer_forcegraph_layout_params
 
+	// Module-scoped layout cache keyed by graph_key (dataset_id). Survives
+	// component remount so returning to the graph shows the settled layout
+	// instantly instead of replaying the spring-in from scratch every time.
+	const $bog_norweb_front_explorer_forcegraph_layout_cache = new Map< string, Record< string, { x: number, y: number } > >()
+
 	export class $bog_norweb_front_explorer_forcegraph extends $.$bog_norweb_front_explorer_forcegraph {
 
 		// Typed accessors over view.tree's `nodes /` and `edges /` — parents
@@ -175,7 +180,15 @@ namespace $.$$ {
 			let p = this.positions()
 			const nodes = this.nodes()
 			if ( Object.keys( p ).length !== nodes.length ) {
-				p = { ... this.initial_positions() }
+				// После ремоунта positions-ячейка пуста — восстанавливаем осевшую
+				// раскладку из module-кэша, чтобы не переигрывать spring-in.
+				const key = this.graph_key()
+				const cached = key ? $bog_norweb_front_explorer_forcegraph_layout_cache.get( key ) : undefined
+				if ( cached && Object.keys( cached ).length === nodes.length ) {
+					p = { ... cached }
+				} else {
+					p = { ... this.initial_positions() }
+				}
 				this.velocities = {}
 				this.positions( p )
 			}
@@ -211,6 +224,9 @@ namespace $.$$ {
 			)
 			this.velocities = next.velocities
 			this.positions( next.positions )
+			// Кэшируем осевшую раскладку по dataset_id — переживёт ремоунт вкладки.
+			const key = this.graph_key()
+			if ( key ) $bog_norweb_front_explorer_forcegraph_layout_cache.set( key, next.positions )
 		}
 
 		// Continuous simulation loop driven by requestAnimationFrame.
@@ -268,7 +284,11 @@ namespace $.$$ {
 			const tree = super.dom_tree()
 			if ( !this.initial_sim_started ) {
 				this.initial_sim_started = true
-				this.start_sim( this.SIM_INITIAL_FRAMES )
+				// Уже раскладывали этот граф — берём осевшие позиции из кэша и
+				// гоняем лишь короткую стабилизацию вместо полного spring-in.
+				const key = this.graph_key()
+				const cached = key && $bog_norweb_front_explorer_forcegraph_layout_cache.has( key )
+				this.start_sim( cached ? this.SIM_DRAG_FRAMES : this.SIM_INITIAL_FRAMES )
 			}
 			return tree
 		}

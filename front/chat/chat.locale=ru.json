@@ -5,5 +5,6 @@
 	"$bog_norweb_front_chat_send_label_text": "Отправить",
 	"$bog_norweb_front_chat_seed_user_text": "Кто написал гимн Норвегии и когда?",
 	"$bog_norweb_front_chat_seed_assistant_text": "Текст гимна Норвегии написал Бьёрнстьерне Бьёрнсон в 1859 году…",
-	"$bog_norweb_front_chat_clear_text": "Очистить"
+	"$bog_norweb_front_chat_clear_text": "Очистить",
+	"$bog_norweb_front_chat_off_graph_text": "⚠ Ответ вне графа (LLM без ретривала)"
 }

@@ -7,6 +7,7 @@ $bog_norweb_front_explorer_forcegraph $mol_svg_root
 	drag_id? \
 	search \
 	filter_type \
+	graph_key \
 	nodes /
 	edges /
 	pan_x? +0

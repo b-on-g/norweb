@@ -146,6 +146,31 @@ namespace $ {
 			},
 		},
 
+		Message_badge: {
+			display: 'none',
+			alignSelf: 'flex-start',
+			margin: { top: '6px' },
+			font: {
+				family: 'ui-monospace, monospace',
+				weight: 600,
+				size: '10px',
+			},
+			color: '#8a6d1b',
+			background: { color: '#f5c84226' },
+			border: { width: '1px', style: 'solid', color: '#d9b23a66', radius: '5px' },
+			padding: {
+				top: '2px',
+				bottom: '2px',
+				left: '7px',
+				right: '7px',
+			},
+			'@': {
+				raggu_off_graph: {
+					true: { display: 'flex' },
+				},
+			},
+		},
+
 		Footer: {
 			padding: {
 				top: '14px',

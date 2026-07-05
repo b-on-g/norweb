@@ -21,6 +21,7 @@ $bog_norweb_front_explorer $bog_builderui_div
 		<= Canvas $bog_builderui_div sub /
 			<= Canvas_bg $bog_builderui_div sub /
 				<= Graph $bog_norweb_front_explorer_forcegraph
+					graph_key <= dataset_id
 					nodes <= graph_nodes /
 					edges <= graph_edges /
 					selected_id? <=> selected_id?

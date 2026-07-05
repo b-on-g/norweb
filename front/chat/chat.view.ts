@@ -5,6 +5,8 @@ namespace $.$$ {
 	export type Raggu_chat_item = {
 		role: Raggu_chat_role
 		text: string
+		/** Отвечено фолбэком (прямой LLM без графа), а не GraphRAG-бэком. */
+		off_graph?: boolean
 	}
 
 	export class $bog_norweb_front_chat extends $.$bog_norweb_front_chat {
@@ -57,6 +59,10 @@ namespace $.$$ {
 			return this.history()[ index ]?.role ?? 'user'
 		}
 
+		message_off_graph( index: number ) {
+			return this.history()[ index ]?.off_graph ?? false
+		}
+
 		@ $mol_action
 		override prompt_submit() {
 			const text = this.prompt_text().trim()
@@ -89,7 +95,7 @@ namespace $.$$ {
 					return this.ask_backend( text )
 				} catch( error: any ) {
 					if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
-					$mol_fail_log( error )
+					console.error( '[norweb chat] GraphRAG backend failed, falling back to direct LLM:', error )
 					// провалились в фолбэк ниже
 				}
 			}
@@ -132,11 +138,11 @@ namespace $.$$ {
 			try {
 				const resp = model.response() as { reply?: string } | string
 				const reply = typeof resp === 'string' ? resp : resp?.reply ?? JSON.stringify( resp, null, 2 )
-				this.history( [ ... this.history(), { role: 'assistant', text: reply } ] )
+				this.history( [ ... this.history(), { role: 'assistant', text: reply, off_graph: true } ] )
 			} catch( error: any ) {
 				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
 				if( $mol_fail_log( error ) ) {
-					this.history( [ ... this.history(), { role: 'assistant', text: '📛 ' + ( error.message || String( error ) ) } ] )
+					this.history( [ ... this.history(), { role: 'assistant', text: '📛 ' + ( error.message || String( error ) ), off_graph: true } ] )
 				}
 			}
 		}
